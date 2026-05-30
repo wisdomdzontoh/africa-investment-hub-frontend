@@ -1,0 +1,680 @@
+{
+  "meta": {
+    "siteName": "African Investment Hub",
+    "siteDescription": "Connecting global investors to verified African opportunities across all 54 countries."
+  },
+  "nav": {
+    "home": "Home",
+    "opportunities": "Opportunities",
+    "countries": "Countries",
+    "whyAfrica": "Why Africa",
+    "about": "About",
+    "contact": "Contact",
+    "signIn": "Sign in",
+    "register": "Register as Investor",
+    "dashboard": "Dashboard",
+    "account": "Account",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language",
+    "languages": {
+      "en": "English",
+      "fr": "Français",
+      "zh": "中文"
+    }
+  },
+  "footer": {
+    "tagline": "Connecting global investors to verified African opportunities — across all 54 countries.",
+    "platform": "Platform",
+    "services": "Services",
+    "company": "Company",
+    "legal": "Legal",
+    "platformLinks": {
+      "opportunities": "Opportunities",
+      "countries": "Countries",
+      "whyAfrica": "Why Africa",
+      "forOwners": "For project owners"
+    },
+    "servicesLinks": {
+      "verification": "Investor verification",
+      "diligence": "Due diligence",
+      "thirdParty": "Third-party verification",
+      "monitoring": "Project monitoring"
+    },
+    "companyLinks": {
+      "about": "About",
+      "advisory": "Advisory board",
+      "partners": "Partners",
+      "contact": "Contact"
+    },
+    "legalLinks": {
+      "terms": "Terms",
+      "privacy": "Privacy",
+      "data": "Data policy",
+      "disclosures": "Disclosures"
+    },
+    "copyright": "© 2026 African Investment Hub. Not a licensed broker or financial advisor.",
+    "disclaimer": "The platform does not process payments or hold funds."
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Verified African investment",
+      "title": "Connecting Global Investors to <verified>Verified</verified> Opportunities Across Africa",
+      "lead": "Discover investment-ready projects, trusted partners, legal guidance, and end-to-end investment support across Africa.",
+      "exploreCta": "Explore Opportunities",
+      "registerCta": "Register as Investor",
+      "submitProjectCta": "Submit a Project",
+      "advisorCta": "Talk to an Advisor",
+      "trust": {
+        "investors": "Every investor verified",
+        "projects": "Every project screened",
+        "countries": "All 54 countries"
+      },
+      "capitalFacilitated": "Capital facilitated",
+      "dealsClosed": "across {count} closed deals",
+      "moreCountries": "+48"
+    },
+    "process": {
+      "register": {
+        "title": "Register",
+        "desc": "Create your account and complete the structured investor profile."
+      },
+      "verify": {
+        "title": "Get verified",
+        "desc": "Submit registration & AML documents. Our team reviews every applicant manually."
+      },
+      "invest": {
+        "title": "Invest",
+        "desc": "Unlock matched, screened opportunities and a deal room with NDA-gated detail."
+      }
+    },
+    "featured": {
+      "eyebrow": "Live opportunities",
+      "title": "Featured, screened, investment-ready",
+      "sub": "A selection of vetted projects with verified documentation and clear funding terms.",
+      "viewAll": "View all"
+    },
+    "whyAfrica": {
+      "title": "Why Invest in Africa?",
+      "lead": "Demographic momentum, continental integration, and structural demand create a compelling long-term investment case.",
+      "items": {
+        "population": {
+          "title": "Population growth",
+          "desc": "Africa's population is projected to reach 2.5 billion by 2050, with 60% under age 25 — driving consumption, labour supply, and long-term demand."
+        },
+        "markets": {
+          "title": "Untapped markets",
+          "desc": "Many sectors remain underpenetrated, offering first-mover advantages for investors who enter with verified partners and local insight."
+        },
+        "resources": {
+          "title": "Natural resources",
+          "desc": "Abundant minerals, agricultural land, and energy potential underpin industrialisation and export-led growth across the continent."
+        },
+        "afcfta": {
+          "title": "AfCFTA opportunities",
+          "desc": "The African Continental Free Trade Area unites 54 countries into a single market of 1.3 billion people with harmonised trade rules."
+        },
+        "urbanization": {
+          "title": "Urbanization",
+          "desc": "Rapid city growth creates sustained demand for housing, infrastructure, retail, and services in emerging urban centres."
+        },
+        "digital": {
+          "title": "Digital transformation",
+          "desc": "Mobile connectivity, fintech, and digital infrastructure are accelerating financial inclusion and new market access."
+        }
+      }
+    },
+    "platformBenefits": {
+      "eyebrow": "Platform benefits",
+      "title": "Everything you need to invest with confidence",
+      "lead": "From verified listings to ongoing monitoring — one platform for the full investment journey.",
+      "items": {
+        "verified": {
+          "title": "Verified projects",
+          "desc": "Every listing is screened for documentation, governance, and ground-truth verification before going live."
+        },
+        "legal": {
+          "title": "Legal guidance",
+          "desc": "Access curated legal frameworks, ownership rules, and licensing requirements per country."
+        },
+        "diligence": {
+          "title": "Due diligence support",
+          "desc": "Structured diligence workflows and verified data to reduce information asymmetry."
+        },
+        "ai": {
+          "title": "AI-powered assistance",
+          "desc": "An intelligent advisor to answer questions, surface matches, and explain regulations."
+        },
+        "monitoring": {
+          "title": "Project monitoring",
+          "desc": "Track milestones, financials, and risk notes once you're in a deal."
+        },
+        "matchmaking": {
+          "title": "Investor matchmaking",
+          "desc": "Verified investors are matched to screened opportunities that fit their profile and mandate."
+        }
+      }
+    },
+    "aiAssistant": {
+      "eyebrow": "AI assistant",
+      "title": "AI Investment Advisor",
+      "lead": "Get instant answers about opportunities, regulations, and onboarding — powered by verified platform data.",
+      "cta": "Try the assistant",
+      "functions": {
+        "faqs": {
+          "title": "Answer FAQs",
+          "desc": "Quick answers on verification, sectors, countries, and how the platform works."
+        },
+        "recommend": {
+          "title": "Recommend opportunities",
+          "desc": "Surface screened projects that match your sector, risk profile, and investment size."
+        },
+        "regulations": {
+          "title": "Explain regulations",
+          "desc": "Plain-language summaries of ownership rules, licensing, and tax frameworks by country."
+        },
+        "onboarding": {
+          "title": "Guide onboarding",
+          "desc": "Step-by-step help through registration, document submission, and verification."
+        }
+      }
+    },
+    "sectors": {
+      "eyebrow": "Where capital flows",
+      "title": "Ten sectors, screened end to end"
+    },
+    "countries": {
+      "eyebrow": "Browse by country",
+      "title": "54 countries, one verified standard",
+      "sub": "Investment climate, tax, foreign-ownership rules and licensing — maintained per country and kept current.",
+      "openGuide": "Open country guide",
+      "opportunities": "{count} opportunities"
+    },
+    "cta": {
+      "title": "Ready to see verified opportunities?",
+      "sub": "Registration is free. Verification takes under 48 hours.",
+      "register": "Register as investor",
+      "browse": "Browse first"
+    }
+  },
+  "opportunities": {
+    "title": "Investment opportunities",
+    "subtitle": "Screened projects across 54 countries. Full terms unlock after investor verification.",
+    "filters": {
+      "country": "Country",
+      "sector": "Sector",
+      "risk": "Risk",
+      "stage": "Stage",
+      "fundingType": "Funding type",
+      "sort": "Sort by",
+      "all": "All",
+      "clear": "Clear filters",
+      "sortFeatured": "Featured first",
+      "sortFundingDesc": "Funding (high to low)",
+      "sortFundingAsc": "Funding (low to high)",
+      "sortRoi": "ROI (high to low)",
+      "sortViews": "Most viewed"
+    },
+    "empty": "No opportunities match your filters.",
+    "showing": "Showing {from}–{to} of {total}",
+    "gated": {
+      "title": "Verify to view full terms",
+      "desc": "Funding, ROI & documents unlock after verification.",
+      "cta": "Register free"
+    },
+    "detail": {
+      "back": "Back to opportunities",
+      "summary": "Executive summary",
+      "fullDetail": "Full project detail",
+      "gatedDetail": "Detailed financial models, legal documents, and team credentials are available to verified investors.",
+      "registerCta": "Register to unlock",
+      "stats": {
+        "funding": "Funding",
+        "roi": "ROI range",
+        "timeline": "Timeline",
+        "stage": "Stage",
+        "risk": "Risk",
+        "views": "Views"
+      }
+    }
+  },
+  "countries": {
+    "title": "Country investment guide",
+    "subtitle": "Regulatory detail, tax, ownership rules and licensing — maintained for all 54 African countries.",
+    "searchPlaceholder": "Search countries or regions…",
+    "empty": "No countries match your search.",
+    "opportunities": "{count} opportunities",
+    "detail": {
+      "back": "Back to countries",
+      "lastUpdated": "Last updated {date}",
+      "sections": {
+        "climate": "Investment climate",
+        "laws": "Legal framework",
+        "tax": "Tax & incentives",
+        "registration": "Business registration",
+        "licensing": "Licensing",
+        "ownership": "Foreign ownership",
+        "repatriation": "Repatriation",
+        "immigration": "Immigration",
+        "contacts": "Key contacts",
+        "news": "Recent updates"
+      },
+      "viewOpportunities": "View opportunities in {country}"
+    }
+  },
+  "whyAfricaPage": {
+    "title": "Why invest in Africa",
+    "subtitle": "Demographic momentum, continental integration, and structural demand create a compelling long-term investment case.",
+    "sections": {
+      "demographics": {
+        "title": "Demographic dividend",
+        "body": "Africa's population will reach 2.5 billion by 2050. A young, urbanising workforce drives consumption, digital adoption, and labour cost advantages."
+      },
+      "afcfta": {
+        "title": "AfCFTA integration",
+        "body": "The African Continental Free Trade Area creates a single market of 1.3 billion people — reducing tariff barriers and harmonising trade rules across member states."
+      },
+      "infrastructure": {
+        "title": "Infrastructure gap",
+        "body": "An estimated $130 billion annual infrastructure deficit creates sustained demand for power, transport, digital, and urban development investment."
+      },
+      "returns": {
+        "title": "Return potential",
+        "body": "Frontier-market valuations and growing middle-class consumption offer attractive risk-adjusted returns for patient, verified capital."
+      }
+    }
+  },
+  "about": {
+    "title": "About African Investment Hub",
+    "subtitle": "We connect verified international investors with screened African opportunities — with a trusted ground presence across all 54 countries.",
+    "mission": {
+      "title": "Our mission",
+      "body": "To reduce information asymmetry and execution risk in cross-border African investment by verifying every participant and maintaining current country intelligence."
+    },
+    "team": {
+      "title": "Leadership team",
+      "body": "A pan-African team of investment professionals, regulatory specialists, and sector analysts — headquartered across Lagos, Nairobi, and Cape Town."
+    },
+    "partners": {
+      "title": "Partners",
+      "body": "We work with development finance institutions, regional investment promotion agencies, and verified local counsel networks."
+    },
+    "trust": {
+      "title": "Trust & verification",
+      "body": "Every investor undergoes AML/KYC review. Every project is screened for documentation, governance, and ground-truth verification before listing."
+    }
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "Questions about verification, opportunities, or partnership — our team responds within one business day.",
+    "form": {
+      "name": "Full name",
+      "email": "Email address",
+      "company": "Company / organisation",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send message",
+      "submitting": "Sending…",
+      "successTitle": "Message sent",
+      "successBody": "Thank you — we'll respond within one business day.",
+      "errors": {
+        "nameRequired": "Name is required",
+        "emailInvalid": "Enter a valid email address",
+        "subjectRequired": "Subject is required",
+        "messageMin": "Message must be at least 20 characters"
+      }
+    }
+  },
+  "chat": {
+    "open": "Open investment assistant",
+    "close": "Close",
+    "title": "AI Investment Advisor",
+    "subtitle": "EN · responds in your language",
+    "placeholder": "Ask about a country or sector…",
+    "send": "Send",
+    "greeting": "Hello — I'm your investment assistant. Ask me about opportunities, country regulations, or the verification process.",
+    "mockReply": "Here's a structured answer drawn from our verified country and sector data. For a binding assessment, the platform team reviews every match before introduction.",
+    "suggestions": {
+      "verification": "How does verification work?",
+      "kenya": "Best sectors in Kenya?",
+      "afcfta": "What is AfCFTA?"
+    }
+  },
+  "common": {
+    "featured": "Featured",
+    "funding": "Funding",
+    "roi": "ROI range",
+    "timeline": "Timeline",
+    "risk": {
+      "low": "Low risk",
+      "medium": "Medium risk",
+      "high": "High risk"
+    },
+    "loading": "Loading…",
+    "error": "Something went wrong. Please try again.",
+    "learnMore": "Learn more"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you're looking for doesn't exist or has moved.",
+    "home": "Back to home"
+  },
+  "portal": {
+    "workspace": "Workspace",
+    "backToSite": "Back to site",
+    "loadError": "We couldn't load your account. Please check your connection and try again.",
+    "retry": "Retry",
+    "reviewTitle": "Your account is under review",
+    "reviewBody": "You can set up your profile now. Browsing opportunities and matches unlocks once our team approves your account — usually within 48 hours.",
+    "rejectedTitle": "Your account isn't active",
+    "rejectedBody": "Your account is not currently approved. Please contact support if you believe this is a mistake.",
+    "lockedTitle": "Available after approval",
+    "lockedBody": "This feature unlocks once your account is approved. We review every account manually — you'll get an email as soon as you're verified."
+  },
+  "onboarding": {
+    "title": "Welcome to African Investment Hub",
+    "subtitle": "Choose how you want to use the platform. You can complete your profile in the next step.",
+    "investorTitle": "Investor",
+    "investorDesc": "Discover verified opportunities and connect with vetted projects across Africa.",
+    "ownerTitle": "Project owner",
+    "ownerDesc": "Submit your project for review and reach qualified international investors.",
+    "continueAsInvestor": "Continue as investor",
+    "continueAsOwner": "Continue as project owner",
+    "roleError": "Could not save your role. Please try again.",
+    "resume": {
+      "title": "Continue your application",
+      "body": "You have an unfinished application saved on this device. Pick up where you left off.",
+      "button": "Continue"
+    },
+    "wizard": {
+      "saveAndExit": "Save & exit",
+      "section": "Section",
+      "back": "Back",
+      "saving": "Saving…",
+      "saved": "Progress saved",
+      "review": "Review",
+      "continue": "Save & continue",
+      "submitError": "Something went wrong. Please try again.",
+      "submittedTitle": "Application submitted",
+      "submittedDescription": "Thank you. Your application is in the review queue. We verify every account manually — you'll receive an email at each status change.",
+      "submittedNote": "Typical verification time: under 48 hours.",
+      "submittedContinue": "Continue"
+    },
+    "investor": {
+      "steps": {
+        "company": { "label": "Company", "title": "Company information", "subtitle": "Tell us about the legal entity that will invest. This must match your registration documents." },
+        "profile": { "label": "Investment", "title": "Investment profile", "subtitle": "Where, how much, and in what form you want to deploy capital. This powers your matches." },
+        "risk": { "label": "Risk & returns", "title": "Risk & returns", "subtitle": "Your appetite for risk, return expectations, and preferred ownership structures." },
+        "compliance": { "label": "Compliance", "title": "Compliance & ESG", "subtitle": "Your screening criteria and the sectors you will not invest in." },
+        "track": { "label": "Track record", "title": "Track record", "subtitle": "Your investment history. Strong track records accelerate verification." },
+        "documents": { "label": "Documents", "title": "Document upload", "subtitle": "Optional now — you can add these later. Verification is performed manually by our team." }
+      },
+      "dividers": { "primaryContact": "Primary contact" },
+      "fields": {
+        "companyName": { "label": "Company legal name", "placeholder": "Meridian Capital Partners AS" },
+        "regCountry": { "label": "Country of registration", "placeholder": "Search country…" },
+        "regNumber": { "label": "Company registration number", "placeholder": "e.g. 924 583 110" },
+        "years": { "label": "Years of operation", "placeholder": "12" },
+        "address": { "label": "Registered address", "placeholder": "Street, city, postal code" },
+        "website": { "label": "Website", "placeholder": "https://" },
+        "contactName": { "label": "Contact name", "placeholder": "Full name" },
+        "contactTitle": { "label": "Title", "placeholder": "Managing Partner" },
+        "contactEmail": { "label": "Contact email", "placeholder": "name@company.com" },
+        "contactPhone": { "label": "Contact phone", "placeholder": "+47 …" },
+        "investCountries": { "label": "Countries of interest", "placeholder": "Search African markets…", "hint": "Select all African markets you would consider." },
+        "investSectors": { "label": "Sectors of interest" },
+        "investTypes": { "label": "Preferred investment type" },
+        "minTicket": { "label": "Minimum ticket size", "placeholder": "2,000,000" },
+        "maxTicket": { "label": "Maximum ticket size", "placeholder": "40,000,000" },
+        "dealSize": { "label": "Preferred deal size", "placeholder": "15,000,000" },
+        "capital": { "label": "Total investable capital", "placeholder": "120,000,000" },
+        "risk": { "label": "Risk appetite" },
+        "roiMin": { "label": "Target ROI — min", "placeholder": "12", "hint": "% per annum" },
+        "roiMax": { "label": "Target ROI — max", "placeholder": "20", "hint": "% per annum" },
+        "horizon": { "label": "Investment time horizon", "placeholder": "Select" },
+        "exit": { "label": "Exit strategy", "placeholder": "Select" },
+        "ownership": { "label": "Preferred ownership structure" },
+        "ownMin": { "label": "Preferred ownership % — min", "placeholder": "25" },
+        "ownMax": { "label": "Preferred ownership % — max", "placeholder": "60" },
+        "esg": { "label": "ESG requirements", "placeholder": "e.g. IFC Performance Standards; gender-balanced governance…", "hint": "Optional — describe any environmental, social or governance criteria you apply." },
+        "excluded": { "label": "Sectors to exclude", "hint": "These will never appear in your matches." },
+        "polRisk": { "label": "Political risk tolerance", "placeholder": "Select" },
+        "fxRisk": { "label": "Currency risk tolerance", "placeholder": "Select" },
+        "certifications": { "label": "Certifications or accreditations", "placeholder": "e.g. AIFMD-authorised; B-Corp certified…", "hint": "Optional" },
+        "previousProjects": { "label": "Previous investments (up to 5)", "add": "Add reference", "empty": "No previous investments added yet.", "name": "Project name", "country": "Country", "sector": "Sector", "year": "Year" }
+      },
+      "options": {
+        "equity": "Equity", "jv": "Joint venture", "debt": "Debt", "ppp": "PPP", "acquisition": "Acquisition",
+        "tobacco": "Tobacco", "arms": "Arms", "gambling": "Gambling",
+        "ownFull": "Full ownership", "ownJv": "Joint venture", "ownBot": "Build-Operate-Transfer", "ownLease": "Long-term lease", "ownPpp": "Public-Private Partnership", "ownMinority": "Minority stake",
+        "riskLow": "Low", "riskMedium": "Medium", "riskHigh": "High",
+        "horizon": { "1-3": "1–3 years", "3-5": "3–5 years", "5-7": "5–7 years", "7-10": "7–10 years", "10+": "10+ years" },
+        "exit": { "trade_sale": "Trade sale", "ipo": "IPO", "buyback": "Buyback", "long_term_hold": "Long-term hold", "bot": "BOT transfer" },
+        "polRisk": { "conservative": "Conservative", "moderate": "Moderate", "opportunistic": "Opportunistic" },
+        "fxRisk": { "hedged": "Hedged only", "partial": "Partial exposure", "full": "Full exposure acceptable" }
+      },
+      "summary": { "countSelected": "{count} selected", "countSectors": "{count} sectors", "countReferences": "{count} added" },
+      "documents": {
+        "note": "Every document is stored encrypted and reviewed manually by our team. We do not use automated third-party KYC tools.",
+        "registration": "Company registration certificate",
+        "aml": "AML compliance certificate",
+        "capacity": "Proof of investment capacity / fund mandate",
+        "additional": "Additional supporting documents",
+        "optionalHint": "Optional · PDF, PNG, JPG",
+        "capacityHint": "Required before deal-room access — optional now.",
+        "uploadFailed": "Your profile was saved, but documents could not be uploaded. You can add them later from your dashboard."
+      },
+      "validation": {
+        "required": "Required",
+        "country": "Select a country",
+        "email": "Enter a valid email",
+        "nonNegative": "Must be zero or more",
+        "atLeastOneCountry": "Pick at least one country",
+        "atLeastOneSector": "Pick at least one sector"
+      },
+      "review": {
+        "title": "Review your application",
+        "subtitle": "Confirm everything is correct. After submission our team reviews your application — usually within 48 hours.",
+        "consent": "I confirm the information provided is accurate and I consent to manual verification, including AML and document checks, in line with the platform's data policy.",
+        "submit": "Submit application",
+        "submitting": "Submitting…",
+        "edit": "Edit"
+      }
+    },
+    "project": {
+      "steps": {
+        "basics": { "label": "Basics", "title": "Project basics", "subtitle": "The headline details investors see first. Be specific and concrete." },
+        "funding": { "label": "Funding", "title": "Funding & structure", "subtitle": "How much you're raising, in what form, and how it will be used." },
+        "financials": { "label": "Financials", "title": "Returns & financials", "subtitle": "Expected returns and revenue. Optional, but stronger projections attract more interest." },
+        "documents": { "label": "Documents", "title": "Supporting documents", "subtitle": "Optional now — you can add these later. All files are stored encrypted." }
+      },
+      "dividers": { "projections": "Projected revenue" },
+      "fields": {
+        "title": { "label": "Project title", "placeholder": "e.g. Lagos–Ibadan Solar Microgrid" },
+        "sector": { "label": "Sector", "placeholder": "Select a sector" },
+        "country": { "label": "Country", "placeholder": "Search country…" },
+        "stage": { "label": "Project stage", "placeholder": "Select stage" },
+        "brief": { "label": "Brief description", "placeholder": "One or two sentences shown on the public listing.", "hint": "Public — max 500 characters." },
+        "fundingRequired": { "label": "Total funding required", "placeholder": "5,000,000" },
+        "fundingType": { "label": "Funding type", "placeholder": "Select type" },
+        "minInvestment": { "label": "Minimum investment", "placeholder": "250,000" },
+        "existingFunding": { "label": "Existing funding secured", "placeholder": "1,000,000" },
+        "useOfFunds": { "label": "Use of funds", "placeholder": "How the capital will be deployed…", "hint": "Optional" },
+        "roiMin": { "label": "Expected ROI — min", "placeholder": "12", "hint": "% per annum" },
+        "roiMax": { "label": "Expected ROI — max", "placeholder": "20", "hint": "% per annum" },
+        "timeline": { "label": "Timeline to returns", "placeholder": "24", "hint": "months" },
+        "currentRevenue": { "label": "Current annual revenue", "placeholder": "0" },
+        "rev12": { "label": "Projected — 12 months", "placeholder": "500,000" },
+        "rev24": { "label": "Projected — 24 months", "placeholder": "1,500,000" },
+        "rev36": { "label": "Projected — 36 months", "placeholder": "4,000,000" },
+        "execSummary": { "label": "Executive summary", "placeholder": "A concise overview for approved investors…", "hint": "Shown to approved investors." },
+        "fullDescription": { "label": "Full description", "placeholder": "Detailed description, shared only after an NDA is signed…", "hint": "Confidential — shared only after NDA." }
+      },
+      "options": {
+        "stage": { "concept": "Concept", "pre_revenue": "Pre-revenue", "revenue_generating": "Revenue generating", "expansion": "Expansion" },
+        "fundingType": { "equity": "Equity", "debt": "Debt", "jv": "Joint venture", "ppp": "Public-Private Partnership", "acquisition": "Acquisition" }
+      },
+      "documents": {
+        "note": "Documents are stored encrypted and reviewed manually by our team alongside your submission.",
+        "businessPlan": "Business plan",
+        "financials": "Financial model",
+        "pitchDeck": "Pitch deck",
+        "additional": "Additional documents",
+        "optionalHint": "Optional · PDF, PNG, JPG",
+        "uploadFailed": "Your project was saved, but documents could not be uploaded. You can add them later from your dashboard."
+      },
+      "validation": {
+        "required": "Required",
+        "country": "Select a country",
+        "positive": "Must be greater than zero",
+        "nonNegative": "Must be zero or more",
+        "max500": "Keep this under 500 characters"
+      },
+      "review": {
+        "title": "Review your project",
+        "subtitle": "Confirm everything is correct. After submission our team reviews your project before it goes live — usually within 48 hours.",
+        "consent": "I confirm I'm authorised to submit this project and that the information provided is accurate.",
+        "submit": "Submit project",
+        "submitting": "Submitting…",
+        "edit": "Edit"
+      }
+    }
+  },
+  "pendingApproval": {
+    "title": "Application under review",
+    "description": "Our team is reviewing your submission. You'll receive an email when your account is approved.",
+    "note": "This usually takes up to 48 hours.",
+    "approvedTitle": "You're approved",
+    "approvedDesc": "Your account has been approved. You can now access your dashboard.",
+    "goToDashboard": "Go to dashboard"
+  },
+  "investorPortal": {
+    "title": "Investor dashboard",
+    "overview": "Overview",
+    "profile": "Profile",
+    "matches": "Matches",
+    "notifications": "Notifications",
+    "welcome": "Welcome back",
+    "statusLabel": "Account status",
+    "companyLabel": "Company",
+    "loading": "Loading…",
+    "noProfile": "No investor profile found.",
+    "country": "Country",
+    "contact": "Contact",
+    "email": "Email",
+    "sectors": "Sectors",
+    "noMatches": "No matches yet.",
+    "matchProject": "Project",
+    "status": "Status",
+    "score": "Score",
+    "noNotifications": "No notifications."
+  },
+  "ownerPortal": {
+    "title": "Project owner dashboard",
+    "overview": "Overview",
+    "projects": "My projects",
+    "newProject": "New project",
+    "welcome": "Project owner workspace",
+    "statusLabel": "Account status",
+    "projectCount": "Projects submitted",
+    "loading": "Loading…",
+    "noProjects": "No projects yet.",
+    "createFirst": "Submit your first project",
+    "titleField": "Project title",
+    "sector": "Sector",
+    "country": "Country",
+    "briefDescription": "Brief description",
+    "fundingRequired": "Funding required",
+    "submitProject": "Submit project",
+    "projectCreated": "Project created.",
+    "projectError": "Could not create project.",
+    "executiveSummary": "Executive summary",
+    "notFound": "Project not found."
+  },
+  "adminPortal": {
+    "title": "Admin dashboard",
+    "overview": "Overview",
+    "investors": "Investors",
+    "projects": "Projects",
+    "users": "Users",
+    "auditLog": "Audit log",
+    "loading": "Loading…",
+    "empty": "Nothing here yet.",
+    "needsAttention": "Needs attention",
+    "review": "Review",
+    "investorsTotal": "Total investors",
+    "investorsPending": "Pending investors",
+    "projectsTotal": "Total projects",
+    "projectsPending": "Pending projects",
+    "matchesTotal": "Total matches",
+    "usersTotal": "Total users",
+    "approve": "Approve",
+    "approved": "Approved.",
+    "reject": "Reject",
+    "rejected": "Rejected.",
+    "actionError": "Action failed. Please try again.",
+    "rejectTitle": "Reject submission",
+    "rejectDescription": "Optionally add a reason. It is recorded in the audit log and emailed to the applicant.",
+    "rejectReasonPlaceholder": "Reason (optional)…",
+    "cancel": "Cancel",
+    "confirmReject": "Reject",
+    "filter": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "suspended": "Suspended",
+      "all": "All"
+    },
+    "role": "Role",
+    "roles": {
+      "investor": "Investor",
+      "project_owner": "Project owner",
+      "admin": "Admin"
+    },
+    "roleUpdated": "Role updated. The user must sign out and back in for it to take effect.",
+    "suspend": "Suspend",
+    "suspended": "Suspended.",
+    "reactivate": "Reactivate",
+    "reactivated": "Reactivated.",
+    "you": "you",
+    "auditAction": "Action",
+    "auditTarget": "Target",
+    "auditWhen": "When",
+    "consoleLabel": "Console",
+    "backToSite": "Back to site",
+    "navOperations": "Operations",
+    "navComingSoon": "Coming soon",
+    "navMatches": "Matches",
+    "navCountries": "Countries",
+    "navHomepage": "Homepage",
+    "navAnalytics": "Analytics",
+    "soon": "Soon",
+    "dashboardSubtitle": "Platform activity and items that need your review.",
+    "pendingReview": "Pending review",
+    "investorsByStatus": "Investors by status",
+    "projectsByStatus": "Projects by status",
+    "sectorsCovered": "Sectors covered",
+    "investorsTitle": "Investor management",
+    "investorsSubtitle": "Review registrations and manage investor access.",
+    "projectsTitle": "Project management",
+    "projectsSubtitle": "Review submissions before they go live.",
+    "usersTitle": "User management",
+    "usersSubtitle": "Manage roles and account access.",
+    "auditLogTitle": "Audit log",
+    "auditLogSubtitle": "A record of administrative actions.",
+    "searchInvestors": "Search by company or country…",
+    "searchProjects": "Search by title, sector, or country…",
+    "searchUsers": "Search by email or role…",
+    "colCompany": "Company",
+    "colCountry": "Country",
+    "colStatus": "Status",
+    "colSubmitted": "Submitted",
+    "colActions": "Actions",
+    "colProject": "Project",
+    "colSector": "Sector",
+    "colUser": "User",
+    "colJoined": "Joined",
+    "exportCsv": "Export CSV",
+    "exportError": "Could not export. Please try again."
+  }
+}
