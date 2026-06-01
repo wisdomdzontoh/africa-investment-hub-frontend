@@ -45,13 +45,23 @@ export function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer className="mt-16 bg-[var(--surface-footer)] text-[var(--surface-footer-fg)]">
-      <div className="page grid gap-10 py-14 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
+    <footer className="relative mt-16 overflow-hidden bg-[var(--surface-footer)] text-[var(--surface-footer-fg)]">
+      {/* Brand accent rule — vermilion → crimson bleed across the top edge */}
+      <div className="h-1 w-full bg-[linear-gradient(90deg,var(--orange-deep),var(--orange),var(--orange-strong))]" />
+
+      {/* Soft warm glow in the upper-left, deepening toward the lower-right */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_80%_at_0%_0%,color-mix(in_srgb,var(--orange)_22%,transparent)_0%,transparent_55%)]"
+      />
+
+      <div className="page relative grid gap-10 py-14 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
         <div>
           <div className="mb-3.5 font-display text-xl font-bold tracking-tight text-white">
-            African<span className="text-[var(--orange)]"> Investment</span> Hub
+            African
+            <span className="text-[var(--orange-soft)]"> Investment</span> Hub
           </div>
-          <p className="max-w-[300px] text-[var(--text-sm)] text-white/60">
+          <p className="max-w-[300px] text-[var(--text-sm)] leading-relaxed text-white/65">
             {t("tagline")}
           </p>
           <div className="mt-5">
@@ -61,7 +71,8 @@ export function Footer() {
 
         {FOOTER_COLUMNS.map((col) => (
           <div key={col.titleKey}>
-            <div className="mb-3.5 text-[var(--text-2xs)] font-bold tracking-[0.08em] text-white/45 uppercase">
+            <div className="mb-3.5 flex items-center gap-2 text-[var(--text-2xs)] font-bold tracking-[0.08em] text-[var(--orange-soft)]/80 uppercase">
+              <span className="h-px w-3 bg-[var(--orange)]/70" />
               {t(col.titleKey)}
             </div>
             <div className="flex flex-col gap-2">
@@ -69,7 +80,7 @@ export function Footer() {
                 <Link
                   key={link.labelKey}
                   href={link.href}
-                  className="text-[var(--text-sm)] text-white/78 transition-colors hover:text-white"
+                  className="w-fit text-[var(--text-sm)] text-white/75 transition-colors hover:text-[var(--orange-soft)]"
                 >
                   {t(link.labelKey)}
                 </Link>
@@ -79,8 +90,8 @@ export function Footer() {
         ))}
       </div>
 
-      <div className="border-t border-white/12">
-        <div className="page flex flex-col gap-2 py-4 text-[var(--text-xs)] text-white/50 sm:flex-row sm:justify-between">
+      <div className="relative border-t border-white/10">
+        <div className="page flex flex-col gap-2 py-4 text-[var(--text-xs)] text-white/55 sm:flex-row sm:justify-between">
           <span>{t("copyright")}</span>
           <span>{t("disclaimer")}</span>
         </div>

@@ -1,4 +1,368 @@
 {
+  "meta": {
+    "siteName": "African Investment Hub",
+    "siteDescription": "Connecter les investisseurs mondiaux à des opportunités africaines vérifiées dans les 54 pays."
+  },
+  "nav": {
+    "home": "Accueil",
+    "opportunities": "Opportunités",
+    "countries": "Pays",
+    "whyAfrica": "Pourquoi l'Afrique",
+    "about": "À propos",
+    "contact": "Contact",
+    "signIn": "Se connecter",
+    "register": "S'inscrire comme investisseur",
+    "dashboard": "Tableau de bord",
+    "account": "Compte",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "language": "Langue",
+    "languages": {
+      "en": "English",
+      "fr": "Français",
+      "zh": "中文"
+    }
+  },
+  "footer": {
+    "tagline": "Connecter les investisseurs mondiaux à des opportunités africaines vérifiées — dans les 54 pays.",
+    "platform": "Plateforme",
+    "services": "Services",
+    "company": "Entreprise",
+    "legal": "Mentions légales",
+    "platformLinks": {
+      "opportunities": "Opportunités",
+      "countries": "Pays",
+      "whyAfrica": "Pourquoi l'Afrique",
+      "forOwners": "Pour les porteurs de projet"
+    },
+    "servicesLinks": {
+      "verification": "Vérification des investisseurs",
+      "diligence": "Diligence raisonnable",
+      "thirdParty": "Vérification par un tiers",
+      "monitoring": "Suivi des projets"
+    },
+    "companyLinks": {
+      "about": "À propos",
+      "advisory": "Comité consultatif",
+      "partners": "Partenaires",
+      "contact": "Contact"
+    },
+    "legalLinks": {
+      "terms": "Conditions",
+      "privacy": "Confidentialité",
+      "data": "Politique des données",
+      "disclosures": "Informations légales"
+    },
+    "copyright": "© 2026 African Investment Hub. Ni courtier agréé ni conseiller financier.",
+    "disclaimer": "La plateforme ne traite pas les paiements et ne détient pas de fonds."
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Investissement africain vérifié",
+      "title": "Connecter les investisseurs mondiaux à des opportunités <verified>vérifiées</verified> à travers l'Afrique",
+      "lead": "Découvrez des projets prêts à l'investissement, des partenaires de confiance, un accompagnement juridique et un soutien de bout en bout à travers l'Afrique.",
+      "exploreCta": "Explorer les opportunités",
+      "registerCta": "S'inscrire comme investisseur",
+      "submitProjectCta": "Soumettre un projet",
+      "advisorCta": "Parler à un conseiller",
+      "trust": {
+        "investors": "Chaque investisseur vérifié",
+        "projects": "Chaque projet contrôlé",
+        "countries": "Les 54 pays"
+      },
+      "capitalFacilitated": "Capitaux facilités",
+      "dealsClosed": "sur {count} opérations conclues",
+      "moreCountries": "+48"
+    },
+    "process": {
+      "register": {
+        "title": "S'inscrire",
+        "desc": "Créez votre compte et complétez le profil d'investisseur structuré."
+      },
+      "verify": {
+        "title": "Être vérifié",
+        "desc": "Soumettez vos documents d'enregistrement et AML. Notre équipe examine chaque candidat manuellement."
+      },
+      "invest": {
+        "title": "Investir",
+        "desc": "Accédez à des opportunités contrôlées et ciblées, et à une data-room avec détails protégés par NDA."
+      }
+    },
+    "featured": {
+      "eyebrow": "Opportunités en direct",
+      "title": "Sélectionnées, contrôlées, prêtes à l'investissement",
+      "sub": "Une sélection de projets vérifiés, documentation à l'appui et conditions de financement claires.",
+      "viewAll": "Tout voir"
+    },
+    "whyAfrica": {
+      "title": "Pourquoi investir en Afrique ?",
+      "lead": "Dynamique démographique, intégration continentale et demande structurelle créent une thèse d'investissement convaincante à long terme.",
+      "items": {
+        "population": {
+          "title": "Croissance démographique",
+          "desc": "La population africaine devrait atteindre 2,5 milliards d'ici 2050, avec 60 % de moins de 25 ans — stimulant la consommation, l'offre de main-d'œuvre et la demande à long terme."
+        },
+        "markets": {
+          "title": "Marchés inexploités",
+          "desc": "De nombreux secteurs restent sous-pénétrés, offrant des avantages de précurseur aux investisseurs qui entrent avec des partenaires vérifiés et une connaissance locale."
+        },
+        "resources": {
+          "title": "Ressources naturelles",
+          "desc": "Des minéraux abondants, des terres agricoles et un potentiel énergétique soutiennent l'industrialisation et la croissance tirée par les exportations sur tout le continent."
+        },
+        "afcfta": {
+          "title": "Opportunités ZLECAf",
+          "desc": "La Zone de libre-échange continentale africaine réunit 54 pays en un marché unique de 1,3 milliard de personnes avec des règles commerciales harmonisées."
+        },
+        "urbanization": {
+          "title": "Urbanisation",
+          "desc": "La croissance rapide des villes crée une demande soutenue de logements, d'infrastructures, de commerces et de services dans les centres urbains émergents."
+        },
+        "digital": {
+          "title": "Transformation numérique",
+          "desc": "La connectivité mobile, la fintech et l'infrastructure numérique accélèrent l'inclusion financière et l'accès à de nouveaux marchés."
+        }
+      }
+    },
+    "platformBenefits": {
+      "eyebrow": "Avantages de la plateforme",
+      "title": "Tout ce qu'il vous faut pour investir en confiance",
+      "lead": "Des annonces vérifiées au suivi continu — une seule plateforme pour tout le parcours d'investissement.",
+      "items": {
+        "verified": {
+          "title": "Projets vérifiés",
+          "desc": "Chaque annonce est contrôlée (documentation, gouvernance et vérification sur le terrain) avant sa mise en ligne."
+        },
+        "legal": {
+          "title": "Accompagnement juridique",
+          "desc": "Accédez à des cadres juridiques sélectionnés, aux règles de propriété et aux exigences de licence par pays."
+        },
+        "diligence": {
+          "title": "Soutien à la diligence raisonnable",
+          "desc": "Des processus de diligence structurés et des données vérifiées pour réduire l'asymétrie d'information."
+        },
+        "ai": {
+          "title": "Assistance par IA",
+          "desc": "Un conseiller intelligent pour répondre aux questions, faire émerger des correspondances et expliquer les réglementations."
+        },
+        "monitoring": {
+          "title": "Suivi des projets",
+          "desc": "Suivez les jalons, les finances et les notes de risque une fois engagé dans une opération."
+        },
+        "matchmaking": {
+          "title": "Mise en relation des investisseurs",
+          "desc": "Les investisseurs vérifiés sont mis en relation avec des opportunités contrôlées correspondant à leur profil et à leur mandat."
+        }
+      }
+    },
+    "aiAssistant": {
+      "eyebrow": "Assistant IA",
+      "title": "Conseiller en investissement IA",
+      "lead": "Obtenez des réponses instantanées sur les opportunités, les réglementations et l'inscription — alimentées par des données de plateforme vérifiées.",
+      "cta": "Essayer l'assistant",
+      "functions": {
+        "faqs": {
+          "title": "Répondre aux questions fréquentes",
+          "desc": "Réponses rapides sur la vérification, les secteurs, les pays et le fonctionnement de la plateforme."
+        },
+        "recommend": {
+          "title": "Recommander des opportunités",
+          "desc": "Faites émerger des projets contrôlés correspondant à votre secteur, votre profil de risque et votre taille d'investissement."
+        },
+        "regulations": {
+          "title": "Expliquer les réglementations",
+          "desc": "Résumés en langage clair des règles de propriété, des licences et des cadres fiscaux par pays."
+        },
+        "onboarding": {
+          "title": "Guider l'inscription",
+          "desc": "Aide étape par étape pour l'inscription, la soumission de documents et la vérification."
+        }
+      }
+    },
+    "sectors": {
+      "eyebrow": "Où circulent les capitaux",
+      "title": "Dix secteurs, contrôlés de bout en bout"
+    },
+    "countries": {
+      "eyebrow": "Parcourir par pays",
+      "title": "54 pays, une norme vérifiée unique",
+      "sub": "Climat d'investissement, fiscalité, règles de propriété étrangère et licences — tenus à jour pays par pays.",
+      "openGuide": "Ouvrir le guide pays",
+      "opportunities": "{count} opportunités"
+    },
+    "cta": {
+      "title": "Prêt à voir des opportunités vérifiées ?",
+      "sub": "L'inscription est gratuite. La vérification prend moins de 48 heures.",
+      "register": "S'inscrire comme investisseur",
+      "browse": "Parcourir d'abord"
+    }
+  },
+  "opportunities": {
+    "title": "Opportunités d'investissement",
+    "subtitle": "Projets contrôlés dans 54 pays. Les conditions complètes se débloquent après la vérification de l'investisseur.",
+    "filters": {
+      "country": "Pays",
+      "sector": "Secteur",
+      "risk": "Risque",
+      "stage": "Stade",
+      "fundingType": "Type de financement",
+      "sort": "Trier par",
+      "all": "Tous",
+      "clear": "Effacer les filtres",
+      "sortFeatured": "À la une d'abord",
+      "sortFundingDesc": "Financement (décroissant)",
+      "sortFundingAsc": "Financement (croissant)",
+      "sortRoi": "ROI (décroissant)",
+      "sortViews": "Les plus consultés"
+    },
+    "empty": "Aucune opportunité ne correspond à vos filtres.",
+    "showing": "Affichage de {from} à {to} sur {total}",
+    "gated": {
+      "title": "Vérifiez-vous pour voir les conditions complètes",
+      "desc": "Financement, ROI et documents se débloquent après vérification.",
+      "cta": "Inscription gratuite"
+    },
+    "detail": {
+      "back": "Retour aux opportunités",
+      "summary": "Résumé exécutif",
+      "fullDetail": "Détail complet du projet",
+      "gatedDetail": "Les modèles financiers détaillés, les documents juridiques et les références de l'équipe sont accessibles aux investisseurs vérifiés.",
+      "registerCta": "S'inscrire pour débloquer",
+      "guestDetail": "Les modèles financiers détaillés, les documents juridiques et les références de l'équipe sont accessibles aux membres vérifiés. Connectez-vous ou créez un compte pour les consulter.",
+      "pendingDetail": "Les détails complets du projet se débloquent une fois votre compte vérifié par notre équipe.",
+      "signInCta": "Se connecter",
+      "createAccount": "Créer un compte",
+      "stats": {
+        "funding": "Financement",
+        "roi": "Plage de ROI",
+        "timeline": "Calendrier",
+        "stage": "Stade",
+        "risk": "Risque",
+        "views": "Vues"
+      }
+    }
+  },
+  "countries": {
+    "title": "Guide d'investissement par pays",
+    "subtitle": "Détails réglementaires, fiscalité, règles de propriété et licences — tenus à jour pour les 54 pays africains.",
+    "searchPlaceholder": "Rechercher des pays ou des régions…",
+    "empty": "Aucun pays ne correspond à votre recherche.",
+    "opportunities": "{count} opportunités",
+    "detail": {
+      "back": "Retour aux pays",
+      "lastUpdated": "Mis à jour le {date}",
+      "sections": {
+        "climate": "Climat d'investissement",
+        "laws": "Cadre juridique",
+        "tax": "Fiscalité et incitations",
+        "registration": "Enregistrement d'entreprise",
+        "licensing": "Licences",
+        "ownership": "Propriété étrangère",
+        "repatriation": "Rapatriement",
+        "immigration": "Immigration",
+        "contacts": "Contacts clés",
+        "news": "Mises à jour récentes"
+      },
+      "viewOpportunities": "Voir les opportunités en {country}"
+    }
+  },
+  "whyAfricaPage": {
+    "title": "Pourquoi investir en Afrique",
+    "subtitle": "Dynamique démographique, intégration continentale et demande structurelle créent une thèse d'investissement convaincante à long terme.",
+    "sections": {
+      "demographics": {
+        "title": "Dividende démographique",
+        "body": "La population africaine atteindra 2,5 milliards d'ici 2050. Une main-d'œuvre jeune et urbanisée stimule la consommation, l'adoption du numérique et des avantages de coût de main-d'œuvre."
+      },
+      "afcfta": {
+        "title": "Intégration ZLECAf",
+        "body": "La Zone de libre-échange continentale africaine crée un marché unique de 1,3 milliard de personnes — réduisant les barrières tarifaires et harmonisant les règles commerciales entre les États membres."
+      },
+      "infrastructure": {
+        "title": "Déficit d'infrastructures",
+        "body": "Un déficit d'infrastructures estimé à 130 milliards de dollars par an crée une demande soutenue d'investissements dans l'énergie, le transport, le numérique et le développement urbain."
+      },
+      "returns": {
+        "title": "Potentiel de rendement",
+        "body": "Les valorisations des marchés frontières et la consommation croissante de la classe moyenne offrent des rendements attractifs ajustés au risque pour des capitaux patients et vérifiés."
+      }
+    }
+  },
+  "about": {
+    "title": "À propos d'African Investment Hub",
+    "subtitle": "Nous mettons en relation des investisseurs internationaux vérifiés avec des opportunités africaines contrôlées — avec une présence de confiance sur le terrain dans les 54 pays.",
+    "mission": {
+      "title": "Notre mission",
+      "body": "Réduire l'asymétrie d'information et le risque d'exécution dans l'investissement transfrontalier africain en vérifiant chaque participant et en maintenant une intelligence pays à jour."
+    },
+    "team": {
+      "title": "Équipe de direction",
+      "body": "Une équipe panafricaine de professionnels de l'investissement, de spécialistes réglementaires et d'analystes sectoriels — basée à Lagos, Nairobi et Le Cap."
+    },
+    "partners": {
+      "title": "Partenaires",
+      "body": "Nous collaborons avec des institutions de financement du développement, des agences régionales de promotion des investissements et des réseaux d'avocats locaux vérifiés."
+    },
+    "trust": {
+      "title": "Confiance et vérification",
+      "body": "Chaque investisseur fait l'objet d'un contrôle AML/KYC. Chaque projet est contrôlé (documentation, gouvernance et vérification sur le terrain) avant sa mise en ligne."
+    }
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Questions sur la vérification, les opportunités ou les partenariats — notre équipe répond sous un jour ouvrable.",
+    "form": {
+      "name": "Nom complet",
+      "email": "Adresse e-mail",
+      "company": "Société / organisation",
+      "subject": "Objet",
+      "message": "Message",
+      "submit": "Envoyer le message",
+      "submitting": "Envoi…",
+      "successTitle": "Message envoyé",
+      "successBody": "Merci — nous répondrons sous un jour ouvrable.",
+      "errors": {
+        "nameRequired": "Le nom est requis",
+        "emailInvalid": "Saisissez une adresse e-mail valide",
+        "subjectRequired": "L'objet est requis",
+        "messageMin": "Le message doit comporter au moins 20 caractères"
+      }
+    }
+  },
+  "chat": {
+    "open": "Ouvrir l'assistant d'investissement",
+    "close": "Fermer",
+    "title": "Conseiller en investissement IA",
+    "subtitle": "FR · répond dans votre langue",
+    "placeholder": "Posez une question sur un pays ou un secteur…",
+    "send": "Envoyer",
+    "greeting": "Bonjour — je suis votre assistant d'investissement. Interrogez-moi sur les opportunités, les réglementations par pays ou le processus de vérification.",
+    "mockReply": "Voici une réponse structurée tirée de nos données vérifiées par pays et par secteur. Pour une évaluation contraignante, l'équipe de la plateforme examine chaque correspondance avant toute mise en relation.",
+    "suggestions": {
+      "verification": "Comment fonctionne la vérification ?",
+      "kenya": "Meilleurs secteurs au Kenya ?",
+      "afcfta": "Qu'est-ce que la ZLECAf ?"
+    }
+  },
+  "common": {
+    "featured": "À la une",
+    "funding": "Financement",
+    "roi": "Plage de ROI",
+    "timeline": "Calendrier",
+    "risk": {
+      "low": "Risque faible",
+      "medium": "Risque moyen",
+      "high": "Risque élevé"
+    },
+    "loading": "Chargement…",
+    "error": "Une erreur s'est produite. Veuillez réessayer.",
+    "learnMore": "En savoir plus"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "body": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "home": "Retour à l'accueil"
+  },
   "portal": {
     "workspace": "Espace de travail",
     "backToSite": "Retour au site",

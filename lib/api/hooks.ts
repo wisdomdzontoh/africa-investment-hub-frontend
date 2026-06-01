@@ -8,7 +8,9 @@ import type { StagedDocument } from "@/lib/onboarding/types";
 import type {
   AdminAnalytics,
   AdminInvestor,
+  AdminInvestorDetail,
   AdminProject,
+  AdminProjectDetail,
   AuditLogEntry,
   InvestorProfile,
   MatchItem,
@@ -186,6 +188,22 @@ export function useAdminProjects() {
     queryKey: ["admin", "projects"],
     queryFn: () =>
       api.get<{ items: AdminProject[] }>("/admin/projects"),
+  });
+}
+
+export function useAdminInvestor(id: string) {
+  const api = useApiClient();
+  return useQuery({
+    queryKey: ["admin", "investor", id],
+    queryFn: () => api.get<AdminInvestorDetail>(`/admin/investors/${id}`),
+  });
+}
+
+export function useAdminProject(id: string) {
+  const api = useApiClient();
+  return useQuery({
+    queryKey: ["admin", "project", id],
+    queryFn: () => api.get<AdminProjectDetail>(`/admin/projects/${id}`),
   });
 }
 

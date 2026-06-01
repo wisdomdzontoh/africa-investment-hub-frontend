@@ -6,9 +6,9 @@ import { ProjectCard } from "@/features/opportunities/ProjectCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getCountries } from "@/lib/data/countries";
 import {
-  getProjectFilterOptions,
-  getProjects,
-} from "@/lib/data/projects";
+  getLiveProjects,
+  liveProjectFilterOptions,
+} from "@/lib/api/public-projects";
 import { getSectors } from "@/lib/data/sectors";
 import type { ProjectFilters, RiskLevel } from "@/types";
 import {
@@ -59,12 +59,12 @@ async function OpportunitiesContent({
 }) {
   const t = await getTranslations("opportunities");
   const filters = parseFilters(searchParams);
-  const [result, countries, sectors, options] = await Promise.all([
-    getProjects(filters),
+  const [result, countries, sectors] = await Promise.all([
+    getLiveProjects(filters),
     getCountries(),
     getSectors(),
-    getProjectFilterOptions(),
   ]);
+  const options = liveProjectFilterOptions();
 
   return (
     <div className="page py-12">

@@ -1,8 +1,8 @@
 export const clerkAppearance = {
   variables: {
-    // Warm brand orange (matches --brand-primary in globals.css), not the old green.
-    colorPrimary: "#c2410c",
-    colorText: "#1c1917",
+    // Brand red (matches --primary / --brand-primary in globals.css).
+    colorPrimary: "#c0392b",
+    colorText: "#211915",
     borderRadius: "0.5rem",
     fontFamily: "var(--font-sans)",
   },

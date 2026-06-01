@@ -38,7 +38,7 @@ export async function CtaBand() {
             size="lg"
             className="bg-[var(--red-600)] text-white hover:bg-[var(--red-700)]"
           >
-            <Link href="/contact">{t("register")}</Link>
+            <Link href="/sign-up">{t("register")}</Link>
           </BrandedButton>
           <BrandedButton
             asChild

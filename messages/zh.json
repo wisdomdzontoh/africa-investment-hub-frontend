@@ -1,4 +1,368 @@
 {
+  "meta": {
+    "siteName": "African Investment Hub",
+    "siteDescription": "连接全球投资者与覆盖全部54个国家的经核实非洲投资机会。"
+  },
+  "nav": {
+    "home": "首页",
+    "opportunities": "投资机会",
+    "countries": "国家",
+    "whyAfrica": "为何投资非洲",
+    "about": "关于我们",
+    "contact": "联系我们",
+    "signIn": "登录",
+    "register": "注册为投资者",
+    "dashboard": "控制台",
+    "account": "账户",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单",
+    "language": "语言",
+    "languages": {
+      "en": "English",
+      "fr": "Français",
+      "zh": "中文"
+    }
+  },
+  "footer": {
+    "tagline": "连接全球投资者与经核实的非洲投资机会——覆盖全部54个国家。",
+    "platform": "平台",
+    "services": "服务",
+    "company": "公司",
+    "legal": "法律",
+    "platformLinks": {
+      "opportunities": "投资机会",
+      "countries": "国家",
+      "whyAfrica": "为何投资非洲",
+      "forOwners": "面向项目方"
+    },
+    "servicesLinks": {
+      "verification": "投资者核实",
+      "diligence": "尽职调查",
+      "thirdParty": "第三方核实",
+      "monitoring": "项目监测"
+    },
+    "companyLinks": {
+      "about": "关于我们",
+      "advisory": "顾问委员会",
+      "partners": "合作伙伴",
+      "contact": "联系我们"
+    },
+    "legalLinks": {
+      "terms": "条款",
+      "privacy": "隐私",
+      "data": "数据政策",
+      "disclosures": "信息披露"
+    },
+    "copyright": "© 2026 African Investment Hub。非持牌经纪商或财务顾问。",
+    "disclaimer": "本平台不处理付款，也不持有资金。"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "经核实的非洲投资",
+      "title": "连接全球投资者与遍布非洲的<verified>经核实</verified>投资机会",
+      "lead": "发现可投资的项目、可信赖的合作伙伴、法律指导，以及覆盖全非洲的端到端投资支持。",
+      "exploreCta": "探索投资机会",
+      "registerCta": "注册为投资者",
+      "submitProjectCta": "提交项目",
+      "advisorCta": "咨询顾问",
+      "trust": {
+        "investors": "每位投资者均经核实",
+        "projects": "每个项目均经审查",
+        "countries": "全部54个国家"
+      },
+      "capitalFacilitated": "促成资本",
+      "dealsClosed": "已完成 {count} 笔交易",
+      "moreCountries": "+48"
+    },
+    "process": {
+      "register": {
+        "title": "注册",
+        "desc": "创建账户并完成结构化的投资者档案。"
+      },
+      "verify": {
+        "title": "获得核实",
+        "desc": "提交注册及反洗钱文件。我们的团队会人工审核每一位申请人。"
+      },
+      "invest": {
+        "title": "投资",
+        "desc": "解锁匹配且经审查的机会，以及带保密协议门槛的交易室详情。"
+      }
+    },
+    "featured": {
+      "eyebrow": "实时机会",
+      "title": "精选、经审查、可投资",
+      "sub": "一系列经核实的项目，配有核实文件和清晰的融资条款。",
+      "viewAll": "查看全部"
+    },
+    "whyAfrica": {
+      "title": "为何投资非洲？",
+      "lead": "人口增长动能、大陆一体化和结构性需求，构成了令人信服的长期投资逻辑。",
+      "items": {
+        "population": {
+          "title": "人口增长",
+          "desc": "预计到2050年非洲人口将达到25亿，其中60%在25岁以下——拉动消费、劳动力供给和长期需求。"
+        },
+        "markets": {
+          "title": "尚待开发的市场",
+          "desc": "许多行业渗透率仍然偏低，为携手经核实合作伙伴并具备本地洞察的投资者提供先发优势。"
+        },
+        "resources": {
+          "title": "自然资源",
+          "desc": "丰富的矿产、农业用地和能源潜力，支撑整个大陆的工业化和出口导向型增长。"
+        },
+        "afcfta": {
+          "title": "非洲大陆自贸区机遇",
+          "desc": "非洲大陆自由贸易区将54个国家整合为一个13亿人口的单一市场，并统一贸易规则。"
+        },
+        "urbanization": {
+          "title": "城市化",
+          "desc": "城市快速增长在新兴城市中心持续催生对住房、基础设施、零售和服务的需求。"
+        },
+        "digital": {
+          "title": "数字化转型",
+          "desc": "移动连接、金融科技和数字基础设施正在加速金融普惠和新市场准入。"
+        }
+      }
+    },
+    "platformBenefits": {
+      "eyebrow": "平台优势",
+      "title": "满怀信心投资所需的一切",
+      "lead": "从经核实的项目列表到持续监测——一个平台覆盖完整投资旅程。",
+      "items": {
+        "verified": {
+          "title": "经核实的项目",
+          "desc": "每个项目在上线前都会就文件、治理和实地核实进行审查。"
+        },
+        "legal": {
+          "title": "法律指导",
+          "desc": "获取按国家整理的法律框架、所有权规则和许可要求。"
+        },
+        "diligence": {
+          "title": "尽职调查支持",
+          "desc": "结构化的尽调流程和经核实的数据，减少信息不对称。"
+        },
+        "ai": {
+          "title": "AI 智能辅助",
+          "desc": "智能顾问可解答问题、呈现匹配并解释法规。"
+        },
+        "monitoring": {
+          "title": "项目监测",
+          "desc": "达成交易后，跟踪里程碑、财务和风险记录。"
+        },
+        "matchmaking": {
+          "title": "投资者撮合",
+          "desc": "经核实的投资者将与契合其档案和投资授权的经审查机会进行匹配。"
+        }
+      }
+    },
+    "aiAssistant": {
+      "eyebrow": "AI 助手",
+      "title": "AI 投资顾问",
+      "lead": "即时获取有关机会、法规和入驻流程的解答——由经核实的平台数据驱动。",
+      "cta": "试用助手",
+      "functions": {
+        "faqs": {
+          "title": "解答常见问题",
+          "desc": "就核实、行业、国家及平台运作方式提供快速解答。"
+        },
+        "recommend": {
+          "title": "推荐机会",
+          "desc": "呈现契合您行业、风险偏好和投资规模的经审查项目。"
+        },
+        "regulations": {
+          "title": "解释法规",
+          "desc": "以通俗语言按国家概述所有权规则、许可和税收框架。"
+        },
+        "onboarding": {
+          "title": "引导入驻",
+          "desc": "在注册、文件提交和核实方面提供分步帮助。"
+        }
+      }
+    },
+    "sectors": {
+      "eyebrow": "资本流向",
+      "title": "十大行业，端到端审查"
+    },
+    "countries": {
+      "eyebrow": "按国家浏览",
+      "title": "54个国家，统一的核实标准",
+      "sub": "投资环境、税收、外资所有权规则和许可——按国家维护并保持更新。",
+      "openGuide": "打开国家指南",
+      "opportunities": "{count} 个机会"
+    },
+    "cta": {
+      "title": "准备好查看经核实的机会了吗？",
+      "sub": "注册免费。核实用时不到48小时。",
+      "register": "注册为投资者",
+      "browse": "先浏览看看"
+    }
+  },
+  "opportunities": {
+    "title": "投资机会",
+    "subtitle": "覆盖54个国家的经审查项目。完整条款在投资者核实后解锁。",
+    "filters": {
+      "country": "国家",
+      "sector": "行业",
+      "risk": "风险",
+      "stage": "阶段",
+      "fundingType": "融资类型",
+      "sort": "排序方式",
+      "all": "全部",
+      "clear": "清除筛选",
+      "sortFeatured": "精选优先",
+      "sortFundingDesc": "融资额（由高到低）",
+      "sortFundingAsc": "融资额（由低到高）",
+      "sortRoi": "ROI（由高到低）",
+      "sortViews": "最多浏览"
+    },
+    "empty": "没有符合筛选条件的机会。",
+    "showing": "显示第 {from}–{to} 项，共 {total} 项",
+    "gated": {
+      "title": "核实后查看完整条款",
+      "desc": "融资、ROI 及文件在核实后解锁。",
+      "cta": "免费注册"
+    },
+    "detail": {
+      "back": "返回投资机会",
+      "summary": "执行摘要",
+      "fullDetail": "项目完整详情",
+      "gatedDetail": "详细的财务模型、法律文件和团队资历向经核实的投资者开放。",
+      "registerCta": "注册以解锁",
+      "guestDetail": "详细的财务模型、法律文件和团队资历向经核实的会员开放。请登录或创建账户以查看。",
+      "pendingDetail": "在您的账户经我们团队核实后，将解锁完整的项目详情。",
+      "signInCta": "登录",
+      "createAccount": "创建账户",
+      "stats": {
+        "funding": "融资",
+        "roi": "ROI 区间",
+        "timeline": "时间线",
+        "stage": "阶段",
+        "risk": "风险",
+        "views": "浏览量"
+      }
+    }
+  },
+  "countries": {
+    "title": "国家投资指南",
+    "subtitle": "监管细节、税收、所有权规则和许可——为全部54个非洲国家维护。",
+    "searchPlaceholder": "搜索国家或地区…",
+    "empty": "没有符合搜索条件的国家。",
+    "opportunities": "{count} 个机会",
+    "detail": {
+      "back": "返回国家",
+      "lastUpdated": "更新于 {date}",
+      "sections": {
+        "climate": "投资环境",
+        "laws": "法律框架",
+        "tax": "税收与激励",
+        "registration": "企业注册",
+        "licensing": "许可",
+        "ownership": "外资所有权",
+        "repatriation": "资金汇回",
+        "immigration": "移民",
+        "contacts": "关键联系人",
+        "news": "近期更新"
+      },
+      "viewOpportunities": "查看 {country} 的机会"
+    }
+  },
+  "whyAfricaPage": {
+    "title": "为何投资非洲",
+    "subtitle": "人口增长动能、大陆一体化和结构性需求，构成了令人信服的长期投资逻辑。",
+    "sections": {
+      "demographics": {
+        "title": "人口红利",
+        "body": "到2050年非洲人口将达到25亿。年轻且日益城市化的劳动力拉动消费、数字化普及和劳动力成本优势。"
+      },
+      "afcfta": {
+        "title": "非洲大陆自贸区一体化",
+        "body": "非洲大陆自由贸易区打造一个13亿人口的单一市场——降低关税壁垒并在成员国之间统一贸易规则。"
+      },
+      "infrastructure": {
+        "title": "基础设施缺口",
+        "body": "估计每年1300亿美元的基础设施缺口，持续催生对电力、交通、数字和城市开发投资的需求。"
+      },
+      "returns": {
+        "title": "回报潜力",
+        "body": "前沿市场估值和不断增长的中产阶级消费，为有耐心、经核实的资本提供有吸引力的风险调整后回报。"
+      }
+    }
+  },
+  "about": {
+    "title": "关于 African Investment Hub",
+    "subtitle": "我们将经核实的国际投资者与经审查的非洲机会相连接——并在全部54个国家拥有可信赖的实地存在。",
+    "mission": {
+      "title": "我们的使命",
+      "body": "通过核实每一位参与者并保持最新的国家情报，降低非洲跨境投资中的信息不对称与执行风险。"
+    },
+    "team": {
+      "title": "领导团队",
+      "body": "由投资专业人士、监管专家和行业分析师组成的泛非团队——总部分布于拉各斯、内罗毕和开普敦。"
+    },
+    "partners": {
+      "title": "合作伙伴",
+      "body": "我们与开发性金融机构、区域投资促进机构以及经核实的本地法律顾问网络合作。"
+    },
+    "trust": {
+      "title": "信任与核实",
+      "body": "每位投资者都需经过反洗钱/KYC 审查。每个项目在上线前都会就文件、治理和实地核实进行审查。"
+    }
+  },
+  "contact": {
+    "title": "联系我们",
+    "subtitle": "有关核实、机会或合作的问题——我们的团队将在一个工作日内回复。",
+    "form": {
+      "name": "全名",
+      "email": "电子邮箱",
+      "company": "公司／机构",
+      "subject": "主题",
+      "message": "留言",
+      "submit": "发送留言",
+      "submitting": "发送中…",
+      "successTitle": "留言已发送",
+      "successBody": "谢谢——我们将在一个工作日内回复。",
+      "errors": {
+        "nameRequired": "请填写姓名",
+        "emailInvalid": "请输入有效的电子邮箱",
+        "subjectRequired": "请填写主题",
+        "messageMin": "留言至少需要20个字符"
+      }
+    }
+  },
+  "chat": {
+    "open": "打开投资助手",
+    "close": "关闭",
+    "title": "AI 投资顾问",
+    "subtitle": "中文 · 以您的语言回复",
+    "placeholder": "询问某个国家或行业…",
+    "send": "发送",
+    "greeting": "您好——我是您的投资助手。可以问我有关机会、各国法规或核实流程的问题。",
+    "mockReply": "以下是根据我们经核实的国家和行业数据给出的结构化回答。如需具约束力的评估，平台团队会在引荐前审查每一项匹配。",
+    "suggestions": {
+      "verification": "核实流程是怎样的？",
+      "kenya": "肯尼亚最佳行业？",
+      "afcfta": "什么是非洲大陆自贸区？"
+    }
+  },
+  "common": {
+    "featured": "精选",
+    "funding": "融资",
+    "roi": "ROI 区间",
+    "timeline": "时间线",
+    "risk": {
+      "low": "低风险",
+      "medium": "中风险",
+      "high": "高风险"
+    },
+    "loading": "加载中…",
+    "error": "出了点问题，请重试。",
+    "learnMore": "了解更多"
+  },
+  "notFound": {
+    "title": "页面未找到",
+    "body": "您查找的页面不存在或已移动。",
+    "home": "返回首页"
+  },
   "portal": {
     "workspace": "工作区",
     "backToSite": "返回网站",

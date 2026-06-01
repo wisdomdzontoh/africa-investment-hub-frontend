@@ -155,10 +155,10 @@ export function HeroEditorial() {
               </Link>
             </BrandedButton>
             <BrandedButton asChild variant="secondary" size="lg">
-              <Link href="/contact">{t("registerCta")}</Link>
+              <Link href="/sign-up">{t("registerCta")}</Link>
             </BrandedButton>
             <BrandedButton asChild variant="secondary" size="lg">
-              <Link href="/contact">{t("submitProjectCta")}</Link>
+              <Link href="/sign-up">{t("submitProjectCta")}</Link>
             </BrandedButton>
             <BrandedButton asChild variant="outline" size="lg">
               <Link href="/contact">{t("advisorCta")}</Link>

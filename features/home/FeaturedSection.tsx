@@ -4,11 +4,13 @@ import { Link } from "@/i18n/navigation";
 import { BrandedButton } from "@/components/brand/Button";
 import { SectionHead } from "@/components/common/SectionHead";
 import { ProjectCard } from "@/features/opportunities/ProjectCard";
-import { getFeaturedProjects } from "@/lib/data/projects";
+import { getLiveFeaturedProjects } from "@/lib/api/public-projects";
 
 export async function FeaturedSection() {
   const t = await getTranslations("home.featured");
-  const projects = await getFeaturedProjects(3);
+  const projects = await getLiveFeaturedProjects(3);
+
+  if (projects.length === 0) return null;
 
   return (
     <section className="page py-12 pb-8">

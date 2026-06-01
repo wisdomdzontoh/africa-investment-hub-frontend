@@ -1,9 +1,10 @@
 "use client";
 
-import { Check, X } from "lucide-react";
+import { Check, Eye, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
+import { useRouter } from "@/i18n/navigation";
 import { AdminFilterTabs, type StatusFilter } from "@/components/admin/AdminFilterTabs";
 import { AdminPageHeader, ExportCsvButton, RowActionButton, SearchInput } from "@/components/admin/AdminUI";
 import { RejectDialog } from "@/components/admin/RejectDialog";
@@ -27,6 +28,7 @@ export default function AdminInvestorsPage() {
   const locale = useLocale();
   const { data, isLoading } = useAdminInvestors();
   const setStatus = useSetInvestorStatus();
+  const router = useRouter();
   const [filter, setFilter] = useState<StatusFilter>("pending");
   const [query, setQuery] = useState("");
 
@@ -111,6 +113,11 @@ export default function AdminInvestorsPage() {
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center justify-end gap-1.5">
+                        <RowActionButton
+                          icon={Eye}
+                          title={t("view")}
+                          onClick={() => router.push(`/admin/investors/${inv.id}`)}
+                        />
                         {inv.status === "pending" && (
                           <>
                             <RowActionButton

@@ -53,17 +53,19 @@
    Palette: PEACH · ORANGE · BLACK · WHITE. No green, brown, or yellow.
    =========================================================================== */
 :root {
-  /* ---- Core warm scale ---- */
-  --orange: oklch(0.65 0.19 47); /* primary brand orange */
-  --orange-deep: oklch(0.55 0.18 42); /* hover / headings on light */
-  --orange-strong: oklch(0.7 0.2 50); /* vivid highlight */
-  --orange-soft: oklch(0.91 0.06 60); /* pale peach-orange tint */
-  --terra: oklch(0.55 0.2 34); /* deep terracotta accent */
-  --peach-50: oklch(0.975 0.014 62);
-  --peach-100: oklch(0.96 0.022 60);
-  --peach-200: oklch(0.93 0.03 56);
-  --ink: oklch(0.2 0.014 50); /* near-black */
-  --ink-soft: oklch(0.27 0.016 48);
+  /* ---- Core warm scale (RED ramp) ----
+     Vars keep their historical --orange* names so the whole UI inherits the
+     shift, but the values are now a vermilion-crimson → peach/oxblood ramp. */
+  --orange: #c0392b; /* PRIMARY brand red — buttons, links, focus */
+  --orange-deep: #a02a20; /* hover / pressed / headings on light */
+  --orange-strong: #d24a39; /* vivid highlight */
+  --orange-soft: #f6ccbc; /* pale peach/blush tint (replaces light orange) */
+  --terra: #7e211b; /* deep oxblood accent */
+  --peach-50: #fdf4f1; /* faintest blush wash */
+  --peach-100: #fbede7; /* warm light page background */
+  --peach-200: #f5ddd3; /* sunken band / soft fills */
+  --ink: #211915; /* warm near-black */
+  --ink-soft: #4a3d36;
 
   /* ---- shadcn semantic tokens ---- */
   --background: var(--peach-100);
@@ -80,12 +82,12 @@
   --muted-foreground: oklch(0.49 0.03 45);
   --accent: var(--orange-soft);
   --accent-foreground: var(--orange-deep);
-  --destructive: oklch(0.55 0.2 32);
-  --border: oklch(0.88 0.022 60);
-  --input: oklch(0.88 0.022 60);
+  --destructive: #b42318; /* clear red — distinct from brand red */
+  --border: #ecd9cf; /* warm blush hairline */
+  --input: #ecd9cf;
   --ring: var(--orange);
   --chart-1: var(--orange);
-  --chart-2: oklch(0.74 0.15 62);
+  --chart-2: #e07e66;
   --chart-3: var(--terra);
   --chart-4: oklch(0.45 0.14 40);
   --chart-5: var(--ink-soft);
@@ -106,11 +108,11 @@
   --surface-sunken: var(--peach-200);
   --surface-header: oklch(0.985 0.012 70); /* light header */
   --surface-header-fg: var(--ink);
-  --surface-footer: var(--ink); /* black footer */
-  --surface-footer-fg: oklch(0.95 0.01 70);
+  --surface-footer: #5e1814; /* deep oxblood — footer "gravitas" field */
+  --surface-footer-fg: #fbf6f2;
   --text-strong: var(--ink);
   --text-muted: oklch(0.49 0.03 45);
-  --border-strong: oklch(0.82 0.025 58);
+  --border-strong: #ddc4b9;
   --content-max: 72rem;
   --radius-base: 10px;
 
@@ -121,8 +123,8 @@
   --teal-700: var(--orange-deep);
   --gold-300: var(--orange-soft);
   --gold-500: var(--orange);
-  --red-600: var(--terra);
-  --red-700: oklch(0.47 0.18 33);
+  --red-600: var(--destructive);
+  --red-700: #8f1c13;
   --success: var(--orange-deep);
   --warning: var(--orange-strong);
   --brand-primary: var(--orange);
@@ -145,12 +147,12 @@
 }
 
 .dark {
-  --orange: oklch(0.68 0.19 48);
-  --orange-deep: oklch(0.6 0.18 44);
-  --orange-soft: oklch(0.34 0.06 50);
-  --terra: oklch(0.6 0.18 34);
-  --ink: oklch(0.17 0.014 50);
-  --ink-soft: oklch(0.24 0.016 48);
+  --orange: #dd5e4c; /* brighter red for dark surfaces */
+  --orange-deep: #c0392b;
+  --orange-soft: #3c201b; /* deep blush — dark accent fill */
+  --terra: #e68a72; /* warm coral accent on dark */
+  --ink: oklch(0.17 0.014 40);
+  --ink-soft: oklch(0.24 0.016 38);
 
   --background: var(--ink);
   --foreground: oklch(0.95 0.01 70);
@@ -175,7 +177,7 @@
   --surface-sunken: oklch(0.24 0.016 48);
   --surface-header: oklch(0.2 0.016 48);
   --surface-header-fg: oklch(0.95 0.01 70);
-  --surface-footer: oklch(0.13 0.012 50);
+  --surface-footer: #3a0f0c; /* deeper oxblood for dark mode */
   --surface-footer-fg: oklch(0.95 0.01 70);
   --text-strong: oklch(0.95 0.01 70);
   --text-muted: oklch(0.68 0.02 60);

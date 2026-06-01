@@ -19,12 +19,21 @@ type Props = {
   /** Called with the (optional) reason when the admin confirms rejection. */
   onConfirm: (reason: string) => void | Promise<void>;
   pending?: boolean;
-  triggerIcon: LucideIcon;
-  triggerTitle: string;
+  /** Icon trigger (table rows). */
+  triggerIcon?: LucideIcon;
+  triggerTitle?: string;
+  /** Full-button trigger (detail pages). Takes precedence when set. */
+  triggerLabel?: string;
 };
 
 /** Reject action with a reason captured in a modal (reason is logged + emailed). */
-export function RejectDialog({ onConfirm, pending, triggerIcon, triggerTitle }: Props) {
+export function RejectDialog({
+  onConfirm,
+  pending,
+  triggerIcon,
+  triggerTitle,
+  triggerLabel,
+}: Props) {
   const t = useTranslations("adminPortal");
   const [open, setOpen] = useState(false);
   const [reason, setReason] = useState("");
@@ -37,13 +46,26 @@ export function RejectDialog({ onConfirm, pending, triggerIcon, triggerTitle }: 
 
   return (
     <>
-      <RowActionButton
-        icon={triggerIcon}
-        title={triggerTitle}
-        variant="reject"
-        disabled={pending}
-        onClick={() => setOpen(true)}
-      />
+      {triggerLabel ? (
+        <BrandedButton
+          variant="outline"
+          disabled={pending}
+          onClick={() => setOpen(true)}
+          className="border-destructive/40 text-destructive hover:bg-destructive/5"
+        >
+          {triggerLabel}
+        </BrandedButton>
+      ) : (
+        triggerIcon && (
+          <RowActionButton
+            icon={triggerIcon}
+            title={triggerTitle ?? ""}
+            variant="reject"
+            disabled={pending}
+            onClick={() => setOpen(true)}
+          />
+        )
+      )}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
         <DialogHeader>
