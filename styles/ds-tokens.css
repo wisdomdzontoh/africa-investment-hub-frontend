@@ -1,0 +1,10 @@
+/* African Investment Hub — Design system tokens (vendored from DS v3)
+   These files are copied into the project (styles/ds/) so the build never
+   imports outside the project root — Turbopack rejects "../.." escapes. Keep
+   them in sync with fronted-design-system/African-inv-hub-v3/tokens/. */
+
+@import "./ds/colors.css";
+@import "./ds/typography.css";
+@import "./ds/spacing.css";
+
+/* Font family vars are set by next/font in app/layout.tsx — do not @import fonts.css */

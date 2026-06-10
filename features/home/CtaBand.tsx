@@ -1,53 +1,25 @@
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
-import { BrandedButton } from "@/components/brand/Button";
-
-function ArcMotifLight() {
-  const stroke = "rgba(255,255,255,0.16)";
-  return (
-    <svg className="arc-motif" viewBox="0 0 600 600" aria-hidden="true">
-      {[60, 130, 200, 270, 340, 410, 480].map((r) => (
-        <circle
-          key={r}
-          cx="600"
-          cy="300"
-          r={r}
-          fill="none"
-          stroke={stroke}
-          strokeWidth="1.5"
-        />
-      ))}
-    </svg>
-  );
-}
+import { Button } from "@/components/ds";
 
 export async function CtaBand() {
-  const t = await getTranslations("home.cta");
+  const t = await getTranslations("home.finalCta");
 
   return (
-    <section className="page pt-10">
-      <div className="cta-band">
-        <ArcMotifLight />
-        <div className="relative">
-          <h2 className="h1 max-w-[520px] text-white">{t("title")}</h2>
-          <p className="mt-2.5 max-w-[460px] text-white/82">{t("sub")}</p>
-        </div>
-        <div className="relative flex flex-wrap gap-3">
-          <BrandedButton
-            asChild
-            size="lg"
-            className="bg-[var(--red-600)] text-white hover:bg-[var(--red-700)]"
-          >
-            <Link href="/sign-up">{t("register")}</Link>
-          </BrandedButton>
-          <BrandedButton
-            asChild
-            size="lg"
-            variant="outline"
-            className="border-white/40 bg-transparent text-white hover:bg-white/10"
-          >
-            <Link href="/opportunities">{t("browse")}</Link>
-          </BrandedButton>
+    <section className="border-t border-[var(--on-dark-divider)] bg-[var(--surface-dark)] px-[clamp(1rem,4vw,2.5rem)] py-[clamp(3.5rem,8vw,7.5rem)]">
+      <div className="page mx-auto max-w-[800px] text-center">
+        <h2 className="text-balance text-[clamp(1.75rem,3.5vw,3rem)] font-bold leading-[1.15] tracking-[-0.02em] text-[var(--on-dark)]">
+          {t("title")}
+        </h2>
+        <p className="mx-auto mt-5 max-w-[600px] text-[17px] leading-relaxed text-[var(--on-dark-65)]">
+          {t("sub")}
+        </p>
+        <div className="mt-10 flex flex-col items-center justify-center gap-3.5 sm:flex-row">
+          <Button href="/sign-up" size="lg">
+            {t("register")}
+          </Button>
+          <Button href="/sign-up" size="lg" variant="onDark">
+            {t("submitProject")}
+          </Button>
         </div>
       </div>
     </section>

@@ -1,14 +1,22 @@
 "use client";
 
 import { UserButton, useAuth } from "@clerk/nextjs";
-import { Menu } from "lucide-react";
+import {
+  Compass,
+  Globe2,
+  Info,
+  Mail,
+  Menu,
+  Send,
+  TrendingUp,
+  type LucideIcon,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
-import { BrandedButton } from "@/components/brand/Button";
 import { Logo } from "@/components/brand/Logo";
+import { buttonVariants } from "@/components/ds/Button";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
-import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -20,13 +28,12 @@ import { useAccount } from "@/lib/api/hooks";
 import { dashboardPath } from "@/lib/auth/paths";
 import { cn } from "@/lib/utils";
 
-const NAV_ITEMS = [
-  { href: "/", key: "home" as const },
-  { href: "/opportunities", key: "opportunities" as const },
-  { href: "/countries", key: "countries" as const },
-  { href: "/why-africa", key: "whyAfrica" as const },
-  { href: "/about", key: "about" as const },
-  { href: "/contact", key: "contact" as const },
+const NAV_ITEMS: { href: string; key: string; icon: LucideIcon }[] = [
+  { href: "/opportunities", key: "opportunities", icon: Compass },
+  { href: "/countries", key: "countries", icon: Globe2 },
+  { href: "/why-africa", key: "whyAfrica", icon: TrendingUp },
+  { href: "/about", key: "about", icon: Info },
+  { href: "/contact", key: "contact", icon: Mail },
 ];
 
 export function MobileNav() {
@@ -36,78 +43,114 @@ export function MobileNav() {
   const { isLoaded, isSignedIn } = useAuth();
   const { data: account } = useAccount(isSignedIn === true);
 
-  const linkActive = (href: string) =>
-    pathname === href || (href !== "/" && pathname.startsWith(href));
+  const linkActive = (href: string) => pathname.startsWith(href);
   const portalHref = account ? dashboardPath(account.role) : "/onboarding";
   const close = () => setOpen(false);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      {/* Trigger is mobile/tablet only — desktop uses the inline nav. */}
       <SheetTrigger asChild>
-        <Button
+        <button
           type="button"
-          variant="outline"
-          size="icon"
-          className="topnav-menu-btn min-[900px]:hidden"
+          className="topnav-menu-btn min-[1024px]:hidden"
           aria-label={t("openMenu")}
         >
           <Menu className="size-5" strokeWidth={2.25} aria-hidden />
-        </Button>
+        </button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-[min(100vw-2rem,320px)]">
-        <SheetHeader>
+      <SheetContent
+        side="right"
+        className="flex w-[min(100vw-2rem,360px)] flex-col gap-0 border-[var(--accent-border)] bg-[var(--bg-page)] p-0"
+      >
+        <SheetHeader className="border-b border-[var(--accent-border)] px-5 py-4">
           <SheetTitle className="text-left">
-            <Logo height={32} />
+            <Link href="/" onClick={close} className="inline-flex items-center no-underline" aria-label="African Investment Hub home">
+              <Logo height={32} priority={false} />
+            </Link>
           </SheetTitle>
         </SheetHeader>
 
-        <nav className="mt-6 flex flex-col gap-1" aria-label="Mobile">
-          {NAV_ITEMS.map(({ href, key }) => (
-            <Link
-              key={key}
-              href={href}
-              onClick={close}
-              className={cn(
-                "rounded-[var(--radius-base)] px-3 py-2.5 text-sm font-semibold no-underline",
-                linkActive(href)
-                  ? "bg-muted text-[var(--orange-deep)]"
-                  : "text-[var(--text-strong)] hover:bg-muted",
-              )}
-            >
-              {t(key)}
-            </Link>
-          ))}
+        <nav
+          className="flex flex-1 flex-col gap-0.5 overflow-y-auto px-3 py-4"
+          aria-label="Mobile"
+        >
+          {NAV_ITEMS.map(({ href, key, icon: Icon }) => {
+            const active = linkActive(href);
+            return (
+              <Link
+                key={key}
+                href={href}
+                onClick={close}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-3 text-sm font-medium no-underline transition-colors",
+                  active
+                    ? "bg-[var(--accent-tint-08)] text-[var(--accent)]"
+                    : "text-[var(--text-body)] hover:bg-[var(--ink-hover-tint)]",
+                )}
+              >
+                <Icon
+                  className="size-[1.15rem]"
+                  strokeWidth={2}
+                  style={{ color: active ? "var(--accent)" : "var(--text-muted)" }}
+                  aria-hidden
+                />
+                {t(key)}
+              </Link>
+            );
+          })}
         </nav>
 
-        <div className="mt-6 flex items-center justify-between border-t border-border pt-6">
-          <span className="text-sm text-muted-foreground">{t("language")}</span>
-          <LanguageSwitcher />
-        </div>
+        <div className="border-t border-[var(--accent-border)] px-5 py-4">
+          <div className="mb-4 flex items-center justify-between">
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--text-muted)]">
+              {t("language")}
+            </span>
+            <LanguageSwitcher />
+          </div>
 
-        <div className="mt-6 flex flex-col gap-3 border-t border-border pt-6">
-          {isLoaded && !isSignedIn && (
-            <>
-              <Link href="/sign-in" onClick={close}>
-                <BrandedButton variant="outline" className="w-full">
+          <div className="flex flex-col gap-2.5">
+            {isLoaded && !isSignedIn && (
+              <>
+                <Link
+                  href="/sign-up"
+                  onClick={close}
+                  className={cn(buttonVariants({ size: "lg" }), "w-full gap-1.5")}
+                >
+                  <Send className="size-3.5" aria-hidden />
+                  {t("submitProject")}
+                </Link>
+                <Link
+                  href="/sign-up"
+                  onClick={close}
+                  className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full")}
+                >
+                  {t("register")}
+                </Link>
+                <Link
+                  href="/sign-in"
+                  onClick={close}
+                  className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full")}
+                >
                   {t("signIn")}
-                </BrandedButton>
-              </Link>
-              <Link href="/sign-up" onClick={close}>
-                <BrandedButton className="w-full">{t("register")}</BrandedButton>
-              </Link>
-            </>
-          )}
-          {isLoaded && isSignedIn && (
-            <>
-              <Link href={portalHref} onClick={close}>
-                <BrandedButton className="w-full">{t("dashboard")}</BrandedButton>
-              </Link>
-              <div className="flex items-center gap-2 px-1 text-sm text-muted-foreground">
-                <UserButton /> {t("account")}
-              </div>
-            </>
-          )}
+                </Link>
+              </>
+            )}
+            {isLoaded && isSignedIn && (
+              <>
+                <Link
+                  href={portalHref}
+                  onClick={close}
+                  className={cn(buttonVariants({ size: "lg" }), "w-full")}
+                >
+                  {t("dashboard")}
+                </Link>
+                <div className="flex items-center gap-2 px-1 py-1 font-mono text-xs text-[var(--text-muted)]">
+                  <UserButton /> {t("account")}
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </SheetContent>
     </Sheet>

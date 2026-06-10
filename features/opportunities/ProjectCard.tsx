@@ -52,7 +52,7 @@ export function ProjectCard({
             )}
             <button
               type="button"
-              className="inline-flex size-8 items-center justify-center rounded-[var(--radius-base)] text-[var(--text-muted)] transition-colors hover:bg-muted hover:text-[var(--green-600)]"
+              className="inline-flex size-8 items-center justify-center rounded-[var(--radius-base)] text-[var(--text-muted)] transition-colors hover:bg-muted hover:text-[var(--accent)]"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -63,8 +63,8 @@ export function ProjectCard({
               <Bookmark
                 size={16}
                 style={{
-                  color: saved ? "var(--red-600)" : undefined,
-                  fill: saved ? "var(--red-600)" : "none",
+                  color: saved ? "var(--accent)" : undefined,
+                  fill: saved ? "var(--accent)" : "none",
                 }}
               />
             </button>
@@ -82,7 +82,7 @@ export function ProjectCard({
             </span>
             <SectorBadge id={p.sectorId} />
           </div>
-          <h3 className="h4 mb-1.5 line-clamp-2 leading-snug transition-colors group-hover:text-[var(--green-700)]">
+          <h3 className="h4 mb-1.5 line-clamp-2 leading-snug transition-colors group-hover:text-[var(--accent)]">
             {p.title}
           </h3>
           <p className="m-0 line-clamp-3 text-[var(--text-sm)] leading-normal text-[var(--text-muted)]">

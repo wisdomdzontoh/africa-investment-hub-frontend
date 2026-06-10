@@ -1,0 +1,52 @@
+/* African Investment Hub — Color tokens
+   Warm cream surfaces, near-black ink, single terracotta-red accent.
+   NOTE: in this brand, red is the CONFIRMATION color (checkmarks, "verified",
+   "low risk", progress fills) — not a danger color.
+   Vendored from fronted-design-system/African-inv-hub-v3/tokens/colors.css —
+   keep in sync with the design-system source of truth. */
+
+:root {
+  /* ── Accent (terracotta red) ─────────────────────────── */
+  --accent: #C0392B;            /* primary accent — CTAs, links, checks */
+  --accent-bright: #E74C3C;     /* hover state, on-dark accent text */
+  --accent-tint-06: rgba(192, 57, 43, 0.06);  /* ghost-button hover bg */
+  --accent-tint-08: rgba(192, 57, 43, 0.08);  /* icon wells, number circles */
+  --accent-tint-10: rgba(192, 57, 43, 0.10);  /* badge backgrounds */
+  --accent-tint-16: rgba(231, 76, 60, 0.16);  /* active tab bg on dark */
+  --accent-border: rgba(192, 57, 43, 0.15);   /* card + divider borders */
+  --accent-border-strong: rgba(192, 57, 43, 0.30); /* social icon rings */
+
+  /* ── Ink / neutrals ──────────────────────────────────── */
+  --ink: #1A1A1A;               /* headings, primary text, dark buttons */
+  --text-body: #4A4A4A;         /* body copy */
+  --text-muted: #8A8A8A;        /* captions, meta, placeholders */
+  --ink-border: rgba(26, 26, 26, 0.15);        /* chip outlines */
+  --ink-border-strong: rgba(26, 26, 26, 0.20); /* footer badge outlines */
+  --ink-hover-tint: rgba(26, 26, 26, 0.05);    /* outline-button hover bg */
+
+  /* ── Surfaces ────────────────────────────────────────── */
+  --bg-page: #FDF6F0;           /* default page background (warm cream) */
+  --bg-section: #F5EDE6;        /* alternate section background */
+  --bg-stripe: #EFE6DE;         /* placeholder stripes, hairline dividers */
+  --surface-card: #FFFFFF;      /* cards on cream */
+  --surface-dark: #0F0F0F;      /* dark panels, stats strip, final CTA */
+  --map-dot: #2E2624;           /* inactive dots on dark continent map */
+
+  /* ── On-dark text ────────────────────────────────────── */
+  --on-dark: #F5EDE6;           /* headings on dark */
+  --on-dark-85: rgba(245, 237, 230, 0.85);  /* body on dark */
+  --on-dark-65: rgba(245, 237, 230, 0.65);  /* secondary on dark */
+  --on-dark-50: rgba(245, 237, 230, 0.50);  /* captions on dark */
+  --on-dark-divider: rgba(245, 237, 230, 0.18);
+  --on-dark-border: rgba(245, 237, 230, 0.40); /* outline button on dark */
+
+  /* ── Semantic (risk + status) ────────────────────────── */
+  --risk-low-fg: #C0392B;       /* low risk = good = accent */
+  --risk-low-bg: rgba(192, 57, 43, 0.10);
+  --risk-medium-fg: #8A8A8A;
+  --risk-medium-bg: rgba(138, 138, 138, 0.12);
+  --risk-high-fg: #FFFFFF;      /* high risk = solid ink chip */
+  --risk-high-bg: #1A1A1A;
+  --status-solid-fg: #FFFFFF;   /* "Approved" — solid accent chip */
+  --status-solid-bg: #C0392B;
+}

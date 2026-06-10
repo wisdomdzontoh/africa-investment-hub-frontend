@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { BrandedCard } from "@/components/brand/Card";
+import { PageHero } from "@/components/marketing/PageHero";
 
 const SECTIONS = ["mission", "team", "partners", "trust"] as const;
 
@@ -14,11 +15,9 @@ export default async function AboutPage({
   const t = await getTranslations("about");
 
   return (
-    <div className="page py-12">
-      <div className="mb-10 max-w-[720px]">
-        <h1 className="h1">{t("title")}</h1>
-        <p className="lead mt-3">{t("subtitle")}</p>
-      </div>
+    <>
+      <PageHero title={t("title")} subtitle={t("subtitle")} eyebrow={t("eyebrow")} />
+      <div className="page py-12">
       <div className="grid gap-5 md:grid-cols-2">
         {SECTIONS.map((key) => (
           <BrandedCard key={key} pad>
@@ -29,6 +28,7 @@ export default async function AboutPage({
           </BrandedCard>
         ))}
       </div>
-    </div>
+      </div>
+    </>
   );
 }

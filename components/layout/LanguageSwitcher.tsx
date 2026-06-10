@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, ChevronDown } from "lucide-react";
+import { Check, ChevronDown, Globe2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
@@ -48,7 +48,7 @@ export function LanguageSwitcher({
         )}
         aria-label={t("language")}
       >
-        <Flag code={LOCALE_FLAGS[locale]} className="lang-switcher-flag" />
+        <Globe2 className="lang-switcher-globe" aria-hidden />
         <span className="lang-switcher-code">{LOCALE_CODES[locale]}</span>
         <span className="lang-switcher-label hidden min-[420px]:inline">
           {t(`languages.${locale}`)}
@@ -63,18 +63,18 @@ export function LanguageSwitcher({
               key={l}
               className={cn(
                 "lang-switcher-item gap-2.5 py-2",
-                active && "bg-muted",
+                active && "bg-[var(--accent-tint-06)]",
               )}
               onClick={() => router.replace(pathname, { locale: l })}
             >
               <Flag code={LOCALE_FLAGS[l]} className="shrink-0" />
-              <span className="flex-1 font-semibold">{t(`languages.${l}`)}</span>
-              <span className="text-[var(--text-2xs)] font-bold text-[var(--text-muted)]">
+              <span className="flex-1 font-medium">{t(`languages.${l}`)}</span>
+              <span className="font-mono text-[10px] font-bold text-[var(--text-muted)]">
                 {LOCALE_CODES[l]}
               </span>
               {active && (
                 <Check
-                  className="size-4 shrink-0 text-[var(--orange-deep)]"
+                  className="size-4 shrink-0 text-[var(--accent)]"
                   aria-hidden
                 />
               )}

@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
-import { BrandedCard } from "@/components/brand/Card";
+import { Card } from "@/components/ds";
+import { PageHero } from "@/components/marketing/PageHero";
 
 const SECTIONS = [
   "demographics",
@@ -19,21 +20,28 @@ export default async function WhyAfricaPage({
   const t = await getTranslations("whyAfricaPage");
 
   return (
-    <div className="page py-12">
-      <div className="mb-10 max-w-[720px]">
-        <h1 className="h1">{t("title")}</h1>
-        <p className="lead mt-3">{t("subtitle")}</p>
+    <>
+      <PageHero
+        tone="dark"
+        eyebrow={t("eyebrow")}
+        title={t("title")}
+        subtitle={t("subtitle")}
+        meta={["54 countries", "AfCFTA · 1.3B people", "$3.4T market"]}
+      />
+      <div className="page py-[clamp(3rem,7vw,6rem)]">
+        <div className="grid gap-6 md:grid-cols-2">
+          {SECTIONS.map((key) => (
+            <Card key={key}>
+              <h2 className="text-[clamp(1.25rem,2vw,1.75rem)] font-bold tracking-[-0.01em] text-[var(--ink)]">
+                {t(`sections.${key}.title`)}
+              </h2>
+              <p className="mt-2.5 text-[15px] leading-relaxed text-[var(--text-body)]">
+                {t(`sections.${key}.body`)}
+              </p>
+            </Card>
+          ))}
+        </div>
       </div>
-      <div className="grid gap-5 md:grid-cols-2">
-        {SECTIONS.map((key) => (
-          <BrandedCard key={key} pad>
-            <h2 className="h3">{t(`sections.${key}.title`)}</h2>
-            <p className="mt-2 text-[var(--text-sm)] leading-relaxed text-[var(--text-muted)]">
-              {t(`sections.${key}.body`)}
-            </p>
-          </BrandedCard>
-        ))}
-      </div>
-    </div>
+    </>
   );
 }

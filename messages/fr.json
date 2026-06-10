@@ -21,10 +21,28 @@
       "en": "English",
       "fr": "Français",
       "zh": "中文"
+    },
+    "submitProject": "Soumettre un projet",
+    "explore": "Explorer",
+    "descriptions": {
+      "opportunities": "Parcourez des projets vérifiés, prêts à investir",
+      "countries": "Guides de marché des économies africaines",
+      "whyAfrica": "Pourquoi investir en Afrique maintenant"
     }
   },
   "footer": {
     "tagline": "Connecter les investisseurs mondiaux à des opportunités africaines vérifiées — dans les 54 pays.",
+    "chips": {
+      "manualVerification": "Vérification manuelle",
+      "ndaGated": "Salles de deal sous NDA",
+      "noFundsHeld": "Aucun fonds détenu"
+    },
+    "links": {
+      "sitemap": "Plan du site",
+      "terms": "Conditions générales",
+      "security": "Sécurité",
+      "privacy": "Avis de confidentialité"
+    },
     "platform": "Plateforme",
     "services": "Services",
     "company": "Entreprise",
@@ -33,7 +51,7 @@
       "opportunities": "Opportunités",
       "countries": "Pays",
       "whyAfrica": "Pourquoi l'Afrique",
-      "forOwners": "Pour les porteurs de projet"
+      "forOwners": "Pour les facilitateurs de projet"
     },
     "servicesLinks": {
       "verification": "Vérification des investisseurs",
@@ -54,25 +72,126 @@
       "disclosures": "Informations légales"
     },
     "copyright": "© 2026 African Investment Hub. Ni courtier agréé ni conseiller financier.",
-    "disclaimer": "La plateforme ne traite pas les paiements et ne détient pas de fonds."
+    "disclaimer": "La plateforme ne traite pas les paiements et ne détient pas de fonds.",
+    "ctaTitle": "Prêt à explorer des opportunités africaines vérifiées ?",
+    "ctaButton": "Parler à un conseiller",
+    "contactTitle": "Nous contacter",
+    "email": "invest@africaninvestmenthub.com",
+    "phone": "+44 20 7946 0123"
   },
   "home": {
     "hero": {
-      "eyebrow": "Investissement africain vérifié",
-      "title": "Connecter les investisseurs mondiaux à des opportunités <verified>vérifiées</verified> à travers l'Afrique",
-      "lead": "Découvrez des projets prêts à l'investissement, des partenaires de confiance, un accompagnement juridique et un soutien de bout en bout à travers l'Afrique.",
+      "eyebrow": "Plateforme d'investissement panafricaine",
+      "title": "Connecter les investisseurs mondiaux à des opportunités africaines vérifiées",
+      "lead": "L'African Investment Hub lève les obstacles de confiance, de découverte et de facilitation qui freinent les capitaux transfrontaliers sur les marchés africains — dans les 54 pays.",
       "exploreCta": "Explorer les opportunités",
-      "registerCta": "S'inscrire comme investisseur",
-      "submitProjectCta": "Soumettre un projet",
-      "advisorCta": "Parler à un conseiller",
-      "trust": {
-        "investors": "Chaque investisseur vérifié",
-        "projects": "Chaque projet contrôlé",
-        "countries": "Les 54 pays"
+      "registerCta": "Postuler comme investisseur",
+      "trustLine": "54 pays · Projets vérifiés · Due diligence de niveau institutionnel",
+      "map": {
+        "verifiedTitle": "Titre foncier vérifié",
+        "verifiedSub": "Nairobi, Kenya · Revue indépendante",
+        "matchTitle": "Nouvelle correspondance examinée",
+        "matchSub": "Énergies renouvelables · Kenya · Risque faible"
+      }
+    },
+    "problem": {
+      "eyebrow": "Le problème",
+      "title": "Les obstacles qui freinent l'investissement en Afrique",
+      "items": {
+        "discovery": {
+          "label": "Découverte",
+          "desc": "Aucune source unique et fiable de projets contrôlés et prêts à l'investissement sur les marchés africains."
+        },
+        "trust": {
+          "label": "Confiance et fraude",
+          "desc": "Forte incidence de documents falsifiés — titres fonciers, immatriculations, états financiers."
+        },
+        "diligence": {
+          "label": "Due diligence",
+          "desc": "Aucun mécanisme standardisé pour vérifier la propriété foncière ou mener des contrôles de conformité à distance."
+        },
+        "regulatory": {
+          "label": "Opacité réglementaire",
+          "desc": "54 pays, 54 cadres juridiques, fiscaux, d'licences et de propriété étrangère différents."
+        },
+        "visibility": {
+          "label": "Visibilité post-investissement",
+          "desc": "Aucun moyen structuré de suivre l'utilisation des fonds ou l'avancement du chantier sans équipe locale."
+        },
+        "network": {
+          "label": "Déficit de réseau",
+          "desc": "Pas d'accès à des consultants locaux, conseils juridiques et partenaires techniques de confiance."
+        }
+      }
+    },
+    "featureTabs": {
+      "title": "Avec l'African Investment Hub, vous pouvez",
+      "learnMore": "En savoir plus →",
+      "tabs": {
+        "discover": {
+          "label": "Découvrir des opportunités",
+          "title": "Découvrir des projets contrôlés et prêts à l'investissement",
+          "body": "Une source unique et fiable d'opportunités vérifiées — chaque annonce examinée et notée en risque par notre équipe avant publication.",
+          "imagery": "visuel : investisseur parcourant les opportunités"
+        },
+        "verify": {
+          "label": "Vérifier les contreparties",
+          "title": "La vérification est essentielle — et non négociable",
+          "body": "Chaque investisseur est vérifié avant d'accéder à toute information privilégiée — revue manuelle par notre équipe interne, sans raccourcis KYC automatisés.",
+          "imagery": "visuel : revue de documents de conformité"
+        },
+        "diligence": {
+          "label": "Mener la due diligence",
+          "title": "Due diligence structurée, vérifiée sur le terrain",
+          "body": "Notre processus standardisé et notre présence locale vérifient ce que vous ne pouvez pas contrôler à distance — un NDA est signé avant tout partage privilégié.",
+          "imagery": "visuel : visite au registre foncier"
+        },
+        "monitor": {
+          "label": "Suivre les investissements",
+          "title": "Voir votre projet sans prendre l'avion",
+          "body": "Notre équipe effectue des visites de site, collecte les justificatifs et vérifie l'avancement — vous vous connectez et voyez un statut vérifié en temps réel.",
+          "imagery": "visuel : avancement du chantier"
+        }
       },
-      "capitalFacilitated": "Capitaux facilités",
-      "dealsClosed": "sur {count} opérations conclues",
-      "moreCountries": "+48"
+      "panels": {
+        "opportunities": "Opportunités",
+        "discoverRow1": "Énergies renouvelables · Kenya",
+        "discoverRow2": "Agriculture · Ghana",
+        "verification": "Liste de vérification",
+        "verifyRow1": "Certificat d'immatriculation",
+        "verifyRow2": "Certificat de conformité AML",
+        "verifyRow3": "Revue manuelle — équipe interne",
+        "diligenceProgress": "Avancement de la due diligence",
+        "legal": "Juridique",
+        "signedOff": "Validé",
+        "landTitle": "Vérification du titre foncier",
+        "inReview": "En cours d'examen",
+        "milestones": "Jalons",
+        "landPurchase": "Achat du terrain",
+        "foundation": "Fondations",
+        "completed": "Terminé",
+        "inProgress": "En cours"
+      }
+    },
+    "stats": {
+      "items": {
+        "population": {
+          "label": "Population",
+          "caption": "60 % de moins de 25 ans — moteur de consommation et de demande à long terme"
+        },
+        "countries": {
+          "label": "Pays africains",
+          "caption": "Couverture dès le premier jour — une zone de libre-échange continentale"
+        },
+        "gdp": {
+          "label": "PIB combiné",
+          "caption": "Échelle économique de la Zone de libre-échange continentale africaine"
+        },
+        "infrastructure": {
+          "label": "Déficit annuel d'infrastructures",
+          "caption": "Demande structurelle de projets vérifiés et prêts à l'investissement"
+        }
+      }
     },
     "process": {
       "register": {
@@ -92,9 +211,13 @@
       "eyebrow": "Opportunités en direct",
       "title": "Sélectionnées, contrôlées, prêtes à l'investissement",
       "sub": "Une sélection de projets vérifiés, documentation à l'appui et conditions de financement claires.",
-      "viewAll": "Tout voir"
+      "viewAll": "Tout voir",
+      "viewOpportunity": "Voir l'opportunité",
+      "emptyTitle": "De nouvelles opportunités sont en cours de vérification",
+      "emptyBody": "Notre équipe examine la prochaine sélection de projets prêts à l'investissement. Parcourez toutes les annonces en attendant."
     },
     "whyAfrica": {
+      "eyebrow": "Pourquoi l'Afrique",
       "title": "Pourquoi investir en Afrique ?",
       "lead": "Dynamique démographique, intégration continentale et demande structurelle créent une thèse d'investissement convaincante à long terme.",
       "items": {
@@ -181,7 +304,20 @@
     },
     "sectors": {
       "eyebrow": "Où circulent les capitaux",
-      "title": "Dix secteurs, contrôlés de bout en bout"
+      "title": "Dix secteurs, examinés de bout en bout",
+      "lead": "Des énergies renouvelables à l'agro-industrie, chaque opportunité est vérifiée, documentée et prête pour la due diligence — pour passer de l'intérêt à l'investissement en toute confiance.",
+      "allSectors": "Tous les secteurs",
+      "exploreSector": "Explorer les opportunités",
+      "viewAll": "Parcourir toutes les opportunités",
+      "featured": {
+        "renewable": "Solaire, éolien & hydraulique au service du continent",
+        "realestate": "Logement urbain & développement commercial",
+        "agriculture": "Systèmes alimentaires & chaînes de valeur agro-industrielles",
+        "construction": "Bâtiments & travaux de génie civil à grande échelle",
+        "infrastructure": "Ports, routes & corridors logistiques",
+        "technology": "Fintech, numérique & entreprises innovantes",
+        "mining": "Minéraux, métaux & extraction responsable des ressources"
+      }
     },
     "countries": {
       "eyebrow": "Parcourir par pays",
@@ -190,14 +326,15 @@
       "openGuide": "Ouvrir le guide pays",
       "opportunities": "{count} opportunités"
     },
-    "cta": {
-      "title": "Prêt à voir des opportunités vérifiées ?",
-      "sub": "L'inscription est gratuite. La vérification prend moins de 48 heures.",
-      "register": "S'inscrire comme investisseur",
-      "browse": "Parcourir d'abord"
+    "finalCta": {
+      "title": "Les capitaux vont là où la confiance existe",
+      "sub": "Rejoignez un réseau vérifié d'investisseurs et de facilitateurs de projets dans les 54 pays africains.",
+      "register": "Postuler comme investisseur",
+      "submitProject": "Soumettre un projet"
     }
   },
   "opportunities": {
+    "eyebrow": "Opportunités vérifiées",
     "title": "Opportunités d'investissement",
     "subtitle": "Projets contrôlés dans 54 pays. Les conditions complètes se débloquent après la vérification de l'investisseur.",
     "filters": {
@@ -213,7 +350,10 @@
       "sortFundingDesc": "Financement (décroissant)",
       "sortFundingAsc": "Financement (croissant)",
       "sortRoi": "ROI (décroissant)",
-      "sortViews": "Les plus consultés"
+      "sortViews": "Les plus consultés",
+      "riskLow": "Faible",
+      "riskMedium": "Moyen",
+      "riskHigh": "Élevé"
     },
     "empty": "Aucune opportunité ne correspond à vos filtres.",
     "showing": "Affichage de {from} à {to} sur {total}",
@@ -240,9 +380,14 @@
         "risk": "Risque",
         "views": "Vues"
       }
-    }
+    },
+    "emptyTitle": "Aucune opportunité correspondante",
+    "clearFilters": "Effacer les filtres",
+    "previous": "Précédent",
+    "next": "Suivant"
   },
   "countries": {
+    "eyebrow": "Dans 54 marchés",
     "title": "Guide d'investissement par pays",
     "subtitle": "Détails réglementaires, fiscalité, règles de propriété et licences — tenus à jour pour les 54 pays africains.",
     "searchPlaceholder": "Rechercher des pays ou des régions…",
@@ -264,9 +409,11 @@
         "news": "Mises à jour récentes"
       },
       "viewOpportunities": "Voir les opportunités en {country}"
-    }
+    },
+    "clearSearch": "Effacer la recherche"
   },
   "whyAfricaPage": {
+    "eyebrow": "Pourquoi investir en Afrique",
     "title": "Pourquoi investir en Afrique",
     "subtitle": "Dynamique démographique, intégration continentale et demande structurelle créent une thèse d'investissement convaincante à long terme.",
     "sections": {
@@ -289,6 +436,7 @@
     }
   },
   "about": {
+    "eyebrow": "À propos de la plateforme",
     "title": "À propos d'African Investment Hub",
     "subtitle": "Nous mettons en relation des investisseurs internationaux vérifiés avec des opportunités africaines contrôlées — avec une présence de confiance sur le terrain dans les 54 pays.",
     "mission": {
@@ -309,6 +457,7 @@
     }
   },
   "contact": {
+    "eyebrow": "Contactez-nous",
     "title": "Contactez-nous",
     "subtitle": "Questions sur la vérification, les opportunités ou les partenariats — notre équipe répond sous un jour ouvrable.",
     "form": {
@@ -326,7 +475,11 @@
         "emailInvalid": "Saisissez une adresse e-mail valide",
         "subjectRequired": "L'objet est requis",
         "messageMin": "Le message doit comporter au moins 20 caractères"
-      }
+      },
+      "sendAnother": "Envoyer un autre message",
+      "failTitle": "Impossible d’envoyer votre message",
+      "failBody": "Une erreur s’est produite lors de l’envoi de votre message. Veuillez réessayer.",
+      "optional": "Facultatif"
     }
   },
   "chat": {
@@ -356,7 +509,15 @@
     },
     "loading": "Chargement…",
     "error": "Une erreur s'est produite. Veuillez réessayer.",
-    "learnMore": "En savoir plus"
+    "learnMore": "En savoir plus",
+    "errorTitle": "Une erreur s’est produite",
+    "errorBody": "Une erreur inattendue est survenue lors du chargement de cette section. Vous pouvez réessayer ou revenir à l’accueil.",
+    "tryAgain": "Réessayer",
+    "goBack": "Retour",
+    "goHome": "Retour à l’accueil",
+    "emptyTitle": "Rien pour l’instant",
+    "emptyBody": "Il n’y a rien à afficher pour le moment. Revenez bientôt.",
+    "required": "Obligatoire"
   },
   "notFound": {
     "title": "Page introuvable",
@@ -397,58 +558,220 @@
     },
     "investor": {
       "steps": {
-        "company": { "label": "Société", "title": "Informations sur la société", "subtitle": "Présentez l'entité juridique qui investira. Ces informations doivent correspondre à vos documents d'enregistrement." },
-        "profile": { "label": "Investissement", "title": "Profil d'investissement", "subtitle": "Où, combien et sous quelle forme vous souhaitez déployer des capitaux. Cela alimente vos correspondances." },
-        "risk": { "label": "Risque et rendement", "title": "Risque et rendement", "subtitle": "Votre appétence au risque, vos attentes de rendement et vos structures de propriété préférées." },
-        "compliance": { "label": "Conformité", "title": "Conformité et ESG", "subtitle": "Vos critères de sélection et les secteurs dans lesquels vous n'investirez pas." },
-        "track": { "label": "Antécédents", "title": "Antécédents", "subtitle": "Votre historique d'investissement. De solides antécédents accélèrent la vérification." },
-        "documents": { "label": "Documents", "title": "Téléversement de documents", "subtitle": "Facultatif pour l'instant — vous pourrez les ajouter plus tard. La vérification est effectuée manuellement par notre équipe." }
+        "company": {
+          "label": "Société",
+          "title": "Informations sur la société",
+          "subtitle": "Présentez l'entité juridique qui investira. Ces informations doivent correspondre à vos documents d'enregistrement."
+        },
+        "profile": {
+          "label": "Investissement",
+          "title": "Profil d'investissement",
+          "subtitle": "Où, combien et sous quelle forme vous souhaitez déployer des capitaux. Cela alimente vos correspondances."
+        },
+        "risk": {
+          "label": "Risque et rendement",
+          "title": "Risque et rendement",
+          "subtitle": "Votre appétence au risque, vos attentes de rendement et vos structures de propriété préférées."
+        },
+        "compliance": {
+          "label": "Conformité",
+          "title": "Conformité et ESG",
+          "subtitle": "Vos critères de sélection et les secteurs dans lesquels vous n'investirez pas."
+        },
+        "track": {
+          "label": "Antécédents",
+          "title": "Antécédents",
+          "subtitle": "Votre historique d'investissement. De solides antécédents accélèrent la vérification."
+        },
+        "documents": {
+          "label": "Documents",
+          "title": "Téléversement de documents",
+          "subtitle": "Facultatif pour l'instant — vous pourrez les ajouter plus tard. La vérification est effectuée manuellement par notre équipe."
+        }
       },
-      "dividers": { "primaryContact": "Contact principal" },
+      "dividers": {
+        "primaryContact": "Contact principal"
+      },
       "fields": {
-        "companyName": { "label": "Nom légal de la société", "placeholder": "Meridian Capital Partners AS" },
-        "regCountry": { "label": "Pays d'enregistrement", "placeholder": "Rechercher un pays…" },
-        "regNumber": { "label": "Numéro d'enregistrement de la société", "placeholder": "ex. 924 583 110" },
-        "years": { "label": "Années d'activité", "placeholder": "12" },
-        "address": { "label": "Adresse enregistrée", "placeholder": "Rue, ville, code postal" },
-        "website": { "label": "Site web", "placeholder": "https://" },
-        "contactName": { "label": "Nom du contact", "placeholder": "Nom complet" },
-        "contactTitle": { "label": "Fonction", "placeholder": "Associé gérant" },
-        "contactEmail": { "label": "E-mail du contact", "placeholder": "nom@societe.com" },
-        "contactPhone": { "label": "Téléphone du contact", "placeholder": "+33 …" },
-        "investCountries": { "label": "Pays d'intérêt", "placeholder": "Rechercher des marchés africains…", "hint": "Sélectionnez tous les marchés africains que vous envisageriez." },
-        "investSectors": { "label": "Secteurs d'intérêt" },
-        "investTypes": { "label": "Type d'investissement préféré" },
-        "minTicket": { "label": "Ticket minimum", "placeholder": "2 000 000" },
-        "maxTicket": { "label": "Ticket maximum", "placeholder": "40 000 000" },
-        "dealSize": { "label": "Taille d'opération préférée", "placeholder": "15 000 000" },
-        "capital": { "label": "Capital total investissable", "placeholder": "120 000 000" },
-        "risk": { "label": "Appétence au risque" },
-        "roiMin": { "label": "ROI cible — min", "placeholder": "12", "hint": "% par an" },
-        "roiMax": { "label": "ROI cible — max", "placeholder": "20", "hint": "% par an" },
-        "horizon": { "label": "Horizon d'investissement", "placeholder": "Sélectionner" },
-        "exit": { "label": "Stratégie de sortie", "placeholder": "Sélectionner" },
-        "ownership": { "label": "Structure de propriété préférée" },
-        "ownMin": { "label": "% de propriété préféré — min", "placeholder": "25" },
-        "ownMax": { "label": "% de propriété préféré — max", "placeholder": "60" },
-        "esg": { "label": "Exigences ESG", "placeholder": "ex. Normes de performance de l'IFC ; gouvernance paritaire…", "hint": "Facultatif — décrivez les critères environnementaux, sociaux ou de gouvernance que vous appliquez." },
-        "excluded": { "label": "Secteurs à exclure", "hint": "Ils n'apparaîtront jamais dans vos correspondances." },
-        "polRisk": { "label": "Tolérance au risque politique", "placeholder": "Sélectionner" },
-        "fxRisk": { "label": "Tolérance au risque de change", "placeholder": "Sélectionner" },
-        "certifications": { "label": "Certifications ou accréditations", "placeholder": "ex. agréé AIFMD ; certifié B-Corp…", "hint": "Facultatif" },
-        "previousProjects": { "label": "Investissements précédents (jusqu'à 5)", "add": "Ajouter une référence", "empty": "Aucun investissement précédent ajouté.", "name": "Nom du projet", "country": "Pays", "sector": "Secteur", "year": "Année" }
+        "companyName": {
+          "label": "Nom légal de la société",
+          "placeholder": "Meridian Capital Partners AS"
+        },
+        "regCountry": {
+          "label": "Pays d'enregistrement",
+          "placeholder": "Rechercher un pays…"
+        },
+        "regNumber": {
+          "label": "Numéro d'enregistrement de la société",
+          "placeholder": "ex. 924 583 110"
+        },
+        "years": {
+          "label": "Années d'activité",
+          "placeholder": "12"
+        },
+        "address": {
+          "label": "Adresse enregistrée",
+          "placeholder": "Rue, ville, code postal"
+        },
+        "website": {
+          "label": "Site web",
+          "placeholder": "https://"
+        },
+        "contactName": {
+          "label": "Nom du contact",
+          "placeholder": "Nom complet"
+        },
+        "contactTitle": {
+          "label": "Fonction",
+          "placeholder": "Associé gérant"
+        },
+        "contactEmail": {
+          "label": "E-mail du contact",
+          "placeholder": "nom@societe.com"
+        },
+        "contactPhone": {
+          "label": "Téléphone du contact",
+          "placeholder": "+33 …"
+        },
+        "investCountries": {
+          "label": "Pays d'intérêt",
+          "placeholder": "Rechercher des marchés africains…",
+          "hint": "Sélectionnez tous les marchés africains que vous envisageriez."
+        },
+        "investSectors": {
+          "label": "Secteurs d'intérêt"
+        },
+        "investTypes": {
+          "label": "Type d'investissement préféré"
+        },
+        "minTicket": {
+          "label": "Ticket minimum",
+          "placeholder": "2 000 000"
+        },
+        "maxTicket": {
+          "label": "Ticket maximum",
+          "placeholder": "40 000 000"
+        },
+        "dealSize": {
+          "label": "Taille d'opération préférée",
+          "placeholder": "15 000 000"
+        },
+        "capital": {
+          "label": "Capital total investissable",
+          "placeholder": "120 000 000"
+        },
+        "risk": {
+          "label": "Appétence au risque"
+        },
+        "roiMin": {
+          "label": "ROI cible — min",
+          "placeholder": "12",
+          "hint": "% par an"
+        },
+        "roiMax": {
+          "label": "ROI cible — max",
+          "placeholder": "20",
+          "hint": "% par an"
+        },
+        "horizon": {
+          "label": "Horizon d'investissement",
+          "placeholder": "Sélectionner"
+        },
+        "exit": {
+          "label": "Stratégie de sortie",
+          "placeholder": "Sélectionner"
+        },
+        "ownership": {
+          "label": "Structure de propriété préférée"
+        },
+        "ownMin": {
+          "label": "% de propriété préféré — min",
+          "placeholder": "25"
+        },
+        "ownMax": {
+          "label": "% de propriété préféré — max",
+          "placeholder": "60"
+        },
+        "esg": {
+          "label": "Exigences ESG",
+          "placeholder": "ex. Normes de performance de l'IFC ; gouvernance paritaire…",
+          "hint": "Facultatif — décrivez les critères environnementaux, sociaux ou de gouvernance que vous appliquez."
+        },
+        "excluded": {
+          "label": "Secteurs à exclure",
+          "hint": "Ils n'apparaîtront jamais dans vos correspondances."
+        },
+        "polRisk": {
+          "label": "Tolérance au risque politique",
+          "placeholder": "Sélectionner"
+        },
+        "fxRisk": {
+          "label": "Tolérance au risque de change",
+          "placeholder": "Sélectionner"
+        },
+        "certifications": {
+          "label": "Certifications ou accréditations",
+          "placeholder": "ex. agréé AIFMD ; certifié B-Corp…",
+          "hint": "Facultatif"
+        },
+        "previousProjects": {
+          "label": "Investissements précédents (jusqu'à 5)",
+          "add": "Ajouter une référence",
+          "empty": "Aucun investissement précédent ajouté.",
+          "name": "Nom du projet",
+          "country": "Pays",
+          "sector": "Secteur",
+          "year": "Année"
+        }
       },
       "options": {
-        "equity": "Capitaux propres", "jv": "Coentreprise", "debt": "Dette", "ppp": "PPP", "acquisition": "Acquisition",
-        "tobacco": "Tabac", "arms": "Armement", "gambling": "Jeux d'argent",
-        "ownFull": "Pleine propriété", "ownJv": "Coentreprise", "ownBot": "Construction-Exploitation-Transfert", "ownLease": "Bail de longue durée", "ownPpp": "Partenariat public-privé", "ownMinority": "Participation minoritaire",
-        "riskLow": "Faible", "riskMedium": "Moyen", "riskHigh": "Élevé",
-        "horizon": { "1-3": "1–3 ans", "3-5": "3–5 ans", "5-7": "5–7 ans", "7-10": "7–10 ans", "10+": "10+ ans" },
-        "exit": { "trade_sale": "Cession industrielle", "ipo": "Introduction en bourse", "buyback": "Rachat", "long_term_hold": "Conservation à long terme", "bot": "Transfert BOT" },
-        "polRisk": { "conservative": "Conservateur", "moderate": "Modéré", "opportunistic": "Opportuniste" },
-        "fxRisk": { "hedged": "Couvert uniquement", "partial": "Exposition partielle", "full": "Exposition totale acceptable" }
+        "equity": "Capitaux propres",
+        "jv": "Coentreprise",
+        "debt": "Dette",
+        "ppp": "PPP",
+        "acquisition": "Acquisition",
+        "tobacco": "Tabac",
+        "arms": "Armement",
+        "gambling": "Jeux d'argent",
+        "ownFull": "Pleine propriété",
+        "ownJv": "Coentreprise",
+        "ownBot": "Construction-Exploitation-Transfert",
+        "ownLease": "Bail de longue durée",
+        "ownPpp": "Partenariat public-privé",
+        "ownMinority": "Participation minoritaire",
+        "riskLow": "Faible",
+        "riskMedium": "Moyen",
+        "riskHigh": "Élevé",
+        "horizon": {
+          "1-3": "1–3 ans",
+          "3-5": "3–5 ans",
+          "5-7": "5–7 ans",
+          "7-10": "7–10 ans",
+          "10+": "10+ ans"
+        },
+        "exit": {
+          "trade_sale": "Cession industrielle",
+          "ipo": "Introduction en bourse",
+          "buyback": "Rachat",
+          "long_term_hold": "Conservation à long terme",
+          "bot": "Transfert BOT"
+        },
+        "polRisk": {
+          "conservative": "Conservateur",
+          "moderate": "Modéré",
+          "opportunistic": "Opportuniste"
+        },
+        "fxRisk": {
+          "hedged": "Couvert uniquement",
+          "partial": "Exposition partielle",
+          "full": "Exposition totale acceptable"
+        }
       },
-      "summary": { "countSelected": "{count} sélectionné(s)", "countSectors": "{count} secteur(s)", "countReferences": "{count} ajouté(s)" },
+      "summary": {
+        "countSelected": "{count} sélectionné(s)",
+        "countSectors": "{count} secteur(s)",
+        "countReferences": "{count} ajouté(s)"
+      },
       "documents": {
         "note": "Chaque document est stocké chiffré et vérifié manuellement par notre équipe. Nous n'utilisons pas d'outils KYC tiers automatisés.",
         "registration": "Certificat d'enregistrement de la société",
@@ -478,36 +801,129 @@
     },
     "project": {
       "steps": {
-        "basics": { "label": "Éléments clés", "title": "Présentation du projet", "subtitle": "Les informations principales que les investisseurs voient en premier. Soyez précis et concret." },
-        "funding": { "label": "Financement", "title": "Financement et structure", "subtitle": "Le montant recherché, sous quelle forme, et son utilisation." },
-        "financials": { "label": "Finances", "title": "Rendement et finances", "subtitle": "Rendements attendus et revenus. Facultatif, mais des projections solides suscitent plus d'intérêt." },
-        "documents": { "label": "Documents", "title": "Documents justificatifs", "subtitle": "Facultatif pour l'instant — vous pourrez les ajouter plus tard. Tous les fichiers sont chiffrés." }
+        "basics": {
+          "label": "Éléments clés",
+          "title": "Présentation du projet",
+          "subtitle": "Les informations principales que les investisseurs voient en premier. Soyez précis et concret."
+        },
+        "funding": {
+          "label": "Financement",
+          "title": "Financement et structure",
+          "subtitle": "Le montant recherché, sous quelle forme, et son utilisation."
+        },
+        "financials": {
+          "label": "Finances",
+          "title": "Rendement et finances",
+          "subtitle": "Rendements attendus et revenus. Facultatif, mais des projections solides suscitent plus d'intérêt."
+        },
+        "documents": {
+          "label": "Documents",
+          "title": "Documents justificatifs",
+          "subtitle": "Facultatif pour l'instant — vous pourrez les ajouter plus tard. Tous les fichiers sont chiffrés."
+        }
       },
-      "dividers": { "projections": "Revenus projetés" },
+      "dividers": {
+        "projections": "Revenus projetés"
+      },
       "fields": {
-        "title": { "label": "Titre du projet", "placeholder": "ex. Micro-réseau solaire Lagos–Ibadan" },
-        "sector": { "label": "Secteur", "placeholder": "Sélectionnez un secteur" },
-        "country": { "label": "Pays", "placeholder": "Rechercher un pays…" },
-        "stage": { "label": "Stade du projet", "placeholder": "Sélectionnez le stade" },
-        "brief": { "label": "Brève description", "placeholder": "Une ou deux phrases affichées sur l'annonce publique.", "hint": "Public — 500 caractères maximum." },
-        "fundingRequired": { "label": "Financement total requis", "placeholder": "5 000 000" },
-        "fundingType": { "label": "Type de financement", "placeholder": "Sélectionnez le type" },
-        "minInvestment": { "label": "Investissement minimum", "placeholder": "250 000" },
-        "existingFunding": { "label": "Financement déjà obtenu", "placeholder": "1 000 000" },
-        "useOfFunds": { "label": "Utilisation des fonds", "placeholder": "Comment les capitaux seront déployés…", "hint": "Facultatif" },
-        "roiMin": { "label": "ROI attendu — min", "placeholder": "12", "hint": "% par an" },
-        "roiMax": { "label": "ROI attendu — max", "placeholder": "20", "hint": "% par an" },
-        "timeline": { "label": "Délai avant rendement", "placeholder": "24", "hint": "mois" },
-        "currentRevenue": { "label": "Chiffre d'affaires annuel actuel", "placeholder": "0" },
-        "rev12": { "label": "Projeté — 12 mois", "placeholder": "500 000" },
-        "rev24": { "label": "Projeté — 24 mois", "placeholder": "1 500 000" },
-        "rev36": { "label": "Projeté — 36 mois", "placeholder": "4 000 000" },
-        "execSummary": { "label": "Résumé exécutif", "placeholder": "Un aperçu concis pour les investisseurs approuvés…", "hint": "Visible par les investisseurs approuvés." },
-        "fullDescription": { "label": "Description complète", "placeholder": "Description détaillée, partagée uniquement après signature d'un NDA…", "hint": "Confidentiel — partagé uniquement après NDA." }
+        "title": {
+          "label": "Titre du projet",
+          "placeholder": "ex. Micro-réseau solaire Lagos–Ibadan"
+        },
+        "sector": {
+          "label": "Secteur",
+          "placeholder": "Sélectionnez un secteur"
+        },
+        "country": {
+          "label": "Pays",
+          "placeholder": "Rechercher un pays…"
+        },
+        "stage": {
+          "label": "Stade du projet",
+          "placeholder": "Sélectionnez le stade"
+        },
+        "brief": {
+          "label": "Brève description",
+          "placeholder": "Une ou deux phrases affichées sur l'annonce publique.",
+          "hint": "Public — 500 caractères maximum."
+        },
+        "fundingRequired": {
+          "label": "Financement total requis",
+          "placeholder": "5 000 000"
+        },
+        "fundingType": {
+          "label": "Type de financement",
+          "placeholder": "Sélectionnez le type"
+        },
+        "minInvestment": {
+          "label": "Investissement minimum",
+          "placeholder": "250 000"
+        },
+        "existingFunding": {
+          "label": "Financement déjà obtenu",
+          "placeholder": "1 000 000"
+        },
+        "useOfFunds": {
+          "label": "Utilisation des fonds",
+          "placeholder": "Comment les capitaux seront déployés…",
+          "hint": "Facultatif"
+        },
+        "roiMin": {
+          "label": "ROI attendu — min",
+          "placeholder": "12",
+          "hint": "% par an"
+        },
+        "roiMax": {
+          "label": "ROI attendu — max",
+          "placeholder": "20",
+          "hint": "% par an"
+        },
+        "timeline": {
+          "label": "Délai avant rendement",
+          "placeholder": "24",
+          "hint": "mois"
+        },
+        "currentRevenue": {
+          "label": "Chiffre d'affaires annuel actuel",
+          "placeholder": "0"
+        },
+        "rev12": {
+          "label": "Projeté — 12 mois",
+          "placeholder": "500 000"
+        },
+        "rev24": {
+          "label": "Projeté — 24 mois",
+          "placeholder": "1 500 000"
+        },
+        "rev36": {
+          "label": "Projeté — 36 mois",
+          "placeholder": "4 000 000"
+        },
+        "execSummary": {
+          "label": "Résumé exécutif",
+          "placeholder": "Un aperçu concis pour les investisseurs approuvés…",
+          "hint": "Visible par les investisseurs approuvés."
+        },
+        "fullDescription": {
+          "label": "Description complète",
+          "placeholder": "Description détaillée, partagée uniquement après signature d'un NDA…",
+          "hint": "Confidentiel — partagé uniquement après NDA."
+        }
       },
       "options": {
-        "stage": { "concept": "Concept", "pre_revenue": "Pré-revenu", "revenue_generating": "Générateur de revenus", "expansion": "Expansion" },
-        "fundingType": { "equity": "Capitaux propres", "debt": "Dette", "jv": "Coentreprise", "ppp": "Partenariat public-privé", "acquisition": "Acquisition" }
+        "stage": {
+          "concept": "Concept",
+          "pre_revenue": "Pré-revenu",
+          "revenue_generating": "Générateur de revenus",
+          "expansion": "Expansion"
+        },
+        "fundingType": {
+          "equity": "Capitaux propres",
+          "debt": "Dette",
+          "jv": "Coentreprise",
+          "ppp": "Partenariat public-privé",
+          "acquisition": "Acquisition"
+        }
       },
       "documents": {
         "note": "Les documents sont stockés chiffrés et vérifiés manuellement par notre équipe avec votre soumission.",
@@ -533,7 +949,17 @@
         "submitting": "Soumission…",
         "edit": "Modifier"
       }
-    }
+    },
+    "title": "Bienvenue sur African Investment Hub",
+    "subtitle": "Choisissez comment vous souhaitez utiliser la plateforme. Vous pourrez compléter votre profil à l'étape suivante.",
+    "investorTitle": "Investisseur",
+    "investorDesc": "Découvrez des opportunités vérifiées et connectez-vous à des projets contrôlés à travers l'Afrique.",
+    "ownerTitle": "Facilitateur de projet",
+    "ownerDesc": "Soumettez votre projet pour examen et atteignez des investisseurs internationaux qualifiés.",
+    "continueAsInvestor": "Continuer en tant qu'investisseur",
+    "continueAsOwner": "Continuer en tant que facilitateur de projet",
+    "roleError": "Impossible d'enregistrer votre rôle. Veuillez réessayer.",
+    "eyebrow": "Commencer"
   },
   "adminPortal": {
     "title": "Tableau de bord admin",
@@ -572,7 +998,7 @@
     "role": "Rôle",
     "roles": {
       "investor": "Investisseur",
-      "project_owner": "Porteur de projet",
+      "project_owner": "Facilitateur de projet",
       "admin": "Admin"
     },
     "roleUpdated": "Rôle mis à jour. L'utilisateur doit se déconnecter puis se reconnecter pour que cela prenne effet.",
@@ -619,6 +1045,122 @@
     "colUser": "Utilisateur",
     "colJoined": "Inscrit",
     "exportCsv": "Exporter CSV",
-    "exportError": "Échec de l'export. Veuillez réessayer."
+    "exportError": "Échec de l'export. Veuillez réessayer.",
+    "view": "Voir les détails",
+    "notFound": "Introuvable.",
+    "backToList": "Retour à la liste",
+    "noDocuments": "Aucun document soumis.",
+    "secCompany": "Société",
+    "secInvestment": "Profil d'investissement",
+    "secRisk": "Risque et rendements",
+    "secCompliance": "Conformité et ESG",
+    "secTrack": "Antécédents",
+    "secDocuments": "Documents",
+    "secOverview": "Aperçu",
+    "secFunding": "Financement",
+    "secFinancials": "Données financières",
+    "fCompanyName": "Dénomination sociale",
+    "fRegCountry": "Pays d'enregistrement",
+    "fRegNumber": "Numéro d'enregistrement",
+    "fYears": "Années d'activité",
+    "fAddress": "Adresse enregistrée",
+    "fWebsite": "Site web",
+    "fContactName": "Nom du contact",
+    "fContactTitle": "Fonction",
+    "fContactEmail": "E-mail du contact",
+    "fContactPhone": "Téléphone du contact",
+    "fCountries": "Pays d'intérêt",
+    "fSectors": "Secteurs d'intérêt",
+    "fTypes": "Types d'investissement",
+    "fMinTicket": "Ticket minimum",
+    "fMaxTicket": "Ticket maximum",
+    "fDealSize": "Taille d'opération préférée",
+    "fCapital": "Capital investissable",
+    "fRisk": "Appétit pour le risque",
+    "fRoi": "ROI cible",
+    "fHorizon": "Horizon temporel",
+    "fExit": "Stratégie de sortie",
+    "fOwnership": "Structures de propriété",
+    "fEsg": "Exigences ESG",
+    "fExcluded": "Secteurs exclus",
+    "fPolRisk": "Tolérance au risque politique",
+    "fFxRisk": "Tolérance au risque de change",
+    "fTitle": "Titre du projet",
+    "fSector": "Secteur",
+    "fCountry": "Pays",
+    "fStage": "Étape",
+    "fBrief": "Brève description",
+    "fExecSummary": "Résumé exécutif",
+    "fFullDescription": "Description complète",
+    "fFundingRequired": "Financement requis",
+    "fFundingType": "Type de financement",
+    "fMinInvestment": "Investissement minimum",
+    "fExistingFunding": "Financement existant",
+    "fUseOfFunds": "Utilisation des fonds",
+    "fTimeline": "Délai avant rendements",
+    "fCurrentRevenue": "Chiffre d'affaires annuel actuel",
+    "fRev12": "Revenu projeté — 12 mois",
+    "fRev24": "Revenu projeté — 24 mois",
+    "fRev36": "Revenu projeté — 36 mois"
+  },
+  "pendingApproval": {
+    "title": "Demande en cours d'examen",
+    "description": "Notre équipe examine votre soumission. Vous recevrez un e-mail dès l'approbation de votre compte.",
+    "note": "Cela prend généralement jusqu'à 48 heures.",
+    "approvedTitle": "Vous êtes approuvé",
+    "approvedDesc": "Votre compte a été approuvé. Vous pouvez maintenant accéder à votre tableau de bord.",
+    "goToDashboard": "Accéder au tableau de bord"
+  },
+  "investorPortal": {
+    "title": "Tableau de bord investisseur",
+    "overview": "Aperçu",
+    "profile": "Profil",
+    "matches": "Correspondances",
+    "notifications": "Notifications",
+    "welcome": "Bon retour",
+    "statusLabel": "Statut du compte",
+    "companyLabel": "Société",
+    "loading": "Chargement…",
+    "noProfile": "Aucun profil investisseur trouvé.",
+    "country": "Pays",
+    "contact": "Contact",
+    "email": "E-mail",
+    "sectors": "Secteurs",
+    "noMatches": "Aucune correspondance pour l'instant.",
+    "matchProject": "Projet",
+    "status": "Statut",
+    "score": "Score",
+    "noNotifications": "Aucune notification."
+  },
+  "ownerPortal": {
+    "title": "Tableau de bord du facilitateur de projet",
+    "overview": "Aperçu",
+    "projects": "Mes projets",
+    "newProject": "Nouveau projet",
+    "welcome": "Espace du facilitateur de projet",
+    "statusLabel": "Statut du compte",
+    "projectCount": "Projets soumis",
+    "loading": "Chargement…",
+    "noProjects": "Aucun projet pour l'instant.",
+    "createFirst": "Soumettez votre premier projet",
+    "titleField": "Titre du projet",
+    "sector": "Secteur",
+    "country": "Pays",
+    "briefDescription": "Brève description",
+    "fundingRequired": "Financement requis",
+    "submitProject": "Soumettre le projet",
+    "projectCreated": "Projet créé.",
+    "projectError": "Impossible de créer le projet.",
+    "executiveSummary": "Résumé exécutif",
+    "notFound": "Projet introuvable."
+  },
+  "auth": {
+    "eyebrow": "Réseau d'investissement vérifié",
+    "headline": "Les capitaux vont là où règne la confiance.",
+    "point1": "Chaque investisseur vérifié manuellement — aucun raccourci KYC automatisé.",
+    "point2": "Des projets contrôlés et prêts à l'investissement dans les 54 pays.",
+    "point3": "Salles de transaction protégées par NDA. La plateforme ne détient jamais vos fonds.",
+    "backHome": "Retour à l'accueil",
+    "disclaimer": "Vérification manuelle · Protégé par NDA · Aucun fonds détenu"
   }
 }

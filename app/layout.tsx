@@ -1,47 +1,27 @@
 import { getLocale } from "next-intl/server";
-import {
-  Hanken_Grotesk,
-  IBM_Plex_Mono,
-  Noto_Sans_SC,
-  Noto_Serif_SC,
-  Spectral,
-} from "next/font/google";
+import { Inter, Noto_Sans_Mono } from "next/font/google";
 import "./globals.css";
 
-const spectral = Spectral({
-  variable: "--font-spectral",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const hanken = Hanken_Grotesk({
-  variable: "--font-hanken",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex",
+const notoMono = Noto_Sans_Mono({
+  variable: "--font-noto-mono",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const notoSansSc = Noto_Sans_SC({
-  variable: "--font-noto-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  display: "swap",
-});
-
-const notoSerifSc = Noto_Serif_SC({
-  variable: "--font-noto-serif",
-  subsets: ["latin"],
-  weight: ["500", "600"],
-  display: "swap",
-});
+// Native CJK stack for the zh locale. Avoids shipping (and build-time fetching)
+// the multi-megabyte Google CJK web fonts; Inter still renders Latin glyphs and
+// numerals, with the OS Chinese face filling in CJK. Chosen for DS fidelity
+// (clean sans, not serif) and zero download.
+const CJK_SANS =
+  '"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif';
 
 export default async function RootLayout({
   children,
@@ -51,18 +31,17 @@ export default async function RootLayout({
   const locale = await getLocale();
   const isZh = locale === "zh";
 
-  const fontClass = isZh
-    ? `${spectral.variable} ${notoSansSc.variable} ${notoSerifSc.variable} ${plexMono.variable}`
-    : `${spectral.variable} ${hanken.variable} ${plexMono.variable}`;
+  const fontClass = `${inter.variable} ${notoMono.variable}`;
+
+  const sans = isZh
+    ? `var(--font-inter), ${CJK_SANS}`
+    : "var(--font-inter), system-ui, sans-serif";
 
   const fontVars = {
-    "--font-sans": isZh
-      ? "var(--font-noto-sans), system-ui, sans-serif"
-      : "var(--font-hanken), system-ui, sans-serif",
-    "--font-display": isZh
-      ? "var(--font-noto-serif), Georgia, serif"
-      : "var(--font-spectral), Georgia, serif",
-    "--font-mono": "var(--font-plex), ui-monospace, monospace",
+    "--font-sans": sans,
+    // DS uses Inter (a clean sans) for display in all locales.
+    "--font-display": sans,
+    "--font-mono": "var(--font-noto-mono), ui-monospace, monospace",
   } as React.CSSProperties;
 
   return (

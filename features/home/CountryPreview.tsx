@@ -1,9 +1,7 @@
-import { ArrowRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { BrandedButton } from "@/components/brand/Button";
+import { Button, Chip, SectionLabel } from "@/components/ds";
 import { Flag } from "@/components/common/Flag";
-import { SectionHead } from "@/components/common/SectionHead";
 import { getCountries } from "@/lib/data/countries";
 
 export async function CountryPreview() {
@@ -11,38 +9,38 @@ export async function CountryPreview() {
   const countries = (await getCountries()).slice(0, 12);
 
   return (
-    <section className="page py-12 pb-6">
-      <SectionHead
-        eyebrow={t("eyebrow")}
-        title={t("title")}
-        sub={t("sub")}
-        action={
-          <BrandedButton asChild variant="secondary">
-            <Link href="/countries" className="inline-flex items-center gap-2">
-              {t("openGuide")}
-              <ArrowRight className="size-4" aria-hidden />
+    <section className="bg-[var(--bg-section)] py-[clamp(3rem,7vw,7.5rem)]">
+      <div className="page">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-2xl">
+            <SectionLabel>{t("eyebrow")}</SectionLabel>
+            <h2 className="mt-3 text-balance text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold leading-[1.15] tracking-[-0.02em] text-[var(--ink)]">
+              {t("title")}
+            </h2>
+            <p className="mt-3 max-w-xl text-[var(--text-body)]">{t("sub")}</p>
+          </div>
+          <Button href="/countries" variant="outline" size="sm">
+            {t("openGuide")} →
+          </Button>
+        </div>
+
+        <div className="mt-8 flex flex-wrap gap-3">
+          {countries.map((c) => (
+            <Link key={c.code} href={`/countries/${c.code}`} className="no-underline">
+              <Chip className="inline-flex items-center gap-2.5 px-3.5 py-2.5">
+                <Flag code={c.code} lg />
+                <span className="text-left leading-tight">
+                  <span className="block text-sm font-semibold text-[var(--ink)]">
+                    {c.name}
+                  </span>
+                  <span className="block text-[10px] text-[var(--text-muted)]">
+                    {t("opportunities", { count: c.opps })}
+                  </span>
+                </span>
+              </Chip>
             </Link>
-          </BrandedButton>
-        }
-      />
-      <div className="country-grid mt-7">
-        {countries.map((c) => (
-          <Link
-            key={c.code}
-            href={`/countries/${c.code}`}
-            className="country-chip no-underline"
-          >
-            <Flag code={c.code} lg />
-            <div className="text-left leading-tight">
-              <div className="text-[var(--text-sm)] font-semibold text-[var(--text-strong)]">
-                {c.name}
-              </div>
-              <div className="text-[var(--text-2xs)] text-[var(--text-muted)]">
-                {t("opportunities", { count: c.opps })}
-              </div>
-            </div>
-          </Link>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

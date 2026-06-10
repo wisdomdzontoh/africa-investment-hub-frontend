@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { CountryGrid } from "@/features/countries/CountryGrid";
+import { PageHero } from "@/components/marketing/PageHero";
 import { countLiveProjectsByCountry } from "@/lib/api/public-projects";
 import { getCountries } from "@/lib/data/countries";
 
@@ -20,12 +21,11 @@ export default async function CountriesPage({
   const withCounts = countries.map((c) => ({ ...c, opps: liveCounts[c.code] ?? 0 }));
 
   return (
-    <div className="page py-12">
-      <div className="mb-8">
-        <h1 className="h1">{t("title")}</h1>
-        <p className="lead mt-2 max-w-[640px]">{t("subtitle")}</p>
+    <>
+      <PageHero title={t("title")} subtitle={t("subtitle")} eyebrow={t("eyebrow")} />
+      <div className="page py-12">
+        <CountryGrid countries={withCounts} />
       </div>
-      <CountryGrid countries={withCounts} />
-    </div>
+    </>
   );
 }

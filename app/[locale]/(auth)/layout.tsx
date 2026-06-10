@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
-  return <div className="bg-[var(--surface-muted)]">{children}</div>;
+  return <div className="min-h-screen bg-[var(--bg-page)]">{children}</div>;
 }

@@ -16,9 +16,9 @@ export function BrandedBadge({
 }: BrandedBadgeProps) {
   const toneClass =
     tone === "featured"
-      ? "border-transparent bg-[color-mix(in_srgb,var(--gold-500)_18%,white)] text-[color-mix(in_srgb,var(--gold-500)_80%,black)]"
+      ? "border-transparent bg-[color-mix(in_srgb,var(--orange-strong)_16%,white)] text-[var(--orange-deep)]"
       : tone === "verified"
-        ? "border-transparent bg-[color-mix(in_srgb,var(--success)_14%,white)] text-[var(--success)]"
+        ? "border-transparent bg-[color-mix(in_srgb,var(--orange)_12%,white)] text-[var(--orange-deep)]"
         : "";
 
   return (

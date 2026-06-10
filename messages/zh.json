@@ -21,10 +21,28 @@
       "en": "English",
       "fr": "Français",
       "zh": "中文"
+    },
+    "submitProject": "提交项目",
+    "explore": "探索",
+    "descriptions": {
+      "opportunities": "浏览经核实、可投资的项目",
+      "countries": "非洲各经济体市场指南",
+      "whyAfrica": "现在投资非洲的理由"
     }
   },
   "footer": {
     "tagline": "连接全球投资者与经核实的非洲投资机会——覆盖全部54个国家。",
+    "chips": {
+      "manualVerification": "人工核实",
+      "ndaGated": "NDA 保护交易室",
+      "noFundsHeld": "不持有资金"
+    },
+    "links": {
+      "sitemap": "网站地图",
+      "terms": "条款与条件",
+      "security": "安全",
+      "privacy": "隐私声明"
+    },
     "platform": "平台",
     "services": "服务",
     "company": "公司",
@@ -33,7 +51,7 @@
       "opportunities": "投资机会",
       "countries": "国家",
       "whyAfrica": "为何投资非洲",
-      "forOwners": "面向项目方"
+      "forOwners": "面向项目促进者"
     },
     "servicesLinks": {
       "verification": "投资者核实",
@@ -54,25 +72,126 @@
       "disclosures": "信息披露"
     },
     "copyright": "© 2026 African Investment Hub。非持牌经纪商或财务顾问。",
-    "disclaimer": "本平台不处理付款，也不持有资金。"
+    "disclaimer": "本平台不处理付款，也不持有资金。",
+    "ctaTitle": "准备好探索经过验证的非洲投资机会了吗？",
+    "ctaButton": "联系顾问",
+    "contactTitle": "联系我们",
+    "email": "invest@africaninvestmenthub.com",
+    "phone": "+44 20 7946 0123"
   },
   "home": {
     "hero": {
-      "eyebrow": "经核实的非洲投资",
-      "title": "连接全球投资者与遍布非洲的<verified>经核实</verified>投资机会",
-      "lead": "发现可投资的项目、可信赖的合作伙伴、法律指导，以及覆盖全非洲的端到端投资支持。",
+      "eyebrow": "泛非投资平台",
+      "title": "连接全球投资者与经核实的非洲投资机会",
+      "lead": "非洲投资中心消除信任、发现和促成障碍，让跨境资本能够进入非洲市场——覆盖全部54个国家。",
       "exploreCta": "探索投资机会",
-      "registerCta": "注册为投资者",
-      "submitProjectCta": "提交项目",
-      "advisorCta": "咨询顾问",
-      "trust": {
-        "investors": "每位投资者均经核实",
-        "projects": "每个项目均经审查",
-        "countries": "全部54个国家"
+      "registerCta": "申请成为投资者",
+      "trustLine": "54个国家 · 经核实项目 · 机构级尽职调查",
+      "map": {
+        "verifiedTitle": "土地产权已核实",
+        "verifiedSub": "肯尼亚内罗毕 · 独立审查",
+        "matchTitle": "新匹配已审查",
+        "matchSub": "可再生能源 · 肯尼亚 · 低风险"
+      }
+    },
+    "problem": {
+      "eyebrow": "问题所在",
+      "title": "阻碍非洲投资的壁垒",
+      "items": {
+        "discovery": {
+          "label": "项目发现",
+          "desc": "缺乏单一、可信赖的非洲市场经筛选、可投资项目来源。"
+        },
+        "trust": {
+          "label": "信任与欺诈风险",
+          "desc": "伪造文件高发——土地产权、公司注册、财务记录。"
+        },
+        "diligence": {
+          "label": "尽职调查",
+          "desc": "缺乏标准化机制，无法远程核实土地所有权或开展合规评估。"
+        },
+        "regulatory": {
+          "label": "监管不透明",
+          "desc": "54个国家，54套不同的法律、税收、许可和外资所有权框架。"
+        },
+        "visibility": {
+          "label": "投后可见性",
+          "desc": "没有本地团队，就难以结构化跟踪资金使用情况或工地进展。"
+        },
+        "network": {
+          "label": "网络缺口",
+          "desc": "无法触达可信赖的本地顾问、法律顾问和技术合作伙伴。"
+        }
+      }
+    },
+    "featureTabs": {
+      "title": "借助非洲投资中心，您可以",
+      "learnMore": "了解更多 →",
+      "tabs": {
+        "discover": {
+          "label": "发现机会",
+          "title": "发现经筛选、可投资的项目",
+          "body": "单一可信赖的经审核机会来源——每个项目上线前均由团队审查并评级风险。",
+          "imagery": "图示：投资者浏览机会"
+        },
+        "verify": {
+          "label": "核实交易对手",
+          "title": "核实是核心——且不容妥协",
+          "body": "每位投资者在获取任何特权信息前均需核实——由内部团队人工审核，无自动化KYC捷径。",
+          "imagery": "图示：合规文件审查"
+        },
+        "diligence": {
+          "label": "开展尽职调查",
+          "title": "结构化尽职调查，实地核实",
+          "body": "标准化流程与实地团队核实您无法远程核验的内容——共享任何特权信息前须签署保密协议。",
+          "imagery": "图示：土地登记现场走访"
+        },
+        "monitor": {
+          "label": "监测投资",
+          "title": "无需亲临现场即可掌握项目进展",
+          "body": "团队进行现场走访、收集凭证并核实进度——您登录即可查看经核实的实时状态。",
+          "imagery": "图示：施工现场进度"
+        }
       },
-      "capitalFacilitated": "促成资本",
-      "dealsClosed": "已完成 {count} 笔交易",
-      "moreCountries": "+48"
+      "panels": {
+        "opportunities": "投资机会",
+        "discoverRow1": "可再生能源 · 肯尼亚",
+        "discoverRow2": "农业 · 加纳",
+        "verification": "核实清单",
+        "verifyRow1": "公司注册证书",
+        "verifyRow2": "反洗钱合规证书",
+        "verifyRow3": "人工审核 — 内部团队",
+        "diligenceProgress": "尽职调查进度",
+        "legal": "法律",
+        "signedOff": "已签署",
+        "landTitle": "土地产权核实",
+        "inReview": "审核中",
+        "milestones": "里程碑",
+        "landPurchase": "土地购置",
+        "foundation": "地基工程",
+        "completed": "已完成",
+        "inProgress": "进行中"
+      }
+    },
+    "stats": {
+      "items": {
+        "population": {
+          "label": "人口",
+          "caption": "60%在25岁以下——驱动消费与长期需求"
+        },
+        "countries": {
+          "label": "非洲国家",
+          "caption": "首日即覆盖——一个大陆自由贸易区"
+        },
+        "gdp": {
+          "label": "合计GDP",
+          "caption": "非洲大陆自由贸易区的经济规模"
+        },
+        "infrastructure": {
+          "label": "年度基础设施缺口",
+          "caption": "对经核实、可投资项目的结构性需求"
+        }
+      }
     },
     "process": {
       "register": {
@@ -92,9 +211,13 @@
       "eyebrow": "实时机会",
       "title": "精选、经审查、可投资",
       "sub": "一系列经核实的项目，配有核实文件和清晰的融资条款。",
-      "viewAll": "查看全部"
+      "viewAll": "查看全部",
+      "viewOpportunity": "查看机会",
+      "emptyTitle": "新机会正在审核中",
+      "emptyBody": "我们的团队正在筛选下一批可投资项目。在此期间，欢迎浏览所有在线项目。"
     },
     "whyAfrica": {
+      "eyebrow": "为何是非洲",
       "title": "为何投资非洲？",
       "lead": "人口增长动能、大陆一体化和结构性需求，构成了令人信服的长期投资逻辑。",
       "items": {
@@ -180,8 +303,21 @@
       }
     },
     "sectors": {
-      "eyebrow": "资本流向",
-      "title": "十大行业，端到端审查"
+      "eyebrow": "资本流向之处",
+      "title": "十大行业，全程严格审核",
+      "lead": "从可再生能源到农业综合企业，每个机会都经过核实、记录并完成尽职调查准备——让您从关注到投资充满信心。",
+      "allSectors": "所有行业",
+      "exploreSector": "探索机会",
+      "viewAll": "浏览所有机会",
+      "featured": {
+        "renewable": "太阳能、风能与水力驱动非洲大陆",
+        "realestate": "城市住房与商业开发",
+        "agriculture": "食品体系与农业价值链",
+        "construction": "大规模建筑与土木工程",
+        "infrastructure": "港口、道路与物流走廊",
+        "technology": "金融科技、数字与创新企业",
+        "mining": "矿产、金属与负责任的资源开采"
+      }
     },
     "countries": {
       "eyebrow": "按国家浏览",
@@ -190,14 +326,15 @@
       "openGuide": "打开国家指南",
       "opportunities": "{count} 个机会"
     },
-    "cta": {
-      "title": "准备好查看经核实的机会了吗？",
-      "sub": "注册免费。核实用时不到48小时。",
-      "register": "注册为投资者",
-      "browse": "先浏览看看"
+    "finalCta": {
+      "title": "资本流向信任所在之处",
+      "sub": "加入覆盖全部54个非洲国家的经核实投资者与项目促成者网络。",
+      "register": "申请成为投资者",
+      "submitProject": "提交项目"
     }
   },
   "opportunities": {
+    "eyebrow": "已核实的投资机会",
     "title": "投资机会",
     "subtitle": "覆盖54个国家的经审查项目。完整条款在投资者核实后解锁。",
     "filters": {
@@ -213,7 +350,10 @@
       "sortFundingDesc": "融资额（由高到低）",
       "sortFundingAsc": "融资额（由低到高）",
       "sortRoi": "ROI（由高到低）",
-      "sortViews": "最多浏览"
+      "sortViews": "最多浏览",
+      "riskLow": "低",
+      "riskMedium": "中",
+      "riskHigh": "高"
     },
     "empty": "没有符合筛选条件的机会。",
     "showing": "显示第 {from}–{to} 项，共 {total} 项",
@@ -240,9 +380,14 @@
         "risk": "风险",
         "views": "浏览量"
       }
-    }
+    },
+    "emptyTitle": "没有匹配的机会",
+    "clearFilters": "清除筛选条件",
+    "previous": "上一页",
+    "next": "下一页"
   },
   "countries": {
+    "eyebrow": "覆盖 54 个市场",
     "title": "国家投资指南",
     "subtitle": "监管细节、税收、所有权规则和许可——为全部54个非洲国家维护。",
     "searchPlaceholder": "搜索国家或地区…",
@@ -264,9 +409,11 @@
         "news": "近期更新"
       },
       "viewOpportunities": "查看 {country} 的机会"
-    }
+    },
+    "clearSearch": "清除搜索"
   },
   "whyAfricaPage": {
+    "eyebrow": "为何投资非洲",
     "title": "为何投资非洲",
     "subtitle": "人口增长动能、大陆一体化和结构性需求，构成了令人信服的长期投资逻辑。",
     "sections": {
@@ -289,6 +436,7 @@
     }
   },
   "about": {
+    "eyebrow": "关于平台",
     "title": "关于 African Investment Hub",
     "subtitle": "我们将经核实的国际投资者与经审查的非洲机会相连接——并在全部54个国家拥有可信赖的实地存在。",
     "mission": {
@@ -309,6 +457,7 @@
     }
   },
   "contact": {
+    "eyebrow": "联系我们",
     "title": "联系我们",
     "subtitle": "有关核实、机会或合作的问题——我们的团队将在一个工作日内回复。",
     "form": {
@@ -326,7 +475,11 @@
         "emailInvalid": "请输入有效的电子邮箱",
         "subjectRequired": "请填写主题",
         "messageMin": "留言至少需要20个字符"
-      }
+      },
+      "sendAnother": "再发送一条消息",
+      "failTitle": "无法发送您的消息",
+      "failBody": "发送消息时出错，请重试。",
+      "optional": "可选"
     }
   },
   "chat": {
@@ -356,7 +509,15 @@
     },
     "loading": "加载中…",
     "error": "出了点问题，请重试。",
-    "learnMore": "了解更多"
+    "learnMore": "了解更多",
+    "errorTitle": "出错了",
+    "errorBody": "加载此部分时发生意外错误。您可以重试，或返回首页。",
+    "tryAgain": "重试",
+    "goBack": "返回",
+    "goHome": "返回首页",
+    "emptyTitle": "暂无内容",
+    "emptyBody": "目前没有可显示的内容，请稍后再来。",
+    "required": "必填"
   },
   "notFound": {
     "title": "页面未找到",
@@ -397,58 +558,220 @@
     },
     "investor": {
       "steps": {
-        "company": { "label": "公司", "title": "公司信息", "subtitle": "请介绍将进行投资的法律实体。此信息必须与您的注册文件一致。" },
-        "profile": { "label": "投资", "title": "投资偏好", "subtitle": "您希望在何处、以多少金额、以何种形式部署资金。这将驱动您的匹配。" },
-        "risk": { "label": "风险与回报", "title": "风险与回报", "subtitle": "您的风险偏好、回报预期以及首选的所有权结构。" },
-        "compliance": { "label": "合规", "title": "合规与 ESG", "subtitle": "您的筛选标准以及您不会投资的行业。" },
-        "track": { "label": "过往业绩", "title": "过往业绩", "subtitle": "您的投资历史。良好的业绩记录可加快验证。" },
-        "documents": { "label": "文件", "title": "上传文件", "subtitle": "现在为可选——您可以稍后添加。验证由我们的团队人工完成。" }
+        "company": {
+          "label": "公司",
+          "title": "公司信息",
+          "subtitle": "请介绍将进行投资的法律实体。此信息必须与您的注册文件一致。"
+        },
+        "profile": {
+          "label": "投资",
+          "title": "投资偏好",
+          "subtitle": "您希望在何处、以多少金额、以何种形式部署资金。这将驱动您的匹配。"
+        },
+        "risk": {
+          "label": "风险与回报",
+          "title": "风险与回报",
+          "subtitle": "您的风险偏好、回报预期以及首选的所有权结构。"
+        },
+        "compliance": {
+          "label": "合规",
+          "title": "合规与 ESG",
+          "subtitle": "您的筛选标准以及您不会投资的行业。"
+        },
+        "track": {
+          "label": "过往业绩",
+          "title": "过往业绩",
+          "subtitle": "您的投资历史。良好的业绩记录可加快验证。"
+        },
+        "documents": {
+          "label": "文件",
+          "title": "上传文件",
+          "subtitle": "现在为可选——您可以稍后添加。验证由我们的团队人工完成。"
+        }
       },
-      "dividers": { "primaryContact": "主要联系人" },
+      "dividers": {
+        "primaryContact": "主要联系人"
+      },
       "fields": {
-        "companyName": { "label": "公司法定名称", "placeholder": "Meridian Capital Partners AS" },
-        "regCountry": { "label": "注册国家/地区", "placeholder": "搜索国家/地区…" },
-        "regNumber": { "label": "公司注册号", "placeholder": "例如 924 583 110" },
-        "years": { "label": "运营年限", "placeholder": "12" },
-        "address": { "label": "注册地址", "placeholder": "街道、城市、邮政编码" },
-        "website": { "label": "网站", "placeholder": "https://" },
-        "contactName": { "label": "联系人姓名", "placeholder": "全名" },
-        "contactTitle": { "label": "职务", "placeholder": "管理合伙人" },
-        "contactEmail": { "label": "联系邮箱", "placeholder": "name@company.com" },
-        "contactPhone": { "label": "联系电话", "placeholder": "+86 …" },
-        "investCountries": { "label": "感兴趣的国家/地区", "placeholder": "搜索非洲市场…", "hint": "选择您会考虑的所有非洲市场。" },
-        "investSectors": { "label": "感兴趣的行业" },
-        "investTypes": { "label": "首选投资类型" },
-        "minTicket": { "label": "最小投资额", "placeholder": "2,000,000" },
-        "maxTicket": { "label": "最大投资额", "placeholder": "40,000,000" },
-        "dealSize": { "label": "首选交易规模", "placeholder": "15,000,000" },
-        "capital": { "label": "可投资总资本", "placeholder": "120,000,000" },
-        "risk": { "label": "风险偏好" },
-        "roiMin": { "label": "目标 ROI — 最小", "placeholder": "12", "hint": "每年 %" },
-        "roiMax": { "label": "目标 ROI — 最大", "placeholder": "20", "hint": "每年 %" },
-        "horizon": { "label": "投资期限", "placeholder": "选择" },
-        "exit": { "label": "退出策略", "placeholder": "选择" },
-        "ownership": { "label": "首选所有权结构" },
-        "ownMin": { "label": "首选持股比例 — 最小", "placeholder": "25" },
-        "ownMax": { "label": "首选持股比例 — 最大", "placeholder": "60" },
-        "esg": { "label": "ESG 要求", "placeholder": "例如 IFC 绩效标准；性别均衡治理…", "hint": "可选——描述您采用的任何环境、社会或治理标准。" },
-        "excluded": { "label": "排除的行业", "hint": "这些将永远不会出现在您的匹配中。" },
-        "polRisk": { "label": "政治风险承受度", "placeholder": "选择" },
-        "fxRisk": { "label": "货币风险承受度", "placeholder": "选择" },
-        "certifications": { "label": "认证或资质", "placeholder": "例如 AIFMD 授权；B-Corp 认证…", "hint": "可选" },
-        "previousProjects": { "label": "过往投资（最多 5 项）", "add": "添加参考", "empty": "尚未添加过往投资。", "name": "项目名称", "country": "国家/地区", "sector": "行业", "year": "年份" }
+        "companyName": {
+          "label": "公司法定名称",
+          "placeholder": "Meridian Capital Partners AS"
+        },
+        "regCountry": {
+          "label": "注册国家/地区",
+          "placeholder": "搜索国家/地区…"
+        },
+        "regNumber": {
+          "label": "公司注册号",
+          "placeholder": "例如 924 583 110"
+        },
+        "years": {
+          "label": "运营年限",
+          "placeholder": "12"
+        },
+        "address": {
+          "label": "注册地址",
+          "placeholder": "街道、城市、邮政编码"
+        },
+        "website": {
+          "label": "网站",
+          "placeholder": "https://"
+        },
+        "contactName": {
+          "label": "联系人姓名",
+          "placeholder": "全名"
+        },
+        "contactTitle": {
+          "label": "职务",
+          "placeholder": "管理合伙人"
+        },
+        "contactEmail": {
+          "label": "联系邮箱",
+          "placeholder": "name@company.com"
+        },
+        "contactPhone": {
+          "label": "联系电话",
+          "placeholder": "+86 …"
+        },
+        "investCountries": {
+          "label": "感兴趣的国家/地区",
+          "placeholder": "搜索非洲市场…",
+          "hint": "选择您会考虑的所有非洲市场。"
+        },
+        "investSectors": {
+          "label": "感兴趣的行业"
+        },
+        "investTypes": {
+          "label": "首选投资类型"
+        },
+        "minTicket": {
+          "label": "最小投资额",
+          "placeholder": "2,000,000"
+        },
+        "maxTicket": {
+          "label": "最大投资额",
+          "placeholder": "40,000,000"
+        },
+        "dealSize": {
+          "label": "首选交易规模",
+          "placeholder": "15,000,000"
+        },
+        "capital": {
+          "label": "可投资总资本",
+          "placeholder": "120,000,000"
+        },
+        "risk": {
+          "label": "风险偏好"
+        },
+        "roiMin": {
+          "label": "目标 ROI — 最小",
+          "placeholder": "12",
+          "hint": "每年 %"
+        },
+        "roiMax": {
+          "label": "目标 ROI — 最大",
+          "placeholder": "20",
+          "hint": "每年 %"
+        },
+        "horizon": {
+          "label": "投资期限",
+          "placeholder": "选择"
+        },
+        "exit": {
+          "label": "退出策略",
+          "placeholder": "选择"
+        },
+        "ownership": {
+          "label": "首选所有权结构"
+        },
+        "ownMin": {
+          "label": "首选持股比例 — 最小",
+          "placeholder": "25"
+        },
+        "ownMax": {
+          "label": "首选持股比例 — 最大",
+          "placeholder": "60"
+        },
+        "esg": {
+          "label": "ESG 要求",
+          "placeholder": "例如 IFC 绩效标准；性别均衡治理…",
+          "hint": "可选——描述您采用的任何环境、社会或治理标准。"
+        },
+        "excluded": {
+          "label": "排除的行业",
+          "hint": "这些将永远不会出现在您的匹配中。"
+        },
+        "polRisk": {
+          "label": "政治风险承受度",
+          "placeholder": "选择"
+        },
+        "fxRisk": {
+          "label": "货币风险承受度",
+          "placeholder": "选择"
+        },
+        "certifications": {
+          "label": "认证或资质",
+          "placeholder": "例如 AIFMD 授权；B-Corp 认证…",
+          "hint": "可选"
+        },
+        "previousProjects": {
+          "label": "过往投资（最多 5 项）",
+          "add": "添加参考",
+          "empty": "尚未添加过往投资。",
+          "name": "项目名称",
+          "country": "国家/地区",
+          "sector": "行业",
+          "year": "年份"
+        }
       },
       "options": {
-        "equity": "股权", "jv": "合资", "debt": "债权", "ppp": "PPP", "acquisition": "收购",
-        "tobacco": "烟草", "arms": "军火", "gambling": "博彩",
-        "ownFull": "完全所有权", "ownJv": "合资", "ownBot": "建设-运营-移交", "ownLease": "长期租赁", "ownPpp": "公私合营", "ownMinority": "少数股权",
-        "riskLow": "低", "riskMedium": "中", "riskHigh": "高",
-        "horizon": { "1-3": "1–3 年", "3-5": "3–5 年", "5-7": "5–7 年", "7-10": "7–10 年", "10+": "10 年以上" },
-        "exit": { "trade_sale": "出售给同业", "ipo": "首次公开募股", "buyback": "回购", "long_term_hold": "长期持有", "bot": "BOT 移交" },
-        "polRisk": { "conservative": "保守", "moderate": "适中", "opportunistic": "机会主义" },
-        "fxRisk": { "hedged": "仅对冲", "partial": "部分敞口", "full": "可接受完全敞口" }
+        "equity": "股权",
+        "jv": "合资",
+        "debt": "债权",
+        "ppp": "PPP",
+        "acquisition": "收购",
+        "tobacco": "烟草",
+        "arms": "军火",
+        "gambling": "博彩",
+        "ownFull": "完全所有权",
+        "ownJv": "合资",
+        "ownBot": "建设-运营-移交",
+        "ownLease": "长期租赁",
+        "ownPpp": "公私合营",
+        "ownMinority": "少数股权",
+        "riskLow": "低",
+        "riskMedium": "中",
+        "riskHigh": "高",
+        "horizon": {
+          "1-3": "1–3 年",
+          "3-5": "3–5 年",
+          "5-7": "5–7 年",
+          "7-10": "7–10 年",
+          "10+": "10 年以上"
+        },
+        "exit": {
+          "trade_sale": "出售给同业",
+          "ipo": "首次公开募股",
+          "buyback": "回购",
+          "long_term_hold": "长期持有",
+          "bot": "BOT 移交"
+        },
+        "polRisk": {
+          "conservative": "保守",
+          "moderate": "适中",
+          "opportunistic": "机会主义"
+        },
+        "fxRisk": {
+          "hedged": "仅对冲",
+          "partial": "部分敞口",
+          "full": "可接受完全敞口"
+        }
       },
-      "summary": { "countSelected": "已选择 {count} 项", "countSectors": "{count} 个行业", "countReferences": "已添加 {count} 项" },
+      "summary": {
+        "countSelected": "已选择 {count} 项",
+        "countSectors": "{count} 个行业",
+        "countReferences": "已添加 {count} 项"
+      },
       "documents": {
         "note": "每份文件都加密存储并由我们的团队人工审核。我们不使用自动化的第三方 KYC 工具。",
         "registration": "公司注册证书",
@@ -478,36 +801,129 @@
     },
     "project": {
       "steps": {
-        "basics": { "label": "基本信息", "title": "项目基本信息", "subtitle": "投资者首先看到的核心信息。请具体、明确。" },
-        "funding": { "label": "融资", "title": "融资与结构", "subtitle": "您计划融资的金额、形式及其用途。" },
-        "financials": { "label": "财务", "title": "回报与财务", "subtitle": "预期回报和收入。可选，但更有力的预测会吸引更多兴趣。" },
-        "documents": { "label": "文件", "title": "支持文件", "subtitle": "现在为可选——您可以稍后添加。所有文件均加密存储。" }
+        "basics": {
+          "label": "基本信息",
+          "title": "项目基本信息",
+          "subtitle": "投资者首先看到的核心信息。请具体、明确。"
+        },
+        "funding": {
+          "label": "融资",
+          "title": "融资与结构",
+          "subtitle": "您计划融资的金额、形式及其用途。"
+        },
+        "financials": {
+          "label": "财务",
+          "title": "回报与财务",
+          "subtitle": "预期回报和收入。可选，但更有力的预测会吸引更多兴趣。"
+        },
+        "documents": {
+          "label": "文件",
+          "title": "支持文件",
+          "subtitle": "现在为可选——您可以稍后添加。所有文件均加密存储。"
+        }
       },
-      "dividers": { "projections": "预计收入" },
+      "dividers": {
+        "projections": "预计收入"
+      },
       "fields": {
-        "title": { "label": "项目名称", "placeholder": "例如 拉各斯–伊巴丹太阳能微电网" },
-        "sector": { "label": "行业", "placeholder": "选择行业" },
-        "country": { "label": "国家/地区", "placeholder": "搜索国家/地区…" },
-        "stage": { "label": "项目阶段", "placeholder": "选择阶段" },
-        "brief": { "label": "简要描述", "placeholder": "在公开列表中显示的一两句话。", "hint": "公开——最多 500 个字符。" },
-        "fundingRequired": { "label": "所需融资总额", "placeholder": "5,000,000" },
-        "fundingType": { "label": "融资类型", "placeholder": "选择类型" },
-        "minInvestment": { "label": "最低投资额", "placeholder": "250,000" },
-        "existingFunding": { "label": "已获得的融资", "placeholder": "1,000,000" },
-        "useOfFunds": { "label": "资金用途", "placeholder": "资金将如何使用…", "hint": "可选" },
-        "roiMin": { "label": "预期 ROI — 最小", "placeholder": "12", "hint": "每年 %" },
-        "roiMax": { "label": "预期 ROI — 最大", "placeholder": "20", "hint": "每年 %" },
-        "timeline": { "label": "回报周期", "placeholder": "24", "hint": "个月" },
-        "currentRevenue": { "label": "当前年收入", "placeholder": "0" },
-        "rev12": { "label": "预计 — 12 个月", "placeholder": "500,000" },
-        "rev24": { "label": "预计 — 24 个月", "placeholder": "1,500,000" },
-        "rev36": { "label": "预计 — 36 个月", "placeholder": "4,000,000" },
-        "execSummary": { "label": "执行摘要", "placeholder": "面向已批准投资者的简明概述…", "hint": "向已批准的投资者显示。" },
-        "fullDescription": { "label": "完整描述", "placeholder": "详细描述，仅在签署保密协议后共享…", "hint": "机密——仅在签署 NDA 后共享。" }
+        "title": {
+          "label": "项目名称",
+          "placeholder": "例如 拉各斯–伊巴丹太阳能微电网"
+        },
+        "sector": {
+          "label": "行业",
+          "placeholder": "选择行业"
+        },
+        "country": {
+          "label": "国家/地区",
+          "placeholder": "搜索国家/地区…"
+        },
+        "stage": {
+          "label": "项目阶段",
+          "placeholder": "选择阶段"
+        },
+        "brief": {
+          "label": "简要描述",
+          "placeholder": "在公开列表中显示的一两句话。",
+          "hint": "公开——最多 500 个字符。"
+        },
+        "fundingRequired": {
+          "label": "所需融资总额",
+          "placeholder": "5,000,000"
+        },
+        "fundingType": {
+          "label": "融资类型",
+          "placeholder": "选择类型"
+        },
+        "minInvestment": {
+          "label": "最低投资额",
+          "placeholder": "250,000"
+        },
+        "existingFunding": {
+          "label": "已获得的融资",
+          "placeholder": "1,000,000"
+        },
+        "useOfFunds": {
+          "label": "资金用途",
+          "placeholder": "资金将如何使用…",
+          "hint": "可选"
+        },
+        "roiMin": {
+          "label": "预期 ROI — 最小",
+          "placeholder": "12",
+          "hint": "每年 %"
+        },
+        "roiMax": {
+          "label": "预期 ROI — 最大",
+          "placeholder": "20",
+          "hint": "每年 %"
+        },
+        "timeline": {
+          "label": "回报周期",
+          "placeholder": "24",
+          "hint": "个月"
+        },
+        "currentRevenue": {
+          "label": "当前年收入",
+          "placeholder": "0"
+        },
+        "rev12": {
+          "label": "预计 — 12 个月",
+          "placeholder": "500,000"
+        },
+        "rev24": {
+          "label": "预计 — 24 个月",
+          "placeholder": "1,500,000"
+        },
+        "rev36": {
+          "label": "预计 — 36 个月",
+          "placeholder": "4,000,000"
+        },
+        "execSummary": {
+          "label": "执行摘要",
+          "placeholder": "面向已批准投资者的简明概述…",
+          "hint": "向已批准的投资者显示。"
+        },
+        "fullDescription": {
+          "label": "完整描述",
+          "placeholder": "详细描述，仅在签署保密协议后共享…",
+          "hint": "机密——仅在签署 NDA 后共享。"
+        }
       },
       "options": {
-        "stage": { "concept": "概念", "pre_revenue": "收入前", "revenue_generating": "已产生收入", "expansion": "扩张" },
-        "fundingType": { "equity": "股权", "debt": "债权", "jv": "合资", "ppp": "公私合营", "acquisition": "收购" }
+        "stage": {
+          "concept": "概念",
+          "pre_revenue": "收入前",
+          "revenue_generating": "已产生收入",
+          "expansion": "扩张"
+        },
+        "fundingType": {
+          "equity": "股权",
+          "debt": "债权",
+          "jv": "合资",
+          "ppp": "公私合营",
+          "acquisition": "收购"
+        }
       },
       "documents": {
         "note": "文件加密存储，并由我们的团队连同您的提交一起人工审核。",
@@ -533,7 +949,17 @@
         "submitting": "正在提交…",
         "edit": "编辑"
       }
-    }
+    },
+    "title": "欢迎来到 African Investment Hub",
+    "subtitle": "选择您希望如何使用本平台。您可以在下一步完善您的资料。",
+    "investorTitle": "投资者",
+    "investorDesc": "发现已核实的投资机会，连接非洲各地经过审查的项目。",
+    "ownerTitle": "项目方",
+    "ownerDesc": "提交您的项目以供审核，触达合格的国际投资者。",
+    "continueAsInvestor": "以投资者身份继续",
+    "continueAsOwner": "以项目方身份继续",
+    "roleError": "无法保存您的角色，请重试。",
+    "eyebrow": "开始"
   },
   "adminPortal": {
     "title": "管理员仪表板",
@@ -572,7 +998,7 @@
     "role": "角色",
     "roles": {
       "investor": "投资者",
-      "project_owner": "项目方",
+      "project_owner": "项目促进者",
       "admin": "管理员"
     },
     "roleUpdated": "角色已更新。用户需要退出并重新登录才能生效。",
@@ -619,6 +1045,122 @@
     "colUser": "用户",
     "colJoined": "加入时间",
     "exportCsv": "导出 CSV",
-    "exportError": "导出失败，请重试。"
+    "exportError": "导出失败，请重试。",
+    "view": "查看详情",
+    "notFound": "未找到。",
+    "backToList": "返回列表",
+    "noDocuments": "未提交任何文件。",
+    "secCompany": "公司",
+    "secInvestment": "投资概况",
+    "secRisk": "风险与回报",
+    "secCompliance": "合规与 ESG",
+    "secTrack": "过往业绩",
+    "secDocuments": "文件",
+    "secOverview": "概览",
+    "secFunding": "融资",
+    "secFinancials": "财务数据",
+    "fCompanyName": "公司法定名称",
+    "fRegCountry": "注册国家",
+    "fRegNumber": "注册编号",
+    "fYears": "经营年限",
+    "fAddress": "注册地址",
+    "fWebsite": "网站",
+    "fContactName": "联系人姓名",
+    "fContactTitle": "职位",
+    "fContactEmail": "联系邮箱",
+    "fContactPhone": "联系电话",
+    "fCountries": "意向国家",
+    "fSectors": "意向行业",
+    "fTypes": "投资类型",
+    "fMinTicket": "最小投资额",
+    "fMaxTicket": "最大投资额",
+    "fDealSize": "偏好交易规模",
+    "fCapital": "可投资资本",
+    "fRisk": "风险偏好",
+    "fRoi": "目标投资回报率",
+    "fHorizon": "投资期限",
+    "fExit": "退出策略",
+    "fOwnership": "股权结构",
+    "fEsg": "ESG 要求",
+    "fExcluded": "排除行业",
+    "fPolRisk": "政治风险承受度",
+    "fFxRisk": "汇率风险承受度",
+    "fTitle": "项目名称",
+    "fSector": "行业",
+    "fCountry": "国家",
+    "fStage": "阶段",
+    "fBrief": "简要描述",
+    "fExecSummary": "执行摘要",
+    "fFullDescription": "完整描述",
+    "fFundingRequired": "所需资金",
+    "fFundingType": "融资类型",
+    "fMinInvestment": "最低投资额",
+    "fExistingFunding": "现有资金",
+    "fUseOfFunds": "资金用途",
+    "fTimeline": "回报时间表",
+    "fCurrentRevenue": "当前年收入",
+    "fRev12": "预计收入 — 12 个月",
+    "fRev24": "预计收入 — 24 个月",
+    "fRev36": "预计收入 — 36 个月"
+  },
+  "pendingApproval": {
+    "title": "申请审核中",
+    "description": "我们的团队正在审核您的提交。账户获批后，您将收到电子邮件。",
+    "note": "通常最多需要 48 小时。",
+    "approvedTitle": "您已通过审核",
+    "approvedDesc": "您的账户已获批准。现在即可访问您的仪表板。",
+    "goToDashboard": "前往仪表板"
+  },
+  "investorPortal": {
+    "title": "投资者仪表板",
+    "overview": "概览",
+    "profile": "资料",
+    "matches": "匹配",
+    "notifications": "通知",
+    "welcome": "欢迎回来",
+    "statusLabel": "账户状态",
+    "companyLabel": "公司",
+    "loading": "加载中…",
+    "noProfile": "未找到投资者资料。",
+    "country": "国家",
+    "contact": "联系人",
+    "email": "电子邮件",
+    "sectors": "行业",
+    "noMatches": "暂无匹配。",
+    "matchProject": "项目",
+    "status": "状态",
+    "score": "评分",
+    "noNotifications": "暂无通知。"
+  },
+  "ownerPortal": {
+    "title": "项目方仪表板",
+    "overview": "概览",
+    "projects": "我的项目",
+    "newProject": "新建项目",
+    "welcome": "项目方工作区",
+    "statusLabel": "账户状态",
+    "projectCount": "已提交项目",
+    "loading": "加载中…",
+    "noProjects": "暂无项目。",
+    "createFirst": "提交您的第一个项目",
+    "titleField": "项目名称",
+    "sector": "行业",
+    "country": "国家",
+    "briefDescription": "简要描述",
+    "fundingRequired": "所需资金",
+    "submitProject": "提交项目",
+    "projectCreated": "项目已创建。",
+    "projectError": "无法创建项目。",
+    "executiveSummary": "执行摘要",
+    "notFound": "未找到项目。"
+  },
+  "auth": {
+    "eyebrow": "已核实的投资网络",
+    "headline": "资本流向信任所在之处。",
+    "point1": "每位投资者均经人工核实——绝无自动化 KYC 捷径。",
+    "point2": "覆盖全部 54 个国家、经过筛选的投资就绪项目。",
+    "point3": "受 NDA 保护的交易室。平台绝不托管您的资金。",
+    "backHome": "返回首页",
+    "disclaimer": "人工核实 · NDA 保护 · 不托管资金"
   }
 }

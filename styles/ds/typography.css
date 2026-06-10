@@ -1,0 +1,40 @@
+/* African Investment Hub — Typography tokens
+   Two families only: Inter carries everything readable;
+   Noto Sans Mono carries the "machine layer" — eyebrows, buttons,
+   meta labels, footer links, badges with letterspacing.
+   Vendored from fronted-design-system/African-inv-hub-v3/tokens/typography.css —
+   keep in sync with the design-system source of truth. */
+
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Noto Sans Mono', monospace;
+
+  /* ── Display & headings (Inter 700, tight tracking) ─── */
+  --text-display-size: 72px;     /* hero h1 */
+  --text-display-line: 1.1;
+  --text-h2-size: 48px;          /* section headings */
+  --text-h2-line: 1.15;
+  --text-h3-size: 28px;          /* panel headings */
+  --text-h3-line: 1.25;
+  --text-card-title-size: 18px;  /* card headings, Inter 600 */
+  --tracking-display: -0.02em;
+  --tracking-h3: -0.01em;
+
+  /* ── Body (Inter 400) ────────────────────────────────── */
+  --text-lead-size: 18px;        /* hero subcopy */
+  --text-body-size: 16px;        /* section body */
+  --text-body-sm-size: 15px;     /* card body */
+  --text-body-line: 1.6;
+
+  /* ── Mono layer (Noto Sans Mono) ─────────────────────── */
+  --text-eyebrow-size: 12px;     /* mono 500, uppercase */
+  --text-label-size: 11px;       /* mono 600, uppercase — column titles */
+  --text-button-size: 13px;      /* mono 600 (14px for hero CTAs) */
+  --text-meta-size: 12px;        /* mono 400/500 — footnotes, copyright */
+  --text-badge-size: 10px;       /* mono/inter 600, uppercase */
+  --tracking-eyebrow: 0.08em;
+  --tracking-badge: 0.06em;
+
+  /* ── Stats ───────────────────────────────────────────── */
+  --text-stat-size: 56px;        /* Inter 700, tracking -0.02em */
+}

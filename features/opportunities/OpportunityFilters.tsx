@@ -79,9 +79,9 @@ export function OpportunityFilters({
         }
         options={[
           { value: "all", label: t("all") },
-          { value: "low", label: "Low" },
-          { value: "medium", label: "Medium" },
-          { value: "high", label: "High" },
+          { value: "low", label: t("riskLow") },
+          { value: "medium", label: t("riskMedium") },
+          { value: "high", label: t("riskHigh") },
         ]}
       />
       <FilterSelect

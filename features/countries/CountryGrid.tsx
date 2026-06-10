@@ -1,8 +1,10 @@
 "use client";
 
+import { SearchX } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { Link } from "@/i18n/navigation";
+import { EmptyState } from "@/components/common/EmptyState";
 import { Flag } from "@/components/common/Flag";
 import { Input } from "@/components/ui/input";
 import type { Country } from "@/types";
@@ -30,7 +32,19 @@ export function CountryGrid({ countries }: { countries: Country[] }) {
         className="mb-6 max-w-md"
       />
       {filtered.length === 0 ? (
-        <p className="text-[var(--text-muted)]">{t("empty")}</p>
+        <EmptyState
+          icon={SearchX}
+          title={t("empty")}
+          action={
+            <button
+              type="button"
+              onClick={() => setQuery("")}
+              className="text-[var(--text-sm)] font-semibold text-[var(--accent)] hover:underline"
+            >
+              {t("clearSearch")}
+            </button>
+          }
+        />
       ) : (
         <div className="country-grid">
           {filtered.map((c) => (

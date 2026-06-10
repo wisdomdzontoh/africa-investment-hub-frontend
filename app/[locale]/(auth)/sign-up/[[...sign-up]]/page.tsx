@@ -1,4 +1,5 @@
 import { SignUp } from "@clerk/nextjs";
+import { AuthShell } from "@/components/auth/AuthShell";
 import { clerkAppearance } from "@/lib/clerk/appearance";
 
 export default async function SignUpPage({
@@ -8,13 +9,13 @@ export default async function SignUpPage({
 }) {
   const { locale } = await params;
   return (
-    <div className="flex min-h-[80vh] items-center justify-center px-4 py-12">
+    <AuthShell>
       <SignUp
         appearance={clerkAppearance}
         routing="path"
         path={`/${locale}/sign-up`}
         signInUrl={`/${locale}/sign-in`}
       />
-    </div>
+    </AuthShell>
   );
 }

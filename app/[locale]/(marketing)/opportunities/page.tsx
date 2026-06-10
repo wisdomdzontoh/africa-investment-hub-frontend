@@ -1,8 +1,12 @@
+import { SearchX } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
 import { OpportunityFilters } from "@/features/opportunities/OpportunityFilters";
 import { ProjectCard } from "@/features/opportunities/ProjectCard";
+import { EmptyState } from "@/components/common/EmptyState";
+import { PageHero } from "@/components/marketing/PageHero";
+import { CardGridSkeleton, PageHeaderSkeleton } from "@/components/common/Skeletons";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getCountries } from "@/lib/data/countries";
 import {
@@ -67,12 +71,9 @@ async function OpportunitiesContent({
   const options = liveProjectFilterOptions();
 
   return (
-    <div className="page py-12">
-      <div className="mb-8">
-        <h1 className="h1">{t("title")}</h1>
-        <p className="lead mt-2 max-w-[640px]">{t("subtitle")}</p>
-      </div>
-
+    <>
+      <PageHero title={t("title")} subtitle={t("subtitle")} eyebrow={t("eyebrow")} />
+      <div className="page py-12">
       <OpportunityFilters
         countries={countries}
         sectors={sectors}
@@ -82,7 +83,17 @@ async function OpportunitiesContent({
       />
 
       {result.items.length === 0 ? (
-        <p className="mt-10 text-[var(--text-muted)]">{t("empty")}</p>
+        <EmptyState
+          className="mt-10"
+          icon={SearchX}
+          title={t("emptyTitle")}
+          description={t("empty")}
+          action={
+            <BrandedButton asChild variant="outline">
+              <Link href="/opportunities">{t("clearFilters")}</Link>
+            </BrandedButton>
+          }
+        />
       ) : (
         <>
           <p className="mt-6 text-[var(--text-sm)] text-[var(--text-muted)]">
@@ -107,7 +118,7 @@ async function OpportunitiesContent({
                       <Link
                         href={`/opportunities${buildQuery(filters, result.page - 1)}`}
                       >
-                        Previous
+                        {t("previous")}
                       </Link>
                     </BrandedButton>
                   </PaginationItem>
@@ -133,7 +144,7 @@ async function OpportunitiesContent({
                       <Link
                         href={`/opportunities${buildQuery(filters, result.page + 1)}`}
                       >
-                        Next
+                        {t("next")}
                       </Link>
                     </BrandedButton>
                   </PaginationItem>
@@ -143,7 +154,8 @@ async function OpportunitiesContent({
           )}
         </>
       )}
-    </div>
+      </div>
+    </>
   );
 }
 
@@ -161,13 +173,9 @@ export default async function OpportunitiesPage({
     <Suspense
       fallback={
         <div className="page py-12">
-          <Skeleton className="mb-4 h-10 w-64" />
-          <Skeleton className="mb-8 h-24 w-full" />
-          <div className="card-grid-3">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <Skeleton key={i} className="h-80 rounded-[var(--radius-base)]" />
-            ))}
-          </div>
+          <PageHeaderSkeleton />
+          <Skeleton className="mt-8 mb-8 h-14 w-full rounded-[var(--radius-base)]" />
+          <CardGridSkeleton count={6} />
         </div>
       }
     >
