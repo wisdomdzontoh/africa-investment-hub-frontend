@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { BrandedButton } from "@/components/brand/Button";
+import { API_BASE_URL } from "@/lib/api/client";
 import {
   Field,
   FieldError,
@@ -54,13 +55,21 @@ export function ContactForm() {
     },
   });
 
-  const onSubmit = async () => {
+  const onSubmit = async (values: ContactFormValues) => {
     setSubmitError(false);
     try {
-      // Simulated submission — swap for the real contact endpoint.
-      await new Promise((resolve, reject) =>
-        setTimeout(() => (Math.random() < 0.02 ? reject(new Error()) : resolve(null)), 900),
-      );
+      const res = await fetch(`${API_BASE_URL}/v1/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          company: values.company || null,
+          subject: values.subject,
+          message: values.message,
+        }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
       setSubmitted(true);
     } catch {
       setSubmitError(true);

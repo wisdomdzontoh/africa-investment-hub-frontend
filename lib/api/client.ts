@@ -57,6 +57,7 @@ export async function apiFetch<T>(
 export type ApiClient = {
   get: <T>(path: string) => Promise<T>;
   post: <T>(path: string, body?: unknown) => Promise<T>;
+  put: <T>(path: string, body?: unknown) => Promise<T>;
   patch: <T>(path: string, body?: unknown) => Promise<T>;
   delete: <T>(path: string) => Promise<T>;
 };
@@ -80,6 +81,14 @@ export function createApiClient(getToken: () => Promise<string | null>): ApiClie
         path,
         await withToken({
           method: "POST",
+          body: body !== undefined ? JSON.stringify(body) : undefined,
+        }),
+      ),
+    put: async (path, body) =>
+      apiFetch(
+        path,
+        await withToken({
+          method: "PUT",
           body: body !== undefined ? JSON.stringify(body) : undefined,
         }),
       ),

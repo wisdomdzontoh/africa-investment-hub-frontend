@@ -3,18 +3,43 @@
 import { ArrowRight, Briefcase, Clock, GitMerge, UserCog, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { AdminPageHeader, StatCard } from "@/components/admin/AdminUI";
-import { BrandedCard } from "@/components/brand/Card";
+import { Card } from "@/components/ds";
+import { ErrorState } from "@/components/common/ErrorState";
 import { Link } from "@/i18n/navigation";
 import { useAdminAnalytics } from "@/lib/api/hooks";
+import { cn } from "@/lib/utils";
 
 function sum(record?: Record<string, number>) {
   if (!record) return 0;
   return Object.values(record).reduce((a, b) => a + b, 0);
 }
 
+function OverviewSkeleton() {
+  return (
+    <div className="flex flex-col gap-8" aria-busy="true">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div
+            key={i}
+            className="h-[74px] animate-pulse rounded-[var(--radius-card)] border border-[var(--accent-border)] bg-[var(--bg-section)]"
+          />
+        ))}
+      </div>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {Array.from({ length: 2 }).map((_, i) => (
+          <div
+            key={i}
+            className="h-24 animate-pulse rounded-[var(--radius-card)] border border-[var(--accent-border)] bg-[var(--bg-section)]"
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function AdminOverviewPage() {
   const t = useTranslations("adminPortal");
-  const { data, isLoading } = useAdminAnalytics();
+  const { data, isLoading, isError, refetch } = useAdminAnalytics();
 
   const pendingInvestors = data?.investors_by_status?.pending ?? 0;
   const pendingProjects = data?.projects_by_status?.pending ?? 0;
@@ -24,7 +49,9 @@ export default function AdminOverviewPage() {
       <AdminPageHeader title={t("title")} subtitle={t("dashboardSubtitle")} />
 
       {isLoading ? (
-        <p className="text-muted-foreground">{t("loading")}</p>
+        <OverviewSkeleton />
+      ) : isError ? (
+        <ErrorState onRetry={() => refetch()} />
       ) : (
         <div className="flex flex-col gap-8">
           {/* KPIs */}
@@ -42,7 +69,7 @@ export default function AdminOverviewPage() {
 
           {/* Needs attention */}
           <section>
-            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+            <h2 className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--text-muted)]">
               {t("needsAttention")}
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -69,7 +96,11 @@ export default function AdminOverviewPage() {
 
           <div className="grid gap-3 sm:grid-cols-2">
             <StatCard icon={GitMerge} value={sum(data?.matches_by_status)} label={t("matchesTotal")} />
-            <StatCard icon={Briefcase} value={Object.keys(data?.projects_by_sector ?? {}).length} label={t("sectorsCovered")} />
+            <StatCard
+              icon={Briefcase}
+              value={Object.keys(data?.projects_by_sector ?? {}).length}
+              label={t("sectorsCovered")}
+            />
           </div>
         </div>
       )}
@@ -90,24 +121,22 @@ function QueueCard({
 }) {
   const highlight = value > 0;
   return (
-    <Link href={href}>
-      <BrandedCard
-        hover
-        className={
-          "flex items-center justify-between p-5 " +
-          (highlight
-            ? "border-[var(--warning)]/40 bg-[color-mix(in_srgb,var(--warning)_8%,transparent)]"
-            : "")
-        }
+    <Link href={href} className="no-underline">
+      <Card
+        padding="20px"
+        className={cn(
+          "flex items-center justify-between",
+          highlight && "border-[var(--p-warning)]/40 bg-[var(--p-warning-bg)]",
+        )}
       >
         <div>
-          <p className="text-sm text-muted-foreground">{label}</p>
-          <p className="mt-1 text-3xl font-semibold text-foreground">{value}</p>
+          <p className="text-sm text-[var(--text-muted)]">{label}</p>
+          <p className="mt-1 text-3xl font-semibold text-[var(--ink)]">{value}</p>
         </div>
-        <span className="inline-flex items-center gap-1 text-sm font-medium text-[var(--green-700)]">
+        <span className="inline-flex items-center gap-1 text-sm font-medium text-[var(--accent)]">
           {cta} <ArrowRight className="size-4" aria-hidden />
         </span>
-      </BrandedCard>
+      </Card>
     </Link>
   );
 }
@@ -124,21 +153,23 @@ function Breakdown({
   const entries = Object.entries(data ?? {});
   const total = entries.reduce((a, [, v]) => a + v, 0) || 1;
   return (
-    <BrandedCard className="p-5">
-      <h3 className="mb-4 text-sm font-semibold text-foreground">{title}</h3>
+    <Card hoverLift={false} padding="20px">
+      <h3 className="mb-4 text-sm font-semibold text-[var(--ink)]">{title}</h3>
       {entries.length === 0 ? (
-        <p className="text-sm text-muted-foreground">{t("empty")}</p>
+        <p className="text-sm text-[var(--text-muted)]">{t("empty")}</p>
       ) : (
         <div className="flex flex-col gap-3">
           {entries.map(([status, count]) => (
             <div key={status}>
               <div className="mb-1 flex justify-between text-sm">
-                <span className="capitalize text-muted-foreground">{status.replace("_", " ")}</span>
-                <span className="font-medium text-foreground">{count}</span>
+                <span className="capitalize text-[var(--text-muted)]">
+                  {status.replace("_", " ")}
+                </span>
+                <span className="font-medium text-[var(--ink)]">{count}</span>
               </div>
-              <div className="h-1.5 overflow-hidden rounded-full bg-muted">
+              <div className="h-1.5 overflow-hidden rounded-full bg-[var(--bg-section)]">
                 <div
-                  className="h-full rounded-full bg-[var(--green-600)]"
+                  className="h-full rounded-full bg-[var(--accent)]"
                   style={{ width: `${Math.round((count / total) * 100)}%` }}
                 />
               </div>
@@ -146,6 +177,6 @@ function Breakdown({
           ))}
         </div>
       )}
-    </BrandedCard>
+    </Card>
   );
 }

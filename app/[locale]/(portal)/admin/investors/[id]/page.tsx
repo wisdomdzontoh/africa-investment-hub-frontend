@@ -14,7 +14,7 @@ import {
 } from "@/components/admin/DetailView";
 import { RejectDialog } from "@/components/admin/RejectDialog";
 import { StatusBadge } from "@/components/admin/StatusBadge";
-import { BrandedButton } from "@/components/brand/Button";
+import { Button } from "@/components/ds";
 import { Link } from "@/i18n/navigation";
 import { useAdminInvestor, useSetInvestorStatus, type InvestorAction } from "@/lib/api/hooks";
 import { ApiError } from "@/lib/api/client";
@@ -68,9 +68,9 @@ export default function AdminInvestorDetailPage() {
                   pending={setStatus.isPending}
                   onConfirm={(reason) => act("reject", reason)}
                 />
-                <BrandedButton disabled={setStatus.isPending} onClick={() => act("approve")}>
+                <Button disabled={setStatus.isPending} onClick={() => act("approve")}>
                   {t("approve")}
-                </BrandedButton>
+                </Button>
               </>
             )}
           </div>

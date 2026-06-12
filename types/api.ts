@@ -40,15 +40,19 @@ export type InvestorProfile = {
   user_id: string;
   company_name: string;
   country_of_registration: string;
+  registered_address: string | null;
+  website: string | null;
   contact_name: string | null;
+  contact_title: string | null;
   contact_email: string | null;
+  contact_phone: string | null;
   investment_countries: string[];
   investment_sectors: string[];
   risk_appetite: string | null;
   created_at: string;
 };
 
-export type ProjectOwnerProject = {
+export type FacilitatorProject = {
   id: string;
   title: string;
   sector: string;
@@ -59,10 +63,25 @@ export type ProjectOwnerProject = {
   created_at: string;
 };
 
-export type ProjectDetail = ProjectOwnerProject & {
+export type ProjectDetail = FacilitatorProject & {
   executive_summary: string | null;
   project_stage: string;
   funding_type: string;
+  full_description?: string | null;
+  min_investment?: string | null;
+  existing_funding?: string | null;
+  use_of_funds?: string | null;
+  expected_roi_min?: string | null;
+  expected_roi_max?: string | null;
+  timeline_to_returns_months?: number | null;
+  risk_level?: string | null;
+};
+
+/** Owner's view of their own project (GET /projects/mine/{id}) — any status,
+ *  ungated fields, plus uploaded documents. */
+export type FacilitatorProjectDetail = ProjectDetail & {
+  documents: Document[];
+  updated_at: string;
 };
 
 export type MatchItem = {
@@ -186,6 +205,62 @@ export type AdminProjectDetail = {
   admin_notes: string | null;
   documents: Document[];
   created_at: string;
+};
+
+/* ───────────────────────── Admin CMS (PRD §6.4) ───────────────────────── */
+
+/** Per-locale rich-text value, e.g. `{ en: "...", fr: "...", zh: "..." }`. */
+export type LocaleText = Partial<Record<Locale, string>>;
+
+export type CmsCountrySummary = {
+  country_code: string;
+  country_name: string;
+  region: string | null;
+  is_published: boolean;
+};
+
+export type CmsKeyContact = {
+  name?: string;
+  organization?: string;
+  role?: string;
+  email?: string;
+  phone?: string;
+};
+
+export type CmsCountryContent = {
+  country_code: string;
+  country_name: string;
+  region: string | null;
+  investment_climate: LocaleText | null;
+  investment_laws: LocaleText | null;
+  tax_system: LocaleText | null;
+  business_registration: LocaleText | null;
+  licensing_requirements: LocaleText | null;
+  foreign_ownership_rules: LocaleText | null;
+  repatriation_policy: LocaleText | null;
+  immigration_requirements: LocaleText | null;
+  key_contacts: CmsKeyContact[];
+  recent_news: Record<string, unknown>[];
+  is_published: boolean;
+};
+
+export type CmsCountryUpsert = Partial<
+  Omit<CmsCountryContent, "country_code" | "is_published">
+> & {
+  /** True publishes (and reindexes the AI knowledge base); false saves a draft. */
+  publish?: boolean;
+};
+
+export type CmsHomepageStat = { value: string; label: LocaleText };
+export type CmsPartnerLogo = { name: string; logo_url?: string; website?: string };
+
+export type CmsHomepageContent = {
+  stats: CmsHomepageStat[];
+  process_steps: Record<string, unknown>[];
+  sector_highlights: Record<string, unknown>[];
+  partner_logos: CmsPartnerLogo[];
+  team_members: Record<string, unknown>[];
+  advisory_board: Record<string, unknown>[];
 };
 
 export type AuditLogEntry = {

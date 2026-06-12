@@ -1,5 +1,5 @@
 import { FileText } from "lucide-react";
-import { BrandedCard } from "@/components/brand/Card";
+import { Card } from "@/components/ds";
 import type { Document } from "@/types/api";
 
 export function DetailSection({
@@ -10,12 +10,12 @@ export function DetailSection({
   children: React.ReactNode;
 }) {
   return (
-    <BrandedCard className="p-5">
-      <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+    <Card hoverLift={false} padding="20px">
+      <h2 className="mb-4 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--text-muted)]">
         {title}
       </h2>
       {children}
-    </BrandedCard>
+    </Card>
   );
 }
 

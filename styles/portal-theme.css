@@ -1,0 +1,107 @@
+/* African Investment Hub — Portal theme layer
+   Scoped to `.portal` (the authenticated app shell sets this class) so the
+   marketing site keeps the strict terracotta-only DS. Adds a functional
+   semantic palette (success/warning/info/danger) + a LIGHT shadcn sidebar.
+   Hues are warm/desaturated to harmonise with cream + terracotta. */
+
+.portal {
+  /* ── Brand (identity — unchanged) ───────────────────────── */
+  --p-primary: #c0392b;
+  --p-primary-bright: #e74c3c;
+  --p-primary-fg: #9a2d22;
+  --p-primary-bg: rgba(192, 57, 43, 0.10);
+  --p-primary-border: rgba(192, 57, 43, 0.22);
+
+  /* ── Success — warm emerald ─────────────────────────────── */
+  --p-success: #1f8a5b;
+  --p-success-fg: #146c46;
+  --p-success-bg: rgba(31, 138, 91, 0.12);
+  --p-success-border: rgba(31, 138, 91, 0.30);
+
+  /* ── Warning — amber ────────────────────────────────────── */
+  --p-warning: #e08a00;
+  --p-warning-fg: #9a5b00;
+  --p-warning-bg: rgba(224, 138, 0, 0.13);
+  --p-warning-border: rgba(224, 138, 0, 0.32);
+
+  /* ── Info — denim blue ──────────────────────────────────── */
+  --p-info: #2d7dd2;
+  --p-info-fg: #1e5fa8;
+  --p-info-bg: rgba(45, 125, 210, 0.12);
+  --p-info-border: rgba(45, 125, 210, 0.30);
+
+  /* ── Danger — true red (distinct from terracotta accent) ── */
+  --p-danger: #c62828;
+  --p-danger-fg: #9b1c1c;
+  --p-danger-bg: rgba(198, 40, 40, 0.10);
+  --p-danger-border: rgba(198, 40, 40, 0.28);
+
+  /* ── App surfaces ───────────────────────────────────────── */
+  --p-surface: #ffffff;
+  --p-canvas: var(--bg-page);
+  --p-muted: var(--bg-section);
+  --p-border: var(--accent-border);
+  --p-text: var(--ink);
+  --p-text-muted: var(--text-muted);
+
+  /* ── Gradients (portal-only flourish) ───────────────────── */
+  --p-grad-brand: linear-gradient(135deg, #c0392b 0%, #8e2b20 100%);
+  --p-grad-success: linear-gradient(135deg, rgba(31, 138, 91, 0.14), transparent 70%);
+  --p-grad-warning: linear-gradient(135deg, rgba(224, 138, 0, 0.14), transparent 70%);
+  --p-grad-info: linear-gradient(135deg, rgba(45, 125, 210, 0.14), transparent 70%);
+  --p-grad-primary: linear-gradient(135deg, rgba(192, 57, 43, 0.14), transparent 70%);
+
+  /* ── shadcn sidebar → LIGHT ─────────────────────────────── */
+  --sidebar: #ffffff;
+  --sidebar-foreground: var(--text-body);
+  --sidebar-primary: var(--accent);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--accent-tint-08);
+  --sidebar-accent-foreground: var(--accent);
+  --sidebar-border: var(--accent-border);
+  --sidebar-ring: var(--accent);
+
+  /* shadcn destructive + chart palette inherit the portal ramp */
+  --destructive: var(--p-danger);
+  --chart-1: var(--p-primary);
+  --chart-2: var(--p-info);
+  --chart-3: var(--p-success);
+  --chart-4: var(--p-warning);
+  --chart-5: var(--ink);
+}
+
+/* Dark-ready ramp (no toggle shipped yet — values prepared for next-themes). */
+.dark .portal {
+  --p-success: #34c98a;
+  --p-success-fg: #6ee0b0;
+  --p-success-bg: rgba(52, 201, 138, 0.16);
+  --p-success-border: rgba(52, 201, 138, 0.32);
+  --p-warning: #f0a32e;
+  --p-warning-fg: #f6c277;
+  --p-warning-bg: rgba(240, 163, 46, 0.16);
+  --p-warning-border: rgba(240, 163, 46, 0.32);
+  --p-info: #5aa0e6;
+  --p-info-fg: #93c0f0;
+  --p-info-bg: rgba(90, 160, 230, 0.16);
+  --p-info-border: rgba(90, 160, 230, 0.32);
+  --p-danger: #e06a6a;
+  --p-danger-fg: #f0a0a0;
+  --p-danger-bg: rgba(224, 106, 106, 0.16);
+  --p-danger-border: rgba(224, 106, 106, 0.32);
+  --p-surface: oklch(0.22 0.016 48);
+  --p-border: oklch(1 0 0 / 12%);
+
+  --sidebar: oklch(0.2 0.016 48);
+  --sidebar-foreground: oklch(0.85 0.01 70);
+  --sidebar-accent: color-mix(in srgb, var(--accent) 22%, transparent);
+  --sidebar-accent-foreground: oklch(0.95 0.01 70);
+  --sidebar-border: oklch(1 0 0 / 12%);
+}
+
+/* ── Semantic utility classes (used by primitives) ────────── */
+.portal .sem-success { background: var(--p-success-bg); color: var(--p-success-fg); }
+.portal .sem-warning { background: var(--p-warning-bg); color: var(--p-warning-fg); }
+.portal .sem-info { background: var(--p-info-bg); color: var(--p-info-fg); }
+.portal .sem-danger { background: var(--p-danger-bg); color: var(--p-danger-fg); }
+.portal .sem-primary { background: var(--p-primary-bg); color: var(--p-primary-fg); }
+.portal .sem-neutral { background: var(--bg-section); color: var(--text-muted); }

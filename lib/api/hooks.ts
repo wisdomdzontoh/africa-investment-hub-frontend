@@ -12,13 +12,18 @@ import type {
   AdminProject,
   AdminProjectDetail,
   AuditLogEntry,
+  CmsCountryContent,
+  CmsCountrySummary,
+  CmsCountryUpsert,
+  CmsHomepageContent,
   InvestorProfile,
   MatchItem,
   NotificationItem,
   Page,
   PresignUploadResponse,
   ProjectDetail,
-  ProjectOwnerProject,
+  FacilitatorProject,
+  FacilitatorProjectDetail,
   UserAccount,
   UserRole,
   UserStatus,
@@ -130,7 +135,7 @@ export function useMyProjects(enabled = true) {
   const api = useApiClient();
   return useQuery({
     queryKey: ["projects", "mine"],
-    queryFn: () => api.get<ProjectOwnerProject[]>("/projects/mine"),
+    queryFn: () => api.get<FacilitatorProject[]>("/projects/mine"),
     enabled,
   });
 }
@@ -149,6 +154,61 @@ export function useCreateProject() {
   });
 }
 
+export function useUpdateInvestorProfile() {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (body: Record<string, unknown>) =>
+      api.patch<InvestorProfile>("/investors/me", body),
+    onSuccess: (profile) => {
+      qc.setQueryData(["investor", "me"], profile);
+      qc.invalidateQueries({ queryKey: ["investor"] });
+    },
+  });
+}
+
+/** Owner's full view of one of their own projects (any status, with documents). */
+export function useMyProject(projectId: string, enabled = true) {
+  const api = useApiClient();
+  return useQuery({
+    queryKey: ["projects", "mine", projectId],
+    queryFn: () => api.get<FacilitatorProjectDetail>(`/projects/mine/${projectId}`),
+    enabled: enabled && Boolean(projectId),
+    retry: false,
+  });
+}
+
+export function useUpdateProject() {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (vars: { projectId: string; body: Record<string, unknown> }) =>
+      api.patch<FacilitatorProjectDetail>(`/projects/${vars.projectId}`, vars.body),
+    onSuccess: (project) => {
+      qc.setQueryData(["projects", "mine", project.id], project);
+      qc.invalidateQueries({ queryKey: ["projects"] });
+    },
+  });
+}
+
+export function useDeleteProjectDocument() {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (vars: { projectId: string; r2Key: string }) =>
+      // Encode per segment — the backend route param is `{r2_key:path}`, so
+      // slashes must survive while each segment is still URL-safe.
+      api.delete(
+        `/projects/${vars.projectId}/documents/${vars.r2Key
+          .split("/")
+          .map(encodeURIComponent)
+          .join("/")}`,
+      ),
+    onSuccess: (_data, vars) =>
+      qc.invalidateQueries({ queryKey: ["projects", "mine", vars.projectId] }),
+  });
+}
+
 export function useInvestorMatches() {
   const api = useApiClient();
   return useQuery({
@@ -157,11 +217,12 @@ export function useInvestorMatches() {
   });
 }
 
-export function useInvestorNotifications() {
+export function useInvestorNotifications(enabled = true) {
   const api = useApiClient();
   return useQuery({
     queryKey: ["investor", "notifications"],
     queryFn: () => api.get<Page<NotificationItem>>("/investors/me/notifications"),
+    enabled,
   });
 }
 
@@ -276,5 +337,56 @@ export function useSetUserStatus() {
     mutationFn: (vars: { userId: string; status: UserStatus }) =>
       api.patch(`/admin/users/${vars.userId}/status`, { status: vars.status }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["admin"] }),
+  });
+}
+
+/* ───────────────────────── Admin CMS (PRD §6.4) ───────────────────────── */
+
+export function useCmsCountries() {
+  const api = useApiClient();
+  return useQuery({
+    queryKey: ["admin", "cms", "countries"],
+    queryFn: () => api.get<CmsCountrySummary[]>("/admin/cms/countries"),
+  });
+}
+
+export function useCmsCountry(code: string) {
+  const api = useApiClient();
+  return useQuery({
+    queryKey: ["admin", "cms", "countries", code],
+    queryFn: () => api.get<CmsCountryContent>(`/admin/cms/countries/${code}`),
+    enabled: Boolean(code),
+    retry: false,
+  });
+}
+
+export function useUpsertCmsCountry() {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (vars: { code: string; body: CmsCountryUpsert }) =>
+      api.put<CmsCountryContent>(`/admin/cms/countries/${vars.code}`, vars.body),
+    onSuccess: (content) => {
+      qc.setQueryData(["admin", "cms", "countries", content.country_code], content);
+      qc.invalidateQueries({ queryKey: ["admin", "cms", "countries"], exact: true });
+    },
+  });
+}
+
+export function useCmsHomepage() {
+  const api = useApiClient();
+  return useQuery({
+    queryKey: ["admin", "cms", "homepage"],
+    queryFn: () => api.get<CmsHomepageContent>("/admin/cms/homepage"),
+  });
+}
+
+export function useUpdateCmsHomepage() {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (body: Partial<CmsHomepageContent>) =>
+      api.put<CmsHomepageContent>("/admin/cms/homepage", body),
+    onSuccess: (content) => qc.setQueryData(["admin", "cms", "homepage"], content),
   });
 }

@@ -9,7 +9,7 @@ export function dashboardPath(role: UserRole): string {
     case "admin":
       return "/admin";
     case "project_owner":
-      return "/project-owner";
+      return "/facilitator";
     case "investor":
     default:
       return "/investor";

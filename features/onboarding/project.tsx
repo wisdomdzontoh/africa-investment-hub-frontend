@@ -105,7 +105,7 @@ export function useProjectWizardConfig(): WizardConfig<ProjectForm> {
       submitLabel: t("review.submit"),
       submittingLabel: t("review.submitting"),
       editLabel: t("review.edit"),
-      doneRedirect: "/project-owner",
+      doneRedirect: "/facilitator",
       steps: [
         {
           id: "basics",

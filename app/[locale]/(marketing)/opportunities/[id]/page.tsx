@@ -20,7 +20,7 @@ export default async function OpportunityDetailPage({
   setRequestLocale(locale);
 
   // Signed-in users get a bearer token so the backend can release gated fields
-  // when they're an approved investor / the owner / an admin.
+  // when they're an approved investor / the project facilitator / an admin.
   const { userId, getToken } = await auth();
   const signedIn = !!userId;
   const token = signedIn
@@ -32,7 +32,7 @@ export default async function OpportunityDetailPage({
 
   const t = await getTranslations("opportunities.detail");
   const country = getCountry(project.countryCode);
-  // The backend only releases these fields to verified investors / owner / admin.
+  // The backend only releases these fields to verified investors / facilitator / admin.
   const hasDetail = !!(project.execSummary || project.fullDescription);
 
   return (

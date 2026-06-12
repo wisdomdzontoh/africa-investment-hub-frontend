@@ -2,7 +2,7 @@
 
 import { AlertTriangle, RotateCw } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { BrandedButton } from "@/components/brand/Button";
+import { Button } from "@/components/ds";
 import { cn } from "@/lib/utils";
 
 type ErrorStateProps = {
@@ -53,9 +53,10 @@ export function ErrorState({
       {(onRetry || action) && (
         <div className="mt-1 flex flex-wrap items-center justify-center gap-2.5">
           {onRetry && (
-            <BrandedButton onClick={onRetry} icon={RotateCw}>
+            <Button onClick={onRetry} className="gap-1.5">
+              <RotateCw className="size-4" aria-hidden />
               {retryLabel ?? t("tryAgain")}
-            </BrandedButton>
+            </Button>
           )}
           {action}
         </div>

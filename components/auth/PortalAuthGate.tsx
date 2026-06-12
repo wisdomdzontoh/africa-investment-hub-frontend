@@ -1,14 +1,20 @@
 "use client";
 
-import { UserButton, useUser } from "@clerk/nextjs";
-import { Clock, Lock } from "lucide-react";
+import { useClerk, useUser } from "@clerk/nextjs";
+import { Lock, ShieldCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
-import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { useAccount } from "@/lib/api/hooks";
 import { dashboardPath, resolvePostAuthRedirect } from "@/lib/auth/paths";
-import { Link, usePathname, useRouter } from "@/i18n/navigation";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import type { UserStatus } from "@/types/api";
+
+/** Mandatory MFA before portal access (PRD §6.2, FE-07/SEC-03). Defaults to
+ *  enforced in production; set NEXT_PUBLIC_REQUIRE_MFA=true|false to override
+ *  (e.g. `true` in staging, `false` while developing locally). */
+const REQUIRE_MFA = process.env.NEXT_PUBLIC_REQUIRE_MFA
+  ? process.env.NEXT_PUBLIC_REQUIRE_MFA === "true"
+  : process.env.NODE_ENV === "production";
 
 /* ----------------------------- shared chrome ---------------------------- */
 
@@ -20,7 +26,7 @@ function clerkRole(user: { publicMetadata?: unknown } | null | undefined): strin
 
 function GateLoading() {
   return (
-    <div className="flex min-h-[40vh] items-center justify-center text-muted-foreground">
+    <div className="flex min-h-[40vh] items-center justify-center text-[var(--text-muted)]">
       Loading…
     </div>
   );
@@ -30,14 +36,45 @@ function GateError({ onRetry }: { onRetry: () => void }) {
   const t = useTranslations("portal");
   return (
     <div className="flex min-h-[40vh] flex-col items-center justify-center gap-3 px-4 text-center">
-      <p className="text-sm text-muted-foreground">{t("loadError")}</p>
+      <p className="text-sm text-[var(--text-muted)]">{t("loadError")}</p>
       <button
         type="button"
         onClick={onRetry}
-        className="rounded-[var(--radius-base)] border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-[var(--green-600)]"
+        className="rounded-[var(--radius-md)] border border-[var(--accent-border)] px-4 py-2 text-sm font-medium text-[var(--ink)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
       >
         {t("retry")}
       </button>
+    </div>
+  );
+}
+
+/** Blocking screen shown until the user enrols a second factor. Clerk's
+ *  profile modal hosts the TOTP/backup-code setup; `useUser` re-renders the
+ *  gate the moment `twoFactorEnabled` flips. */
+function MfaGate() {
+  const t = useTranslations("portal");
+  const { openUserProfile } = useClerk();
+  return (
+    <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 px-4 text-center">
+      <span className="grid size-14 place-items-center rounded-full bg-[var(--accent-tint-08)] text-[var(--accent)]">
+        <ShieldCheck className="size-7" aria-hidden />
+      </span>
+      <div>
+        <h1 className="text-xl font-bold tracking-[-0.01em] text-[var(--ink)]">
+          {t("mfaTitle")}
+        </h1>
+        <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-[var(--text-body)]">
+          {t("mfaBody")}
+        </p>
+      </div>
+      <button
+        type="button"
+        onClick={() => openUserProfile()}
+        className="rounded-[var(--radius-md)] bg-[var(--accent)] px-5 py-2.5 font-mono text-[13px] font-semibold text-white transition-colors hover:bg-[var(--accent-bright)]"
+      >
+        {t("mfaSetup")}
+      </button>
+      <p className="text-xs text-[var(--text-muted)]">{t("mfaHint")}</p>
     </div>
   );
 }
@@ -84,6 +121,7 @@ export function PortalAuthGate({ allowedRoles, children }: PortalAuthGateProps) 
   if (!isSignedIn || !account) return null;
   if (!isAdmin && !account.onboarding_complete) return null;
   if (allowedRoles && effectiveRole && !allowedRoles.includes(effectiveRole)) return null;
+  if (REQUIRE_MFA && user && !user.twoFactorEnabled) return <MfaGate />;
   return <>{children}</>;
 }
 
@@ -138,109 +176,17 @@ export function ApprovalRequired({
   const t = useTranslations("portal");
   if (status === "approved") return <>{children}</>;
   return (
-    <div className="flex flex-col items-center gap-2 rounded-[var(--radius-base)] border border-dashed border-border bg-[var(--surface-sunken)]/40 px-6 py-12 text-center">
-      <span className="grid size-10 place-items-center rounded-full bg-[color-mix(in_srgb,var(--green-600)_12%,transparent)] text-[var(--green-700)]">
+    <div className="flex flex-col items-center gap-2 rounded-[var(--radius-card)] border border-dashed border-[var(--accent-border)] bg-[var(--bg-section)] px-6 py-12 text-center">
+      <span className="grid size-10 place-items-center rounded-full bg-[var(--accent-tint-08)] text-[var(--accent)]">
         <Lock className="size-5" aria-hidden />
       </span>
-      <p className="font-medium text-foreground">{t("lockedTitle")}</p>
-      <p className="max-w-sm text-sm text-muted-foreground">{t("lockedBody")}</p>
+      <p className="font-medium text-[var(--ink)]">{t("lockedTitle")}</p>
+      <p className="max-w-sm text-sm text-[var(--text-muted)]">{t("lockedBody")}</p>
     </div>
   );
 }
 
-/* ------------------------------- review banner -------------------------- */
-
-function ReviewBanner({ status }: { status: UserStatus }) {
-  const t = useTranslations("portal");
-  if (status === "approved") return null;
-  const rejected = status === "rejected" || status === "suspended";
-  return (
-    <div
-      className={
-        "mb-6 flex items-start gap-3 rounded-[var(--radius-base)] border px-4 py-3 " +
-        (rejected
-          ? "border-destructive/40 bg-destructive/5"
-          : "border-[var(--warning)]/40 bg-[color-mix(in_srgb,var(--warning)_8%,transparent)]")
-      }
-    >
-      <Clock
-        className={"mt-0.5 size-4 shrink-0 " + (rejected ? "text-destructive" : "text-[var(--warning)]")}
-        aria-hidden
-      />
-      <div>
-        <p className="text-sm font-semibold text-foreground">
-          {rejected ? t("rejectedTitle") : t("reviewTitle")}
-        </p>
-        <p className="text-sm text-muted-foreground">
-          {rejected ? t("rejectedBody") : t("reviewBody")}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-/* -------------------------------- shell --------------------------------- */
-
-type PortalShellProps = {
-  title: string;
-  nav: Array<{ href: string; label: string }>;
-  children: React.ReactNode;
-};
-
-export function PortalShell({ title, nav, children }: PortalShellProps) {
-  const t = useTranslations("portal");
-  const pathname = usePathname();
-  const { data: account } = useAccount();
-  const showBanner = !!account && account.role !== "admin" && account.status !== "approved";
-
-  return (
-    <div className="min-h-screen bg-[var(--surface-muted)]">
-      <header className="border-b border-border bg-background">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
-          <div>
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">
-              {t("workspace")}
-            </p>
-            <h1 className="font-display text-xl font-semibold text-[var(--text-strong)]">
-              {title}
-            </h1>
-          </div>
-          <div className="flex items-center gap-2 sm:gap-3">
-            <LanguageSwitcher />
-            <Link
-              href="/"
-              className="hidden text-sm text-muted-foreground hover:text-foreground sm:inline"
-            >
-              {t("backToSite")}
-            </Link>
-            <UserButton />
-          </div>
-        </div>
-      </header>
-      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 lg:grid-cols-[220px_1fr]">
-        <nav className="flex flex-col gap-1">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={
-                pathname === item.href || pathname.startsWith(`${item.href}/`)
-                  ? "rounded-md bg-background px-3 py-2 text-sm font-medium text-[var(--text-strong)] shadow-sm"
-                  : "rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-background/70 hover:text-foreground"
-              }
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <main className="min-w-0">
-          {showBanner && account && <ReviewBanner status={account.status} />}
-          {children}
-        </main>
-      </div>
-    </div>
-  );
-}
+/* ------------------------------ redirect -------------------------------- */
 
 export function AccountRedirect() {
   const { data: account, isLoading } = useAccount();
@@ -252,7 +198,7 @@ export function AccountRedirect() {
   }, [account, isLoading, router]);
 
   return (
-    <div className="flex min-h-[50vh] items-center justify-center text-muted-foreground">
+    <div className="flex min-h-[50vh] items-center justify-center text-[var(--text-muted)]">
       Redirecting…
     </div>
   );

@@ -4,17 +4,10 @@ import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { AdminPageHeader, SearchInput } from "@/components/admin/AdminUI";
-import { StatusBadge } from "@/components/admin/StatusBadge";
-import { BrandedButton } from "@/components/brand/Button";
-import { BrandedCard } from "@/components/brand/Card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Button } from "@/components/ds";
+import { EmptyState } from "@/components/common/EmptyState";
+import { ErrorState } from "@/components/common/ErrorState";
+import { DataTable, StatusPill, type Column } from "@/components/portal";
 import {
   useAccount,
   useAdminUsers,
@@ -22,15 +15,14 @@ import {
   useSetUserStatus,
 } from "@/lib/api/hooks";
 import { ApiError } from "@/lib/api/client";
-import type { UserRole } from "@/types/api";
-import { cn } from "@/lib/utils";
+import type { UserAccount, UserRole } from "@/types/api";
 
 const ROLES: UserRole[] = ["investor", "project_owner", "admin"];
 
 export default function AdminUsersPage() {
   const t = useTranslations("adminPortal");
   const locale = useLocale();
-  const { data, isLoading } = useAdminUsers();
+  const { data, isLoading, isError, refetch } = useAdminUsers();
   const { data: me } = useAccount();
   const setRole = useSetUserRole();
   const setStatus = useSetUserStatus();
@@ -61,6 +53,80 @@ export default function AdminUsersPage() {
     }
   }
 
+  const columns: Column<UserAccount>[] = [
+    {
+      key: "user",
+      header: t("colUser"),
+      render: (user) => (
+        <span className="inline-flex items-center gap-2">
+          <span className="font-medium text-[var(--ink)]">{user.email ?? user.id}</span>
+          {me?.id === user.id ? (
+            <span className="rounded-[var(--radius-pill)] bg-[var(--bg-section)] px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase text-[var(--text-muted)]">
+              {t("you")}
+            </span>
+          ) : null}
+        </span>
+      ),
+    },
+    {
+      key: "role",
+      header: t("role"),
+      render: (user) => (
+        <select
+          value={user.role}
+          disabled={me?.id === user.id || setRole.isPending}
+          onChange={(e) => changeRole(user.id, e.target.value as UserRole)}
+          onClick={(e) => e.stopPropagation()}
+          aria-label={t("role")}
+          className="rounded-[var(--radius-md)] border border-[var(--ink-border)] bg-[var(--surface-card)] px-2.5 py-1.5 text-sm text-[var(--ink)] outline-none focus:border-[var(--accent)] focus:shadow-[0_0_0_3px_var(--accent-tint-08)] disabled:opacity-60"
+        >
+          {ROLES.map((r) => (
+            <option key={r} value={r}>
+              {t(`roles.${r}`)}
+            </option>
+          ))}
+        </select>
+      ),
+    },
+    {
+      key: "status",
+      header: t("colStatus"),
+      render: (user) => <StatusPill status={user.status} label={t(`filter.${user.status}`)} />,
+    },
+    {
+      key: "joined",
+      header: t("colJoined"),
+      hideOnMobile: true,
+      render: (user) =>
+        new Date(user.created_at).toLocaleDateString(locale, { dateStyle: "medium" }),
+      className: "whitespace-nowrap text-[var(--text-muted)]",
+    },
+    {
+      key: "actions",
+      header: t("colActions"),
+      align: "right",
+      render: (user) => {
+        if (me?.id === user.id) return null;
+        const suspended = user.status === "suspended";
+        return (
+          <Button
+            size="sm"
+            variant="outline"
+            disabled={setStatus.isPending}
+            onClick={() => toggleSuspend(user.id, suspended)}
+            className={
+              suspended
+                ? ""
+                : "border-[var(--p-danger)]/40 text-[var(--p-danger)] hover:bg-[var(--p-danger-bg)]"
+            }
+          >
+            {suspended ? t("reactivate") : t("suspend")}
+          </Button>
+        );
+      },
+    },
+  ];
+
   return (
     <div>
       <AdminPageHeader title={t("usersTitle")} subtitle={t("usersSubtitle")} />
@@ -69,86 +135,23 @@ export default function AdminUsersPage() {
         <SearchInput value={query} onChange={setQuery} placeholder={t("searchUsers")} />
       </div>
 
-      <BrandedCard className="overflow-hidden">
-        {isLoading ? (
-          <p className="p-6 text-sm text-muted-foreground">{t("loading")}</p>
-        ) : rows.length === 0 ? (
-          <p className="p-6 text-sm text-muted-foreground">{t("empty")}</p>
-        ) : (
-          <div className="overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{t("colUser")}</TableHead>
-                  <TableHead>{t("role")}</TableHead>
-                  <TableHead>{t("colStatus")}</TableHead>
-                  <TableHead>{t("colJoined")}</TableHead>
-                  <TableHead className="text-right">{t("colActions")}</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {rows.map((user) => {
-                  const isSelf = me?.id === user.id;
-                  const suspended = user.status === "suspended";
-                  return (
-                    <TableRow key={user.id}>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <span className="font-medium text-foreground">{user.email ?? user.id}</span>
-                          {isSelf && (
-                            <span className="rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-semibold uppercase text-muted-foreground">
-                              {t("you")}
-                            </span>
-                          )}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <select
-                          value={user.role}
-                          disabled={isSelf || setRole.isPending}
-                          onChange={(e) => changeRole(user.id, e.target.value as UserRole)}
-                          className={cn(
-                            "rounded-[var(--radius-base)] border border-border bg-background px-2.5 py-1.5 text-sm",
-                            "focus:outline-none focus:ring-2 focus:ring-[var(--ring)] disabled:opacity-60",
-                          )}
-                          aria-label={t("role")}
-                        >
-                          {ROLES.map((r) => (
-                            <option key={r} value={r}>
-                              {t(`roles.${r}`)}
-                            </option>
-                          ))}
-                        </select>
-                      </TableCell>
-                      <TableCell>
-                        <StatusBadge status={user.status} label={t(`filter.${user.status}`)} />
-                      </TableCell>
-                      <TableCell className="whitespace-nowrap text-muted-foreground">
-                        {new Date(user.created_at).toLocaleDateString(locale, { dateStyle: "medium" })}
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex justify-end">
-                          {!isSelf && (
-                            <BrandedButton
-                              size="sm"
-                              variant="outline"
-                              disabled={setStatus.isPending}
-                              onClick={() => toggleSuspend(user.id, suspended)}
-                              className={suspended ? "" : "border-destructive/40 text-destructive hover:bg-destructive/5"}
-                            >
-                              {suspended ? t("reactivate") : t("suspend")}
-                            </BrandedButton>
-                          )}
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </div>
-        )}
-      </BrandedCard>
+      {isError ? (
+        <ErrorState onRetry={() => refetch()} />
+      ) : (
+        <DataTable
+          columns={columns}
+          rows={rows}
+          rowKey={(u) => u.id}
+          isLoading={isLoading}
+          empty={
+            <EmptyState
+              compact
+              title={t("empty")}
+              description={query ? t("noSearchResults") : undefined}
+            />
+          }
+        />
+      )}
     </div>
   );
 }

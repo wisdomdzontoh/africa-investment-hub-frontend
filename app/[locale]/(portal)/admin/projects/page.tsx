@@ -9,7 +9,7 @@ import { AdminFilterTabs, type StatusFilter } from "@/components/admin/AdminFilt
 import { AdminPageHeader, ExportCsvButton, RowActionButton, SearchInput } from "@/components/admin/AdminUI";
 import { RejectDialog } from "@/components/admin/RejectDialog";
 import { StatusBadge } from "@/components/admin/StatusBadge";
-import { BrandedCard } from "@/components/brand/Card";
+import { Card } from "@/components/ds";
 import { Flag } from "@/components/common/Flag";
 import {
   Table,
@@ -75,11 +75,11 @@ export default function AdminProjectsPage() {
         <SearchInput value={query} onChange={setQuery} placeholder={t("searchProjects")} />
       </div>
 
-      <BrandedCard className="overflow-hidden">
+      <Card padding="0" hoverLift={false} className="overflow-hidden">
         {isLoading ? (
-          <p className="p-6 text-sm text-muted-foreground">{t("loading")}</p>
+          <p className="p-6 text-sm text-[var(--text-muted)]">{t("loading")}</p>
         ) : rows.length === 0 ? (
-          <p className="p-6 text-sm text-muted-foreground">{t("empty")}</p>
+          <p className="p-6 text-sm text-[var(--text-muted)]">{t("empty")}</p>
         ) : (
           <div className="overflow-x-auto">
             <Table>
@@ -145,7 +145,7 @@ export default function AdminProjectsPage() {
             </Table>
           </div>
         )}
-      </BrandedCard>
+      </Card>
     </div>
   );
 }

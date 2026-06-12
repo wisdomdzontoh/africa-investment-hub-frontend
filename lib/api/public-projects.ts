@@ -59,86 +59,106 @@ function adaptCard(c: ApiProjectCard): Project {
   };
 }
 
-async function fetchApproved(): Promise<Project[]> {
+/* --------------------- server-side query construction -------------------- */
+
+// UI sort keys → backend sort params.
+const SORT_MAP: Record<string, string> = {
+  featured: "featured",
+  "funding-desc": "funding_desc",
+  "funding-asc": "funding_asc",
+  "roi-desc": "highest_roi",
+  "views-desc": "most_viewed",
+};
+
+function buildListQuery(f: ProjectFilters): URLSearchParams {
+  const params = new URLSearchParams();
+  if (f.country) params.set("country", f.country.toUpperCase());
+  if (f.sector) params.set("sector", f.sector);
+  if (f.risk) params.set("risk_level", f.risk);
+  if (f.stage) params.set("stage", f.stage);
+  if (f.fundingType) params.set("funding_type", f.fundingType);
+  if (f.minFunding) params.set("min_funding", String(f.minFunding));
+  if (f.maxFunding) params.set("max_funding", String(f.maxFunding));
+  params.set("sort", SORT_MAP[f.sort ?? "featured"] ?? "featured");
+  return params;
+}
+
+async function fetchPage(
+  params: URLSearchParams,
+): Promise<{ items: Project[]; total: number }> {
   try {
-    const res = await fetch(`${API_BASE_URL}/v1/projects?limit=100`, {
+    const res = await fetch(`${API_BASE_URL}/v1/projects?${params}`, {
       next: { revalidate: 60 },
     });
-    if (!res.ok) return [];
-    const data = (await res.json()) as { items?: ApiProjectCard[] };
-    return (data.items ?? []).map(adaptCard);
+    if (!res.ok) return { items: [], total: 0 };
+    const data = (await res.json()) as { items?: ApiProjectCard[]; total?: number | null };
+    const items = (data.items ?? []).map(adaptCard);
+    return { items, total: data.total ?? items.length };
   } catch {
-    return [];
-  }
-}
-
-/* ----------------------- in-memory filter / sort ------------------------ */
-
-function applyFilters(all: Project[], f: ProjectFilters): Project[] {
-  return all.filter((p) => {
-    if (f.country && p.countryCode !== f.country) return false;
-    if (f.sector && p.sectorId !== f.sector) return false;
-    if (f.risk && p.risk !== f.risk) return false;
-    if (f.stage && p.stage !== f.stage) return false;
-    if (f.fundingType && p.fundingType !== f.fundingType) return false;
-    if (f.minFunding && p.funding < f.minFunding) return false;
-    if (f.maxFunding && p.funding > f.maxFunding) return false;
-    return true;
-  });
-}
-
-function sortProjects(items: Project[], sort?: ProjectFilters["sort"]): Project[] {
-  const copy = [...items];
-  switch (sort) {
-    case "funding-desc":
-      return copy.sort((a, b) => b.funding - a.funding);
-    case "funding-asc":
-      return copy.sort((a, b) => a.funding - b.funding);
-    case "roi-desc":
-      return copy.sort((a, b) => b.roiMax - a.roiMax);
-    case "views-desc":
-      return copy.sort((a, b) => b.views - a.views);
-    case "featured":
-    default:
-      return copy.sort((a, b) => Number(b.featured) - Number(a.featured));
+    return { items: [], total: 0 };
   }
 }
 
 /* ------------------------------- exports -------------------------------- */
 
+/** Filtering, sorting, and pagination all run in the backend query —
+ *  one fetch per page, no in-memory post-processing (FE-01). */
 export async function getLiveProjects(
   filters: ProjectFilters = {},
 ): Promise<PaginatedResult<Project>> {
   const page = filters.page ?? 1;
   const pageSize = filters.pageSize ?? 6;
-  const all = await fetchApproved();
-  const filtered = sortProjects(applyFilters(all, filters), filters.sort);
-  const total = filtered.length;
+  const params = buildListQuery(filters);
+  params.set("page", String(page));
+  params.set("limit", String(pageSize));
+  const { items, total } = await fetchPage(params);
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
-  const start = (page - 1) * pageSize;
-  return { items: filtered.slice(start, start + pageSize), total, page, pageSize, totalPages };
+  return { items, total, page, pageSize, totalPages };
 }
 
 export async function getLiveFeaturedProjects(limit = 3): Promise<Project[]> {
-  const all = await fetchApproved();
-  const featured = all.filter((p) => p.featured);
-  return (featured.length ? featured : all).slice(0, limit);
+  const featured = new URLSearchParams({
+    featured: "true",
+    sort: "featured",
+    limit: String(limit),
+  });
+  const { items } = await fetchPage(featured);
+  if (items.length > 0) return items;
+  // No curated picks yet — fall back to the newest approved projects.
+  const newest = new URLSearchParams({ sort: "newest", limit: String(limit) });
+  return (await fetchPage(newest)).items;
 }
 
 export async function getLiveProjectsByCountry(countryCode: string): Promise<Project[]> {
-  const all = await fetchApproved();
-  return all.filter((p) => p.countryCode === countryCode.toLowerCase());
+  const params = new URLSearchParams({
+    country: countryCode.toUpperCase(),
+    sort: "newest",
+    limit: "100",
+  });
+  return (await fetchPage(params)).items;
 }
 
+/** Approved-project counts per country — served by a Redis-cached aggregate
+ *  endpoint instead of fetching every project. Keys are lowercase codes. */
 export async function countLiveProjectsByCountry(): Promise<Record<string, number>> {
-  const all = await fetchApproved();
-  const counts: Record<string, number> = {};
-  for (const p of all) counts[p.countryCode] = (counts[p.countryCode] ?? 0) + 1;
-  return counts;
+  try {
+    const res = await fetch(`${API_BASE_URL}/v1/content/project-counts`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return {};
+    const data = (await res.json()) as { counts?: Record<string, number> };
+    const counts: Record<string, number> = {};
+    for (const [code, count] of Object.entries(data.counts ?? {})) {
+      counts[code.toLowerCase()] = count;
+    }
+    return counts;
+  } catch {
+    return {};
+  }
 }
 
 /** Detail. Pass a bearer token (signed-in user) so the backend returns gated
- *  fields when the caller is an approved investor / the owner / an admin. */
+ *  fields when the caller is an approved investor / the facilitator / an admin. */
 export async function getLiveProjectDetail(
   id: string,
   token?: string | null,

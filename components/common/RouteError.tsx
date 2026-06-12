@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { BrandedButton } from "@/components/brand/Button";
+import { buttonVariants } from "@/components/ds";
 import { ErrorState } from "@/components/common/ErrorState";
 import { Link } from "@/i18n/navigation";
 
@@ -41,9 +41,12 @@ export function RouteError({
         className="w-full max-w-xl"
         onRetry={retry}
         action={
-          <BrandedButton asChild variant="outline">
-            <Link href={homeHref}>{t("goHome")}</Link>
-          </BrandedButton>
+          <Link
+            href={homeHref}
+            className={buttonVariants({ variant: "outline", size: "md" })}
+          >
+            {t("goHome")}
+          </Link>
         }
       />
     </div>

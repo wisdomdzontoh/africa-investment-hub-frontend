@@ -3,7 +3,7 @@
 import type { LucideIcon } from "lucide-react";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { BrandedButton } from "@/components/brand/Button";
+import { Button } from "@/components/ds";
 import { RowActionButton } from "@/components/admin/AdminUI";
 import {
   Dialog,
@@ -47,14 +47,14 @@ export function RejectDialog({
   return (
     <>
       {triggerLabel ? (
-        <BrandedButton
+        <Button
           variant="outline"
           disabled={pending}
           onClick={() => setOpen(true)}
-          className="border-destructive/40 text-destructive hover:bg-destructive/5"
+          className="border-[var(--ink-border-strong)] text-[var(--ink)] hover:bg-[var(--ink-hover-tint)]"
         >
           {triggerLabel}
-        </BrandedButton>
+        </Button>
       ) : (
         triggerIcon && (
           <RowActionButton
@@ -77,22 +77,17 @@ export function RejectDialog({
           onChange={(e) => setReason(e.target.value)}
           rows={4}
           placeholder={t("rejectReasonPlaceholder")}
-          className="w-full rounded-[var(--radius-base)] border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
+          className="w-full rounded-[var(--radius-md)] border border-[var(--ink-border)] bg-[var(--surface-card)] px-3 py-2.5 text-sm text-[var(--ink)] outline-none transition-[border-color,box-shadow] duration-150 ease-[ease] placeholder:text-[var(--text-muted)] focus:border-[var(--accent)] focus:shadow-[0_0_0_3px_var(--accent-tint-08)]"
         />
         <DialogFooter>
           <DialogClose asChild>
-            <BrandedButton size="sm" variant="ghost">
+            <Button size="sm" variant="outline">
               {t("cancel")}
-            </BrandedButton>
+            </Button>
           </DialogClose>
-          <BrandedButton
-            size="sm"
-            loading={pending}
-            onClick={confirm}
-            className="bg-destructive text-white hover:bg-destructive/90"
-          >
+          <Button size="sm" variant="dark" disabled={pending} onClick={confirm}>
             {t("confirmReject")}
-          </BrandedButton>
+          </Button>
         </DialogFooter>
         </DialogContent>
       </Dialog>

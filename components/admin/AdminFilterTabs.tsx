@@ -17,7 +17,7 @@ export function AdminFilterTabs({
 }) {
   const t = useTranslations("adminPortal");
   return (
-    <div className="inline-flex flex-wrap gap-1 rounded-[var(--radius-base)] border border-border bg-background p-1">
+    <div className="inline-flex flex-wrap gap-1 rounded-[var(--radius-md)] border border-[var(--accent-border)] bg-[var(--surface-card)] p-1">
       {STATUS_FILTERS.map((f) => {
         const active = filter === f;
         return (
@@ -26,10 +26,10 @@ export function AdminFilterTabs({
             type="button"
             onClick={() => onChange(f)}
             className={cn(
-              "inline-flex items-center gap-1.5 rounded-[calc(var(--radius-base)-3px)] px-3 py-1.5 text-sm transition-colors",
+              "inline-flex items-center gap-1.5 rounded-[var(--radius-sm)] px-3 py-1.5 text-sm transition-colors",
               active
-                ? "bg-[color-mix(in_srgb,var(--green-600)_14%,transparent)] font-medium text-[var(--green-700)]"
-                : "text-muted-foreground hover:text-foreground",
+                ? "bg-[var(--accent-tint-08)] font-medium text-[var(--accent)]"
+                : "text-[var(--text-muted)] hover:text-[var(--ink)]",
             )}
           >
             {t(`filter.${f}`)}
@@ -37,7 +37,7 @@ export function AdminFilterTabs({
               <span
                 className={cn(
                   "rounded-full px-1.5 text-xs font-semibold",
-                  active ? "bg-[var(--green-600)]/15 text-[var(--green-700)]" : "bg-muted text-muted-foreground",
+                  active ? "bg-[var(--accent-tint-10)] text-[var(--accent)]" : "bg-[var(--bg-section)] text-[var(--text-muted)]",
                 )}
               >
                 {counts[f]}
