@@ -331,6 +331,9 @@
       "sub": "Join a verified network of investors and project facilitators across all 54 African countries.",
       "register": "Apply as Investor",
       "submitProject": "Submit a Project"
+    },
+    "partners": {
+      "eyebrow": "Trusted by partners across the continent"
     }
   },
   "opportunities": {
@@ -974,7 +977,8 @@
       "profile": "Complete profile",
       "verification": "Verification",
       "explore": "Explore & match"
-    }
+    },
+    "exit": "Save & exit"
   },
   "pendingApproval": {
     "title": "Application under review",
@@ -1052,7 +1056,16 @@
     },
     "saving": "Saving…",
     "saveChanges": "Save changes",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "matchesEmptyTitle": "No matches yet",
+    "matchesEmptyBody": "Once our team reviews opportunities that fit your profile, your AI-matched recommendations appear here.",
+    "matchScore": "Match",
+    "expressInterest": "I'm interested",
+    "dismissMatch": "Not for me",
+    "interestRegistered": "Interest registered — our team will be in touch.",
+    "matchDismissed": "Match dismissed.",
+    "matchActionError": "Couldn't update this match. Please try again.",
+    "interestOnRecord": "Interest registered"
   },
   "facilitatorPortal": {
     "title": "Project facilitator dashboard",
@@ -1359,7 +1372,24 @@
       "noPartners": "No partners yet.",
       "partnerName": "Name",
       "partnerLogoUrl": "Logo URL",
-      "partnerWebsite": "Website"
+      "partnerWebsite": "Website",
+      "teamTitle": "Team members",
+      "teamHint": "Shown on the About page. Role and bio are per-locale.",
+      "addMember": "Add member",
+      "removeMember": "Remove member",
+      "noTeam": "No team members yet.",
+      "memberName": "Name",
+      "memberPhotoUrl": "Photo URL",
+      "memberRole": "Role",
+      "memberBio": "Short bio",
+      "advisoryTitle": "Advisory board",
+      "advisoryHint": "Shown on the About page. Role is per-locale.",
+      "addAdvisor": "Add advisor",
+      "removeAdvisor": "Remove advisor",
+      "noAdvisory": "No advisors yet.",
+      "advisorName": "Name",
+      "advisorOrg": "Organisation",
+      "advisorRole": "Role"
     },
     "submitted": "Submitted"
   },

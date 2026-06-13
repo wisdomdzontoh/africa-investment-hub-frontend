@@ -12,7 +12,19 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored Sentry tunnel/instrumentation output, Playwright artifacts.
+    "playwright-report/**",
+    "test-results/**",
   ]),
+  // Vendored shadcn/ui primitives: keep them lint-clean for real issues, but
+  // don't block CI on the strict newer hook rules they predate. They track
+  // upstream shadcn, not our conventions.
+  {
+    files: ["components/ui/**/*.{ts,tsx}"],
+    rules: {
+      "react-hooks/set-state-in-effect": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;

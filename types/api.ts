@@ -84,13 +84,36 @@ export type FacilitatorProjectDetail = ProjectDetail & {
   updated_at: string;
 };
 
+/** Project summary embedded in a match (backend `ProjectCard`). */
+export type MatchProject = {
+  id: string;
+  title: string;
+  sector: string;
+  country: string;
+  brief_description: string;
+  funding_required: string;
+  funding_type: string;
+  expected_roi_min: string | null;
+  expected_roi_max: string | null;
+  timeline_to_returns_months: number | null;
+  risk_level: string | null;
+  project_stage: string;
+  is_featured: boolean;
+  created_at: string;
+};
+
+/** Investor match with the embedded project (backend `MatchWithProject`).
+ *  `score` is a 0–1 compatibility ratio. */
 export type MatchItem = {
   id: string;
-  investor_id: string;
   project_id: string;
   status: string;
   score: number | null;
   explanation: string | null;
+  source: string;
+  is_confidential: boolean;
+  created_at: string;
+  project: MatchProject;
 };
 
 export type NotificationItem = {
@@ -253,14 +276,21 @@ export type CmsCountryUpsert = Partial<
 
 export type CmsHomepageStat = { value: string; label: LocaleText };
 export type CmsPartnerLogo = { name: string; logo_url?: string; website?: string };
+export type CmsTeamMember = {
+  name: string;
+  role?: LocaleText;
+  bio?: LocaleText;
+  photo_url?: string;
+};
+export type CmsAdvisor = { name: string; role?: LocaleText; organization?: string };
 
 export type CmsHomepageContent = {
   stats: CmsHomepageStat[];
   process_steps: Record<string, unknown>[];
   sector_highlights: Record<string, unknown>[];
   partner_logos: CmsPartnerLogo[];
-  team_members: Record<string, unknown>[];
-  advisory_board: Record<string, unknown>[];
+  team_members: CmsTeamMember[];
+  advisory_board: CmsAdvisor[];
 };
 
 export type AuditLogEntry = {

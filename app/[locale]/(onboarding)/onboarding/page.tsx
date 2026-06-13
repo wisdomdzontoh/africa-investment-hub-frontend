@@ -1,13 +1,14 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { ArrowRight, Building2, Check, Compass } from "lucide-react";
+import { ArrowRight, Building2, Check, Compass, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button, Card, SectionLabel } from "@/components/ds";
 import { Logo } from "@/components/brand/Logo";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { Link, useRouter } from "@/i18n/navigation";
 import { ApiError } from "@/lib/api/client";
 import { useSetAccountRole } from "@/lib/api/hooks";
@@ -98,20 +99,37 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-12 sm:py-16">
-      <Link href="/" className="inline-flex" aria-label="African Investment Hub home">
-        <Logo height={36} />
-      </Link>
+    <div className="flex min-h-screen flex-col bg-[var(--surface-page)]">
+      {/* Page chrome consistent with the wizard (logo · language · exit). */}
+      <header className="border-b border-[var(--accent-border)] bg-[var(--surface-header)]">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
+          <Link href="/" className="inline-flex" aria-label="African Investment Hub home">
+            <Logo height={32} />
+          </Link>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <LanguageSwitcher />
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1.5 text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--ink)]"
+            >
+              <X className="size-4" aria-hidden />
+              {t("exit")}
+            </Link>
+          </div>
+        </div>
+      </header>
 
-      <div className="mt-10">
-        <SectionLabel dot>{t("eyebrow")}</SectionLabel>
-        <h1 className="mt-3 text-balance text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold leading-[1.15] tracking-[-0.02em] text-[var(--ink)]">
-          {t("title")}
-        </h1>
-        <p className="mt-3 text-[var(--text-body)]">{t("subtitle")}</p>
-      </div>
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-10 sm:px-6 sm:py-14">
+        {/* Hero copy stays at a readable measure; cards below use the full width. */}
+        <div className="max-w-2xl">
+          <SectionLabel dot>{t("eyebrow")}</SectionLabel>
+          <h1 className="mt-3 text-balance text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold leading-[1.15] tracking-[-0.02em] text-[var(--ink)]">
+            {t("title")}
+          </h1>
+          <p className="mt-3 text-[var(--text-body)]">{t("subtitle")}</p>
+        </div>
 
-      <JourneyStrip />
+        <JourneyStrip />
 
       {resumeRole && (
         <Card
@@ -132,7 +150,7 @@ export default function OnboardingPage() {
         </Card>
       )}
 
-      <div className="mt-10 grid gap-5 sm:grid-cols-2">
+      <div className="mt-10 grid gap-6 sm:grid-cols-2">
         <Card
           hoverLift={false}
           className={cn(
@@ -203,6 +221,7 @@ export default function OnboardingPage() {
           </Button>
         </Card>
       </div>
+      </main>
     </div>
   );
 }

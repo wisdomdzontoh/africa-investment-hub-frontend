@@ -331,6 +331,9 @@
       "sub": "Rejoignez un réseau vérifié d'investisseurs et de facilitateurs de projets dans les 54 pays africains.",
       "register": "Postuler comme investisseur",
       "submitProject": "Soumettre un projet"
+    },
+    "partners": {
+      "eyebrow": "La confiance de partenaires à travers le continent"
     }
   },
   "opportunities": {
@@ -974,7 +977,8 @@
       "profile": "Compléter le profil",
       "verification": "Vérification",
       "explore": "Explorer et matcher"
-    }
+    },
+    "exit": "Enregistrer et quitter"
   },
   "adminPortal": {
     "title": "Tableau de bord admin",
@@ -1180,7 +1184,24 @@
       "noPartners": "Aucun partenaire pour l'instant.",
       "partnerName": "Nom",
       "partnerLogoUrl": "URL du logo",
-      "partnerWebsite": "Site web"
+      "partnerWebsite": "Site web",
+      "teamTitle": "Membres de l'équipe",
+      "teamHint": "Affichés sur la page À propos. Le rôle et la bio sont par langue.",
+      "addMember": "Ajouter un membre",
+      "removeMember": "Supprimer le membre",
+      "noTeam": "Aucun membre pour l'instant.",
+      "memberName": "Nom",
+      "memberPhotoUrl": "URL de la photo",
+      "memberRole": "Rôle",
+      "memberBio": "Courte bio",
+      "advisoryTitle": "Comité consultatif",
+      "advisoryHint": "Affiché sur la page À propos. Le rôle est par langue.",
+      "addAdvisor": "Ajouter un conseiller",
+      "removeAdvisor": "Supprimer le conseiller",
+      "noAdvisory": "Aucun conseiller pour l'instant.",
+      "advisorName": "Nom",
+      "advisorOrg": "Organisation",
+      "advisorRole": "Rôle"
     },
     "submitted": "Soumis le"
   },
@@ -1260,7 +1281,16 @@
     },
     "saving": "Enregistrement…",
     "saveChanges": "Enregistrer les modifications",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "matchesEmptyTitle": "Aucune correspondance pour l'instant",
+    "matchesEmptyBody": "Dès que notre équipe aura examiné les opportunités correspondant à votre profil, vos recommandations issues de l'IA apparaîtront ici.",
+    "matchScore": "Affinité",
+    "expressInterest": "Je suis intéressé",
+    "dismissMatch": "Pas pour moi",
+    "interestRegistered": "Intérêt enregistré — notre équipe vous contactera.",
+    "matchDismissed": "Correspondance écartée.",
+    "matchActionError": "Impossible de mettre à jour cette correspondance. Veuillez réessayer.",
+    "interestOnRecord": "Intérêt enregistré"
   },
   "facilitatorPortal": {
     "title": "Tableau de bord du facilitateur de projet",

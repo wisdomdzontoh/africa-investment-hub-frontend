@@ -1,5 +1,6 @@
 "use client";
 
+import * as Sentry from "@sentry/nextjs";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { buttonVariants } from "@/components/ds";
@@ -29,7 +30,7 @@ export function RouteError({
   const t = useTranslations("common");
 
   useEffect(() => {
-    // Surface to the console (Sentry picks these up in production).
+    Sentry.captureException(error);
     console.error(error);
   }, [error]);
 

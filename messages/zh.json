@@ -331,6 +331,9 @@
       "sub": "加入覆盖全部54个非洲国家的经核实投资者与项目促成者网络。",
       "register": "申请成为投资者",
       "submitProject": "提交项目"
+    },
+    "partners": {
+      "eyebrow": "深受全非洲合作伙伴信赖"
     }
   },
   "opportunities": {
@@ -974,7 +977,8 @@
       "profile": "完善档案",
       "verification": "验证审核",
       "explore": "探索与匹配"
-    }
+    },
+    "exit": "保存并退出"
   },
   "adminPortal": {
     "title": "管理员仪表板",
@@ -1180,7 +1184,24 @@
       "noPartners": "暂无合作伙伴。",
       "partnerName": "名称",
       "partnerLogoUrl": "标识图片 URL",
-      "partnerWebsite": "网站"
+      "partnerWebsite": "网站",
+      "teamTitle": "团队成员",
+      "teamHint": "显示在“关于”页面。职务和简介按语言填写。",
+      "addMember": "添加成员",
+      "removeMember": "移除成员",
+      "noTeam": "暂无团队成员。",
+      "memberName": "姓名",
+      "memberPhotoUrl": "照片 URL",
+      "memberRole": "职务",
+      "memberBio": "简短介绍",
+      "advisoryTitle": "顾问委员会",
+      "advisoryHint": "显示在“关于”页面。职务按语言填写。",
+      "addAdvisor": "添加顾问",
+      "removeAdvisor": "移除顾问",
+      "noAdvisory": "暂无顾问。",
+      "advisorName": "姓名",
+      "advisorOrg": "机构",
+      "advisorRole": "职务"
     },
     "submitted": "提交于"
   },
@@ -1260,7 +1281,16 @@
     },
     "saving": "保存中…",
     "saveChanges": "保存修改",
-    "cancel": "取消"
+    "cancel": "取消",
+    "matchesEmptyTitle": "暂无匹配",
+    "matchesEmptyBody": "当我们的团队审核了符合您画像的机会后，AI 匹配的推荐将显示在此处。",
+    "matchScore": "匹配度",
+    "expressInterest": "我感兴趣",
+    "dismissMatch": "不合适",
+    "interestRegistered": "已记录您的兴趣——我们的团队将与您联系。",
+    "matchDismissed": "已忽略该匹配。",
+    "matchActionError": "无法更新该匹配，请重试。",
+    "interestOnRecord": "已记录兴趣"
   },
   "facilitatorPortal": {
     "title": "项目促进者仪表板",

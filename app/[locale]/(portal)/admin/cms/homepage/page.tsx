@@ -10,7 +10,14 @@ import { ErrorState } from "@/components/common/ErrorState";
 import { useCmsHomepage, useUpdateCmsHomepage } from "@/lib/api/hooks";
 import { ApiError } from "@/lib/api/client";
 import { cn } from "@/lib/utils";
-import type { CmsHomepageContent, CmsHomepageStat, CmsPartnerLogo, Locale } from "@/types/api";
+import type {
+  CmsAdvisor,
+  CmsHomepageContent,
+  CmsHomepageStat,
+  CmsPartnerLogo,
+  CmsTeamMember,
+  Locale,
+} from "@/types/api";
 
 const LOCALES: Locale[] = ["en", "fr", "zh"];
 
@@ -41,6 +48,8 @@ function HomepageEditor({ content }: { content: CmsHomepageContent }) {
 
   const [stats, setStats] = useState<CmsHomepageStat[]>(content.stats ?? []);
   const [partners, setPartners] = useState<CmsPartnerLogo[]>(content.partner_logos ?? []);
+  const [team, setTeam] = useState<CmsTeamMember[]>(content.team_members ?? []);
+  const [advisory, setAdvisory] = useState<CmsAdvisor[]>(content.advisory_board ?? []);
   const [activeLocale, setActiveLocale] = useState<Locale>("en");
 
   async function save() {
@@ -48,6 +57,8 @@ function HomepageEditor({ content }: { content: CmsHomepageContent }) {
       await update.mutateAsync({
         stats: stats.filter((s) => s.value.trim() !== ""),
         partner_logos: partners.filter((p) => p.name.trim() !== ""),
+        team_members: team.filter((m) => m.name.trim() !== ""),
+        advisory_board: advisory.filter((a) => a.name.trim() !== ""),
       });
       toast.success(t("cms.savedToast"));
     } catch (err) {
@@ -251,6 +262,219 @@ function HomepageEditor({ content }: { content: CmsHomepageContent }) {
                     onClick={() => setPartners((prev) => prev.filter((_, j) => j !== i))}
                     aria-label={t("cms.removePartner")}
                     title={t("cms.removePartner")}
+                    className="mb-1 grid size-9 place-items-center rounded-[var(--radius-md)] border border-[var(--ink-border)] text-[var(--text-muted)] transition-colors hover:border-[var(--p-danger)] hover:text-[var(--p-danger)]"
+                  >
+                    <Trash2 className="size-4" aria-hidden />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </Card>
+
+        {/* Team members — name fixed; role/bio are per-locale (About page). */}
+        <Card hoverLift={false} padding="20px">
+          <div className="mb-4 flex items-center justify-between">
+            <div>
+              <h2 className="text-[var(--text-card-title-size)] font-semibold text-[var(--ink)]">
+                {t("cms.teamTitle")}
+              </h2>
+              <p className="mt-1 text-xs text-[var(--text-muted)]">{t("cms.teamHint")}</p>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1.5"
+              onClick={() => setTeam((m) => [...m, { name: "" }])}
+            >
+              <Plus className="size-3.5" aria-hidden />
+              {t("cms.addMember")}
+            </Button>
+          </div>
+          {team.length === 0 ? (
+            <p className="text-sm text-[var(--text-muted)]">{t("cms.noTeam")}</p>
+          ) : (
+            <div className="grid gap-3">
+              {team.map((member, i) => (
+                <div
+                  key={i}
+                  className="rounded-[var(--radius-md)] border border-[var(--accent-border)] p-3"
+                >
+                  <div className="grid items-end gap-3 sm:grid-cols-[1fr_1fr_auto]">
+                    <div>
+                      <label htmlFor={`member-${i}-name`} className={labelClass}>
+                        {t("cms.memberName")}
+                      </label>
+                      <input
+                        id={`member-${i}-name`}
+                        className={controlClass}
+                        value={member.name}
+                        onChange={(e) =>
+                          setTeam((prev) =>
+                            prev.map((m, j) => (j === i ? { ...m, name: e.target.value } : m)),
+                          )
+                        }
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor={`member-${i}-photo`} className={labelClass}>
+                        {t("cms.memberPhotoUrl")}
+                      </label>
+                      <input
+                        id={`member-${i}-photo`}
+                        type="url"
+                        placeholder="https://"
+                        className={controlClass}
+                        value={member.photo_url ?? ""}
+                        onChange={(e) =>
+                          setTeam((prev) =>
+                            prev.map((m, j) =>
+                              j === i ? { ...m, photo_url: e.target.value } : m,
+                            ),
+                          )
+                        }
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setTeam((prev) => prev.filter((_, j) => j !== i))}
+                      aria-label={t("cms.removeMember")}
+                      title={t("cms.removeMember")}
+                      className="mb-1 grid size-9 place-items-center rounded-[var(--radius-md)] border border-[var(--ink-border)] text-[var(--text-muted)] transition-colors hover:border-[var(--p-danger)] hover:text-[var(--p-danger)]"
+                    >
+                      <Trash2 className="size-4" aria-hidden />
+                    </button>
+                  </div>
+                  <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                    <div>
+                      <label htmlFor={`member-${i}-role`} className={labelClass}>
+                        {t("cms.memberRole")} ({activeLocale.toUpperCase()})
+                      </label>
+                      <input
+                        id={`member-${i}-role`}
+                        className={controlClass}
+                        value={member.role?.[activeLocale] ?? ""}
+                        onChange={(e) =>
+                          setTeam((prev) =>
+                            prev.map((m, j) =>
+                              j === i
+                                ? { ...m, role: { ...m.role, [activeLocale]: e.target.value } }
+                                : m,
+                            ),
+                          )
+                        }
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor={`member-${i}-bio`} className={labelClass}>
+                        {t("cms.memberBio")} ({activeLocale.toUpperCase()})
+                      </label>
+                      <input
+                        id={`member-${i}-bio`}
+                        className={controlClass}
+                        value={member.bio?.[activeLocale] ?? ""}
+                        onChange={(e) =>
+                          setTeam((prev) =>
+                            prev.map((m, j) =>
+                              j === i
+                                ? { ...m, bio: { ...m.bio, [activeLocale]: e.target.value } }
+                                : m,
+                            ),
+                          )
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </Card>
+
+        {/* Advisory board — name + organization fixed; role per-locale. */}
+        <Card hoverLift={false} padding="20px">
+          <div className="mb-4 flex items-center justify-between">
+            <div>
+              <h2 className="text-[var(--text-card-title-size)] font-semibold text-[var(--ink)]">
+                {t("cms.advisoryTitle")}
+              </h2>
+              <p className="mt-1 text-xs text-[var(--text-muted)]">{t("cms.advisoryHint")}</p>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1.5"
+              onClick={() => setAdvisory((a) => [...a, { name: "" }])}
+            >
+              <Plus className="size-3.5" aria-hidden />
+              {t("cms.addAdvisor")}
+            </Button>
+          </div>
+          {advisory.length === 0 ? (
+            <p className="text-sm text-[var(--text-muted)]">{t("cms.noAdvisory")}</p>
+          ) : (
+            <div className="grid gap-3">
+              {advisory.map((advisor, i) => (
+                <div
+                  key={i}
+                  className="grid items-end gap-3 rounded-[var(--radius-md)] border border-[var(--accent-border)] p-3 sm:grid-cols-[1fr_1fr_1fr_auto]"
+                >
+                  <div>
+                    <label htmlFor={`advisor-${i}-name`} className={labelClass}>
+                      {t("cms.advisorName")}
+                    </label>
+                    <input
+                      id={`advisor-${i}-name`}
+                      className={controlClass}
+                      value={advisor.name}
+                      onChange={(e) =>
+                        setAdvisory((prev) =>
+                          prev.map((a, j) => (j === i ? { ...a, name: e.target.value } : a)),
+                        )
+                      }
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor={`advisor-${i}-org`} className={labelClass}>
+                      {t("cms.advisorOrg")}
+                    </label>
+                    <input
+                      id={`advisor-${i}-org`}
+                      className={controlClass}
+                      value={advisor.organization ?? ""}
+                      onChange={(e) =>
+                        setAdvisory((prev) =>
+                          prev.map((a, j) =>
+                            j === i ? { ...a, organization: e.target.value } : a,
+                          ),
+                        )
+                      }
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor={`advisor-${i}-role`} className={labelClass}>
+                      {t("cms.advisorRole")} ({activeLocale.toUpperCase()})
+                    </label>
+                    <input
+                      id={`advisor-${i}-role`}
+                      className={controlClass}
+                      value={advisor.role?.[activeLocale] ?? ""}
+                      onChange={(e) =>
+                        setAdvisory((prev) =>
+                          prev.map((a, j) =>
+                            j === i
+                              ? { ...a, role: { ...a.role, [activeLocale]: e.target.value } }
+                              : a,
+                          ),
+                        )
+                      }
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setAdvisory((prev) => prev.filter((_, j) => j !== i))}
+                    aria-label={t("cms.removeAdvisor")}
+                    title={t("cms.removeAdvisor")}
                     className="mb-1 grid size-9 place-items-center rounded-[var(--radius-md)] border border-[var(--ink-border)] text-[var(--text-muted)] transition-colors hover:border-[var(--p-danger)] hover:text-[var(--p-danger)]"
                   >
                     <Trash2 className="size-4" aria-hidden />

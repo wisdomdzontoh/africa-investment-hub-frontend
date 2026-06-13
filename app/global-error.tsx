@@ -1,5 +1,6 @@
 "use client";
 
+import * as Sentry from "@sentry/nextjs";
 import { useEffect } from "react";
 
 // Root-level error boundary. It replaces the entire root layout, so neither
@@ -15,6 +16,7 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
+    Sentry.captureException(error);
     console.error(error);
   }, [error]);
 
@@ -95,6 +97,10 @@ export default function GlobalError({
             >
               Try again
             </button>
+            {/* global-error replaces the root layout and renders outside the
+                router/provider tree, so next/link's <Link> can't be used here —
+                a full-document navigation is intentional. */}
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a
               href="/"
               style={{

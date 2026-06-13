@@ -209,11 +209,30 @@ export function useDeleteProjectDocument() {
   });
 }
 
-export function useInvestorMatches() {
+export function useInvestorMatches(enabled = true) {
   const api = useApiClient();
   return useQuery({
     queryKey: ["investor", "matches"],
     queryFn: () => api.get<Page<MatchItem>>("/investors/me/matches"),
+    enabled,
+  });
+}
+
+export function useExpressInterest() {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (matchId: string) => api.post(`/matches/${matchId}/interest`),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["investor", "matches"] }),
+  });
+}
+
+export function useDismissMatch() {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (matchId: string) => api.post(`/matches/${matchId}/dismiss`),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["investor", "matches"] }),
   });
 }
 

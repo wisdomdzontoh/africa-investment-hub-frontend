@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withSentryConfig } from "@sentry/nextjs";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
@@ -65,4 +66,21 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withNextIntl(nextConfig);
+// Source-map upload only runs when Sentry credentials are present (prod CD),
+// so local and CI builds stay clean and offline-friendly (FE-16).
+const sentryEnabled = Boolean(
+  process.env.SENTRY_AUTH_TOKEN && process.env.SENTRY_ORG && process.env.SENTRY_PROJECT,
+);
+
+export default withSentryConfig(withNextIntl(nextConfig), {
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  silent: !process.env.CI,
+  // Skip source-map upload entirely without credentials.
+  sourcemaps: { disable: !sentryEnabled },
+  // Route Sentry's browser requests through a same-origin path to dodge ad
+  // blockers (tunneling). Safe no-op when Sentry is disabled.
+  tunnelRoute: "/monitoring",
+  disableLogger: true,
+  telemetry: false,
+});
