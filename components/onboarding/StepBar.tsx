@@ -36,9 +36,9 @@ export function StepBar({ steps, current, onJump }: Props) {
                   className={cn(
                     "grid size-8 shrink-0 place-items-center rounded-full border text-sm font-semibold transition-colors",
                     state === "done" &&
-                      "border-[var(--green-600)] bg-[var(--green-600)] text-white",
+                      "border-[var(--accent)] bg-[var(--accent)] text-white",
                     state === "active" &&
-                      "border-[var(--green-600)] bg-[color-mix(in_srgb,var(--green-600)_12%,transparent)] text-[var(--green-700)]",
+                      "border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] text-[var(--accent)]",
                     state === "todo" && "border-border bg-background text-muted-foreground",
                   )}
                 >
@@ -57,7 +57,7 @@ export function StepBar({ steps, current, onJump }: Props) {
                 <span
                   className={cn(
                     "mx-3 h-px flex-1 transition-colors",
-                    i < current ? "bg-[var(--green-600)]" : "bg-border",
+                    i < current ? "bg-[var(--accent)]" : "bg-border",
                   )}
                 />
               )}
@@ -78,7 +78,7 @@ export function StepBar({ steps, current, onJump }: Props) {
         </div>
         <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-border">
           <div
-            className="h-full rounded-full bg-[var(--green-600)] transition-all duration-300"
+            className="h-full rounded-full bg-[var(--accent)] transition-all duration-300"
             style={{ width: `${Math.max(pct, 8)}%` }}
           />
         </div>

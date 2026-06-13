@@ -9,7 +9,7 @@ export default async function SignInPage({
 }) {
   const { locale } = await params;
   return (
-    <AuthShell>
+    <AuthShell mode="sign-in">
       <SignIn
         appearance={clerkAppearance}
         routing="path"

@@ -84,24 +84,33 @@ export default async function OpportunityDetailPage({
             </Card>
           ) : (
             <Card padding="0" hoverLift={false} className="relative overflow-hidden">
-              <div className="p-8 blur-[5px] select-none" aria-hidden>
-                <p className="text-[var(--text-sm)] leading-relaxed text-[var(--text-muted)]">
-                  Detailed project documentation including financial models, legal
-                  structure, management team credentials, and third-party
-                  verification reports are available to verified investors.
-                </p>
+              {/* Decorative blurred "document" lines fill the card behind the
+                  locked panel. */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 select-none space-y-2.5 p-8 blur-[6px]"
+              >
+                {[92, 84, 96, 78, 88, 70].map((w, i) => (
+                  <div
+                    key={i}
+                    className="h-3 rounded-full bg-[var(--bg-section)]"
+                    style={{ width: `${w}%` }}
+                  />
+                ))}
               </div>
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[color-mix(in_srgb,var(--surface-card)_72%,transparent)] p-6 text-center backdrop-blur-[2px]">
+              {/* Locked panel is in-flow with a min-height, so the card grows to
+                  fit it and the CTA buttons are never clipped. */}
+              <div className="relative z-10 flex min-h-[240px] flex-col items-center justify-center gap-3 bg-[color-mix(in_srgb,var(--surface-card)_78%,transparent)] p-8 text-center backdrop-blur-[2px]">
                 <span className="flex size-11 items-center justify-center rounded-[var(--radius-icon)] bg-[var(--accent-tint-08)] text-[var(--accent)]">
                   <Lock size={18} aria-hidden />
                 </span>
                 {signedIn ? (
-                  <p className="max-w-xs text-[var(--text-sm)] text-[var(--text-muted)]">
+                  <p className="max-w-sm text-[var(--text-sm)] leading-relaxed text-[var(--text-muted)]">
                     {t("pendingDetail")}
                   </p>
                 ) : (
                   <>
-                    <p className="max-w-xs text-[var(--text-sm)] text-[var(--text-muted)]">
+                    <p className="max-w-sm text-[var(--text-sm)] leading-relaxed text-[var(--text-muted)]">
                       {t("guestDetail")}
                     </p>
                     <div className="mt-1 flex flex-wrap justify-center gap-2">

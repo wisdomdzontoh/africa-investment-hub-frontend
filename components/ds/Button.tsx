@@ -13,7 +13,7 @@ const buttonVariants = cva(
           "border-[1.5px] border-[var(--ink)] bg-transparent text-[var(--ink)] hover:bg-[var(--ink-hover-tint)]",
         dark: "border-none bg-[var(--ink)] text-white hover:bg-[var(--accent)]",
         accentOutline:
-          "border-[1.5px] border-[var(--accent)] bg-transparent text-[var(--accent)] hover:bg-[var(--accent-tint-06)]",
+          "border-[1.5px] border-[var(--accent)] bg-transparent text-[var(--accent)] hover:border-[var(--accent-bright)] hover:bg-[var(--accent-tint-06)] hover:text-[var(--accent-bright)]",
         onDark:
           "border-[1.5px] border-[var(--on-dark-border)] bg-transparent text-[var(--on-dark)] hover:border-[color-mix(in_srgb,var(--on-dark)_70%,transparent)] hover:bg-[color-mix(in_srgb,var(--on-dark)_8%,transparent)]",
       },

@@ -1,15 +1,16 @@
 "use client";
 
-import { Check, Eye, X } from "lucide-react";
+import { Check, Eye, Plus, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { useRouter } from "@/i18n/navigation";
 import { AdminFilterTabs, type StatusFilter } from "@/components/admin/AdminFilterTabs";
 import { AdminPageHeader, ExportCsvButton, RowActionButton, SearchInput } from "@/components/admin/AdminUI";
+import { ApproveProjectDialog } from "@/components/admin/ApproveProjectDialog";
 import { RejectDialog } from "@/components/admin/RejectDialog";
 import { StatusBadge } from "@/components/admin/StatusBadge";
-import { Card } from "@/components/ds";
+import { Button, Card } from "@/components/ds";
 import { Flag } from "@/components/common/Flag";
 import {
   Table,
@@ -53,9 +54,9 @@ export default function AdminProjectsPage() {
     );
   });
 
-  async function act(id: string, action: ProjectAction, reason?: string) {
+  async function act(id: string, action: ProjectAction, reason?: string, riskLevel?: string) {
     try {
-      await setStatus.mutateAsync({ id, action, reason });
+      await setStatus.mutateAsync({ id, action, reason, risk_level: riskLevel });
       toast.success(t(action === "approve" ? "approved" : "rejected"));
     } catch (err) {
       toast.error(err instanceof ApiError ? err.message : t("actionError"));
@@ -67,7 +68,15 @@ export default function AdminProjectsPage() {
       <AdminPageHeader
         title={t("projectsTitle")}
         subtitle={t("projectsSubtitle")}
-        action={<ExportCsvButton path="/admin/projects.csv" filename="projects.csv" />}
+        action={
+          <div className="flex items-center gap-2">
+            <Button href="/admin/projects/new" size="sm" className="gap-1.5">
+              <Plus className="size-3.5" aria-hidden />
+              {t("addProject")}
+            </Button>
+            <ExportCsvButton path="/admin/projects.csv" filename="projects.csv" />
+          </div>
+        }
       />
 
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
@@ -122,12 +131,11 @@ export default function AdminProjectsPage() {
                         />
                         {project.status === "pending" && (
                           <>
-                            <RowActionButton
-                              icon={Check}
-                              title={t("approve")}
-                              variant="approve"
-                              disabled={setStatus.isPending}
-                              onClick={() => act(project.id, "approve")}
+                            <ApproveProjectDialog
+                              triggerIcon={Check}
+                              triggerTitle={t("approve")}
+                              pending={setStatus.isPending}
+                              onConfirm={(risk) => act(project.id, "approve", undefined, risk)}
                             />
                             <RejectDialog
                               triggerIcon={X}

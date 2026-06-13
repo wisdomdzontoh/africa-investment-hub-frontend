@@ -1,16 +1,23 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Sparkles } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { AdminPageHeader } from "@/components/admin/AdminUI";
+import { ApproveProjectDialog } from "@/components/admin/ApproveProjectDialog";
 import { DetailGrid, DetailSection, DocumentList, Field } from "@/components/admin/DetailView";
 import { RejectDialog } from "@/components/admin/RejectDialog";
 import { StatusBadge } from "@/components/admin/StatusBadge";
 import { Button } from "@/components/ds";
 import { Link } from "@/i18n/navigation";
-import { useAdminProject, useSetProjectStatus, type ProjectAction } from "@/lib/api/hooks";
+import {
+  useAdminProject,
+  useDocumentDownloader,
+  useRunRiskAssessment,
+  useSetProjectStatus,
+  type ProjectAction,
+} from "@/lib/api/hooks";
 import { ApiError } from "@/lib/api/client";
 import { displayMoney } from "@/lib/onboarding/format";
 
@@ -21,11 +28,22 @@ export default function AdminProjectDetailPage() {
   const locale = useLocale();
   const { data: p, isLoading, isError } = useAdminProject(id);
   const setStatus = useSetProjectStatus();
+  const runRisk = useRunRiskAssessment(id);
+  const getDocUrl = useDocumentDownloader();
 
-  async function act(action: ProjectAction, reason?: string) {
+  async function act(action: ProjectAction, reason?: string, riskLevel?: string) {
     try {
-      await setStatus.mutateAsync({ id, action, reason });
+      await setStatus.mutateAsync({ id, action, reason, risk_level: riskLevel });
       toast.success(t(action === "approve" ? "approved" : "rejected"));
+    } catch (err) {
+      toast.error(err instanceof ApiError ? err.message : t("actionError"));
+    }
+  }
+
+  async function assessRisk() {
+    try {
+      await runRisk.mutateAsync();
+      toast.success(t("riskAssessed"));
     } catch (err) {
       toast.error(err instanceof ApiError ? err.message : t("actionError"));
     }
@@ -61,9 +79,11 @@ export default function AdminProjectDetailPage() {
                   pending={setStatus.isPending}
                   onConfirm={(reason) => act("reject", reason)}
                 />
-                <Button disabled={setStatus.isPending} onClick={() => act("approve")}>
-                  {t("approve")}
-                </Button>
+                <ApproveProjectDialog
+                  triggerLabel={t("approve")}
+                  pending={setStatus.isPending}
+                  onConfirm={(risk) => act("approve", undefined, risk)}
+                />
               </>
             )}
           </div>
@@ -106,8 +126,39 @@ export default function AdminProjectDetailPage() {
         </DetailGrid>
       </DetailSection>
 
+      <DetailSection title={t("secRiskNotes")}>
+        <DetailGrid>
+          <Field
+            label={t("fRiskLevel")}
+            value={p.risk_level ? <span className="capitalize">{p.risk_level}</span> : undefined}
+          />
+        </DetailGrid>
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={runRisk.isPending}
+            onClick={assessRisk}
+            className="gap-1.5"
+          >
+            <Sparkles className="size-3.5" aria-hidden />
+            {runRisk.isPending ? t("riskAssessing") : t("runRiskAssessment")}
+          </Button>
+          <span className="text-xs text-[var(--text-muted)]">{t("riskAdvisoryNote")}</span>
+        </div>
+        {p.admin_notes ? (
+          <pre className="mt-4 max-h-80 overflow-auto whitespace-pre-wrap rounded-[var(--radius-md)] border border-border bg-background p-3 font-mono text-xs leading-relaxed text-[var(--text-body)]">
+            {p.admin_notes}
+          </pre>
+        ) : null}
+      </DetailSection>
+
       <DetailSection title={t("secDocuments")}>
-        <DocumentList documents={p.documents} emptyLabel={t("noDocuments")} />
+        <DocumentList
+          documents={p.documents}
+          emptyLabel={t("noDocuments")}
+          onDownload={(key) => getDocUrl(`/projects/${id}/documents`, key)}
+        />
       </DetailSection>
     </div>
   );

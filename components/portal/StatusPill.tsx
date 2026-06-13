@@ -6,11 +6,14 @@ import { cn } from "@/lib/utils";
 const TONES: Record<string, string> = {
   approved: "bg-[var(--p-success-bg)] text-[var(--p-success-fg)]",
   live: "bg-[var(--p-success-bg)] text-[var(--p-success-fg)]",
+  completed: "bg-[var(--p-success-bg)] text-[var(--p-success-fg)]",
   in_review: "bg-[var(--p-info-bg)] text-[var(--p-info-fg)]",
-  pending: "bg-[var(--p-warning-bg)] text-[var(--p-warning-fg)]",
-  draft: "bg-[var(--p-warning-bg)] text-[var(--p-warning-fg)]",
+  in_progress: "bg-[var(--p-info-bg)] text-[var(--p-info-fg)]",
+  pending: "bg-[var(--p-primary-bg)] text-[var(--p-primary-fg)]",
+  draft: "bg-[var(--p-primary-bg)] text-[var(--p-primary-fg)]",
   rejected: "bg-[var(--p-danger-bg)] text-[var(--p-danger-fg)]",
   suspended: "bg-[var(--p-danger-bg)] text-[var(--p-danger-fg)]",
+  overdue: "bg-[var(--p-danger-bg)] text-[var(--p-danger-fg)]",
 };
 
 export function StatusPill({

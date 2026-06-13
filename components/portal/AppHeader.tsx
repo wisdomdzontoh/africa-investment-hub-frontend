@@ -24,7 +24,7 @@ export function AppHeader({
   );
 
   return (
-    <header className="sticky top-0 z-20 flex h-16 shrink-0 items-center gap-2 border-b border-[var(--accent-border)] bg-[color-mix(in_srgb,var(--bg-page)_88%,transparent)] px-3 backdrop-blur sm:px-4">
+    <header className="sticky top-0 z-20 flex h-16 shrink-0 items-center gap-2 border-b border-[var(--p-border)] bg-[color-mix(in_srgb,var(--p-surface)_92%,transparent)] px-3 backdrop-blur sm:px-4">
       <SidebarTrigger className="text-[var(--text-body)]" />
       <Separator orientation="vertical" className="mr-1 hidden h-5 sm:block" />
 

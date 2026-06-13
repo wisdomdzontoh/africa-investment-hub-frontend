@@ -102,9 +102,8 @@ export type MatchProject = {
   created_at: string;
 };
 
-/** Investor match with the embedded project (backend `MatchWithProject`).
- *  `score` is a 0–1 compatibility ratio. */
-export type MatchItem = {
+/** Bare match (backend `MatchOut`). `score` is a 0–1 compatibility ratio. */
+export type MatchSummary = {
   id: string;
   project_id: string;
   status: string;
@@ -113,7 +112,72 @@ export type MatchItem = {
   source: string;
   is_confidential: boolean;
   created_at: string;
+};
+
+/** Investor match with the embedded project (backend `MatchWithProject`). */
+export type MatchItem = MatchSummary & {
   project: MatchProject;
+};
+
+/** Admin matches list row (backend `AdminMatchOut`). */
+export type AdminMatch = MatchSummary & {
+  project_title: string | null;
+  investor_company: string | null;
+};
+
+/** Deal-room project view (backend `DealRoomProject`). `full_description` and
+ *  `documents` are present only when the NDA gate is unlocked. */
+export type DealRoomProject = MatchProject & {
+  executive_summary: string | null;
+  full_description: string | null;
+  documents: Document[];
+};
+
+/** Per-match deal room (backend `DealRoomOut`). */
+export type DealRoom = {
+  match: MatchSummary;
+  project: DealRoomProject;
+  nda_unlocked: boolean;
+  can_sign_nda: boolean;
+};
+
+export type DueDiligenceItemStatus = "pending" | "submitted" | "approved" | "rejected";
+
+export type DueDiligenceItem = {
+  item_id: string;
+  category: string;
+  title: string;
+  status: DueDiligenceItemStatus;
+  document_r2_key: string | null;
+  filename: string | null;
+  signed_off_at?: string | null;
+};
+
+export type DueDiligence = {
+  id: string;
+  match_id: string;
+  status: string;
+  checklist: DueDiligenceItem[];
+  created_at: string;
+  updated_at: string;
+};
+
+export type RiskAssessment = {
+  assessment: Record<string, unknown>;
+  admin_notes: string | null;
+};
+
+export type MilestoneStatus = "pending" | "in_progress" | "completed" | "overdue";
+
+export type Milestone = {
+  id: string;
+  project_id: string;
+  title: string;
+  description: string | null;
+  due_date: string | null;
+  status: MilestoneStatus;
+  created_at: string;
+  updated_at: string;
 };
 
 export type NotificationItem = {
@@ -130,6 +194,8 @@ export type AdminAnalytics = {
   projects_by_sector: Record<string, number>;
   matches_by_status: Record<string, number>;
   total_users: number;
+  total_matches: number;
+  avg_match_score: number | null;
 };
 
 export type AdminInvestor = {

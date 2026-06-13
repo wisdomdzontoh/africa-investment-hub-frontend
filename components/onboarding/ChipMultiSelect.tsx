@@ -74,8 +74,8 @@ export function ChipMultiSelect({
               className={cn(
                 "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm transition-colors",
                 on
-                  ? "border-[var(--green-600)] bg-[color-mix(in_srgb,var(--green-600)_12%,transparent)] font-medium text-[var(--green-700)]"
-                  : "border-border bg-background text-foreground hover:border-[var(--green-600)]/50",
+                  ? "border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] font-medium text-[var(--accent)]"
+                  : "border-border bg-background text-foreground hover:border-[var(--accent)]/50",
               )}
             >
               {on && <Check className="size-3.5" aria-hidden />}
@@ -91,7 +91,7 @@ export function ChipMultiSelect({
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className="mt-1 w-fit text-xs font-medium text-[var(--green-700)] hover:underline"
+          className="mt-1 w-fit text-xs font-medium text-[var(--accent)] hover:underline"
         >
           {expanded ? "Show fewer" : `Show all ${options.length}`}
         </button>

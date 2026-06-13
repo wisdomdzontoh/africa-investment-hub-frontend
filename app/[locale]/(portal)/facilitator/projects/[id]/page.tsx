@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, FileText, Pencil, Trash2, Upload } from "lucide-react";
+import { ArrowLeft, Download, FileText, Pencil, Trash2, Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
@@ -20,9 +20,10 @@ import { Button, Card } from "@/components/ds";
 import { ErrorState } from "@/components/common/ErrorState";
 import { EmptyState } from "@/components/common/EmptyState";
 import { Link } from "@/i18n/navigation";
-import { PortalPage, StatusPill } from "@/components/portal";
+import { MilestonesSection, PortalPage, StatusPill } from "@/components/portal";
 import {
   useDeleteProjectDocument,
+  useDocumentDownloader,
   useMyProject,
   useUploadProjectDocuments,
 } from "@/lib/api/hooks";
@@ -177,6 +178,8 @@ export default function ProjectDetailPage() {
       </Card>
 
       <DocumentsCard projectId={project.id} documents={project.documents} />
+
+      <MilestonesSection projectId={project.id} canManage />
     </PortalPage>
   );
 }
@@ -186,10 +189,24 @@ function DocumentsCard({ projectId, documents }: { projectId: string; documents:
   const qc = useQueryClient();
   const upload = useUploadProjectDocuments();
   const deleteDoc = useDeleteProjectDocument();
+  const getDocUrl = useDocumentDownloader();
   const fileRef = useRef<HTMLInputElement>(null);
   const [docType, setDocType] = useState<string>("business_plan");
   const [uploading, setUploading] = useState(false);
+  const [busyKey, setBusyKey] = useState<string | null>(null);
   const [pendingDelete, setPendingDelete] = useState<Document | null>(null);
+
+  async function downloadDoc(r2Key: string) {
+    setBusyKey(r2Key);
+    try {
+      const { url } = await getDocUrl(`/projects/${projectId}/documents`, r2Key);
+      window.open(url, "_blank", "noopener,noreferrer");
+    } catch (err) {
+      toast.error(err instanceof ApiError ? err.message : t("docs.downloadError"));
+    } finally {
+      setBusyKey(null);
+    }
+  }
 
   async function onFileSelected(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -294,16 +311,28 @@ function DocumentsCard({ projectId, documents }: { projectId: string; documents:
                   </p>
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={() => setPendingDelete(doc)}
-                disabled={deleteDoc.isPending}
-                aria-label={t("docs.delete")}
-                title={t("docs.delete")}
-                className="grid size-8 shrink-0 place-items-center rounded-[var(--radius-md)] border border-[var(--ink-border)] text-[var(--text-muted)] transition-colors hover:border-[var(--p-danger)] hover:text-[var(--p-danger)] disabled:opacity-50"
-              >
-                <Trash2 className="size-4" aria-hidden />
-              </button>
+              <div className="flex shrink-0 items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => downloadDoc(doc.r2_key)}
+                  disabled={busyKey === doc.r2_key}
+                  aria-label={t("docs.download")}
+                  title={t("docs.download")}
+                  className="grid size-8 place-items-center rounded-[var(--radius-md)] border border-[var(--ink-border)] text-[var(--text-muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] disabled:opacity-50"
+                >
+                  <Download className="size-4" aria-hidden />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPendingDelete(doc)}
+                  disabled={deleteDoc.isPending}
+                  aria-label={t("docs.delete")}
+                  title={t("docs.delete")}
+                  className="grid size-8 place-items-center rounded-[var(--radius-md)] border border-[var(--ink-border)] text-[var(--text-muted)] transition-colors hover:border-[var(--p-danger)] hover:text-[var(--p-danger)] disabled:opacity-50"
+                >
+                  <Trash2 className="size-4" aria-hidden />
+                </button>
+              </div>
             </li>
           ))}
         </ul>

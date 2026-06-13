@@ -1,5 +1,6 @@
 "use client";
 
+import { UserPlus } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
@@ -9,8 +10,17 @@ import { EmptyState } from "@/components/common/EmptyState";
 import { ErrorState } from "@/components/common/ErrorState";
 import { DataTable, StatusPill, type Column } from "@/components/portal";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
   useAccount,
   useAdminUsers,
+  useInviteAdmin,
   useSetUserRole,
   useSetUserStatus,
 } from "@/lib/api/hooks";
@@ -129,7 +139,11 @@ export default function AdminUsersPage() {
 
   return (
     <div>
-      <AdminPageHeader title={t("usersTitle")} subtitle={t("usersSubtitle")} />
+      <AdminPageHeader
+        title={t("usersTitle")}
+        subtitle={t("usersSubtitle")}
+        action={<InviteAdminDialog />}
+      />
 
       <div className="mb-4 flex justify-end">
         <SearchInput value={query} onChange={setQuery} placeholder={t("searchUsers")} />
@@ -153,5 +167,68 @@ export default function AdminUsersPage() {
         />
       )}
     </div>
+  );
+}
+
+/** Invite a new administrator by email (Clerk invitation, role=admin). */
+function InviteAdminDialog() {
+  const t = useTranslations("adminPortal");
+  const invite = useInviteAdmin();
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email.trim()) return;
+    try {
+      await invite.mutateAsync(email.trim());
+      toast.success(t("inviteSent"));
+      setEmail("");
+      setOpen(false);
+    } catch (err) {
+      toast.error(err instanceof ApiError ? err.message : t("actionError"));
+    }
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <Button size="sm" className="gap-1.5" onClick={() => setOpen(true)}>
+        <UserPlus className="size-3.5" aria-hidden />
+        {t("inviteAdmin")}
+      </Button>
+      <DialogContent>
+        <form onSubmit={submit}>
+          <DialogHeader>
+            <DialogTitle>{t("inviteAdminTitle")}</DialogTitle>
+            <DialogDescription>{t("inviteAdminBody")}</DialogDescription>
+          </DialogHeader>
+          <div className="py-4">
+            <label
+              htmlFor="invite-email"
+              className="mb-1.5 block font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-muted)]"
+            >
+              {t("inviteEmail")}
+            </label>
+            <input
+              id="invite-email"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="name@example.com"
+              className="w-full rounded-[var(--radius-md)] border border-[var(--ink-border)] bg-[var(--surface-card)] px-3.5 py-2.5 text-sm text-[var(--ink)] outline-none focus:border-[var(--accent)] focus:shadow-[0_0_0_3px_var(--accent-tint-08)]"
+            />
+          </div>
+          <DialogFooter>
+            <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+              {t("cancel")}
+            </Button>
+            <Button type="submit" disabled={invite.isPending || !email.trim()}>
+              {invite.isPending ? t("inviteSending") : t("inviteSend")}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }

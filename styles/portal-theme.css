@@ -1,76 +1,125 @@
 /* African Investment Hub — Portal theme layer
-   Scoped to `.portal` (the authenticated app shell sets this class) so the
-   marketing site keeps the strict terracotta-only DS. Adds a functional
-   semantic palette (success/warning/info/danger) + a LIGHT shadcn sidebar.
-   Hues are warm/desaturated to harmonise with cream + terracotta. */
+   Scoped to `.portal` so marketing keeps the cream DS. Portal uses grayish-white
+   surfaces (auth-inspired dot canvas, light mode) with terracotta red as primary. */
 
 .portal {
-  /* ── Brand (identity — unchanged) ───────────────────────── */
+  /* ── Brand / primary (auth terracotta red) ──────────────── */
   --p-primary: #c0392b;
   --p-primary-bright: #e74c3c;
+  --p-primary-hover: #e67e22;
   --p-primary-fg: #9a2d22;
-  --p-primary-bg: rgba(192, 57, 43, 0.10);
-  --p-primary-border: rgba(192, 57, 43, 0.22);
+  --p-primary-bg: rgba(192, 57, 43, 0.08);
+  --p-primary-border: rgba(192, 57, 43, 0.18);
 
-  /* ── Success — warm emerald ─────────────────────────────── */
-  --p-success: #1f8a5b;
-  --p-success-fg: #146c46;
-  --p-success-bg: rgba(31, 138, 91, 0.12);
-  --p-success-border: rgba(31, 138, 91, 0.30);
-
-  /* ── Warning — amber ────────────────────────────────────── */
-  --p-warning: #e08a00;
-  --p-warning-fg: #9a5b00;
-  --p-warning-bg: rgba(224, 138, 0, 0.13);
-  --p-warning-border: rgba(224, 138, 0, 0.32);
-
-  /* ── Info — denim blue ──────────────────────────────────── */
-  --p-info: #2d7dd2;
-  --p-info-fg: #1e5fa8;
-  --p-info-bg: rgba(45, 125, 210, 0.12);
-  --p-info-border: rgba(45, 125, 210, 0.30);
-
-  /* ── Danger — true red (distinct from terracotta accent) ── */
-  --p-danger: #c62828;
-  --p-danger-fg: #9b1c1c;
-  --p-danger-bg: rgba(198, 40, 40, 0.10);
-  --p-danger-border: rgba(198, 40, 40, 0.28);
-
-  /* ── App surfaces ───────────────────────────────────────── */
+  /* ── Surfaces (grayish-white ramp) ──────────────────────── */
   --p-surface: #ffffff;
-  --p-canvas: var(--bg-page);
-  --p-muted: var(--bg-section);
-  --p-border: var(--accent-border);
+  --p-canvas: #f5f4f3;
+  --p-muted: #eeedec;
+  --p-subtle: #e6e5e4;
+  --p-border: rgba(26, 26, 26, 0.09);
+  --p-border-strong: rgba(26, 26, 26, 0.14);
   --p-text: var(--ink);
   --p-text-muted: var(--text-muted);
 
-  /* ── Gradients (portal-only flourish) ───────────────────── */
+  /* ── Success ─────────────────────────────────────────────── */
+  --p-success: #1f8a5b;
+  --p-success-fg: #146c46;
+  --p-success-bg: rgba(31, 138, 91, 0.10);
+  --p-success-border: rgba(31, 138, 91, 0.26);
+
+  /* ── Warning (functional amber — not brand orange) ───────── */
+  --p-warning: #b45309;
+  --p-warning-fg: #92400e;
+  --p-warning-bg: rgba(180, 83, 9, 0.10);
+  --p-warning-border: rgba(180, 83, 9, 0.26);
+
+  /* ── Info ────────────────────────────────────────────────── */
+  --p-info: #2d7dd2;
+  --p-info-fg: #1e5fa8;
+  --p-info-bg: rgba(45, 125, 210, 0.10);
+  --p-info-border: rgba(45, 125, 210, 0.26);
+
+  /* ── Danger ──────────────────────────────────────────────── */
+  --p-danger: #c62828;
+  --p-danger-fg: #9b1c1c;
+  --p-danger-bg: rgba(198, 40, 40, 0.08);
+  --p-danger-border: rgba(198, 40, 40, 0.24);
+
+  /* ── Gradients ───────────────────────────────────────────── */
   --p-grad-brand: linear-gradient(135deg, #c0392b 0%, #8e2b20 100%);
-  --p-grad-success: linear-gradient(135deg, rgba(31, 138, 91, 0.14), transparent 70%);
-  --p-grad-warning: linear-gradient(135deg, rgba(224, 138, 0, 0.14), transparent 70%);
-  --p-grad-info: linear-gradient(135deg, rgba(45, 125, 210, 0.14), transparent 70%);
-  --p-grad-primary: linear-gradient(135deg, rgba(192, 57, 43, 0.14), transparent 70%);
+  --p-grad-success: linear-gradient(135deg, rgba(31, 138, 91, 0.12), transparent 70%);
+  --p-grad-warning: linear-gradient(135deg, rgba(180, 83, 9, 0.10), transparent 70%);
+  --p-grad-info: linear-gradient(135deg, rgba(45, 125, 210, 0.10), transparent 70%);
+  --p-grad-primary: linear-gradient(135deg, rgba(192, 57, 43, 0.10), transparent 70%);
 
-  /* ── shadcn sidebar → LIGHT ─────────────────────────────── */
-  --sidebar: #ffffff;
-  --sidebar-foreground: var(--text-body);
-  --sidebar-primary: var(--accent);
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: var(--accent-tint-08);
-  --sidebar-accent-foreground: var(--accent);
-  --sidebar-border: var(--accent-border);
-  --sidebar-ring: var(--accent);
+  /* ── DS token overrides (portal palette wins) ────────────── */
+  --accent: var(--p-primary);
+  --accent-bright: var(--p-primary-hover);
+  --accent-tint-06: rgba(192, 57, 43, 0.06);
+  --accent-tint-08: rgba(192, 57, 43, 0.08);
+  --accent-tint-10: rgba(192, 57, 43, 0.10);
+  --accent-tint-16: rgba(192, 57, 43, 0.14);
+  --accent-border: var(--p-border);
+  --accent-border-strong: var(--p-primary-border);
+  --ink-border: var(--p-border);
+  --ink-border-strong: var(--p-border-strong);
+  --ink-hover-tint: rgba(26, 26, 26, 0.04);
 
-  /* shadcn destructive + chart palette inherit the portal ramp */
+  --bg-page: var(--p-canvas);
+  --bg-section: var(--p-muted);
+  --bg-stripe: var(--p-subtle);
+  --surface-card: var(--p-surface);
+
+  --background: var(--p-canvas);
+  --foreground: var(--ink);
+  --card: var(--p-surface);
+  --card-foreground: var(--ink);
+  --popover: var(--p-surface);
+  --primary: var(--p-primary);
+  --primary-foreground: #ffffff;
+  --secondary: var(--p-muted);
+  --muted: var(--p-muted);
+  --border: var(--p-border);
+  --input: var(--p-border);
+  --ring: var(--p-primary);
+  --brand-primary: var(--p-primary);
+  --brand-primary-hover: var(--p-primary-hover);
+
   --destructive: var(--p-danger);
   --chart-1: var(--p-primary);
   --chart-2: var(--p-info);
   --chart-3: var(--p-success);
   --chart-4: var(--p-warning);
   --chart-5: var(--ink);
+
+  /* ── shadcn sidebar (white panel on gray canvas) ─────────── */
+  --sidebar: var(--p-surface);
+  --sidebar-foreground: var(--text-body);
+  --sidebar-primary: var(--p-primary);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--p-primary-bg);
+  --sidebar-accent-foreground: var(--p-primary);
+  --sidebar-border: var(--p-border);
+  --sidebar-ring: var(--p-primary);
 }
 
-/* Dark-ready ramp (no toggle shipped yet — values prepared for next-themes). */
+/* Auth-inspired dot canvas — light grayish-white variant */
+.portal-canvas {
+  background-color: var(--p-canvas);
+  background-image:
+    radial-gradient(
+      circle at 18% 42%,
+      color-mix(in srgb, var(--p-primary) 5%, transparent) 0%,
+      transparent 52%
+    ),
+    radial-gradient(
+      circle at center,
+      color-mix(in srgb, var(--ink) 5%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: auto, 22px 22px;
+}
+
 .dark .portal {
   --p-success: #34c98a;
   --p-success-fg: #6ee0b0;
@@ -89,6 +138,8 @@
   --p-danger-bg: rgba(224, 106, 106, 0.16);
   --p-danger-border: rgba(224, 106, 106, 0.32);
   --p-surface: oklch(0.22 0.016 48);
+  --p-canvas: oklch(0.19 0.014 48);
+  --p-muted: oklch(0.24 0.016 48);
   --p-border: oklch(1 0 0 / 12%);
 
   --sidebar: oklch(0.2 0.016 48);
@@ -98,10 +149,28 @@
   --sidebar-border: oklch(1 0 0 / 12%);
 }
 
-/* ── Semantic utility classes (used by primitives) ────────── */
+/* ── Semantic utility classes ─────────────────────────────── */
 .portal .sem-success { background: var(--p-success-bg); color: var(--p-success-fg); }
 .portal .sem-warning { background: var(--p-warning-bg); color: var(--p-warning-fg); }
 .portal .sem-info { background: var(--p-info-bg); color: var(--p-info-fg); }
 .portal .sem-danger { background: var(--p-danger-bg); color: var(--p-danger-fg); }
 .portal .sem-primary { background: var(--p-primary-bg); color: var(--p-primary-fg); }
-.portal .sem-neutral { background: var(--bg-section); color: var(--text-muted); }
+.portal .sem-neutral { background: var(--p-muted); color: var(--p-text-muted); }
+
+/* Buttons & actions — red default, warm orange hover */
+.portal [data-slot="button"][data-variant="default"]:hover:not(:disabled) {
+  background-color: var(--p-primary-hover);
+}
+
+.portal :is(a, button).border-\[var\(--accent\)\]:hover:not(:disabled) {
+  border-color: var(--p-primary-hover);
+  color: var(--p-primary-hover);
+}
+
+.portal :is(a, button).text-\[var\(--accent\)\]:hover:not(:disabled) {
+  color: var(--p-primary-hover);
+}
+
+.portal .hover\:text-\[var\(--accent\)\]:hover:not(:disabled) {
+  color: var(--p-primary-hover);
+}

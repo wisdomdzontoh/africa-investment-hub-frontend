@@ -12,7 +12,7 @@ export const fieldControl = cn(
   "text-[var(--text-sm)] text-[var(--text-strong)] placeholder:text-[var(--text-muted)]/70",
   "shadow-[var(--shadow-xs)] transition-[border-color,box-shadow] outline-none",
   "hover:border-[var(--border-strong)]",
-  "focus-visible:border-[var(--orange)] focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--orange)_28%,transparent)]",
+  "focus-visible:border-[var(--accent)] focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--accent)_28%,transparent)]",
   "aria-[invalid=true]:border-[var(--destructive)] aria-[invalid=true]:ring-[color-mix(in_srgb,var(--destructive)_22%,transparent)]",
   "disabled:cursor-not-allowed disabled:opacity-60",
 );

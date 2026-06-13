@@ -30,11 +30,11 @@ function ReviewBanner({ status }: { status: UserStatus }) {
         "mb-6 flex items-start gap-3 rounded-[var(--radius-card)] border px-4 py-3",
         stopped
           ? "border-[var(--p-danger-border)] bg-[var(--p-danger-bg)]"
-          : "border-[var(--p-warning-border)] bg-[var(--p-warning-bg)]",
+          : "border-[var(--p-primary-border)] bg-[var(--p-primary-bg)]",
       )}
     >
       <Clock
-        className={cn("mt-0.5 size-4 shrink-0", stopped ? "text-[var(--p-danger-fg)]" : "text-[var(--p-warning-fg)]")}
+        className={cn("mt-0.5 size-4 shrink-0", stopped ? "text-[var(--p-danger-fg)]" : "text-[var(--p-primary-fg)]")}
         aria-hidden
       />
       <div>
@@ -54,10 +54,11 @@ export function PortalShell({ title, homeHref, nav, soonLabel, children }: Porta
   const showBanner = !!account && account.role !== "admin" && account.status !== "approved";
 
   return (
-    <div className="portal">
-      <SidebarProvider>
+    <div className="portal relative min-h-svh">
+      <div aria-hidden className="portal-canvas pointer-events-none absolute inset-0" />
+      <SidebarProvider className="relative z-[1] min-h-svh">
         <AppSidebar homeHref={homeHref} title={title} nav={nav} soonLabel={soonLabel} />
-        <SidebarInset className="bg-[var(--bg-page)]">
+        <SidebarInset className="bg-transparent">
           <AppHeader title={title} homeHref={homeHref} nav={nav} />
           <main className="min-w-0 flex-1 px-4 py-6 sm:px-6 lg:px-8">
             {showBanner && account ? <ReviewBanner status={account.status} /> : null}

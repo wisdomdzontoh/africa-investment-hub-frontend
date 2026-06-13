@@ -16,7 +16,12 @@ import { RejectDialog } from "@/components/admin/RejectDialog";
 import { StatusBadge } from "@/components/admin/StatusBadge";
 import { Button } from "@/components/ds";
 import { Link } from "@/i18n/navigation";
-import { useAdminInvestor, useSetInvestorStatus, type InvestorAction } from "@/lib/api/hooks";
+import {
+  useAdminInvestor,
+  useDocumentDownloader,
+  useSetInvestorStatus,
+  type InvestorAction,
+} from "@/lib/api/hooks";
 import { ApiError } from "@/lib/api/client";
 import { displayMoney } from "@/lib/onboarding/format";
 import { worldCountryName } from "@/lib/data/world-countries";
@@ -27,6 +32,7 @@ export default function AdminInvestorDetailPage() {
   const t = useTranslations("adminPortal");
   const locale = useLocale();
   const { data: inv, isLoading, isError } = useAdminInvestor(id);
+  const getDocUrl = useDocumentDownloader();
   const setStatus = useSetInvestorStatus();
 
   async function act(action: InvestorAction, reason?: string) {
@@ -141,7 +147,11 @@ export default function AdminInvestorDetailPage() {
       )}
 
       <DetailSection title={t("secDocuments")}>
-        <DocumentList documents={inv.documents} emptyLabel={t("noDocuments")} />
+        <DocumentList
+          documents={inv.documents}
+          emptyLabel={t("noDocuments")}
+          onDownload={(key) => getDocUrl(`/admin/investors/${id}/documents`, key)}
+        />
       </DetailSection>
     </div>
   );

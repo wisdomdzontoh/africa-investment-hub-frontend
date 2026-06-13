@@ -137,6 +137,9 @@ function MatchCard({ match }: { match: MatchItem }) {
       ) : null}
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
+        <Button href={`/investor/matches/${match.id}`} size="sm">
+          {t("openDealRoom")}
+        </Button>
         <Button href={`/opportunities/${match.project_id}`} variant="outline" size="sm">
           {t("viewProject")}
         </Button>

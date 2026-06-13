@@ -39,8 +39,8 @@ export function RadioSegment({ name, label, required, hint, options }: Props) {
               className={cn(
                 "inline-flex items-center justify-center gap-2 rounded-[var(--radius-base)] border px-4 py-2.5 text-sm font-medium transition-colors",
                 on
-                  ? "border-[var(--green-600)] bg-[color-mix(in_srgb,var(--green-600)_12%,transparent)] text-[var(--green-700)]"
-                  : "border-border bg-background text-foreground hover:border-[var(--green-600)]/50",
+                  ? "border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] text-[var(--accent)]"
+                  : "border-border bg-background text-foreground hover:border-[var(--accent)]/50",
               )}
             >
               {Icon && <Icon className="size-4" aria-hidden />}
@@ -84,17 +84,17 @@ export function CheckGrid({ name, label, required, hint, options }: OwnershipPro
               className={cn(
                 "flex items-center gap-2.5 rounded-[var(--radius-base)] border px-3 py-2.5 text-left text-sm transition-colors",
                 on
-                  ? "border-[var(--green-600)] bg-[color-mix(in_srgb,var(--green-600)_10%,transparent)]"
-                  : "border-border bg-background hover:border-[var(--green-600)]/50",
+                  ? "border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_10%,transparent)]"
+                  : "border-border bg-background hover:border-[var(--accent)]/50",
               )}
             >
               <span
                 className={cn(
                   "grid size-4 shrink-0 place-items-center rounded-full border",
-                  on ? "border-[var(--green-600)]" : "border-border",
+                  on ? "border-[var(--accent)]" : "border-border",
                 )}
               >
-                {on && <span className="size-2 rounded-full bg-[var(--green-600)]" />}
+                {on && <span className="size-2 rounded-full bg-[var(--accent)]" />}
               </span>
               <span className="text-foreground">{o.label}</span>
             </button>

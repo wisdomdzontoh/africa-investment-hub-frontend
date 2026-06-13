@@ -58,7 +58,7 @@ export function AppSidebar({ homeHref, title, nav, soonLabel }: AppSidebarProps)
       : false;
 
   return (
-    <Sidebar collapsible="icon" className="border-[var(--accent-border)]">
+    <Sidebar collapsible="icon" className="border-[var(--p-border)] bg-[var(--p-surface)]">
       <SidebarHeader className="h-16 justify-center px-3">
         <Link
           href={homeHref}
@@ -112,7 +112,7 @@ export function AppSidebar({ homeHref, title, nav, soonLabel }: AppSidebarProps)
 
       <SidebarFooter className="group-data-[collapsible=icon]:hidden">
         {account ? (
-          <div className="flex items-center justify-between gap-2 rounded-[var(--radius-md)] border border-[var(--accent-border)] bg-[var(--bg-page)] px-3 py-2">
+          <div className="flex items-center justify-between gap-2 rounded-[var(--radius-md)] border border-[var(--p-border)] bg-[var(--p-muted)] px-3 py-2">
             <span className="truncate font-mono text-[11px] uppercase tracking-[0.06em] text-[var(--text-muted)]">
               {account.role.replace(/_/g, " ")}
             </span>

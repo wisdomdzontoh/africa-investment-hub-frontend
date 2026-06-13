@@ -106,7 +106,7 @@ export function CountryComboField({
                     )}
                   >
                     {o.label}
-                    {on && <Check className="size-4 text-[var(--green-700)]" aria-hidden />}
+                    {on && <Check className="size-4 text-[var(--accent)]" aria-hidden />}
                   </button>
                 </li>
               );

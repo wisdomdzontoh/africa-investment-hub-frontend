@@ -126,7 +126,7 @@ function QueueCard({
         padding="20px"
         className={cn(
           "flex items-center justify-between",
-          highlight && "border-[var(--p-warning)]/40 bg-[var(--p-warning-bg)]",
+          highlight && "border-[var(--p-primary-border)] bg-[var(--p-primary-bg)]",
         )}
       >
         <div>

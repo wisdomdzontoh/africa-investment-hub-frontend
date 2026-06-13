@@ -53,7 +53,7 @@ export default async function SignUpPage({
   const role = parseRole((await searchParams).role);
 
   return (
-    <AuthShell>
+    <AuthShell mode="sign-up">
       {role ? <RoleIntentBanner role={role} /> : null}
       <SignUp
         appearance={clerkAppearance}

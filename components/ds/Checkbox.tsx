@@ -21,14 +21,19 @@ export function Checkbox({
         "inline-flex cursor-pointer select-none items-center gap-2.5",
         className,
       )}
-      onClick={(e) => {
-        e.preventDefault();
-        onChange?.(!checked);
-      }}
     >
+      {/* Real checkbox drives keyboard + screen-reader semantics; the span is
+          a visual proxy. */}
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange?.(e.target.checked)}
+        className="peer sr-only"
+      />
       <span
         className={cn(
           "inline-flex size-[18px] shrink-0 items-center justify-center rounded-[var(--radius-badge)] border-[1.5px] text-xs font-bold leading-none transition-[background,border-color] duration-150 ease-[ease]",
+          "peer-focus-visible:ring-2 peer-focus-visible:ring-[var(--accent)] peer-focus-visible:ring-offset-2",
           checked
             ? "border-[var(--accent)] bg-[var(--accent)] text-white"
             : "border-[var(--ink-border)] bg-[var(--surface-card)] text-transparent",

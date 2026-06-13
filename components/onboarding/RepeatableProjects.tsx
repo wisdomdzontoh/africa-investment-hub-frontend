@@ -91,7 +91,7 @@ export function RepeatableProjects({
         <button
           type="button"
           onClick={() => append({ project_name: "", country: "", sector: "", year: undefined })}
-          className="inline-flex w-fit items-center gap-1.5 text-sm font-medium text-[var(--green-700)] hover:underline"
+          className="inline-flex w-fit items-center gap-1.5 text-sm font-medium text-[var(--accent)] hover:underline"
         >
           <Plus className="size-4" aria-hidden /> {addLabel}
         </button>

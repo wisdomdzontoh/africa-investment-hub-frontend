@@ -190,7 +190,7 @@ function WizardInner<T extends FieldValues>({
             />
             <div className="rounded-[var(--radius-base)] border border-border bg-card p-5 sm:p-7">
               <div className="mb-5">
-                <span className="inline-block rounded-full bg-[color-mix(in_srgb,var(--green-600)_12%,transparent)] px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-[var(--green-700)]">
+                <span className="inline-block rounded-full bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-[var(--accent)]">
                   {t("section")} {step.badge}
                 </span>
                 <h1 className="mt-2 font-display text-xl font-semibold text-[var(--text-strong)]">
@@ -245,7 +245,7 @@ function SavedIndicator({
         </>
       ) : (
         <>
-          <Check className="size-3.5 text-[var(--success)]" aria-hidden /> {savedLabel}
+          <Check className="size-3.5 text-[var(--accent)]" aria-hidden /> {savedLabel}
         </>
       )}
     </span>

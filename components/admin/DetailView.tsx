@@ -1,4 +1,8 @@
-import { FileText } from "lucide-react";
+"use client";
+
+import { Download, FileText } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 import { Card } from "@/components/ds";
 import type { Document } from "@/types/api";
 
@@ -57,9 +61,35 @@ export function TagList({ items }: { items: string[] }) {
   );
 }
 
-export function DocumentList({ documents, emptyLabel }: { documents: Document[]; emptyLabel: string }) {
+export function DocumentList({
+  documents,
+  emptyLabel,
+  onDownload,
+}: {
+  documents: Document[];
+  emptyLabel: string;
+  /** Resolve a presigned download URL for a document key. When provided, each
+   *  row gets a download button. */
+  onDownload?: (r2Key: string) => Promise<{ url: string }>;
+}) {
+  const [busy, setBusy] = useState<string | null>(null);
+
   if (!documents || documents.length === 0)
     return <p className="text-sm text-muted-foreground">{emptyLabel}</p>;
+
+  async function download(r2Key: string) {
+    if (!onDownload) return;
+    setBusy(r2Key);
+    try {
+      const { url } = await onDownload(r2Key);
+      window.open(url, "_blank", "noopener,noreferrer");
+    } catch {
+      toast.error("Could not open that document. Please try again.");
+    } finally {
+      setBusy(null);
+    }
+  }
+
   return (
     <ul className="flex flex-col gap-2">
       {documents.map((doc, i) => (
@@ -72,6 +102,18 @@ export function DocumentList({ documents, emptyLabel }: { documents: Document[];
             <p className="truncate text-sm font-medium text-foreground">{doc.filename}</p>
             <p className="text-xs capitalize text-muted-foreground">{doc.type.replace(/_/g, " ")}</p>
           </div>
+          {onDownload && doc.r2_key ? (
+            <button
+              type="button"
+              onClick={() => download(doc.r2_key)}
+              disabled={busy === doc.r2_key}
+              aria-label="Download"
+              title="Download"
+              className="grid size-8 shrink-0 place-items-center rounded-[var(--radius-md)] border border-border text-muted-foreground transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] disabled:opacity-50"
+            >
+              <Download className="size-4" aria-hidden />
+            </button>
+          ) : null}
         </li>
       ))}
     </ul>

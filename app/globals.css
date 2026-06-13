@@ -70,19 +70,11 @@
 }
 
 /* ===========================================================================
-   African Investment Hub — App tokens (DS v3 + migration aliases)
-   DS source: styles/ds-tokens.css. Legacy --peach-* / --orange-* alias forward.
+   African Investment Hub — App tokens (DS v3). DS source: styles/ds-tokens.css.
+   Legacy --orange/green/teal/gold/terra/peach aliases removed (UI-02) — all
+   surfaces resolve to DS tokens directly.
    =========================================================================== */
 :root {
-  /* ---- Migration aliases (legacy names → DS tokens) ---- */
-  --orange: var(--accent);
-  --orange-deep: color-mix(in srgb, var(--accent) 78%, black);
-  --orange-strong: var(--accent-bright);
-  --orange-soft: var(--accent-tint-10);
-  --terra: var(--ink);
-  --peach-50: var(--bg-page);
-  --peach-100: var(--bg-page);
-  --peach-200: var(--bg-section);
   --ink-soft: var(--text-body);
 
   /* shadcn semantic — DS --accent (brand red) is untouched for ds/ components */
@@ -142,18 +134,12 @@
   --section-y-sm: clamp(2rem, 5vw, 3.5rem);
   --gutter: clamp(1rem, 4vw, 2rem);
 
-  --green-600: var(--accent);
-  --green-700: var(--orange-deep);
-  --teal-600: var(--accent);
-  --teal-700: var(--orange-deep);
-  --gold-300: var(--orange-soft);
-  --gold-500: var(--accent);
   --red-600: var(--destructive);
   --red-700: color-mix(in srgb, var(--destructive) 85%, black);
-  --success: var(--orange-deep);
+  --success: var(--accent);
   --warning: var(--accent-bright);
   --brand-primary: var(--accent);
-  --brand-primary-hover: var(--orange-deep);
+  --brand-primary-hover: var(--accent-bright);
 
   --text-2xs: 0.6875rem;
   --text-xs: 0.75rem;
@@ -170,10 +156,6 @@
 }
 
 .dark {
-  --orange: #d4564a; /* lifted deep-red for dark surfaces (legible on dark) */
-  --orange-deep: #b83d30;
-  --orange-soft: #3a1c18; /* deep blush — dark accent fill */
-  --terra: #e68a72; /* warm coral accent on dark */
   --ink: oklch(0.17 0.014 40);
   --ink-soft: oklch(0.24 0.016 38);
 
@@ -183,7 +165,7 @@
   --card-foreground: oklch(0.95 0.01 70);
   --popover: oklch(0.22 0.016 48);
   --popover-foreground: oklch(0.95 0.01 70);
-  --primary: var(--orange);
+  --primary: var(--accent);
   --primary-foreground: oklch(0.18 0.014 50);
   --secondary: oklch(0.27 0.016 48);
   --secondary-foreground: oklch(0.95 0.01 70);
@@ -194,7 +176,7 @@
   --destructive: oklch(0.62 0.19 32);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
-  --ring: var(--orange);
+  --ring: var(--accent);
 
   --surface-page: var(--ink);
   --surface-sunken: oklch(0.24 0.016 48);
@@ -961,4 +943,73 @@
 .input-field:focus {
   outline: 2px solid color-mix(in srgb, var(--accent) 40%, transparent);
   outline-offset: 1px;
+}
+
+/* Auth routes — Clerk SignIn/SignUp sit flush inside AuthShell's single card */
+.auth-route .auth-clerk {
+  width: 100%;
+}
+
+.auth-route .auth-clerk .cl-rootBox,
+.auth-route .auth-clerk .cl-cardBox,
+.auth-route .auth-clerk .cl-card,
+.auth-route .auth-clerk .cl-main,
+.auth-route .auth-clerk .cl-socialButtons,
+.auth-route .auth-clerk .cl-form,
+.auth-route .auth-clerk .cl-formFieldRow,
+.auth-route .auth-clerk .cl-dividerRow,
+.auth-route .auth-clerk .cl-formButtonPrimary,
+.auth-route .auth-clerk .cl-socialButtonsBlockButton {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-inline: auto;
+}
+
+.auth-route .auth-clerk .cl-cardBox,
+.auth-route .auth-clerk .cl-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+
+.auth-route .auth-clerk .cl-footer {
+  width: 100% !important;
+  text-align: center;
+}
+
+.auth-route .auth-clerk .cl-footerPages {
+  display: none !important;
+}
+
+.auth-route .auth-clerk .cl-footer,
+.auth-route .auth-clerk .cl-footerPages {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.auth-route .auth-clerk .cl-header {
+  display: none !important;
+}
+
+.auth-route .auth-clerk .cl-devModeNotice {
+  display: none !important;
+}
+
+/* ===========================================================================
+   Accessibility — honour the OS "reduce motion" preference (WCAG 2.3.3, UI-03).
+   Near-instant transitions/animations and no smooth scroll for users who ask
+   for reduced motion.
+   =========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

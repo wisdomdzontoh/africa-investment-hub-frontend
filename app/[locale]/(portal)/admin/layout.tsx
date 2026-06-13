@@ -26,8 +26,15 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         { href: "/admin", label: t("overview"), icon: LayoutDashboard, exact: true },
         { href: "/admin/investors", label: t("investors"), icon: Users },
         { href: "/admin/projects", label: t("projects"), icon: Briefcase },
+        { href: "/admin/matches", label: t("navMatches"), icon: GitMerge },
         { href: "/admin/users", label: t("users"), icon: UserCog },
         { href: "/admin/audit-log", label: t("auditLog"), icon: ScrollText },
+      ],
+    },
+    {
+      label: t("navInsights"),
+      items: [
+        { href: "/admin/analytics", label: t("navAnalytics"), icon: BarChart3 },
       ],
     },
     {
@@ -35,13 +42,6 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       items: [
         { href: "/admin/cms/countries", label: t("navCountries"), icon: Globe },
         { href: "/admin/cms/homepage", label: t("navHomepage"), icon: Home },
-      ],
-    },
-    {
-      label: t("navComingSoon"),
-      items: [
-        { label: t("navMatches"), icon: GitMerge, soon: true },
-        { label: t("navAnalytics"), icon: BarChart3, soon: true },
       ],
     },
   ];

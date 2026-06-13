@@ -15,7 +15,7 @@ type Props = {
 export function SubmittedStep({ title, description, note, continueLabel, onContinue }: Props) {
   return (
     <div className="flex flex-col items-center py-8 text-center">
-      <span className="grid size-16 place-items-center rounded-full bg-[color-mix(in_srgb,var(--green-600)_15%,transparent)] text-[var(--green-700)]">
+      <span className="grid size-16 place-items-center rounded-full bg-[color-mix(in_srgb,var(--accent)_15%,transparent)] text-[var(--accent)]">
         <CheckCircle2 className="size-9" aria-hidden />
       </span>
       <h1 className="mt-5 font-display text-2xl font-semibold text-[var(--text-strong)]">{title}</h1>

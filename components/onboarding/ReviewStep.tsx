@@ -57,7 +57,7 @@ export function ReviewStep<T extends FieldValues>({
               <button
                 type="button"
                 onClick={() => onEdit(index)}
-                className="inline-flex items-center gap-1 text-xs font-medium text-[var(--green-700)] hover:underline"
+                className="inline-flex items-center gap-1 text-xs font-medium text-[var(--accent)] hover:underline"
               >
                 <Pencil className="size-3" aria-hidden /> {editLabel}
               </button>
@@ -86,7 +86,7 @@ export function ReviewStep<T extends FieldValues>({
           type="checkbox"
           checked={consent}
           onChange={(e) => onConsentChange(e.target.checked)}
-          className="mt-0.5 size-4 accent-[var(--green-600)]"
+          className="mt-0.5 size-4 accent-[var(--accent)]"
         />
         <span className="text-sm text-foreground">{consentLabel}</span>
       </label>

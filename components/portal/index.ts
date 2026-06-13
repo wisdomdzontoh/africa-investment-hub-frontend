@@ -10,3 +10,5 @@ export { DataTable } from "./DataTable";
 export type { Column } from "./DataTable";
 export { Checklist } from "./Checklist";
 export type { ChecklistState, ChecklistStep } from "./Checklist";
+export { MilestonesSection } from "./MilestonesSection";
+export { DueDiligenceSection } from "./DueDiligenceSection";

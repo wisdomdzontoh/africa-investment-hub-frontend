@@ -9,15 +9,20 @@ import type {
   AdminAnalytics,
   AdminInvestor,
   AdminInvestorDetail,
+  AdminMatch,
   AdminProject,
   AdminProjectDetail,
   AuditLogEntry,
+  DealRoom,
+  DueDiligence,
+  RiskAssessment,
   CmsCountryContent,
   CmsCountrySummary,
   CmsCountryUpsert,
   CmsHomepageContent,
   InvestorProfile,
   MatchItem,
+  Milestone,
   NotificationItem,
   Page,
   PresignUploadResponse,
@@ -134,8 +139,11 @@ export function useUploadProjectDocuments() {
 export function useMyProjects(enabled = true) {
   const api = useApiClient();
   return useQuery({
+    // `/projects/mine` is a paginated envelope ({ items, … }); unwrap to the
+    // array the portal pages consume.
     queryKey: ["projects", "mine"],
-    queryFn: () => api.get<FacilitatorProject[]>("/projects/mine"),
+    queryFn: () => api.get<Page<FacilitatorProject>>("/projects/mine"),
+    select: (page) => page.items,
     enabled,
   });
 }
@@ -209,6 +217,49 @@ export function useDeleteProjectDocument() {
   });
 }
 
+/* ───────────────────────── Milestones (PRD §6.6) ───────────────────────── */
+
+export function useMilestones(projectId: string, enabled = true) {
+  const api = useApiClient();
+  return useQuery({
+    queryKey: ["projects", projectId, "milestones"],
+    queryFn: () => api.get<Milestone[]>(`/projects/${projectId}/milestones`),
+    enabled: enabled && Boolean(projectId),
+  });
+}
+
+export function useCreateMilestone(projectId: string) {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (body: Record<string, unknown>) =>
+      api.post<Milestone>(`/projects/${projectId}/milestones`, body),
+    onSuccess: () =>
+      qc.invalidateQueries({ queryKey: ["projects", projectId, "milestones"] }),
+  });
+}
+
+export function useUpdateMilestone(projectId: string) {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (vars: { milestoneId: string; body: Record<string, unknown> }) =>
+      api.patch<Milestone>(`/milestones/${vars.milestoneId}`, vars.body),
+    onSuccess: () =>
+      qc.invalidateQueries({ queryKey: ["projects", projectId, "milestones"] }),
+  });
+}
+
+export function useDeleteMilestone(projectId: string) {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (milestoneId: string) => api.delete(`/milestones/${milestoneId}`),
+    onSuccess: () =>
+      qc.invalidateQueries({ queryKey: ["projects", projectId, "milestones"] }),
+  });
+}
+
 export function useInvestorMatches(enabled = true) {
   const api = useApiClient();
   return useQuery({
@@ -224,6 +275,131 @@ export function useExpressInterest() {
   return useMutation({
     mutationFn: (matchId: string) => api.post(`/matches/${matchId}/interest`),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["investor", "matches"] }),
+  });
+}
+
+/* ───────────────────────── Deal room (PRD §6.10) ───────────────────────── */
+
+export function useDealRoom(matchId: string, enabled = true) {
+  const api = useApiClient();
+  return useQuery({
+    queryKey: ["matches", matchId, "deal-room"],
+    queryFn: () => api.get<DealRoom>(`/matches/${matchId}/deal-room`),
+    enabled: enabled && Boolean(matchId),
+    retry: false,
+  });
+}
+
+export function useSignNda(matchId: string) {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: () => api.post(`/matches/${matchId}/nda/sign`),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["matches", matchId, "deal-room"] });
+      qc.invalidateQueries({ queryKey: ["investor", "matches"] });
+    },
+  });
+}
+
+function encodeKey(r2Key: string): string {
+  return r2Key.split("/").map(encodeURIComponent).join("/");
+}
+
+/** Resolve a short-lived presigned download URL for a deal-room document. */
+export function useDealRoomDocument() {
+  const api = useApiClient();
+  return useMemo(
+    () => (matchId: string, r2Key: string) =>
+      api.get<{ url: string; expires_in: number }>(
+        `/matches/${matchId}/documents/${encodeKey(r2Key)}`,
+      ),
+    [api],
+  );
+}
+
+export function useSetMatchConfidential(matchId: string) {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (confidential: boolean) =>
+      api.patch(`/matches/${matchId}/confidential`, { confidential }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["matches", matchId, "deal-room"] });
+      qc.invalidateQueries({ queryKey: ["investor", "matches"] });
+    },
+  });
+}
+
+/** Resolve a presigned URL for any document via its owning collection path,
+ *  e.g. `/projects/{id}/documents` or `/investors/me/documents`. */
+export function useDocumentDownloader() {
+  const api = useApiClient();
+  return useMemo(
+    () => (basePath: string, r2Key: string) =>
+      api.get<{ url: string; expires_in: number }>(`${basePath}/${encodeKey(r2Key)}`),
+    [api],
+  );
+}
+
+/* ─────────────────────── Due diligence (PRD §6.8) ─────────────────────── */
+
+export function useDueDiligence(matchId: string, enabled = true) {
+  const api = useApiClient();
+  return useQuery({
+    queryKey: ["matches", matchId, "due-diligence"],
+    queryFn: () => api.get<DueDiligence>(`/matches/${matchId}/due-diligence`),
+    enabled: enabled && Boolean(matchId),
+    retry: false,
+  });
+}
+
+export function useRequestDueDiligence(matchId: string) {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: () => api.post<DueDiligence>(`/matches/${matchId}/due-diligence`),
+    onSuccess: (dd) => qc.setQueryData(["matches", matchId, "due-diligence"], dd),
+  });
+}
+
+export function useUploadDdItemDocument(matchId: string) {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMemo(
+    () => ({
+      upload: async (ddId: string, itemId: string, file: File) => {
+        const contentType = file.type || "application/octet-stream";
+        const presigned = await api.post<PresignUploadResponse>(
+          `/due-diligence/${ddId}/items/${itemId}/document`,
+          { filename: file.name, content_type: contentType, doc_type: "due_diligence" },
+        );
+        const put = await fetch(presigned.upload_url, {
+          method: presigned.method || "PUT",
+          body: file,
+          headers: { "Content-Type": contentType },
+        });
+        if (!put.ok) throw new Error(`Upload failed (${put.status}).`);
+        await qc.invalidateQueries({ queryKey: ["matches", matchId, "due-diligence"] });
+      },
+      downloadUrl: (ddId: string, itemId: string) =>
+        api.get<{ url: string; expires_in: number }>(
+          `/due-diligence/${ddId}/items/${itemId}/document`,
+        ),
+    }),
+    [api, qc, matchId],
+  );
+}
+
+export function useSetDdItemStatus(matchId: string) {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (vars: { ddId: string; itemId: string; status: string }) =>
+      api.patch<DueDiligence>(`/due-diligence/${vars.ddId}/items/${vars.itemId}`, {
+        status: vars.status,
+      }),
+    onSuccess: (dd) => qc.setQueryData(["matches", matchId, "due-diligence"], dd),
   });
 }
 
@@ -250,6 +426,36 @@ export function useAdminAnalytics() {
   return useQuery({
     queryKey: ["admin", "analytics"],
     queryFn: () => api.get<AdminAnalytics>("/admin/analytics"),
+  });
+}
+
+export function useAdminCreateProject() {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (body: Record<string, unknown>) =>
+      api.post<AdminProjectDetail>("/admin/projects", body),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin"] }),
+  });
+}
+
+export function useInviteAdmin() {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (email: string) =>
+      api.post<{ message: string }>("/admin/users/invite", { email }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin", "audit-log"] }),
+  });
+}
+
+export function useRunRiskAssessment(projectId: string) {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: () =>
+      api.post<RiskAssessment>(`/admin/projects/${projectId}/risk-assessment`),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin", "project", projectId] }),
   });
 }
 
@@ -284,6 +490,14 @@ export function useAdminProject(id: string) {
   return useQuery({
     queryKey: ["admin", "project", id],
     queryFn: () => api.get<AdminProjectDetail>(`/admin/projects/${id}`),
+  });
+}
+
+export function useAdminMatches() {
+  const api = useApiClient();
+  return useQuery({
+    queryKey: ["admin", "matches"],
+    queryFn: () => api.get<{ items: AdminMatch[] }>("/admin/matches"),
   });
 }
 

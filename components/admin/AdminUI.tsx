@@ -35,7 +35,7 @@ export function AdminPageHeader({
 
 const TONES: Record<string, string> = {
   default: "bg-[var(--bg-section)] text-[var(--text-muted)]",
-  pending: "bg-[var(--p-warning-bg)] text-[var(--p-warning)]",
+  pending: "bg-[var(--p-primary-bg)] text-[var(--p-primary)]",
   approved: "bg-[var(--p-success-bg)] text-[var(--p-success)]",
   danger: "bg-[var(--p-danger-bg)] text-[var(--p-danger)]",
 };
@@ -113,11 +113,11 @@ export function RowActionButton({
       className={cn(
         "grid size-8 place-items-center rounded-[var(--radius-md)] border transition-colors disabled:opacity-50",
         variant === "approve" &&
-          "border-[var(--accent-border-strong)] text-[var(--accent)] hover:bg-[var(--accent-tint-08)]",
+          "border-[var(--accent-border-strong)] text-[var(--accent)] hover:border-[var(--accent-bright)] hover:bg-[var(--accent-tint-08)] hover:text-[var(--accent-bright)]",
         variant === "reject" &&
           "border-[var(--ink-border-strong)] text-[var(--ink)] hover:bg-[var(--ink-hover-tint)]",
         variant === "default" &&
-          "border-[var(--accent-border)] text-[var(--text-muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]",
+          "border-[var(--accent-border)] text-[var(--text-muted)] hover:border-[var(--accent-bright)] hover:text-[var(--accent-bright)]",
       )}
     >
       <Icon className="size-4" aria-hidden />
