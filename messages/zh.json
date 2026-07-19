@@ -533,6 +533,11 @@
     "backToSite": "返回网站",
     "loadError": "无法加载您的账户。请检查您的网络连接并重试。",
     "retry": "重试",
+    "roles": {
+      "investor": "投资者",
+      "project_owner": "项目促进者",
+      "admin": "管理员"
+    },
     "reviewTitle": "您的账户正在审核中",
     "reviewBody": "您现在可以设置个人资料。账户通过审核后即可浏览机会和匹配——通常在 48 小时内。",
     "rejectedTitle": "您的账户未激活",
@@ -710,7 +715,8 @@
         },
         "excluded": {
           "label": "排除的行业",
-          "hint": "这些将永远不会出现在您的匹配中。"
+          "hint": "这些将永远不会出现在您的匹配中。",
+          "conflict": "已选为感兴趣的行业"
         },
         "polRisk": {
           "label": "政治风险承受度",
@@ -799,7 +805,19 @@
         "email": "请输入有效的邮箱",
         "nonNegative": "必须为零或更大",
         "atLeastOneCountry": "请至少选择一个国家/地区",
-        "atLeastOneSector": "请至少选择一个行业"
+        "atLeastOneSector": "请至少选择一个行业",
+        "ticketOrder": "不得低于最低投资额度",
+        "dealSizeRange": "须介于最低与最高投资额度之间",
+        "roiOrder": "不得低于最低目标回报率",
+        "pctOrder": "不得低于最低持股比例",
+        "excludedConflict": "请移除已选为感兴趣行业的行业",
+        "phoneInvalid": "请输入有效的电话号码",
+        "urlInvalid": "请输入有效的网站地址",
+        "yearRange": "请输入有效的年份"
+      },
+      "phone": {
+        "search": "搜索国家或区号…",
+        "empty": "无匹配结果。"
       },
       "review": {
         "title": "审核您的申请",
@@ -943,6 +961,7 @@
         "pitchDeck": "路演 PPT",
         "additional": "其他文件",
         "optionalHint": "可选 · PDF、PNG、JPG",
+        "requiredForRevenue": "创收和扩张阶段的项目必须提供 · PDF",
         "uploadFailed": "您的项目已保存，但文件上传失败。您可以稍后在仪表板中添加。"
       },
       "validation": {
@@ -950,7 +969,12 @@
         "country": "请选择国家/地区",
         "positive": "必须大于零",
         "nonNegative": "必须为零或更大",
-        "max500": "请控制在 500 个字符以内"
+        "max500": "请控制在 500 个字符以内",
+        "roiOrder": "不得低于最低预期回报率",
+        "minVsTotal": "不得超过所需融资总额",
+        "existingVsTotal": "不得超过所需融资总额",
+        "wholeMonths": "请输入整数月份",
+        "monthsMax": "时间线不得超过 240 个月"
       },
       "review": {
         "title": "审核您的项目",
@@ -969,6 +993,17 @@
     "ownerDesc": "提交您的项目以供审核，触达合格的国际投资者。",
     "continueAsInvestor": "以投资者身份继续",
     "continueAsOwner": "以项目促进者身份继续",
+    "investorTag": "配置资本",
+    "ownerTag": "项目融资",
+    "needsLabel": "需要准备",
+    "investorNeed1": "公司及注册信息",
+    "investorNeed2": "投资偏好与投资额度",
+    "investorNeed3": "注册证书与反洗钱（AML）证书",
+    "ownerNeed1": "项目概况与所属行业",
+    "ownerNeed2": "融资需求与财务预测",
+    "ownerNeed3": "商业计划书与公司文件",
+    "timeMeta": "约需 10 分钟，进度自动保存。",
+    "verifiedNote": "每个账户都需经过我们团队审核后方可获得完整访问权限。",
     "roleError": "无法保存您的角色，请重试。",
     "eyebrow": "开始",
     "preselected": "您的选择",
@@ -992,6 +1027,7 @@
     "needsAttention": "待处理",
     "review": "审查",
     "investorsTotal": "投资者总数",
+    "facilitatorsTotal": "项目促进者",
     "investorsPending": "待审投资者",
     "projectsTotal": "项目总数",
     "projectsPending": "待审项目",
@@ -1025,6 +1061,11 @@
     "suspended": "已暂停。",
     "reactivate": "恢复",
     "reactivated": "已恢复。",
+    "deleteUser": "删除用户",
+    "deleteUserTitle": "确定删除该用户？",
+    "deleteUserBody": "{email} 将立即失去访问权限，其登录账户将被移除。30 天后其数据将被永久删除。此操作无法撤销。",
+    "deleting": "正在删除…",
+    "userDeleted": "用户已删除。其数据将在 30 天后清除。",
     "you": "您",
     "auditAction": "操作",
     "auditTarget": "目标",
@@ -1283,6 +1324,20 @@
     "overview": "概览",
     "profile": "资料",
     "matches": "匹配",
+    "browse": "浏览项目",
+    "browseDesc": "平台上所有经过审核的投资机会。表达兴趣后，我们的团队将为您跟进。",
+    "filterSector": "按行业筛选",
+    "filterCountry": "按国家筛选",
+    "allSectors": "全部行业",
+    "allCountries": "全部国家",
+    "expressInterest": "我有兴趣",
+    "interested": "已表达兴趣",
+    "interestSent": "已发送您的意向。项目方和我们的顾问已收到通知。",
+    "interestError": "无法提交您的意向，请重试。",
+    "viewDetails": "详情",
+    "browseEmpty": "暂无符合筛选条件的项目。",
+    "browseFunding": "融资需求",
+    "browseRoi": "预期回报",
     "notifications": "通知",
     "welcome": "欢迎回来",
     "statusLabel": "账户状态",

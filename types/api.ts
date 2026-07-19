@@ -190,6 +190,7 @@ export type NotificationItem = {
 
 export type AdminAnalytics = {
   investors_by_status: Record<string, number>;
+  users_by_role: Record<string, number>;
   projects_by_status: Record<string, number>;
   projects_by_sector: Record<string, number>;
   matches_by_status: Record<string, number>;

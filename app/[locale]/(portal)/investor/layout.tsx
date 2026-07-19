@@ -1,6 +1,6 @@
 "use client";
 
-import { GitMerge, LayoutDashboard, UserRound } from "lucide-react";
+import { Compass, GitMerge, LayoutDashboard, UserRound } from "lucide-react";
 import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { PortalAuthGate } from "@/components/auth/PortalAuthGate";
@@ -14,8 +14,9 @@ export default function InvestorLayout({ children }: { children: ReactNode }) {
     {
       items: [
         { href: "/investor", label: t("overview"), icon: LayoutDashboard, exact: true },
-        { href: "/investor/profile", label: t("profile"), icon: UserRound },
+        { href: "/investor/opportunities", label: t("browse"), icon: Compass },
         { href: "/investor/matches", label: t("matches"), icon: GitMerge },
+        { href: "/investor/profile", label: t("profile"), icon: UserRound },
       ],
     },
   ];

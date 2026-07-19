@@ -1,3 +1,10 @@
-ignoredBuiltDependencies:
-  - sharp
-  - unrs-resolver
+allowBuilds:
+  # Native binaries / platform binaries that need their install scripts.
+  '@parcel/watcher': true
+  '@sentry/cli': true
+  '@swc/core': true
+  sharp: true
+  # Postinstall scripts we deliberately do not run (telemetry/banner only).
+  '@clerk/shared': false
+  msw: false
+  unrs-resolver: false

@@ -18,6 +18,10 @@ type Props = {
   searchPlaceholder?: string;
   /** Show only the first N until "show all" is toggled (for long lists). */
   collapseAfter?: number;
+  /** Options that cannot be selected here (e.g. chosen elsewhere as a
+   *  conflicting answer). Shown disabled with `disabledNote` as tooltip. */
+  disabledValues?: string[];
+  disabledNote?: string;
 };
 
 export function ChipMultiSelect({
@@ -29,6 +33,8 @@ export function ChipMultiSelect({
   searchable,
   searchPlaceholder,
   collapseAfter,
+  disabledValues,
+  disabledNote,
 }: Props) {
   const { control } = useFormContext();
   const { field, fieldState } = useController({ name, control, defaultValue: [] });
@@ -65,17 +71,22 @@ export function ChipMultiSelect({
       <div className="flex flex-wrap gap-2">
         {filtered.map((o) => {
           const on = selected.includes(o.value);
+          const disabled = !on && (disabledValues?.includes(o.value) ?? false);
           return (
             <button
               type="button"
               key={o.value}
               onClick={() => toggle(o.value)}
               aria-pressed={on}
+              disabled={disabled}
+              title={disabled ? disabledNote : undefined}
               className={cn(
                 "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm transition-colors",
                 on
                   ? "border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] font-medium text-[var(--accent)]"
-                  : "border-border bg-background text-foreground hover:border-[var(--accent)]/50",
+                  : disabled
+                    ? "cursor-not-allowed border-dashed border-border bg-background text-muted-foreground/60 line-through"
+                    : "border-border bg-background text-foreground hover:border-[var(--accent)]/50",
               )}
             >
               {on && <Check className="size-3.5" aria-hidden />}

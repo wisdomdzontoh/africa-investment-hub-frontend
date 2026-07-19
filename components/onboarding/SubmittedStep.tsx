@@ -1,8 +1,7 @@
 "use client";
 
-import { CheckCircle2, Clock } from "lucide-react";
-import { BrandedButton } from "@/components/brand/Button";
-import { BrandedCard } from "@/components/brand/Card";
+import { ArrowRight, CheckCircle2, Clock } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   title: string;
@@ -21,16 +20,17 @@ export function SubmittedStep({ title, description, note, continueLabel, onConti
       <h1 className="mt-5 font-display text-2xl font-semibold text-[var(--text-strong)]">{title}</h1>
       <p className="mt-2 max-w-md text-sm text-muted-foreground">{description}</p>
 
-      <BrandedCard pad className="mt-6 w-full max-w-md">
+      <div className="mt-6 w-full max-w-md rounded-lg border border-border bg-card p-4">
         <div className="flex items-center gap-2 text-sm text-foreground">
           <Clock className="size-4 text-[var(--warning)]" aria-hidden />
           {note}
         </div>
-      </BrandedCard>
+      </div>
 
-      <BrandedButton type="button" className="mt-6" iconRight="arrow-right" onClick={onContinue}>
+      <Button type="button" size="lg" className="mt-6 gap-2" onClick={onContinue}>
         {continueLabel}
-      </BrandedButton>
+        <ArrowRight className="size-4" aria-hidden />
+      </Button>
     </div>
   );
 }

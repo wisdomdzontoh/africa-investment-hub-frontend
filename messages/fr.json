@@ -533,6 +533,11 @@
     "backToSite": "Retour au site",
     "loadError": "Nous n'avons pas pu charger votre compte. Vérifiez votre connexion et réessayez.",
     "retry": "Réessayer",
+    "roles": {
+      "investor": "Investisseur",
+      "project_owner": "Facilitateur de projet",
+      "admin": "Administrateur"
+    },
     "reviewTitle": "Votre compte est en cours d'examen",
     "reviewBody": "Vous pouvez configurer votre profil dès maintenant. La consultation des opportunités et des correspondances sera débloquée une fois votre compte approuvé — généralement sous 48 heures.",
     "rejectedTitle": "Votre compte n'est pas actif",
@@ -710,7 +715,8 @@
         },
         "excluded": {
           "label": "Secteurs à exclure",
-          "hint": "Ils n'apparaîtront jamais dans vos correspondances."
+          "hint": "Ils n'apparaîtront jamais dans vos correspondances.",
+          "conflict": "Déjà sélectionné comme secteur d'intérêt"
         },
         "polRisk": {
           "label": "Tolérance au risque politique",
@@ -799,7 +805,19 @@
         "email": "Saisissez un e-mail valide",
         "nonNegative": "Doit être zéro ou plus",
         "atLeastOneCountry": "Choisissez au moins un pays",
-        "atLeastOneSector": "Choisissez au moins un secteur"
+        "atLeastOneSector": "Choisissez au moins un secteur",
+        "ticketOrder": "Doit être au moins égal à la taille de ticket minimale",
+        "dealSizeRange": "Doit se situer entre vos tailles de ticket minimale et maximale",
+        "roiOrder": "Doit être au moins égal au ROI cible minimal",
+        "pctOrder": "Doit être au moins égal au pourcentage minimal",
+        "excludedConflict": "Retirez les secteurs déjà sélectionnés comme secteurs d'intérêt",
+        "phoneInvalid": "Saisissez un numéro de téléphone valide",
+        "urlInvalid": "Saisissez une adresse de site web valide",
+        "yearRange": "Saisissez une année valide"
+      },
+      "phone": {
+        "search": "Rechercher un pays ou un indicatif…",
+        "empty": "Aucun résultat."
       },
       "review": {
         "title": "Vérifiez votre candidature",
@@ -943,6 +961,7 @@
         "pitchDeck": "Présentation (pitch deck)",
         "additional": "Documents supplémentaires",
         "optionalHint": "Facultatif · PDF, PNG, JPG",
+        "requiredForRevenue": "Requis pour les projets générant des revenus ou en expansion · PDF",
         "uploadFailed": "Votre projet a été enregistré, mais les documents n'ont pas pu être téléversés. Vous pourrez les ajouter plus tard depuis votre tableau de bord."
       },
       "validation": {
@@ -950,7 +969,12 @@
         "country": "Sélectionnez un pays",
         "positive": "Doit être supérieur à zéro",
         "nonNegative": "Doit être zéro ou plus",
-        "max500": "Limitez à 500 caractères"
+        "max500": "Limitez à 500 caractères",
+        "roiOrder": "Doit être au moins égal au ROI minimal attendu",
+        "minVsTotal": "Ne peut pas dépasser le financement total requis",
+        "existingVsTotal": "Ne peut pas dépasser le financement total requis",
+        "wholeMonths": "Saisissez des mois entiers",
+        "monthsMax": "Saisissez un délai de 240 mois maximum"
       },
       "review": {
         "title": "Vérifiez votre projet",
@@ -969,6 +993,17 @@
     "ownerDesc": "Soumettez votre projet pour examen et atteignez des investisseurs internationaux qualifiés.",
     "continueAsInvestor": "Continuer en tant qu'investisseur",
     "continueAsOwner": "Continuer en tant que facilitateur de projet",
+    "investorTag": "Déployer du capital",
+    "ownerTag": "Lever des fonds",
+    "needsLabel": "À préparer",
+    "investorNeed1": "Informations sur la société et son immatriculation",
+    "investorNeed2": "Préférences d'investissement et taille de ticket",
+    "investorNeed3": "Certificats d'immatriculation et de conformité AML",
+    "ownerNeed1": "Présentation du projet et secteur",
+    "ownerNeed2": "Besoin de financement et projections financières",
+    "ownerNeed3": "Business plan et documents de la société",
+    "timeMeta": "Environ 10 minutes. Votre progression est enregistrée automatiquement.",
+    "verifiedNote": "Chaque compte est vérifié par notre équipe avant l'octroi d'un accès complet.",
     "roleError": "Impossible d'enregistrer votre rôle. Veuillez réessayer.",
     "eyebrow": "Commencer",
     "preselected": "Votre choix",
@@ -992,6 +1027,7 @@
     "needsAttention": "À traiter",
     "review": "Examiner",
     "investorsTotal": "Total investisseurs",
+    "facilitatorsTotal": "Facilitateurs de projet",
     "investorsPending": "Investisseurs en attente",
     "projectsTotal": "Total projets",
     "projectsPending": "Projets en attente",
@@ -1025,6 +1061,11 @@
     "suspended": "Suspendu.",
     "reactivate": "Réactiver",
     "reactivated": "Réactivé.",
+    "deleteUser": "Supprimer l'utilisateur",
+    "deleteUserTitle": "Supprimer cet utilisateur ?",
+    "deleteUserBody": "{email} perdra immédiatement l'accès et son compte de connexion sera supprimé. Ses données seront définitivement effacées après 30 jours. Cette action est irréversible.",
+    "deleting": "Suppression…",
+    "userDeleted": "Utilisateur supprimé. Ses données seront purgées dans 30 jours.",
     "you": "vous",
     "auditAction": "Action",
     "auditTarget": "Cible",
@@ -1283,6 +1324,20 @@
     "overview": "Aperçu",
     "profile": "Profil",
     "matches": "Correspondances",
+    "browse": "Parcourir les projets",
+    "browseDesc": "Toutes les opportunités vérifiées de la plateforme. Manifestez votre intérêt et notre équipe prend le relais.",
+    "filterSector": "Filtrer par secteur",
+    "filterCountry": "Filtrer par pays",
+    "allSectors": "Tous les secteurs",
+    "allCountries": "Tous les pays",
+    "expressInterest": "Je suis intéressé",
+    "interested": "Intérêt envoyé",
+    "interestSent": "Intérêt envoyé. L'équipe du projet et nos conseillers ont été notifiés.",
+    "interestError": "Impossible d'enregistrer votre intérêt. Veuillez réessayer.",
+    "viewDetails": "Détails",
+    "browseEmpty": "Aucun projet ne correspond à ces filtres pour le moment.",
+    "browseFunding": "Financement recherché",
+    "browseRoi": "ROI attendu",
     "notifications": "Notifications",
     "welcome": "Bon retour",
     "statusLabel": "Statut du compte",

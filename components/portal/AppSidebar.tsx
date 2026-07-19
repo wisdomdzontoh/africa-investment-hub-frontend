@@ -1,6 +1,7 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Logo } from "@/components/brand/Logo";
 import { Link, usePathname } from "@/i18n/navigation";
 import {
@@ -48,6 +49,7 @@ function BrandMark() {
 
 export function AppSidebar({ homeHref, title, nav, soonLabel }: AppSidebarProps) {
   const pathname = usePathname();
+  const t = useTranslations("portal");
   const { data: account } = useAccount();
 
   const isActive = (item: PortalNavItem) =>
@@ -114,7 +116,7 @@ export function AppSidebar({ homeHref, title, nav, soonLabel }: AppSidebarProps)
         {account ? (
           <div className="flex items-center justify-between gap-2 rounded-[var(--radius-md)] border border-[var(--p-border)] bg-[var(--p-muted)] px-3 py-2">
             <span className="truncate font-mono text-[11px] uppercase tracking-[0.06em] text-[var(--text-muted)]">
-              {account.role.replace(/_/g, " ")}
+              {t(`roles.${account.role}`)}
             </span>
             <StatusPill status={account.status} />
           </div>

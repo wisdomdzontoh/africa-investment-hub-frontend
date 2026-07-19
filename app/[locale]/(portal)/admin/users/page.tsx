@@ -1,6 +1,6 @@
 "use client";
 
-import { UserPlus } from "lucide-react";
+import { Trash2, UserPlus } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
@@ -20,6 +20,7 @@ import {
 import {
   useAccount,
   useAdminUsers,
+  useDeleteUser,
   useInviteAdmin,
   useSetUserRole,
   useSetUserStatus,
@@ -36,7 +37,9 @@ export default function AdminUsersPage() {
   const { data: me } = useAccount();
   const setRole = useSetUserRole();
   const setStatus = useSetUserStatus();
+  const deleteUser = useDeleteUser();
   const [query, setQuery] = useState("");
+  const [pendingDelete, setPendingDelete] = useState<UserAccount | null>(null);
 
   const all = useMemo(() => data?.items ?? [], [data]);
   const rows = all.filter((u) => {
@@ -58,6 +61,17 @@ export default function AdminUsersPage() {
     try {
       await setStatus.mutateAsync({ userId, status: suspended ? "approved" : "suspended" });
       toast.success(t(suspended ? "reactivated" : "suspended"));
+    } catch (err) {
+      toast.error(err instanceof ApiError ? err.message : t("actionError"));
+    }
+  }
+
+  async function confirmDelete() {
+    if (!pendingDelete) return;
+    try {
+      await deleteUser.mutateAsync(pendingDelete.id);
+      toast.success(t("userDeleted"));
+      setPendingDelete(null);
     } catch (err) {
       toast.error(err instanceof ApiError ? err.message : t("actionError"));
     }
@@ -119,19 +133,31 @@ export default function AdminUsersPage() {
         if (me?.id === user.id) return null;
         const suspended = user.status === "suspended";
         return (
-          <Button
-            size="sm"
-            variant="outline"
-            disabled={setStatus.isPending}
-            onClick={() => toggleSuspend(user.id, suspended)}
-            className={
-              suspended
-                ? ""
-                : "border-[var(--p-danger)]/40 text-[var(--p-danger)] hover:bg-[var(--p-danger-bg)]"
-            }
-          >
-            {suspended ? t("reactivate") : t("suspend")}
-          </Button>
+          <span className="inline-flex items-center gap-2">
+            <Button
+              size="sm"
+              variant="outline"
+              disabled={setStatus.isPending}
+              onClick={() => toggleSuspend(user.id, suspended)}
+              className={
+                suspended
+                  ? ""
+                  : "border-[var(--p-danger)]/40 text-[var(--p-danger)] hover:bg-[var(--p-danger-bg)]"
+              }
+            >
+              {suspended ? t("reactivate") : t("suspend")}
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              disabled={deleteUser.isPending}
+              onClick={() => setPendingDelete(user)}
+              aria-label={t("deleteUser")}
+              className="border-[var(--p-danger)]/40 text-[var(--p-danger)] hover:bg-[var(--p-danger-bg)]"
+            >
+              <Trash2 className="size-3.5" aria-hidden />
+            </Button>
+          </span>
         );
       },
     },
@@ -166,6 +192,29 @@ export default function AdminUsersPage() {
           }
         />
       )}
+
+      <Dialog open={pendingDelete !== null} onOpenChange={(open) => !open && setPendingDelete(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t("deleteUserTitle")}</DialogTitle>
+            <DialogDescription>
+              {t("deleteUserBody", { email: pendingDelete?.email ?? pendingDelete?.id ?? "" })}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setPendingDelete(null)}>
+              {t("cancel")}
+            </Button>
+            <Button
+              disabled={deleteUser.isPending}
+              onClick={confirmDelete}
+              className="bg-[var(--p-danger)] text-white hover:bg-[var(--p-danger)]/90"
+            >
+              {deleteUser.isPending ? t("deleting") : t("deleteUser")}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

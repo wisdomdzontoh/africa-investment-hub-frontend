@@ -54,17 +54,21 @@ export default function AdminOverviewPage() {
         <ErrorState onRetry={() => refetch()} />
       ) : (
         <div className="flex flex-col gap-8">
-          {/* KPIs */}
+          {/* KPIs — role-filtered so admins/facilitators never count as investors. */}
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <StatCard icon={UserCog} value={data?.total_users ?? 0} label={t("usersTotal")} />
             <StatCard icon={Users} value={sum(data?.investors_by_status)} label={t("investorsTotal")} />
+            <StatCard
+              icon={Briefcase}
+              value={data?.users_by_role?.project_owner ?? 0}
+              label={t("facilitatorsTotal")}
+            />
             <StatCard
               icon={Clock}
               tone="pending"
               value={pendingInvestors + pendingProjects}
               label={t("pendingReview")}
             />
-            <StatCard icon={Briefcase} value={sum(data?.projects_by_status)} label={t("projectsTotal")} />
-            <StatCard icon={UserCog} value={data?.total_users ?? 0} label={t("usersTotal")} />
           </div>
 
           {/* Needs attention */}
@@ -94,7 +98,8 @@ export default function AdminOverviewPage() {
             <Breakdown title={t("projectsByStatus")} data={data?.projects_by_status} t={t} />
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-3">
+            <StatCard icon={Briefcase} value={sum(data?.projects_by_status)} label={t("projectsTotal")} />
             <StatCard icon={GitMerge} value={sum(data?.matches_by_status)} label={t("matchesTotal")} />
             <StatCard
               icon={Briefcase}

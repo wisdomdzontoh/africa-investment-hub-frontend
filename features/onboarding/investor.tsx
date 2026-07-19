@@ -2,7 +2,8 @@
 
 import { Gauge, ShieldCheck, TriangleAlert } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import { useFormContext, useWatch } from "react-hook-form";
 import { z } from "zod";
 import {
   MoneyField,
@@ -13,6 +14,7 @@ import {
 } from "@/components/onboarding/fields";
 import { ChipMultiSelect } from "@/components/onboarding/ChipMultiSelect";
 import { CountryComboField } from "@/components/onboarding/CountryComboField";
+import { PhoneField } from "@/components/onboarding/PhoneField";
 import { CheckGrid, RadioSegment } from "@/components/onboarding/RadioSegment";
 import { RepeatableProjects } from "@/components/onboarding/RepeatableProjects";
 import { DocsPrivacyNote, FileDropField } from "@/components/onboarding/documents";
@@ -25,21 +27,43 @@ import { WORLD_COUNTRIES, worldCountryName } from "@/lib/data/world-countries";
 
 /* ------------------------------ schema ---------------------------------- */
 
+/** National digits of a stored phone value ("+233 24 123 4567" → "241234567").
+ *  A dial-code-only value (auto-prefilled) counts as empty. */
+function nationalDigits(v: string | undefined): string {
+  if (!v) return "";
+  const m = v.match(/^\+\d{1,3}\s*(.*)$/);
+  return (m ? m[1] : v).replace(/\D/g, "");
+}
+
+const URL_LOOSE = /^(https?:\/\/)?[\w-]+(\.[\w-]+)+([/?#]\S*)?$/i;
+
 function buildSchema(tv: (k: string) => string) {
   const optStr = z.string().trim().optional();
   const optNum = z.number().nonnegative(tv("nonNegative")).optional();
-  return z.object({
+  const currentYear = new Date().getFullYear();
+  const base = z.object({
     // A — Company
     company_name: z.string().trim().min(1, tv("required")),
     country_of_registration: z.string().trim().min(1, tv("country")),
     registration_number: z.string().trim().min(1, tv("required")),
     years_of_operation: optNum,
     registered_address: optStr,
-    website: optStr,
+    website: z
+      .string()
+      .trim()
+      .optional()
+      .refine((v) => !v || URL_LOOSE.test(v), tv("urlInvalid")),
     contact_name: z.string().trim().min(1, tv("required")),
     contact_title: optStr,
     contact_email: z.string().trim().email(tv("email")),
-    contact_phone: optStr,
+    contact_phone: z
+      .string()
+      .trim()
+      .optional()
+      .refine((v) => {
+        const digits = nationalDigits(v);
+        return digits.length === 0 || (digits.length >= 6 && digits.length <= 14);
+      }, tv("phoneInvalid")),
     // B — Investment profile
     investment_countries: z.array(z.string()).min(1, tv("atLeastOneCountry")),
     investment_sectors: z.array(z.string()).min(1, tv("atLeastOneSector")),
@@ -69,12 +93,63 @@ function buildSchema(tv: (k: string) => string) {
           project_name: z.string().trim().optional().default(""),
           country: z.string().optional().default(""),
           sector: z.string().optional().default(""),
-          year: z.number().optional(),
+          year: z
+            .number()
+            .int(tv("yearRange"))
+            .min(1950, tv("yearRange"))
+            .max(currentYear, tv("yearRange"))
+            .optional(),
         }),
       )
       .max(5)
       .default([]),
     certifications: optStr,
+  });
+
+  // Cross-field rules — enforced here (and again by the backend; the frontend
+  // is never the only gate). Each error is attached to a field that appears in
+  // its step's `fields` list so the step gate surfaces it.
+  return base.superRefine((v, ctx) => {
+    const issue = (path: string, message: string) =>
+      ctx.addIssue({ code: "custom", path: [path], message });
+
+    if (
+      v.min_ticket_size !== undefined &&
+      v.max_ticket_size !== undefined &&
+      v.min_ticket_size > v.max_ticket_size
+    ) {
+      issue("max_ticket_size", tv("ticketOrder"));
+    }
+    if (v.preferred_deal_size !== undefined) {
+      if (v.min_ticket_size !== undefined && v.preferred_deal_size < v.min_ticket_size) {
+        issue("preferred_deal_size", tv("dealSizeRange"));
+      }
+      if (v.max_ticket_size !== undefined && v.preferred_deal_size > v.max_ticket_size) {
+        issue("preferred_deal_size", tv("dealSizeRange"));
+      }
+    }
+    if (
+      v.target_roi_min !== undefined &&
+      v.target_roi_max !== undefined &&
+      v.target_roi_min > v.target_roi_max
+    ) {
+      issue("target_roi_max", tv("roiOrder"));
+    }
+    if (
+      v.preferred_ownership_pct_min !== undefined &&
+      v.preferred_ownership_pct_max !== undefined &&
+      v.preferred_ownership_pct_min > v.preferred_ownership_pct_max
+    ) {
+      issue("preferred_ownership_pct_max", tv("pctOrder"));
+    }
+    // Sectors of interest and excluded sectors must be disjoint (the UI
+    // disables conflicts and prunes on change; this is the hard gate).
+    const overlap = (v.sectors_excluded ?? []).filter((s) =>
+      (v.investment_sectors ?? []).includes(s),
+    );
+    if (overlap.length > 0) {
+      issue("sectors_excluded", tv("excludedConflict"));
+    }
   });
 }
 
@@ -98,11 +173,63 @@ function toPayload(v: InvestorForm): Record<string, unknown> {
     previous_projects: previous,
   };
 
+  // Normalise: bare domains get a scheme; a dial-code-only phone is empty.
+  if (v.website && !/^https?:\/\//i.test(v.website)) {
+    raw.website = `https://${v.website}`;
+  }
+  if (nationalDigits(v.contact_phone).length === 0) {
+    delete raw.contact_phone;
+  }
+  // Belt-and-braces: interests always win over exclusions (UI enforces too).
+  raw.sectors_excluded = (v.sectors_excluded ?? []).filter(
+    (s) => !(v.investment_sectors ?? []).includes(s),
+  );
+
   // Drop empty strings and undefined so optional columns stay null server-side.
   for (const [k, val] of Object.entries(raw)) {
     if (val === "" || val === undefined || val === null) delete raw[k];
   }
   return raw;
+}
+
+/* --------------------- excluded sectors (conflict-aware) ----------------- */
+
+function ExcludedSectorsField({
+  label,
+  hint,
+  conflictNote,
+  options,
+}: {
+  label: string;
+  hint: string;
+  conflictNote: string;
+  options: { value: string; label: string }[];
+}) {
+  const { setValue } = useFormContext();
+  const interestsRaw = useWatch({ name: "investment_sectors" }) as string[] | undefined;
+  const excludedRaw = useWatch({ name: "sectors_excluded" }) as string[] | undefined;
+  const interests = useMemo(() => interestsRaw ?? [], [interestsRaw]);
+
+  // Interests win: if the user goes back and adds an interest they had
+  // excluded, the exclusion is removed rather than blocking them later.
+  useEffect(() => {
+    const excluded = excludedRaw ?? [];
+    const pruned = excluded.filter((s) => !interests.includes(s));
+    if (pruned.length !== excluded.length) {
+      setValue("sectors_excluded", pruned, { shouldValidate: true, shouldDirty: true });
+    }
+  }, [interests, excludedRaw, setValue]);
+
+  return (
+    <ChipMultiSelect
+      name="sectors_excluded"
+      label={label}
+      hint={hint}
+      options={options}
+      disabledValues={interests}
+      disabledNote={conflictNote}
+    />
+  );
 }
 
 /* ------------------------------ config ---------------------------------- */
@@ -189,8 +316,10 @@ export function useInvestorWizardConfig(): WizardConfig<InvestorForm> {
             "company_name",
             "country_of_registration",
             "registration_number",
+            "website",
             "contact_name",
             "contact_email",
+            "contact_phone",
           ],
           render: () => (
             <div className="flex flex-col gap-5">
@@ -215,7 +344,14 @@ export function useInvestorWizardConfig(): WizardConfig<InvestorForm> {
                 <TextField name="contact_name" label={f("contactName")} required placeholder={ph("contactName")} />
                 <TextField name="contact_title" label={f("contactTitle")} placeholder={ph("contactTitle")} />
                 <TextField name="contact_email" label={f("contactEmail")} required type="email" placeholder={ph("contactEmail")} />
-                <TextField name="contact_phone" label={f("contactPhone")} type="tel" placeholder={ph("contactPhone")} />
+                <PhoneField
+                  name="contact_phone"
+                  label={f("contactPhone")}
+                  placeholder={ph("contactPhone")}
+                  syncWith="country_of_registration"
+                  searchPlaceholder={t("phone.search")}
+                  emptyText={t("phone.empty")}
+                />
               </div>
             </div>
           ),
@@ -231,7 +367,12 @@ export function useInvestorWizardConfig(): WizardConfig<InvestorForm> {
           label: t("steps.profile.label"),
           title: t("steps.profile.title"),
           subtitle: t("steps.profile.subtitle"),
-          fields: ["investment_countries", "investment_sectors"],
+          fields: [
+            "investment_countries",
+            "investment_sectors",
+            "max_ticket_size",
+            "preferred_deal_size",
+          ],
           render: () => (
             <div className="flex flex-col gap-6">
               <ChipMultiSelect
@@ -266,7 +407,7 @@ export function useInvestorWizardConfig(): WizardConfig<InvestorForm> {
           label: t("steps.risk.label"),
           title: t("steps.risk.title"),
           subtitle: t("steps.risk.subtitle"),
-          fields: [],
+          fields: ["target_roi_max", "preferred_ownership_pct_max"],
           render: () => (
             <div className="flex flex-col gap-6">
               <RadioSegment
@@ -279,15 +420,15 @@ export function useInvestorWizardConfig(): WizardConfig<InvestorForm> {
                 ]}
               />
               <div className="grid gap-5 sm:grid-cols-2">
-                <NumberField name="target_roi_min" label={f("roiMin")} placeholder={ph("roiMin")} hint={t("fields.roiMin.hint")} />
-                <NumberField name="target_roi_max" label={f("roiMax")} placeholder={ph("roiMax")} hint={t("fields.roiMax.hint")} />
+                <NumberField name="target_roi_min" label={f("roiMin")} placeholder={ph("roiMin")} hint={t("fields.roiMin.hint")} suffix="%" />
+                <NumberField name="target_roi_max" label={f("roiMax")} placeholder={ph("roiMax")} hint={t("fields.roiMax.hint")} suffix="%" />
                 <SelectField name="time_horizon" label={f("horizon")} placeholder={ph("horizon")} options={horizonOptions} />
                 <SelectField name="exit_strategy" label={f("exit")} placeholder={ph("exit")} options={exitOptions} />
               </div>
               <CheckGrid name="preferred_ownership_structures" label={f("ownership")} options={ownershipOptions} />
               <div className="grid gap-5 sm:grid-cols-2">
-                <NumberField name="preferred_ownership_pct_min" label={f("ownMin")} placeholder={ph("ownMin")} min={0} max={100} />
-                <NumberField name="preferred_ownership_pct_max" label={f("ownMax")} placeholder={ph("ownMax")} min={0} max={100} />
+                <NumberField name="preferred_ownership_pct_min" label={f("ownMin")} placeholder={ph("ownMin")} min={0} max={100} suffix="%" />
+                <NumberField name="preferred_ownership_pct_max" label={f("ownMax")} placeholder={ph("ownMax")} min={0} max={100} suffix="%" />
               </div>
             </div>
           ),
@@ -302,11 +443,16 @@ export function useInvestorWizardConfig(): WizardConfig<InvestorForm> {
           label: t("steps.compliance.label"),
           title: t("steps.compliance.title"),
           subtitle: t("steps.compliance.subtitle"),
-          fields: [],
+          fields: ["sectors_excluded"],
           render: () => (
             <div className="flex flex-col gap-6">
               <TextareaField name="esg_requirements" label={f("esg")} hint={t("fields.esg.hint")} placeholder={ph("esg")} />
-              <ChipMultiSelect name="sectors_excluded" label={f("excluded")} hint={t("fields.excluded.hint")} options={excludeChips} />
+              <ExcludedSectorsField
+                label={f("excluded")}
+                hint={t("fields.excluded.hint")}
+                conflictNote={t("fields.excluded.conflict")}
+                options={excludeChips}
+              />
               <div className="grid gap-5 sm:grid-cols-2">
                 <SelectField name="political_risk_tolerance" label={f("polRisk")} placeholder={ph("polRisk")} options={polRiskOptions} />
                 <SelectField name="currency_risk_tolerance" label={f("fxRisk")} placeholder={ph("fxRisk")} options={fxRiskOptions} />
@@ -323,7 +469,7 @@ export function useInvestorWizardConfig(): WizardConfig<InvestorForm> {
           label: t("steps.track.label"),
           title: t("steps.track.title"),
           subtitle: t("steps.track.subtitle"),
-          fields: [],
+          fields: ["previous_projects"],
           render: () => (
             <div className="flex flex-col gap-6">
               <div>

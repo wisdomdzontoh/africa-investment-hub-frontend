@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUser } from "@clerk/nextjs";
-import { ArrowLeft, Check, Loader2, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -12,16 +12,16 @@ import {
   type UseFormReturn,
 } from "react-hook-form";
 import { toast } from "sonner";
-import { BrandedButton } from "@/components/brand/Button";
-import { Logo } from "@/components/brand/Logo";
-import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
+import { Button } from "@/components/ui/button";
+import { OnboardingHeader } from "@/components/onboarding/OnboardingHeader";
 import { ReviewStep } from "@/components/onboarding/ReviewStep";
 import { StepBar } from "@/components/onboarding/StepBar";
 import { SubmittedStep } from "@/components/onboarding/SubmittedStep";
 import { WizardDocsProvider, useWizardDocs } from "@/components/onboarding/documents";
-import { Link, useRouter } from "@/i18n/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { clearDraft, loadDraft, saveDraft } from "@/lib/onboarding/draft";
 import type { WizardConfig } from "@/lib/onboarding/types";
+import { cn } from "@/lib/utils";
 
 type Phase = "intake" | "review" | "submitted";
 
@@ -139,21 +139,8 @@ function WizardInner<T extends FieldValues>({
 
   return (
     <div className="flex min-h-screen flex-col bg-[var(--surface-page)]">
-      {/* Top bar */}
-      <header className="border-b border-border bg-[var(--surface-header)]">
-        <div className="mx-auto flex w-full max-w-4xl items-center justify-between px-4 py-3">
-          <Logo height={32} />
-          <div className="flex items-center gap-2 sm:gap-3">
-            <LanguageSwitcher />
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <X className="size-4" aria-hidden /> {t("saveAndExit")}
-            </Link>
-          </div>
-        </div>
-      </header>
+      {/* Top bar — drafts autosave, so exiting is always safe. */}
+      <OnboardingHeader exitLabel={t("saveAndExit")} maxWidth="max-w-4xl" />
 
       <div id="wizard-scroll" className="mx-auto w-full max-w-4xl flex-1 px-4 py-8">
         {phase === "submitted" ? (
@@ -202,21 +189,22 @@ function WizardInner<T extends FieldValues>({
               <div key={step.id}>{step.render()}</div>
 
               <div className="mt-7 flex items-center justify-between border-t border-border pt-5">
-                <BrandedButton
+                <Button
                   type="button"
                   variant="ghost"
-                  icon={ArrowLeft}
                   onClick={back}
                   disabled={sec === 0}
-                  className={sec === 0 ? "invisible" : ""}
+                  className={cn("gap-2", sec === 0 && "invisible")}
                 >
+                  <ArrowLeft className="size-4" aria-hidden />
                   {t("back")}
-                </BrandedButton>
+                </Button>
                 <div className="flex items-center gap-4">
                   <SavedIndicator state={saved} savingLabel={t("saving")} savedLabel={t("saved")} />
-                  <BrandedButton type="button" iconRight="arrow-right" onClick={next}>
+                  <Button type="button" size="lg" onClick={next} className="gap-2">
                     {sec === steps.length - 1 ? t("review") : t("continue")}
-                  </BrandedButton>
+                    <ArrowRight className="size-4" aria-hidden />
+                  </Button>
                 </div>
               </div>
             </div>

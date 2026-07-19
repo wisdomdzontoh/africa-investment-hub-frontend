@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
+import { useWatch } from "react-hook-form";
 import { z } from "zod";
 import {
   MoneyField,
@@ -22,6 +23,28 @@ import { SECTORS } from "@/lib/data/sectors";
 function countryName(code: string | undefined): string {
   if (!code) return "—";
   return COUNTRIES.find((c) => c.code === code.toLowerCase())?.name ?? code.toUpperCase();
+}
+
+/** Audited financials are expected for revenue-generating projects (PRD §6.3);
+ *  the hint hardens accordingly when that stage is selected. */
+function StageAwareFinancialsDoc({
+  label,
+  optionalHint,
+  requiredHint,
+}: {
+  label: string;
+  optionalHint: string;
+  requiredHint: string;
+}) {
+  const stage = useWatch({ name: "project_stage" }) as ProjectForm["project_stage"] | undefined;
+  const revenueStage = stage === "revenue_generating" || stage === "expansion";
+  return (
+    <FileDropField
+      docType="financial_model"
+      label={revenueStage ? `${label} *` : label}
+      hint={revenueStage ? requiredHint : optionalHint}
+    />
+  );
 }
 
 /* ------------------------------ schema ---------------------------------- */
@@ -51,13 +74,44 @@ function buildSchema(tv: (k: string) => string) {
     // 3 — Returns & financials
     expected_roi_min: optNum,
     expected_roi_max: optNum,
-    timeline_to_returns_months: optNum,
+    timeline_to_returns_months: z
+      .number()
+      .int(tv("wholeMonths"))
+      .nonnegative(tv("nonNegative"))
+      .max(240, tv("monthsMax"))
+      .optional(),
     current_annual_revenue: optNum,
     projected_revenue_12m: optNum,
     projected_revenue_24m: optNum,
     projected_revenue_36m: optNum,
     executive_summary: optStr,
     full_description: optStr,
+  }).superRefine((v, ctx) => {
+    // Cross-field rules — the backend re-validates; this is the fast feedback.
+    const issue = (path: string, message: string) =>
+      ctx.addIssue({ code: "custom", path: [path], message });
+
+    if (
+      v.expected_roi_min !== undefined &&
+      v.expected_roi_max !== undefined &&
+      v.expected_roi_min > v.expected_roi_max
+    ) {
+      issue("expected_roi_max", tv("roiOrder"));
+    }
+    if (
+      v.min_investment !== undefined &&
+      v.funding_required !== undefined &&
+      v.min_investment > v.funding_required
+    ) {
+      issue("min_investment", tv("minVsTotal"));
+    }
+    if (
+      v.existing_funding !== undefined &&
+      v.funding_required !== undefined &&
+      v.existing_funding > v.funding_required
+    ) {
+      issue("existing_funding", tv("existingVsTotal"));
+    }
   });
 }
 
@@ -129,7 +183,10 @@ export function useProjectWizardConfig(): WizardConfig<ProjectForm> {
                 hint={t("fields.brief.hint")}
                 placeholder={ph("brief")}
                 maxLength={500}
+                showCount
               />
+              <TextareaField name="executive_summary" label={f("execSummary")} hint={t("fields.execSummary.hint")} placeholder={ph("execSummary")} rows={4} />
+              <TextareaField name="full_description" label={f("fullDescription")} hint={t("fields.fullDescription.hint")} placeholder={ph("fullDescription")} rows={5} />
             </div>
           ),
           summary: (v): ReviewRow[] => [
@@ -144,7 +201,7 @@ export function useProjectWizardConfig(): WizardConfig<ProjectForm> {
           label: t("steps.funding.label"),
           title: t("steps.funding.title"),
           subtitle: t("steps.funding.subtitle"),
-          fields: ["funding_required", "funding_type"],
+          fields: ["funding_required", "funding_type", "min_investment", "existing_funding"],
           render: () => (
             <div className="flex flex-col gap-5">
               <div className="grid gap-5 sm:grid-cols-2">
@@ -170,12 +227,12 @@ export function useProjectWizardConfig(): WizardConfig<ProjectForm> {
           label: t("steps.financials.label"),
           title: t("steps.financials.title"),
           subtitle: t("steps.financials.subtitle"),
-          fields: [],
+          fields: ["expected_roi_max", "timeline_to_returns_months"],
           render: () => (
             <div className="flex flex-col gap-5">
               <div className="grid gap-5 sm:grid-cols-2">
-                <NumberField name="expected_roi_min" label={f("roiMin")} placeholder={ph("roiMin")} hint={t("fields.roiMin.hint")} />
-                <NumberField name="expected_roi_max" label={f("roiMax")} placeholder={ph("roiMax")} hint={t("fields.roiMax.hint")} />
+                <NumberField name="expected_roi_min" label={f("roiMin")} placeholder={ph("roiMin")} hint={t("fields.roiMin.hint")} suffix="%" />
+                <NumberField name="expected_roi_max" label={f("roiMax")} placeholder={ph("roiMax")} hint={t("fields.roiMax.hint")} suffix="%" />
                 <NumberField name="timeline_to_returns_months" label={f("timeline")} placeholder={ph("timeline")} min={0} />
                 <MoneyField name="current_annual_revenue" label={f("currentRevenue")} placeholder={ph("currentRevenue")} />
               </div>
@@ -187,8 +244,6 @@ export function useProjectWizardConfig(): WizardConfig<ProjectForm> {
                 <MoneyField name="projected_revenue_24m" label={f("rev24")} placeholder={ph("rev24")} />
                 <MoneyField name="projected_revenue_36m" label={f("rev36")} placeholder={ph("rev36")} />
               </div>
-              <TextareaField name="executive_summary" label={f("execSummary")} hint={t("fields.execSummary.hint")} placeholder={ph("execSummary")} rows={4} />
-              <TextareaField name="full_description" label={f("fullDescription")} hint={t("fields.fullDescription.hint")} placeholder={ph("fullDescription")} rows={5} />
             </div>
           ),
           summary: (v): ReviewRow[] => [
@@ -213,7 +268,11 @@ export function useProjectWizardConfig(): WizardConfig<ProjectForm> {
               <DocsPrivacyNote text={t("documents.note")} />
               <div className="grid gap-5 sm:grid-cols-2">
                 <FileDropField docType="business_plan" label={t("documents.businessPlan")} hint={t("documents.optionalHint")} />
-                <FileDropField docType="financial_model" label={t("documents.financials")} hint={t("documents.optionalHint")} />
+                <StageAwareFinancialsDoc
+                  label={t("documents.financials")}
+                  optionalHint={t("documents.optionalHint")}
+                  requiredHint={t("documents.requiredForRevenue")}
+                />
                 <FileDropField docType="pitch_deck" label={t("documents.pitchDeck")} hint={t("documents.optionalHint")} />
                 <FileDropField docType="additional" label={t("documents.additional")} hint={t("documents.optionalHint")} multi />
               </div>

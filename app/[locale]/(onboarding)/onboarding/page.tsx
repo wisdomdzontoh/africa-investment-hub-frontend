@@ -1,14 +1,15 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { ArrowRight, Building2, Check, Compass, X } from "lucide-react";
+import { ArrowRight, Check, ShieldCheck } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button, Card, SectionLabel } from "@/components/ds";
-import { Logo } from "@/components/brand/Logo";
-import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
+import { OnboardingHeader } from "@/components/onboarding/OnboardingHeader";
+import { RoleScene } from "@/components/onboarding/RoleScene";
 import { Link, useRouter } from "@/i18n/navigation";
 import { ApiError } from "@/lib/api/client";
 import { useSetAccountRole } from "@/lib/api/hooks";
@@ -71,6 +72,7 @@ export default function OnboardingPage() {
   const setRole = useSetAccountRole();
   const { user } = useUser();
   const searchParams = useSearchParams();
+  const reducedMotion = useReducedMotion();
   const [resumeRole, setResumeRole] = useState<ResumableRole | null>(null);
 
   // Role intent carried over from the sign-up CTA (FE-08).
@@ -98,129 +100,91 @@ export default function OnboardingPage() {
     }
   }
 
+  // One orchestrated load sequence: copy → journey → panels → trust note.
+  const container = {
+    hidden: {},
+    show: reducedMotion
+      ? {}
+      : { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+  };
+  const item = {
+    hidden: reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 22 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.55, ease: [0.22, 0.6, 0.2, 1] as const },
+    },
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-[var(--surface-page)]">
       {/* Page chrome consistent with the wizard (logo · language · exit). */}
-      <header className="border-b border-[var(--accent-border)] bg-[var(--surface-header)]">
-        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
-          <Link href="/" className="inline-flex" aria-label="African Investment Hub home">
-            <Logo height={32} />
-          </Link>
-          <div className="flex items-center gap-2 sm:gap-3">
-            <LanguageSwitcher />
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--ink)]"
-            >
-              <X className="size-4" aria-hidden />
-              {t("exit")}
-            </Link>
-          </div>
-        </div>
-      </header>
+      <OnboardingHeader exitLabel={t("exit")} />
 
       <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-10 sm:px-6 sm:py-14">
-        {/* Hero copy stays at a readable measure; cards below use the full width. */}
-        <div className="max-w-2xl">
-          <SectionLabel dot>{t("eyebrow")}</SectionLabel>
-          <h1 className="mt-3 text-balance text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold leading-[1.15] tracking-[-0.02em] text-[var(--ink)]">
-            {t("title")}
-          </h1>
-          <p className="mt-3 text-[var(--text-body)]">{t("subtitle")}</p>
-        </div>
+        <motion.div variants={container} initial="hidden" animate="show">
+          {/* Hero copy stays at a readable measure; panels use the full width. */}
+          <motion.div variants={item} className="max-w-2xl">
+            <SectionLabel dot>{t("eyebrow")}</SectionLabel>
+            <h1 className="mt-3 text-balance text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold leading-[1.15] tracking-[-0.02em] text-[var(--ink)]">
+              {t("title")}
+            </h1>
+            <p className="mt-3 text-[var(--text-body)]">{t("subtitle")}</p>
+          </motion.div>
 
-        <JourneyStrip />
+          <motion.div variants={item}>
+            <JourneyStrip />
+          </motion.div>
 
-      {resumeRole && (
-        <Card
-          hoverLift={false}
-          padding="20px"
-          className="mt-8 flex items-center justify-between gap-4 border-[var(--accent)]/40 bg-[var(--accent-tint-06)]"
-        >
-          <div>
-            <h2 className="font-semibold text-[var(--ink)]">{t("resume.title")}</h2>
-            <p className="mt-1 text-sm text-[var(--text-muted)]">{t("resume.body")}</p>
-          </div>
-          <Link href={RESUME_PATH[resumeRole]} className="no-underline">
-            <Button className="gap-2">
-              {t("resume.button")}
-              <ArrowRight size={16} aria-hidden />
-            </Button>
-          </Link>
-        </Card>
-      )}
-
-      <div className="mt-10 grid gap-6 sm:grid-cols-2">
-        <Card
-          hoverLift={false}
-          className={cn(
-            "flex flex-col gap-4",
-            intentRole === "investor" &&
-              "border-[var(--accent)] shadow-[0_0_0_3px_var(--accent-tint-08)]",
+          {resumeRole && (
+            <motion.div variants={item}>
+              <Card
+                hoverLift={false}
+                padding="20px"
+                className="mt-8 flex items-center justify-between gap-4 border-[var(--accent)]/40 bg-[var(--accent-tint-06)]"
+              >
+                <div>
+                  <h2 className="font-semibold text-[var(--ink)]">{t("resume.title")}</h2>
+                  <p className="mt-1 text-sm text-[var(--text-muted)]">{t("resume.body")}</p>
+                </div>
+                <Link href={RESUME_PATH[resumeRole]} className="no-underline">
+                  <Button className="gap-2">
+                    {t("resume.button")}
+                    <ArrowRight size={16} aria-hidden />
+                  </Button>
+                </Link>
+              </Card>
+            </motion.div>
           )}
-        >
-          <div className="flex items-center justify-between">
-            <span className="flex size-11 items-center justify-center rounded-[var(--radius-icon)] bg-[var(--accent-tint-08)] text-[var(--accent)]">
-              <Compass size={22} aria-hidden />
-            </span>
-            {intentRole === "investor" ? (
-              <span className="rounded-[var(--radius-pill)] bg-[var(--accent-tint-10)] px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.04em] text-[var(--accent)]">
-                {t("preselected")}
-              </span>
-            ) : null}
-          </div>
-          <div className="flex-1">
-            <h2 className="text-[var(--text-card-title-size)] font-semibold text-[var(--ink)]">
-              {t("investorTitle")}
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-[var(--text-body)]">
-              {t("investorDesc")}
-            </p>
-          </div>
-          <Button
-            onClick={() => choose("investor")}
-            disabled={setRole.isPending}
-            className="w-full"
-          >
-            {t("continueAsInvestor")}
-          </Button>
-        </Card>
 
-        <Card
-          hoverLift={false}
-          className={cn(
-            "flex flex-col gap-4",
-            intentRole === "project_owner" &&
-              "border-[var(--accent)] shadow-[0_0_0_3px_var(--accent-tint-08)]",
-          )}
-        >
-          <div className="flex items-center justify-between">
-            <span className="flex size-11 items-center justify-center rounded-[var(--radius-icon)] bg-[var(--accent-tint-08)] text-[var(--accent)]">
-              <Building2 size={22} aria-hidden />
-            </span>
-            {intentRole === "project_owner" ? (
-              <span className="rounded-[var(--radius-pill)] bg-[var(--accent-tint-10)] px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.04em] text-[var(--accent)]">
-                {t("preselected")}
-              </span>
-            ) : null}
+          <div className="mt-10 grid items-stretch gap-6 sm:grid-cols-2">
+            <motion.div variants={item} className="flex">
+              <RoleScene
+                variant="investor"
+                preselected={intentRole === "investor"}
+                pending={setRole.isPending}
+                onSelect={() => choose("investor")}
+              />
+            </motion.div>
+            <motion.div variants={item} className="flex">
+              <RoleScene
+                variant="project_owner"
+                preselected={intentRole === "project_owner"}
+                pending={setRole.isPending}
+                onSelect={() => choose("project_owner")}
+              />
+            </motion.div>
           </div>
-          <div className="flex-1">
-            <h2 className="text-[var(--text-card-title-size)] font-semibold text-[var(--ink)]">
-              {t("ownerTitle")}
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-[var(--text-body)]">
-              {t("ownerDesc")}
-            </p>
-          </div>
-          <Button
-            onClick={() => choose("project_owner")}
-            disabled={setRole.isPending}
-            className="w-full"
+
+          {/* Trust note — verification is the product's spine (PRD §1). */}
+          <motion.p
+            variants={item}
+            className="mt-8 flex items-center justify-center gap-2 text-center font-mono text-[var(--text-meta-size)] text-[var(--text-muted)]"
           >
-            {t("continueAsOwner")}
-          </Button>
-        </Card>
-      </div>
+            <ShieldCheck size={14} aria-hidden className="text-[var(--accent)]" />
+            {t("verifiedNote")}
+          </motion.p>
+        </motion.div>
       </main>
     </div>
   );

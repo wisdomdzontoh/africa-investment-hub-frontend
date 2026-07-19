@@ -533,6 +533,11 @@
     "backToSite": "Back to site",
     "loadError": "We couldn't load your account. Please check your connection and try again.",
     "retry": "Retry",
+    "roles": {
+      "investor": "Investor",
+      "project_owner": "Project facilitator",
+      "admin": "Administrator"
+    },
     "reviewTitle": "Your account is under review",
     "reviewBody": "You can set up your profile now. Browsing opportunities and matches unlocks once our team approves your account — usually within 48 hours.",
     "rejectedTitle": "Your account isn't active",
@@ -556,6 +561,17 @@
     "ownerDesc": "Submit your project for review and reach qualified international investors.",
     "continueAsInvestor": "Continue as investor",
     "continueAsOwner": "Continue as project facilitator",
+    "investorTag": "Deploy capital",
+    "ownerTag": "Raise capital",
+    "needsLabel": "You'll need",
+    "investorNeed1": "Company and registration details",
+    "investorNeed2": "Investment preferences and ticket size",
+    "investorNeed3": "Registration and AML certificates",
+    "ownerNeed1": "Project overview and sector",
+    "ownerNeed2": "Funding ask and financial projections",
+    "ownerNeed3": "Business plan and company documents",
+    "timeMeta": "About 10 minutes. Progress saves automatically.",
+    "verifiedNote": "Every account is reviewed by our team before full access is granted.",
     "roleError": "Could not save your role. Please try again.",
     "resume": {
       "title": "Continue your application",
@@ -719,7 +735,8 @@
         },
         "excluded": {
           "label": "Sectors to exclude",
-          "hint": "These will never appear in your matches."
+          "hint": "These will never appear in your matches.",
+          "conflict": "Selected as a sector of interest"
         },
         "polRisk": {
           "label": "Political risk tolerance",
@@ -808,7 +825,19 @@
         "email": "Enter a valid email",
         "nonNegative": "Must be zero or more",
         "atLeastOneCountry": "Pick at least one country",
-        "atLeastOneSector": "Pick at least one sector"
+        "atLeastOneSector": "Pick at least one sector",
+        "ticketOrder": "Must be at least the minimum ticket size",
+        "dealSizeRange": "Must fall between your minimum and maximum ticket sizes",
+        "roiOrder": "Must be at least the minimum target ROI",
+        "pctOrder": "Must be at least the minimum ownership percentage",
+        "excludedConflict": "Remove sectors that are also selected as sectors of interest",
+        "phoneInvalid": "Enter a valid phone number",
+        "urlInvalid": "Enter a valid website address",
+        "yearRange": "Enter a valid year"
+      },
+      "phone": {
+        "search": "Search country or code…",
+        "empty": "No match found."
       },
       "review": {
         "title": "Review your application",
@@ -952,6 +981,7 @@
         "pitchDeck": "Pitch deck",
         "additional": "Additional documents",
         "optionalHint": "Optional · PDF, PNG, JPG",
+        "requiredForRevenue": "Required for revenue-generating and expansion projects · PDF",
         "uploadFailed": "Your project was saved, but documents could not be uploaded. You can add them later from your dashboard."
       },
       "validation": {
@@ -959,7 +989,12 @@
         "country": "Select a country",
         "positive": "Must be greater than zero",
         "nonNegative": "Must be zero or more",
-        "max500": "Keep this under 500 characters"
+        "max500": "Keep this under 500 characters",
+        "roiOrder": "Must be at least the minimum expected ROI",
+        "minVsTotal": "Cannot exceed the total funding required",
+        "existingVsTotal": "Cannot exceed the total funding required",
+        "wholeMonths": "Enter whole months",
+        "monthsMax": "Enter a timeline of 240 months or less"
       },
       "review": {
         "title": "Review your project",
@@ -993,6 +1028,20 @@
     "overview": "Overview",
     "profile": "Profile",
     "matches": "Matches",
+    "browse": "Browse projects",
+    "browseDesc": "Every verified opportunity on the platform. Raise your hand and our team takes it from there.",
+    "filterSector": "Filter by sector",
+    "filterCountry": "Filter by country",
+    "allSectors": "All sectors",
+    "allCountries": "All countries",
+    "expressInterest": "I'm interested",
+    "interested": "Interest sent",
+    "interestSent": "Interest sent. The project team and our advisors have been notified.",
+    "interestError": "Could not register your interest. Please try again.",
+    "viewDetails": "Details",
+    "browseEmpty": "No projects match these filters yet.",
+    "browseFunding": "Funding ask",
+    "browseRoi": "Expected ROI",
     "notifications": "Notifications",
     "welcome": "Welcome back",
     "statusLabel": "Account status",
@@ -1255,6 +1304,7 @@
     "needsAttention": "Needs attention",
     "review": "Review",
     "investorsTotal": "Total investors",
+    "facilitatorsTotal": "Project facilitators",
     "investorsPending": "Pending investors",
     "projectsTotal": "Total projects",
     "projectsPending": "Pending projects",
@@ -1288,6 +1338,11 @@
     "suspended": "Suspended.",
     "reactivate": "Reactivate",
     "reactivated": "Reactivated.",
+    "deleteUser": "Delete user",
+    "deleteUserTitle": "Delete this user?",
+    "deleteUserBody": "{email} will lose access immediately and their sign-in account will be removed. Their data is permanently deleted after 30 days. This cannot be undone.",
+    "deleting": "Deleting…",
+    "userDeleted": "User deleted. Their data will be purged in 30 days.",
     "you": "you",
     "auditAction": "Action",
     "auditTarget": "Target",

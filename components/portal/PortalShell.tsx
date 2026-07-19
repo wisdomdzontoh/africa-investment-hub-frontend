@@ -58,9 +58,13 @@ export function PortalShell({ title, homeHref, nav, soonLabel, children }: Porta
       <div aria-hidden className="portal-canvas pointer-events-none absolute inset-0" />
       <SidebarProvider className="relative z-[1] min-h-svh">
         <AppSidebar homeHref={homeHref} title={title} nav={nav} soonLabel={soonLabel} />
-        <SidebarInset className="bg-transparent">
+        {/* min-w-0 lets the inset shrink instead of pushing body-level
+            horizontal scroll (the fixed sidebar would be overlapped);
+            overflow-x-clip guards against any future wide widget — wide
+            tables scroll inside their own containers (DataTable). */}
+        <SidebarInset className="min-w-0 bg-transparent">
           <AppHeader title={title} homeHref={homeHref} nav={nav} />
-          <main className="min-w-0 flex-1 px-4 py-6 sm:px-6 lg:px-8">
+          <main className="min-w-0 flex-1 overflow-x-clip px-4 py-6 sm:px-6 lg:px-8">
             {showBanner && account ? <ReviewBanner status={account.status} /> : null}
             {children}
           </main>

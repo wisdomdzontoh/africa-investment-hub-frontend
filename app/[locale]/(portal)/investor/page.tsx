@@ -74,7 +74,9 @@ export default function InvestorOverviewPage() {
         <StatCard label={t("kpiUnread")} icon={Bell} value={unread} />
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
+      {/* minmax(0,…) lets tracks shrink below long unbreakable content
+          so the page never scrolls horizontally. */}
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <Card hoverLift={false}>
           <h2 className="mb-2 text-[var(--text-card-title-size)] font-semibold text-[var(--ink)]">
             {ck("title")}

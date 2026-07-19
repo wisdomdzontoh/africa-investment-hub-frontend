@@ -2,8 +2,27 @@
 
 import { CircleAlert } from "lucide-react";
 import { Controller, useFormContext } from "react-hook-form";
+import { Input } from "@/components/ui/input";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { formatMoneyInput, parseNumeric } from "@/lib/onboarding/format";
+
+/** Comfortable form-control height shared across the wizard. */
+export const controlH = "h-10";
 
 /* ----------------------------- field shell ------------------------------ */
 
@@ -28,10 +47,10 @@ export function FieldShell({
 }: ShellProps) {
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
-      <label htmlFor={htmlFor} className="text-sm font-medium text-foreground">
+      <Label htmlFor={htmlFor} className="text-sm font-medium text-foreground">
         {label}
         {required && <span className="ml-0.5 text-destructive">*</span>}
-      </label>
+      </Label>
       {children}
       {hint && !error && <p className="text-xs text-muted-foreground">{hint}</p>}
       {error && (
@@ -43,12 +62,7 @@ export function FieldShell({
   );
 }
 
-const inputBase =
-  "w-full rounded-[var(--radius-base)] border bg-background px-3 py-2.5 text-sm text-foreground " +
-  "transition-colors placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 " +
-  "focus:ring-[var(--ring)] focus:ring-offset-1 focus:ring-offset-background disabled:opacity-60";
-
-function useFieldError(name: string): string | undefined {
+export function useFieldError(name: string): string | undefined {
   const {
     formState: { errors },
   } = useFormContext();
@@ -94,13 +108,13 @@ export function TextField({
   const error = useFieldError(name);
   return (
     <FieldShell label={label} htmlFor={name} required={required} hint={hint} error={error}>
-      <input
+      <Input
         id={name}
         type={type}
         maxLength={maxLength}
         placeholder={placeholder}
         aria-invalid={!!error}
-        className={cn(inputBase, mono && "font-mono", error ? "border-destructive" : "border-border")}
+        className={cn(controlH, mono && "font-mono")}
         {...register(name)}
       />
     </FieldShell>
@@ -117,37 +131,52 @@ export function NumberField({
   hint,
   min,
   max,
-}: TextFieldProps & { min?: number; max?: number }) {
+  suffix,
+}: TextFieldProps & { min?: number; max?: number; suffix?: string }) {
   const { register } = useFormContext();
   const error = useFieldError(name);
+  const registration = register(name, {
+    setValueAs: (v) => (v === "" || v === null ? undefined : Number(v)),
+  });
   return (
     <FieldShell label={label} htmlFor={name} required={required} hint={hint} error={error}>
-      <input
-        id={name}
-        type="number"
-        inputMode="numeric"
-        min={min}
-        max={max}
-        placeholder={placeholder}
-        aria-invalid={!!error}
-        className={cn(inputBase, "font-mono", error ? "border-destructive" : "border-border")}
-        {...register(name, {
-          setValueAs: (v) => (v === "" || v === null ? undefined : Number(v)),
-        })}
-      />
+      {suffix ? (
+        <InputGroup className={controlH}>
+          <InputGroupInput
+            id={name}
+            type="number"
+            inputMode="numeric"
+            min={min}
+            max={max}
+            placeholder={placeholder}
+            aria-invalid={!!error}
+            className="font-mono"
+            {...registration}
+          />
+          <InputGroupAddon align="inline-end">
+            <InputGroupText>{suffix}</InputGroupText>
+          </InputGroupAddon>
+        </InputGroup>
+      ) : (
+        <Input
+          id={name}
+          type="number"
+          inputMode="numeric"
+          min={min}
+          max={max}
+          placeholder={placeholder}
+          aria-invalid={!!error}
+          className={cn(controlH, "font-mono")}
+          {...registration}
+        />
+      )}
     </FieldShell>
   );
 }
 
 /* ------------------------------ money input ----------------------------- */
 /** Stores a plain number in form state; displays grouped USD while typing. */
-export function MoneyField({
-  name,
-  label,
-  required,
-  placeholder,
-  hint,
-}: TextFieldProps) {
+export function MoneyField({ name, label, required, placeholder, hint }: TextFieldProps) {
   const { control } = useFormContext();
   const error = useFieldError(name);
   return (
@@ -161,27 +190,23 @@ export function MoneyField({
               ? ""
               : formatMoneyInput(String(field.value));
           return (
-            <div className="relative">
-              <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
-                $
-              </span>
-              <input
+            <InputGroup className={controlH}>
+              <InputGroupAddon>
+                <InputGroupText>$</InputGroupText>
+              </InputGroupAddon>
+              <InputGroupInput
                 id={name}
                 inputMode="numeric"
                 value={display}
                 placeholder={placeholder}
                 aria-invalid={!!error}
-                className={cn(
-                  inputBase,
-                  "pl-7 font-mono",
-                  error ? "border-destructive" : "border-border",
-                )}
+                className="font-mono"
                 name={field.name}
                 ref={field.ref}
                 onBlur={field.onBlur}
                 onChange={(e) => field.onChange(parseNumeric(e.target.value))}
               />
-            </div>
+            </InputGroup>
           );
         }}
       />
@@ -199,29 +224,32 @@ export function TextareaField({
   hint,
   rows = 4,
   maxLength,
-}: TextFieldProps & { rows?: number }) {
-  const { register } = useFormContext();
+  showCount,
+}: TextFieldProps & { rows?: number; showCount?: boolean }) {
+  const { register, watch } = useFormContext();
   const error = useFieldError(name);
+  const value: string = showCount ? (watch(name) ?? "") : "";
   return (
     <FieldShell label={label} htmlFor={name} required={required} hint={hint} error={error}>
-      <textarea
+      <Textarea
         id={name}
         rows={rows}
         maxLength={maxLength}
         placeholder={placeholder}
         aria-invalid={!!error}
-        className={cn(
-          inputBase,
-          "min-h-24 resize-y",
-          error ? "border-destructive" : "border-border",
-        )}
+        className="min-h-24 resize-y"
         {...register(name)}
       />
+      {showCount && maxLength ? (
+        <p className="text-right font-mono text-[11px] text-muted-foreground">
+          {value.length}/{maxLength}
+        </p>
+      ) : null}
     </FieldShell>
   );
 }
 
-/* ------------------------------ native select --------------------------- */
+/* ---------------------------- shadcn select ----------------------------- */
 
 type Option = { value: string; label: string };
 
@@ -233,25 +261,36 @@ export function SelectField({
   placeholder,
   options,
 }: TextFieldProps & { options: Option[] }) {
-  const { register } = useFormContext();
+  const { control } = useFormContext();
   const error = useFieldError(name);
   return (
     <FieldShell label={label} htmlFor={name} required={required} hint={hint} error={error}>
-      <select
-        id={name}
-        aria-invalid={!!error}
-        className={cn(inputBase, error ? "border-destructive" : "border-border")}
-        {...register(name)}
-      >
-        <option value="" disabled>
-          {placeholder ?? "Select"}
-        </option>
-        {options.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
-        ))}
-      </select>
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <Select
+            value={field.value ?? ""}
+            onValueChange={(v) => field.onChange(v)}
+          >
+            <SelectTrigger
+              id={name}
+              aria-invalid={!!error}
+              className={cn("w-full", controlH)}
+              onBlur={field.onBlur}
+            >
+              <SelectValue placeholder={placeholder} />
+            </SelectTrigger>
+            <SelectContent>
+              {options.map((o) => (
+                <SelectItem key={o.value} value={o.value}>
+                  {o.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
+      />
     </FieldShell>
   );
 }

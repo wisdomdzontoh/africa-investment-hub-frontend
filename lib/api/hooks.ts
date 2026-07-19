@@ -22,6 +22,7 @@ import type {
   CmsHomepageContent,
   InvestorProfile,
   MatchItem,
+  MatchSummary,
   Milestone,
   NotificationItem,
   Page,
@@ -274,6 +275,45 @@ export function useExpressInterest() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: (matchId: string) => api.post(`/matches/${matchId}/interest`),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["investor", "matches"] }),
+  });
+}
+
+/** Approved-project catalogue row (backend public `ProjectCard`). */
+export type BrowseProject = {
+  id: string;
+  title: string;
+  sector: string;
+  country: string;
+  brief_description: string;
+  funding_required: string;
+  expected_roi_min: string | null;
+  expected_roi_max: string | null;
+  risk_level: string | null;
+  project_stage: string;
+  is_featured: boolean;
+};
+
+/** Investor-portal catalogue browse (PRD §6.5 — saved/browse opportunities). */
+export function useBrowseProjects(filters: { sector?: string; country?: string }) {
+  const api = useApiClient();
+  const params = new URLSearchParams({ limit: "50", sort: "newest" });
+  if (filters.sector) params.set("sector", filters.sector);
+  if (filters.country) params.set("country", filters.country);
+  return useQuery({
+    queryKey: ["investor", "browse", filters.sector ?? "", filters.country ?? ""],
+    queryFn: () => api.get<Page<BrowseProject>>(`/projects?${params.toString()}`),
+  });
+}
+
+/** Express interest straight from the catalogue — creates/advances the match
+ *  and notifies the facilitator + admins (e-commerce-style flow). */
+export function useProjectInterest() {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (projectId: string) =>
+      api.post<MatchSummary>(`/projects/${projectId}/interest`),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["investor", "matches"] }),
   });
 }
@@ -569,6 +609,17 @@ export function useSetUserStatus() {
   return useMutation({
     mutationFn: (vars: { userId: string; status: UserStatus }) =>
       api.patch(`/admin/users/${vars.userId}/status`, { status: vars.status }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin"] }),
+  });
+}
+
+/** Soft-deletes the user and removes their Clerk identity (hard purge in 30 days). */
+export function useDeleteUser() {
+  const api = useApiClient();
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (userId: string) =>
+      api.delete<{ message: string }>(`/admin/users/${userId}`),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["admin"] }),
   });
 }

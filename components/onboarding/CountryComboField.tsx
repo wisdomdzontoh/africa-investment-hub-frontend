@@ -1,10 +1,21 @@
 "use client";
 
 import { Check, ChevronsUpDown } from "lucide-react";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
+import { Flag } from "@/components/common/Flag";
+import { Button } from "@/components/ui/button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { FieldShell } from "@/components/onboarding/fields";
+import { controlH, FieldShell } from "@/components/onboarding/fields";
 
 type Option = { value: string; label: string };
 
@@ -15,9 +26,12 @@ type Props = {
   hint?: string;
   placeholder?: string;
   options: Option[];
+  /** Option values are ISO alpha-2 codes → show the country flag. */
+  flags?: boolean;
+  emptyText?: string;
 };
 
-/** Accessible-ish searchable single select (combobox) for long country lists. */
+/** Searchable single-select country combobox (shadcn Popover + Command). */
 export function CountryComboField({
   name,
   label,
@@ -25,95 +39,75 @@ export function CountryComboField({
   hint,
   placeholder,
   options,
+  flags = true,
+  emptyText = "No country found.",
 }: Props) {
   const { control } = useFormContext();
   const { field, fieldState } = useController({ name, control });
   const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState("");
-  const blurTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const selectedLabel = useMemo(
-    () => options.find((o) => o.value === field.value)?.label ?? "",
+  const selected = useMemo(
+    () => options.find((o) => o.value === field.value),
     [options, field.value],
   );
-
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return q ? options.filter((o) => o.label.toLowerCase().includes(q)) : options;
-  }, [options, query]);
-
   const error = fieldState.error?.message as string | undefined;
 
   return (
     <FieldShell label={label} htmlFor={name} required={required} hint={hint} error={error}>
-      <div className="relative">
-        <input
-          id={name}
-          role="combobox"
-          aria-expanded={open}
-          aria-controls={`${name}-listbox`}
-          aria-autocomplete="list"
-          aria-invalid={!!error}
-          autoComplete="off"
-          value={open ? query : selectedLabel}
-          placeholder={placeholder ?? "Search country…"}
-          onFocus={() => {
-            setOpen(true);
-            setQuery("");
-          }}
-          onBlur={() => {
-            blurTimer.current = setTimeout(() => setOpen(false), 120);
-            field.onBlur();
-          }}
-          onChange={(e) => {
-            setQuery(e.target.value);
-            if (!open) setOpen(true);
-          }}
-          className={cn(
-            "w-full rounded-[var(--radius-base)] border bg-background px-3 py-2.5 pr-9 text-sm text-foreground",
-            "focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:ring-offset-1 focus:ring-offset-background",
-            error ? "border-destructive" : "border-border",
-          )}
-        />
-        <ChevronsUpDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
-        {open && (
-          <ul
-            id={`${name}-listbox`}
-            role="listbox"
-            className="absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-[var(--radius-base)] border border-border bg-popover p-1 shadow-lg"
-          >
-            {filtered.length === 0 && (
-              <li className="px-3 py-2 text-sm text-muted-foreground">No country found.</li>
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <Button
+            id={name}
+            type="button"
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            aria-invalid={!!error}
+            onBlur={field.onBlur}
+            className={cn(
+              controlH,
+              "w-full justify-between border-input bg-transparent px-3 font-normal shadow-none hover:bg-transparent",
+              !selected && "text-muted-foreground",
             )}
-            {filtered.map((o) => {
-              const on = o.value === field.value;
-              return (
-                <li key={o.value}>
-                  <button
-                    type="button"
-                    role="option"
-                    aria-selected={on}
-                    onMouseDown={(e) => {
-                      // mousedown fires before blur — prevents the list closing first
-                      e.preventDefault();
-                      field.onChange(o.value);
-                      if (blurTimer.current) clearTimeout(blurTimer.current);
+          >
+            <span className="flex min-w-0 items-center gap-2">
+              {selected && flags ? <Flag code={selected.value} /> : null}
+              <span className="truncate">{selected?.label ?? placeholder ?? "Select"}</span>
+            </span>
+            <ChevronsUpDown className="size-4 shrink-0 text-muted-foreground" aria-hidden />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent align="start" className="w-[var(--radix-popover-trigger-width)] p-0">
+          <Command>
+            <CommandInput placeholder={placeholder ?? "Search…"} />
+            <CommandList>
+              <CommandEmpty>{emptyText}</CommandEmpty>
+              <CommandGroup>
+                {options.map((o) => (
+                  <CommandItem
+                    key={o.value}
+                    value={o.label}
+                    onSelect={() => {
+                      field.onChange(o.value === field.value ? "" : o.value);
                       setOpen(false);
                     }}
-                    className={cn(
-                      "flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm hover:bg-accent",
-                      on && "font-medium",
-                    )}
                   >
-                    {o.label}
-                    {on && <Check className="size-4 text-[var(--accent)]" aria-hidden />}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </div>
+                    {flags ? <Flag code={o.value} /> : null}
+                    <span className="flex-1 truncate">{o.label}</span>
+                    <Check
+                      className={cn(
+                        "size-4",
+                        o.value === field.value ? "opacity-100" : "opacity-0",
+                      )}
+                      aria-hidden
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </Popover>
     </FieldShell>
   );
 }

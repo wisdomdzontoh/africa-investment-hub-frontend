@@ -1,9 +1,9 @@
 "use client";
 
-import { CircleAlert, Pencil, Send } from "lucide-react";
+import { CircleAlert, Loader2, Pencil, Send } from "lucide-react";
 import type { FieldValues } from "react-hook-form";
-import { BrandedButton } from "@/components/brand/Button";
-import { BrandedCard } from "@/components/brand/Card";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import type { WizardStep } from "@/lib/onboarding/types";
 import { cn } from "@/lib/utils";
 
@@ -51,7 +51,7 @@ export function ReviewStep<T extends FieldValues>({
 
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
         {cards.map(({ step, index, rows }) => (
-          <BrandedCard key={step.id} pad>
+          <div key={step.id} className="rounded-lg border border-border bg-card p-4">
             <div className="mb-3 flex items-center justify-between">
               <h2 className="text-sm font-bold text-foreground">{step.label}</h2>
               <button
@@ -77,16 +77,15 @@ export function ReviewStep<T extends FieldValues>({
                 </div>
               ))}
             </dl>
-          </BrandedCard>
+          </div>
         ))}
       </div>
 
       <label className="mt-6 flex cursor-pointer items-start gap-3 rounded-[var(--radius-base)] border border-border bg-[var(--surface-sunken)]/40 p-4">
-        <input
-          type="checkbox"
+        <Checkbox
           checked={consent}
-          onChange={(e) => onConsentChange(e.target.checked)}
-          className="mt-0.5 size-4 accent-[var(--accent)]"
+          onCheckedChange={(v) => onConsentChange(v === true)}
+          className="mt-0.5"
         />
         <span className="text-sm text-foreground">{consentLabel}</span>
       </label>
@@ -98,15 +97,20 @@ export function ReviewStep<T extends FieldValues>({
       )}
 
       <div className="mt-6 flex justify-end">
-        <BrandedButton
+        <Button
           type="button"
-          icon={Send}
-          loading={submitting}
+          size="lg"
           disabled={!consent || submitting}
           onClick={onSubmit}
+          className="gap-2"
         >
+          {submitting ? (
+            <Loader2 className="size-4 animate-spin" aria-hidden />
+          ) : (
+            <Send className="size-4" aria-hidden />
+          )}
           {submitting ? submittingLabel : submitLabel}
-        </BrandedButton>
+        </Button>
       </div>
     </div>
   );
