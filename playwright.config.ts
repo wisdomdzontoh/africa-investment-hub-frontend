@@ -21,7 +21,18 @@ export default defineConfig({
     trace: "on-first-retry",
   },
   projects: [
-    { name: "chromium", use: { ...devices["Desktop Chrome"] } },
+    {
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+        // The suite only talks to the loopback server. --no-proxy-server
+        // makes Chromium connect directly, immune to HTTP(S)_PROXY env vars
+        // leaking in from the CI runner — with a proxy configured, even
+        // http://127.0.0.1 navigations fail as net::ERR_NAME_NOT_RESOLVED
+        // when the proxy itself is unreachable.
+        launchOptions: { args: ["--no-proxy-server"] },
+      },
+    },
   ],
   webServer: {
     // `next start` refuses `output: "standalone"` builds (Next 16) — CI runs

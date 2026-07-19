@@ -113,3 +113,7 @@ jobs:
           # to exist at request time; the smoke tests only visit public,
           # cookie-less routes, so Clerk's API is never actually called.
           CLERK_SECRET_KEY: sk_test_e2e_placeholder_000000000000000000
+          # Keep loopback traffic off any proxy the runner environment may
+          # define (Chromium also launches with --no-proxy-server).
+          NO_PROXY: localhost,127.0.0.1
+          no_proxy: localhost,127.0.0.1
