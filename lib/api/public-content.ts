@@ -5,10 +5,16 @@
 import { API_BASE_URL } from "@/lib/api/client";
 import type { CmsHomepageContent, Locale, LocaleText } from "@/types/api";
 
+// Same rationale as lib/api/public-projects.ts: these fetches run during
+// static generation, where a stalled backend would hang the page past Next's
+// 60s prerender limit and fail the build. Bound them and fall back to null.
+const FETCH_TIMEOUT_MS = 8_000;
+
 export async function getHomepageContent(): Promise<CmsHomepageContent | null> {
   try {
     const res = await fetch(`${API_BASE_URL}/v1/content/homepage`, {
       next: { revalidate: 300 },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
     });
     if (!res.ok) return null;
     return (await res.json()) as CmsHomepageContent;
@@ -53,6 +59,7 @@ export async function getPublishedCountryContent(
     const res = await fetch(`${API_BASE_URL}/v1/countries/${code.toUpperCase()}`, {
       headers: { "Accept-Language": locale },
       next: { revalidate: 300 },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
     });
     if (!res.ok) return null;
     return (await res.json()) as PublicCountryContent;

@@ -34,6 +34,13 @@ export type LiveProjectDetail = Project & {
   fullDescription: string | null;
 };
 
+// Hard cap on server-side fetches to the backend. These run during static
+// generation (`next build`), where Next kills any page taking >60s — an
+// unreachable or stalled backend must degrade to the empty state, not hang
+// the build. Aborted responses are never cached, and Next strips the signal
+// on background ISR revalidations, so this only bounds foreground fetches.
+const FETCH_TIMEOUT_MS = 8_000;
+
 function num(v: string | null | undefined): number {
   if (v === null || v === undefined) return 0;
   const n = Number(v);
@@ -89,6 +96,7 @@ async function fetchPage(
   try {
     const res = await fetch(`${API_BASE_URL}/v1/projects?${params}`, {
       next: { revalidate: 60 },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
     });
     if (!res.ok) return { items: [], total: 0 };
     const data = (await res.json()) as { items?: ApiProjectCard[]; total?: number | null };
@@ -144,6 +152,7 @@ export async function countLiveProjectsByCountry(): Promise<Record<string, numbe
   try {
     const res = await fetch(`${API_BASE_URL}/v1/content/project-counts`, {
       next: { revalidate: 60 },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
     });
     if (!res.ok) return {};
     const data = (await res.json()) as { counts?: Record<string, number> };
@@ -167,6 +176,7 @@ export async function getLiveProjectDetail(
     const res = await fetch(`${API_BASE_URL}/v1/projects/${id}`, {
       headers: token ? { Authorization: `Bearer ${token}` } : undefined,
       cache: "no-store",
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
     });
     if (!res.ok) return null;
     const c = (await res.json()) as ApiProjectDetail;
