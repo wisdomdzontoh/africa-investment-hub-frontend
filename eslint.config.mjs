@@ -18,7 +18,6 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
     // Vendored Sentry tunnel/instrumentation output, Playwright artifacts.
-    "playwright-report/**",
     "test-results/**",
   ]),
   // Vendored shadcn/ui primitives: keep them lint-clean for real issues, but

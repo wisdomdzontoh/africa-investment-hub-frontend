@@ -1,5 +1,6 @@
 # Frontend CI (INFRA-02): typecheck, lint, i18n parity, build — on every PR
-# and push to main. Unit/e2e steps join once FE-15 lands the test stack.
+# and push to main. Unit tests run in the main job; the `smoke` job probes
+# the production build over HTTP (no browser).
 name: CI
 
 on:
@@ -69,9 +70,15 @@ jobs:
           # override.
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || 'pk_test_Y2xlcmsuZXhhbXBsZS5jb20k' }}
 
-  e2e:
+  # HTTP smoke test of the production build — no browser. Boots the standalone
+  # server exactly as production would and asserts the critical public routes
+  # respond. This is the gate that catches runtime-config regressions (e.g. a
+  # crashing middleware) that typecheck/build/unit tests cannot see. Deeper
+  # browser e2e (signup → onboarding → submit) re-introduces Playwright when
+  # those flows get test fixtures.
+  smoke:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -87,9 +94,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps chromium
-
       - name: Build
         run: pnpm build
         env:
@@ -98,22 +102,42 @@ jobs:
 
       # `output: standalone` puts the server in .next/standalone but leaves
       # static assets and /public outside it — copy them in so the standalone
-      # server serves the full app (Playwright starts it, not `next start`).
+      # server serves the full app.
       - name: Prepare standalone server assets
         run: |
           cp -r .next/static .next/standalone/.next/static
           cp -r public .next/standalone/public
 
-      - name: Run e2e smoke tests
-        run: pnpm e2e
+      - name: Boot standalone server and probe critical routes
         env:
-          NEXT_PUBLIC_API_URL: http://localhost:8000
-          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || 'pk_test_Y2xlcmsuZXhhbXBsZS5jb20k' }}
           # Placeholder — NOT a real key. clerkMiddleware requires the secret
-          # to exist at request time; the smoke tests only visit public,
+          # to exist at request time; these probes only hit public,
           # cookie-less routes, so Clerk's API is never actually called.
           CLERK_SECRET_KEY: sk_test_e2e_placeholder_000000000000000000
-          # Keep loopback traffic off any proxy the runner environment may
-          # define (Chromium also launches with --no-proxy-server).
-          NO_PROXY: localhost,127.0.0.1
-          no_proxy: localhost,127.0.0.1
+          PORT: "3000"
+        run: |
+          node .next/standalone/server.js &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
+
+          for i in $(seq 1 30); do
+            curl -s --noproxy '*' -o /dev/null http://127.0.0.1:3000/en && break
+            sleep 1
+          done
+
+          fail=0
+          check() {
+            code=$(curl -s --noproxy '*' -o /tmp/body -w '%{http_code}' "http://127.0.0.1:3000$1")
+            if [ "$code" = "$2" ]; then
+              echo "OK   $1 -> $code"
+            else
+              echo "FAIL $1 -> $code (expected $2)"
+              fail=1
+            fi
+          }
+
+          check /en 200
+          grep -q "<h1" /tmp/body || { echo "FAIL /en is missing its <h1>"; fail=1; }
+          check /en/opportunities 200
+          check /en/this-route-does-not-exist 404
+          exit $fail
