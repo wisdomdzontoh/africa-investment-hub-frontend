@@ -306,6 +306,29 @@ export function useBrowseProjects(filters: { sector?: string; country?: string }
   });
 }
 
+/** A match as shown to the project's facilitator; `investor` is null while
+ *  the engagement is confidential (identity withheld — PRD §6.9). */
+export type FacilitatorMatch = {
+  id: string;
+  project_id: string;
+  project_title: string;
+  status: string;
+  source: string;
+  is_confidential: boolean;
+  investor_interest_at: string | null;
+  created_at: string;
+  investor: { company_name: string | null; country_of_registration: string | null } | null;
+};
+
+/** Investor engagement across the facilitator's projects. */
+export function useFacilitatorMatches() {
+  const api = useApiClient();
+  return useQuery({
+    queryKey: ["facilitator", "matches"],
+    queryFn: () => api.get<Page<FacilitatorMatch>>("/projects/mine/matches"),
+  });
+}
+
 /** Express interest straight from the catalogue — creates/advances the match
  *  and notifies the facilitator + admins (e-commerce-style flow). */
 export function useProjectInterest() {

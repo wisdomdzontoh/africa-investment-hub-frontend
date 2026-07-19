@@ -1,6 +1,6 @@
 "use client";
 
-import { Briefcase, LayoutDashboard, Plus } from "lucide-react";
+import { Briefcase, Handshake, LayoutDashboard, Plus } from "lucide-react";
 import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { PortalAuthGate } from "@/components/auth/PortalAuthGate";
@@ -14,6 +14,7 @@ export default function FacilitatorLayout({ children }: { children: ReactNode })
       items: [
         { href: "/facilitator", label: t("overview"), icon: LayoutDashboard, exact: true },
         { href: "/facilitator/projects", label: t("projects"), icon: Briefcase },
+        { href: "/facilitator/interest", label: t("interest"), icon: Handshake },
         { href: "/facilitator/projects/new", label: t("newProject"), icon: Plus },
       ],
     },
