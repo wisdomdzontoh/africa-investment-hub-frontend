@@ -4,7 +4,11 @@ import { defineConfig, devices } from "@playwright/test";
 // install`. CI builds + starts the app; locally it reuses `pnpm dev` if it's
 // already running.
 const PORT = 3000;
-const baseURL = `http://localhost:${PORT}`;
+// Loopback IP, not "localhost": CI Chromium has failed to DNS-resolve the
+// name (net::ERR_NAME_NOT_RESOLVED) while the server itself was healthy. An
+// IP literal needs no resolver. The server binds 0.0.0.0, so this works
+// locally and in CI alike.
+const baseURL = `http://127.0.0.1:${PORT}`;
 
 export default defineConfig({
   testDir: "./e2e",
