@@ -20,7 +20,10 @@ export default defineConfig({
     { name: "chromium", use: { ...devices["Desktop Chrome"] } },
   ],
   webServer: {
-    command: process.env.CI ? "pnpm start" : "pnpm dev",
+    // `next start` refuses `output: "standalone"` builds (Next 16) — CI runs
+    // the standalone server directly. Its static assets are copied in by the
+    // CI workflow after `pnpm build`. Locally we reuse the dev server.
+    command: process.env.CI ? "node .next/standalone/server.js" : "pnpm dev",
     url: baseURL,
     timeout: 120_000,
     reuseExistingServer: !process.env.CI,
