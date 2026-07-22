@@ -4,10 +4,8 @@ import { Logo } from "@/components/brand/Logo";
 import { Chip } from "@/components/ds/Chip";
 
 const FOOTER_LINKS = [
-  { href: "/contact", key: "sitemap" as const },
-  { href: "/contact", key: "terms" as const },
-  { href: "/contact", key: "security" as const },
-  { href: "/contact", key: "privacy" as const },
+  { href: "/terms", key: "terms" as const },
+  { href: "/privacy", key: "privacy" as const },
 ] as const;
 
 const TRUST_CHIPS = [

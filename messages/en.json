@@ -31,51 +31,16 @@
     }
   },
   "footer": {
-    "tagline": "Connecting global investors to verified African opportunities — across all 54 countries.",
     "chips": {
       "manualVerification": "Manual Verification",
       "ndaGated": "NDA-Gated Deal Rooms",
       "noFundsHeld": "No Funds Held"
     },
     "links": {
-      "sitemap": "Sitemap",
       "terms": "Terms & Conditions",
-      "security": "Security",
       "privacy": "Privacy Notice"
     },
-    "ctaTitle": "Ready to explore verified African opportunities?",
-    "ctaButton": "Talk to an advisor",
-    "contactTitle": "Get in touch",
-    "email": "invest@africaninvestmenthub.com",
-    "phone": "+44 20 7946 0123",
-    "platform": "Platform",
-    "services": "Services",
-    "company": "Company",
     "legal": "Legal",
-    "platformLinks": {
-      "opportunities": "Opportunities",
-      "countries": "Countries",
-      "whyAfrica": "Why Africa",
-      "forOwners": "For project facilitators"
-    },
-    "servicesLinks": {
-      "verification": "Investor verification",
-      "diligence": "Due diligence",
-      "thirdParty": "Third-party verification",
-      "monitoring": "Project monitoring"
-    },
-    "companyLinks": {
-      "about": "About",
-      "advisory": "Advisory board",
-      "partners": "Partners",
-      "contact": "Contact"
-    },
-    "legalLinks": {
-      "terms": "Terms",
-      "privacy": "Privacy",
-      "data": "Data policy",
-      "disclosures": "Disclosures"
-    },
     "copyright": "© 2026 African Investment Hub. Not a licensed broker or financial advisor.",
     "disclaimer": "The platform does not process payments or hold funds."
   },
@@ -131,26 +96,22 @@
         "discover": {
           "label": "Discover opportunities",
           "title": "Discover screened, investment-ready projects",
-          "body": "A single trustworthy source of vetted opportunities — every listing reviewed and risk-rated by our team before it goes live.",
-          "imagery": "imagery: investor browsing opportunities"
+          "body": "A single trustworthy source of vetted opportunities — every listing reviewed and risk-rated by our team before it goes live."
         },
         "verify": {
           "label": "Verify counterparties",
           "title": "Verification is core — and non-negotiable",
-          "body": "Every investor is verified before accessing any privileged information — manual review by our internal team, no automated KYC shortcuts.",
-          "imagery": "imagery: compliance document review"
+          "body": "Every investor is verified before accessing any privileged information — manual review by our internal team, no automated KYC shortcuts."
         },
         "diligence": {
           "label": "Run due diligence",
           "title": "Structured due diligence, verified on the ground",
-          "body": "Our standardised workflow and ground presence verify what you cannot check remotely — an NDA is signed before anything privileged is shared.",
-          "imagery": "imagery: land registry site visit"
+          "body": "Our standardised workflow and ground presence verify what you cannot check remotely — an NDA is signed before anything privileged is shared."
         },
         "monitor": {
           "label": "Monitor investments",
           "title": "See your project without flying to it",
-          "body": "Our team conducts site visits, collects receipts and verifies progress — you log in and see real-time, verified status.",
-          "imagery": "imagery: construction site progress"
+          "body": "Our team conducts site visits, collects receipts and verifies progress — you log in and see real-time, verified status."
         }
       },
       "panels": {
@@ -483,6 +444,17 @@
         "subjectRequired": "Subject is required",
         "messageMin": "Message must be at least 20 characters"
       }
+    },
+    "info": {
+      "emailLabel": "Email us",
+      "email": "invest@africaninvestmenthub.com",
+      "phoneLabel": "Call us",
+      "phone": "+44 20 7946 0123",
+      "hoursLabel": "Response time",
+      "hoursBody": "Within one business day, Monday to Friday.",
+      "coverageLabel": "Coverage",
+      "coverageBody": "Serving investors and project facilitators across all 54 African countries.",
+      "note": "The platform never processes payments or holds funds. If you receive a payment request claiming to be from us, do not pay it — report it here."
     }
   },
   "chat": {
@@ -1109,7 +1081,6 @@
     "matchesEmptyTitle": "No matches yet",
     "matchesEmptyBody": "Once our team reviews opportunities that fit your profile, your AI-matched recommendations appear here.",
     "matchScore": "Match",
-    "expressInterest": "I'm interested",
     "dismissMatch": "Not for me",
     "interestRegistered": "Interest registered — our team will be in touch.",
     "matchDismissed": "Match dismissed.",
@@ -1613,5 +1584,121 @@
     "intentFacilitatorBody": "Create your account, then submit your project for verification and investor matching.",
     "intentSwitchInvestor": "I'm an investor instead",
     "intentSwitchFacilitator": "I'm listing a project instead"
+  },
+  "legal": {
+    "terms": {
+      "eyebrow": "Legal",
+      "title": "Terms & Conditions",
+      "subtitle": "The rules that govern your use of the African Investment Hub.",
+      "updated": "Last updated: 22 July 2026",
+      "intro": "These Terms & Conditions govern your access to and use of the African Investment Hub platform. By creating an account or using the site you agree to be bound by them. Please read them together with our Privacy Notice.",
+      "sections": {
+        "role": {
+          "title": "Our role",
+          "body": "The African Investment Hub connects investors with facilitators of African projects. We provide introduction, screening, and information services only. We are not a licensed broker, dealer, investment advisor, or payment institution; we do not process payments, hold client funds, or take custody of assets, and nothing on the platform constitutes investment, legal, or tax advice."
+        },
+        "eligibility": {
+          "title": "Eligibility and accounts",
+          "body": "You must be at least 18 years old and legally able to enter contracts to use the platform. You agree to provide accurate, current information during registration and onboarding, to keep your credentials secure, and to accept responsibility for all activity under your account. One account per person or organisation."
+        },
+        "verification": {
+          "title": "Verification and approval",
+          "body": "Profiles and project listings are reviewed by our team before activation, and we may request supporting documents. Approval means a submission passed our screening checks — it is not an endorsement, a guarantee of accuracy, or a recommendation to invest. We may decline or revoke approval at our discretion."
+        },
+        "interactions": {
+          "title": "Investor–facilitator engagement",
+          "body": "The platform facilitates introductions. All negotiations, agreements, and transactions are concluded directly between the parties, at their own risk and outside the platform. You are responsible for conducting your own independent due diligence and for complying with the laws that apply to you. We are not a party to, and accept no responsibility for, any agreement between users."
+        },
+        "confidentiality": {
+          "title": "Confidentiality",
+          "body": "Certain project materials are shared only after approval or under a non-disclosure agreement. You agree to use gated information solely to evaluate the relevant opportunity and not to disclose it to third parties or use it for any other purpose."
+        },
+        "acceptableUse": {
+          "title": "Acceptable use",
+          "body": "You must not post false or misleading information, impersonate another person or organisation, upload unlawful content, scrape or bulk-extract platform data, interfere with the service's operation, or use the platform to circumvent its verification safeguards."
+        },
+        "ip": {
+          "title": "Intellectual property",
+          "body": "The platform, its design, and its content (excluding user submissions) belong to us or our licensors. You retain rights to the materials you submit and grant us a non-exclusive licence to host, display, and process them for the purpose of operating the platform."
+        },
+        "disclaimers": {
+          "title": "Disclaimers",
+          "body": "The platform is provided \"as is\" and \"as available\". We do not warrant that listings are accurate or complete, that opportunities will perform as described, or that the service will be uninterrupted. Risk ratings are informational screening aids, not financial assessments. All investments carry risk, including the loss of the entire amount invested."
+        },
+        "liability": {
+          "title": "Limitation of liability",
+          "body": "To the fullest extent permitted by law, we are not liable for indirect or consequential losses, loss of profit, or any loss arising from investments made in, or dealings with, projects or users introduced through the platform. Nothing in these terms excludes liability that cannot lawfully be excluded."
+        },
+        "termination": {
+          "title": "Suspension and termination",
+          "body": "We may suspend or terminate accounts that breach these terms or present a risk to other users. You may close your account at any time from your account settings, which triggers deletion of your data as described in the Privacy Notice. Clauses that by their nature should survive termination do so."
+        },
+        "changes": {
+          "title": "Changes to these terms",
+          "body": "We may update these terms from time to time. For material changes we will give notice on the platform or by email before they take effect. Continued use of the platform after changes take effect constitutes acceptance."
+        },
+        "contact": {
+          "title": "Contact",
+          "body": "Questions about these terms? Reach us through the contact page or at invest@africaninvestmenthub.com."
+        }
+      }
+    },
+    "privacy": {
+      "eyebrow": "Legal",
+      "title": "Privacy Notice",
+      "subtitle": "What we collect, why we collect it, and the choices you have.",
+      "updated": "Last updated: 22 July 2026",
+      "intro": "This notice explains how the African Investment Hub collects, uses, and protects personal information when you use the platform. It applies to visitors, investors, and project facilitators.",
+      "sections": {
+        "scope": {
+          "title": "What this notice covers",
+          "body": "It covers personal information processed through the platform — the website, onboarding, matching, messaging, and related emails. It does not cover agreements you enter directly with other users outside the platform."
+        },
+        "collected": {
+          "title": "Information we collect",
+          "body": "Account identity (name, email) managed through our authentication provider; the profile you complete during onboarding, such as investment preferences or project details; documents you choose to upload; and technical usage data such as log records needed to run and secure the service."
+        },
+        "use": {
+          "title": "How we use it",
+          "body": "To operate your account, verify profiles and projects, match investors with relevant opportunities, send notifications and service emails, protect the platform against abuse, and comply with legal obligations. We do not use your information for third-party advertising."
+        },
+        "processors": {
+          "title": "Service providers",
+          "body": "We rely on a small set of processors to run the platform: Clerk (authentication), Resend (email delivery), Cloudflare R2 (document storage), OpenAI (project matching and AI assistance), and our hosting providers. Each receives only the data needed for its function."
+        },
+        "sharing": {
+          "title": "How information is shared",
+          "body": "Profile information is shown to counterparties according to your confidentiality settings — for example, a facilitator sees that a verified investor expressed interest, with contact details mediated by the platform. Our review team accesses submissions to perform verification. We never sell personal information."
+        },
+        "retention": {
+          "title": "Retention and deletion",
+          "body": "We keep personal information while your account is active. When you delete your account, your personal data — including your record at our authentication provider and uploaded documents — is removed through a scheduled purge, except where law requires us to retain specific records."
+        },
+        "security": {
+          "title": "Security",
+          "body": "Data is encrypted in transit, sensitive fields are encrypted at rest, access is role-restricted, and administrative actions are audit-logged. No system is perfectly secure, but we design for defence in depth."
+        },
+        "rights": {
+          "title": "Your rights",
+          "body": "Depending on your jurisdiction, you may have rights to access, correct, delete, or restrict the processing of your personal information, and to data portability. Most of these can be exercised directly from your account settings; for anything else, contact us and we will respond within a reasonable period."
+        },
+        "transfers": {
+          "title": "International transfers",
+          "body": "Our infrastructure and providers operate in multiple regions, so your information may be processed outside your country of residence. Where required, we rely on recognised safeguards for such transfers."
+        },
+        "cookies": {
+          "title": "Cookies",
+          "body": "We use only the cookies necessary to sign you in and keep the platform secure. We do not use third-party advertising or cross-site tracking cookies."
+        },
+        "changes": {
+          "title": "Changes to this notice",
+          "body": "We may update this notice as the platform evolves. Material changes will be announced on the platform or by email before they take effect."
+        },
+        "contact": {
+          "title": "Contact us",
+          "body": "For privacy questions or to exercise your rights, reach us through the contact page or at invest@africaninvestmenthub.com."
+        }
+      }
+    }
   }
 }

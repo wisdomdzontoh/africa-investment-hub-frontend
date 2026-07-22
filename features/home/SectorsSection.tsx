@@ -8,18 +8,18 @@ import { Card, SectionLabel } from "@/components/ds";
 import { SectorGlyph } from "@/components/common/SectorGlyph";
 import { SECTORS } from "@/lib/data/sectors";
 
-const FEATURED = ["renewable", "realestate", "agriculture", "mining", "infrastructure", "construction", "technology"] as const;
+// Six featured sectors — an even 2×3 grid on desktop. Every other sector
+// remains reachable through the all-sectors chip row below.
+const FEATURED = ["renewable", "realestate", "agriculture", "mining", "infrastructure", "technology"] as const;
 
 const SECTOR_NAME = Object.fromEntries(SECTORS.map((s) => [s.id, s.name]));
 
-// Hybrid imagery: DS-treated photography where curated media exists; a 45°
-// cream stripe placeholder stands in where it does not (e.g. mining).
-const SECTOR_IMG: Partial<Record<(typeof FEATURED)[number], string>> = {
+const SECTOR_IMG: Record<(typeof FEATURED)[number], string> = {
   renewable: "/media/solar-energy.webp",
   realestate: "/media/skyline-nairobi.webp",
   agriculture: "/media/agriculture.webp",
+  mining: "/media/mining.webp",
   infrastructure: "/media/port-logistics.webp",
-  construction: "/media/construction.webp",
   technology: "/media/business-team.webp",
 };
 
@@ -55,17 +55,13 @@ export function SectorsSection() {
             >
               <Card padding="0" hoverLift className="overflow-hidden">
                 <div className="relative h-44 overflow-hidden">
-                  {SECTOR_IMG[id] ? (
-                    <Image
-                      src={SECTOR_IMG[id] as string}
-                      alt=""
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-700 ease-[ease] group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,var(--bg-section),var(--bg-section)_10px,var(--bg-stripe)_10px,var(--bg-stripe)_20px)]" />
-                  )}
+                  <Image
+                    src={SECTOR_IMG[id]}
+                    alt=""
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 ease-[ease] group-hover:scale-105"
+                  />
                   <div
                     className="absolute inset-0"
                     style={{

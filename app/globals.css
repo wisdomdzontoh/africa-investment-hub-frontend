@@ -197,6 +197,10 @@
     @apply bg-background text-foreground;
     background: var(--surface-page);
     color: var(--text-strong);
+    /* No section may widen the document — a single element wider than the
+       viewport otherwise adds dead space to the right of every section on
+       mobile. `clip` avoids creating a scroll container (unlike `hidden`). */
+    overflow-x: clip;
   }
   html {
     @apply font-sans;
