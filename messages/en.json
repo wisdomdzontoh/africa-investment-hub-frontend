@@ -520,9 +520,10 @@
     "noNotifications": "No notifications yet.",
     "viewAll": "View all",
     "mfaTitle": "Secure your account",
-    "mfaBody": "Two-factor authentication is required to access the platform. Add an authenticator app — it takes about a minute.",
+    "mfaBody": "Two-factor authentication adds a critical layer of protection to your account. Add an authenticator app — it takes about a minute.",
     "mfaSetup": "Set up two-factor authentication",
-    "mfaHint": "In the security settings, choose “Add two-step verification”. This page unlocks automatically once it's enabled."
+    "mfaHint": "In the security settings, choose “Add two-step verification”. You can enable it anytime from your account settings.",
+    "mfaSkip": "Skip for now — I'll set it up later"
   },
   "onboarding": {
     "title": "Welcome to African Investment Hub",

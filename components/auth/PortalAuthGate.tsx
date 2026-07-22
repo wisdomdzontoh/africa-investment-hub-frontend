@@ -3,18 +3,17 @@
 import { useClerk, useUser } from "@clerk/nextjs";
 import { Lock, ShieldCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAccount } from "@/lib/api/hooks";
 import { dashboardPath, resolvePostAuthRedirect } from "@/lib/auth/paths";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import type { UserStatus } from "@/types/api";
 
-/** Mandatory MFA before portal access (PRD §6.2, FE-07/SEC-03). Defaults to
- *  enforced in production; set NEXT_PUBLIC_REQUIRE_MFA=true|false to override
- *  (e.g. `true` in staging, `false` while developing locally). */
-const REQUIRE_MFA = process.env.NEXT_PUBLIC_REQUIRE_MFA
-  ? process.env.NEXT_PUBLIC_REQUIRE_MFA === "true"
-  : process.env.NODE_ENV === "production";
+/** MFA policy (PRD §6.2, FE-07/SEC-03, relaxed by product decision 2026-07-22):
+ *  2FA is recommended, not required — users see a one-time prompt they can
+ *  skip and enable later from account settings. Set NEXT_PUBLIC_REQUIRE_MFA=true
+ *  to restore the hard block (no skip) for high-security deployments. */
+const REQUIRE_MFA = process.env.NEXT_PUBLIC_REQUIRE_MFA === "true";
 
 /* ----------------------------- shared chrome ---------------------------- */
 
@@ -48,10 +47,11 @@ function GateError({ onRetry }: { onRetry: () => void }) {
   );
 }
 
-/** Blocking screen shown until the user enrols a second factor. Clerk's
- *  profile modal hosts the TOTP/backup-code setup; `useUser` re-renders the
- *  gate the moment `twoFactorEnabled` flips. */
-function MfaGate() {
+/** 2FA enrolment screen. Clerk's profile modal hosts the TOTP/backup-code
+ *  setup; `useUser` re-renders the gate the moment `twoFactorEnabled` flips.
+ *  With `onSkip` it is a dismissible recommendation; without it (env-forced
+ *  policy) it blocks until a second factor is enrolled. */
+function MfaGate({ onSkip }: { onSkip?: () => void }) {
   const t = useTranslations("portal");
   const { openUserProfile } = useClerk();
   return (
@@ -74,6 +74,15 @@ function MfaGate() {
       >
         {t("mfaSetup")}
       </button>
+      {onSkip && (
+        <button
+          type="button"
+          onClick={onSkip}
+          className="border-none bg-transparent text-sm font-medium text-[var(--text-muted)] underline-offset-4 transition-colors hover:text-[var(--ink)] hover:underline"
+        >
+          {t("mfaSkip")}
+        </button>
+      )}
       <p className="text-xs text-[var(--text-muted)]">{t("mfaHint")}</p>
     </div>
   );
@@ -93,6 +102,27 @@ export function PortalAuthGate({ allowedRoles, children }: PortalAuthGateProps) 
   const { data: account, isLoading, isError, refetch } = useAccount();
   const router = useRouter();
   const pathname = usePathname();
+  // Local state unlocks instantly on skip; unsafeMetadata persists the choice
+  // across devices so the prompt is shown at most once per account.
+  const [mfaSkipped, setMfaSkipped] = useState(false);
+  const mfaPromptDismissed =
+    mfaSkipped ||
+    Boolean(
+      (user?.unsafeMetadata as { mfaPromptDismissed?: boolean } | undefined)
+        ?.mfaPromptDismissed,
+    );
+
+  const skipMfaPrompt = () => {
+    setMfaSkipped(true);
+    void user
+      ?.update({
+        unsafeMetadata: { ...user.unsafeMetadata, mfaPromptDismissed: true },
+      })
+      .catch(() => {
+        // Persisting the dismissal is best-effort; the session unlock above
+        // already happened and the worst case is one repeat prompt.
+      });
+  };
 
   // Admin is assigned out-of-band in Clerk; trust publicMetadata so admins are
   // recognised immediately, before the backend account catches up to the JWT.
@@ -121,7 +151,10 @@ export function PortalAuthGate({ allowedRoles, children }: PortalAuthGateProps) 
   if (!isSignedIn || !account) return null;
   if (!isAdmin && !account.onboarding_complete) return null;
   if (allowedRoles && effectiveRole && !allowedRoles.includes(effectiveRole)) return null;
-  if (REQUIRE_MFA && user && !user.twoFactorEnabled) return <MfaGate />;
+  if (user && !user.twoFactorEnabled) {
+    if (REQUIRE_MFA) return <MfaGate />;
+    if (!mfaPromptDismissed) return <MfaGate onSkip={skipMfaPrompt} />;
+  }
   return <>{children}</>;
 }
 

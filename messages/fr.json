@@ -520,9 +520,10 @@
     "noNotifications": "Aucune notification.",
     "viewAll": "Tout voir",
     "mfaTitle": "Sécurisez votre compte",
-    "mfaBody": "L'authentification à deux facteurs est requise pour accéder à la plateforme. Ajoutez une application d'authentification — cela prend environ une minute.",
+    "mfaBody": "La double authentification ajoute une protection essentielle à votre compte. Ajoutez une application d'authentification — cela prend environ une minute.",
     "mfaSetup": "Configurer l'authentification à deux facteurs",
-    "mfaHint": "Dans les paramètres de sécurité, choisissez « Ajouter la vérification en deux étapes ». Cette page se débloque automatiquement une fois activée."
+    "mfaHint": "Dans les paramètres de sécurité, choisissez « Ajouter la vérification en deux étapes ». Vous pourrez l'activer à tout moment depuis les paramètres de votre compte.",
+    "mfaSkip": "Ignorer pour l'instant — je le ferai plus tard"
   },
   "onboarding": {
     "resume": {
