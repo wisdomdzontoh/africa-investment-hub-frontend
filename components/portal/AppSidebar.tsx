@@ -2,7 +2,7 @@
 
 import type { LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Logo } from "@/components/brand/Logo";
+import { AfriVestLogo } from "@/components/brand/AfriVestLogo";
 import { Link, usePathname } from "@/i18n/navigation";
 import {
   Sidebar,
@@ -68,7 +68,7 @@ export function AppSidebar({ homeHref, title, nav, soonLabel }: AppSidebarProps)
           className="flex items-center gap-2 no-underline"
         >
           <span className="group-data-[collapsible=icon]:hidden">
-            <Logo height={30} />
+            <AfriVestLogo height={26} />
           </span>
           <span className="hidden group-data-[collapsible=icon]:flex">
             <BrandMark />

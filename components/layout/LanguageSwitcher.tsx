@@ -46,7 +46,7 @@ export function LanguageSwitcher({
           isDark && "lang-switcher-trigger-dark",
           className,
         )}
-        aria-label={t("language")}
+        aria-label={`${t("language")}: ${t(`languages.${locale}`)}`}
       >
         <Globe2 className="lang-switcher-globe" aria-hidden />
         <span className="lang-switcher-code">{LOCALE_CODES[locale]}</span>

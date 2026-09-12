@@ -10,7 +10,7 @@
     "whyAfrica": "Why Africa",
     "about": "About",
     "contact": "Contact",
-    "signIn": "Sign in",
+    "signIn": "Log in",
     "register": "Register as Investor",
     "dashboard": "Dashboard",
     "account": "Account",
@@ -28,6 +28,32 @@
       "opportunities": "Browse verified, investment-ready projects",
       "countries": "Market guides across African economies",
       "whyAfrica": "The case for investing in Africa now"
+    },
+    "whoWeServe": "Who we serve",
+    "getStarted": "Get started",
+    "talkToAdvisor": "Talk to an advisor",
+    "skipToContent": "Skip to content",
+    "mobileNavLabel": "Mobile",
+    "panels": {
+      "opportunities": {
+        "browse": "Browse",
+        "sectorsA": "Sectors",
+        "sectorsB": "More sectors",
+        "allOpportunities": { "title": "All opportunities" },
+        "featured": { "title": "Featured projects" },
+        "viewAllSectors": { "title": "Browse all sectors" }
+      },
+      "countries": {
+        "explore": "Explore",
+        "byRegion": "By region",
+        "popularGuides": "Popular guides",
+        "all54": { "title": "All 54 countries" },
+        "recentlyUpdated": { "title": "Recently updated" }
+      }
+    },
+    "footerLinks": {
+      "advisor": "Talk to an advisor",
+      "countryGuides": "Browse country guides"
     }
   },
   "footer": {
@@ -46,17 +72,36 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Pan-African Investment Platform",
-      "title": "Connecting global investors to verified African opportunities",
-      "lead": "The African Investment Hub removes the trust, discovery and facilitation barriers that keep cross-border capital out of African markets — across all 54 countries.",
-      "exploreCta": "Explore Opportunities",
-      "registerCta": "Apply as Investor",
-      "trustLine": "54 Countries · Verified Projects · Institutional-Grade Due Diligence",
-      "map": {
-        "verifiedTitle": "Land title verified",
-        "verifiedSub": "Nairobi, Kenya · Independent review",
-        "matchTitle": "New match reviewed",
-        "matchSub": "Renewable Energy · Kenya · Low risk"
+      "headline": {
+        "line1": "Connecting global investors",
+        "line2": "to verified African opportunities"
+      },
+      "lead": "Screened opportunities across all 54 African countries, verified on the ground by our team.",
+      "tertiary": "Investor verification in under 48 hours. No fees at this stage.",
+      "ctaInvestor": "I'm an investor",
+      "ctaProject": "I have a project",
+      "orDivider": "or",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "name@company.com",
+      "emailSubmit": "Get access",
+      "legal": "By continuing you agree to our <terms>Terms of Service</terms> and <privacy>Privacy Policy</privacy>. Investor accounts require verification.",
+      "exploreLink": "Explore opportunities",
+      "advisorLink": "Talk to an advisor",
+      "nodes": {
+        "brief": {
+          "text": "Deploy $2M into agribusiness",
+          "tag": "Investor brief"
+        },
+        "landTitle": {
+          "tag": "Land title check",
+          "sub": "Kumasi, Ghana"
+        },
+        "verified": "Verified on site",
+        "nda": "NDA signed",
+        "surveyor": {
+          "tag": "Quantity surveyor"
+        },
+        "diligence": "Due diligence report"
       }
     },
     "problem": {
@@ -65,27 +110,75 @@
       "items": {
         "discovery": {
           "label": "Discovery",
-          "desc": "No single, trustworthy source of screened, investment-ready projects across African markets."
+          "desc": "No single, trustworthy source of screened, investment-ready projects across African markets.",
+          "panel": {
+            "title": "Where deals actually surface",
+            "rows": [
+              { "label": "WhatsApp broker forward", "status": "high" },
+              { "label": "Facebook marketplace listing", "status": "high" },
+              { "label": "Cold email pitch deck", "status": "medium" }
+            ]
+          }
         },
         "trust": {
           "label": "Trust & Fraud Risk",
-          "desc": "High incidence of falsified documents — land titles, company registrations, financial records."
+          "desc": "High incidence of falsified documents — land titles, company registrations, financial records.",
+          "panel": {
+            "title": "Land title verification",
+            "rows": [
+              { "label": "Notarised copy", "status": "high" },
+              { "label": "Chain of ownership", "status": "medium" },
+              { "label": "Survey plan", "status": "high" }
+            ]
+          }
         },
         "diligence": {
           "label": "Due Diligence",
-          "desc": "No standardised mechanism to verify land ownership or run compliance assessments from abroad."
+          "desc": "No standardised mechanism to verify land ownership or run compliance assessments from abroad.",
+          "panel": {
+            "title": "Compliance checklist",
+            "rows": [
+              { "label": "AML certificate", "status": "medium" },
+              { "label": "Site inspection", "status": "medium" },
+              { "label": "Financial audit", "status": "high" }
+            ]
+          }
         },
         "regulatory": {
           "label": "Regulatory Opacity",
-          "desc": "54 countries, 54 different legal, tax, licensing and foreign ownership frameworks."
+          "desc": "54 countries, 54 different legal, tax, licensing and foreign ownership frameworks.",
+          "panel": {
+            "title": "Foreign ownership rules",
+            "rows": [
+              { "label": "Kenya — 49% cap", "status": "medium" },
+              { "label": "Nigeria — licence required", "status": "high" },
+              { "label": "Ghana — sector-specific", "status": "medium" }
+            ]
+          }
         },
         "visibility": {
           "label": "Post-Investment Visibility",
-          "desc": "No structured way to track fund utilisation or site progress without a team on the ground."
+          "desc": "No structured way to track fund utilisation or site progress without a team on the ground.",
+          "panel": {
+            "title": "Fund utilisation",
+            "rows": [
+              { "label": "Last site visit", "status": "high" },
+              { "label": "Spend vs. budget", "status": "medium" },
+              { "label": "Construction photos", "status": "high" }
+            ]
+          }
         },
         "network": {
           "label": "Network Gap",
-          "desc": "No access to trusted local consultants, legal advisors and technical partners."
+          "desc": "No access to trusted local consultants, legal advisors and technical partners.",
+          "panel": {
+            "title": "Local support network",
+            "rows": [
+              { "label": "Legal counsel", "status": "high" },
+              { "label": "Technical partner", "status": "medium" },
+              { "label": "Site consultant", "status": "high" }
+            ]
+          }
         }
       }
     },
@@ -270,6 +363,10 @@
       "allSectors": "All sectors",
       "exploreSector": "Explore opportunities",
       "viewAll": "Browse every opportunity",
+      "activeIn": "Active in",
+      "focusAreas": "Focus areas",
+      "ctaTitle": "Explore every sector",
+      "ctaDesc": "Browse the full catalogue of screened, investment-ready projects across all ten sectors.",
       "featured": {
         "renewable": "Solar, wind & hydro powering the continent",
         "realestate": "Urban housing & commercial development",
@@ -277,7 +374,10 @@
         "construction": "Buildings & civil works delivered at scale",
         "infrastructure": "Ports, roads & logistics corridors",
         "technology": "Fintech, digital & innovation ventures",
-        "mining": "Minerals, metals & responsible resource extraction"
+        "mining": "Minerals, metals & responsible resource extraction",
+        "farming": "Smallholder cooperatives & commercial farms",
+        "manufacturing": "Light industry & local value-add production",
+        "tourism": "Eco-lodges, hospitality & heritage tourism"
       }
     },
     "countries": {
@@ -1570,21 +1670,30 @@
     "matchViewProject": "View project"
   },
   "auth": {
-    "eyebrow": "Verified investment network",
-    "headline": "Capital moves where trust exists.",
-    "point1": "Every investor manually verified — no automated KYC shortcuts.",
-    "point2": "Screened, investment-ready projects across all 54 countries.",
-    "point3": "NDA-gated deal rooms. The platform never holds your funds.",
     "backHome": "Back to home",
-    "cardSubtitleSignIn": "Sign in to access verified opportunities, deal rooms, and your investor or facilitator portal.",
-    "cardSubtitleSignUp": "Create your account to join Africa's verified investment network.",
     "disclaimer": "Manual verification · NDA-gated · No funds held",
     "intentInvestorTitle": "Joining as an investor",
     "intentInvestorBody": "Create your account, then complete your investment profile to unlock verified opportunities.",
     "intentFacilitatorTitle": "Joining as a project facilitator",
     "intentFacilitatorBody": "Create your account, then submit your project for verification and investor matching.",
     "intentSwitchInvestor": "I'm an investor instead",
-    "intentSwitchFacilitator": "I'm listing a project instead"
+    "intentSwitchFacilitator": "I'm listing a project instead",
+    "footerTerms": "Terms & Privacy",
+    "ssoCallback": "Signing you in",
+    "signUp": {
+      "headlineLine1": "Access to African opportunity",
+      "headlineLine2": "starts with verification",
+      "supporting": "Create your account. Verification takes under 48 hours and costs nothing.",
+      "alreadyHaveAccount": "Already have an account?",
+      "logIn": "Log in",
+      "legal": "By continuing you agree to our <terms>Terms of Service</terms> and acknowledge our <privacy>Privacy Policy</privacy>. Investor and project accounts require document verification before full access."
+    },
+    "signIn": {
+      "headline": "Welcome back",
+      "supporting": "Log in to your account.",
+      "newHere": "New here?",
+      "createAccount": "Create an account"
+    }
   },
   "legal": {
     "terms": {

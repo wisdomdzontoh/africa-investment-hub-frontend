@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Logo } from "@/components/brand/Logo";
+import { AfriVestLogo } from "@/components/brand/AfriVestLogo";
 import { Chip } from "@/components/ds/Chip";
 
 const FOOTER_LINKS = [
@@ -21,8 +21,8 @@ export function Footer() {
     <footer className="site-footer">
       <div className="page">
         <div className="site-footer-bar">
-          <Link href="/" className="site-footer-brand" aria-label="African Investment Hub home">
-            <Logo height={34} priority={false} />
+          <Link href="/" className="site-footer-brand" aria-label="AfriVest home">
+            <AfriVestLogo height={28} />
           </Link>
 
           <nav className="site-footer-links" aria-label={t("legal")}>

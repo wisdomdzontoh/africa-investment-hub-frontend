@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Card, SectionLabel } from "@/components/ds";
+import { SectionLabel } from "@/components/ds";
+import { ProblemShowcase, type ProblemItem, type ProblemPanelRow } from "@/features/home/ProblemShowcase";
 
-const ITEMS = [
+const ITEM_KEYS = [
   "discovery",
   "trust",
   "diligence",
@@ -11,30 +11,36 @@ const ITEMS = [
   "network",
 ] as const;
 
-const ICONS: Record<(typeof ITEMS)[number], string> = {
-  discovery: "search",
-  trust: "alert",
-  diligence: "checklist",
-  regulatory: "layers",
-  visibility: "eye",
-  network: "network",
+// Placeholder imagery (public/problem/*) standing in for the real thing —
+// see ProblemItem["image"] for the swap-out note.
+const ITEM_IMAGES: Record<(typeof ITEM_KEYS)[number], string> = {
+  discovery: "/problem/discovery.png",
+  trust: "/problem/trust-and-fraud.png",
+  diligence: "/problem/due-diligence.png",
+  regulatory: "/problem/regulatory-opacity.png",
+  visibility: "/problem/post-investment.png",
+  network: "/problem/network-gap.png",
 };
-
-function IconWell({ name }: { name: string }) {
-  return (
-    <div className="mb-5 flex size-11 items-center justify-center rounded-[10px] bg-[var(--accent-tint-08)]">
-      <Image src={`/brand/icons/${name}.svg`} width={22} height={22} alt="" aria-hidden />
-    </div>
-  );
-}
 
 export async function ProblemSection() {
   const t = await getTranslations("home.problem");
 
+  const items: ProblemItem[] = ITEM_KEYS.map((key) => {
+    const panel = t.raw(`items.${key}.panel`) as { title: string; rows: ProblemPanelRow[] };
+    return {
+      key,
+      label: t(`items.${key}.label`),
+      desc: t(`items.${key}.desc`),
+      panelTitle: panel.title,
+      rows: panel.rows,
+      image: ITEM_IMAGES[key],
+    };
+  });
+
   return (
     <section className="bg-[var(--bg-page)] py-[clamp(3rem,7vw,7.5rem)]">
       <div className="page">
-        <div className="mx-auto mb-16 max-w-[680px] text-center">
+        <div className="mx-auto mb-14 max-w-[680px] text-center">
           <div className="mb-4">
             <SectionLabel>{t("eyebrow")}</SectionLabel>
           </div>
@@ -42,19 +48,8 @@ export async function ProblemSection() {
             {t("title")}
           </h2>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {ITEMS.map((key) => (
-            <Card key={key}>
-              <IconWell name={ICONS[key]} />
-              <h3 className="mb-2.5 text-lg font-semibold text-[var(--ink)]">
-                {t(`items.${key}.label`)}
-              </h3>
-              <p className="m-0 text-[15px] leading-relaxed text-[var(--text-body)]">
-                {t(`items.${key}.desc`)}
-              </p>
-            </Card>
-          ))}
-        </div>
+
+        <ProblemShowcase items={items} />
       </div>
     </section>
   );

@@ -10,7 +10,7 @@ export default function MarketingLayout({
   return (
     <>
       <PublicNav />
-      <main className="fade-in flex-1">{children}</main>
+      <main id="main-content" className="fade-in flex-1">{children}</main>
       <Footer />
       <ChatWidget />
     </>

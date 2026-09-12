@@ -25,12 +25,12 @@ export default async function HomePage({
     <div style={{ background: "var(--surface-page)" }}>
       <HeroSection />
       <ProblemSection />
+      <PlatformBenefits />
       <FeatureTabsSection />
       <ProcessStrip />
       <ImpactBand />
       <FeaturedSection />
       <WhyAfrica />
-      <PlatformBenefits />
       <SectorsSection />
       <AiAssistantSection />
       <CountryPreview />

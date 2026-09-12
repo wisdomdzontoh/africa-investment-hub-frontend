@@ -11,6 +11,13 @@ type Props = {
   onContinue: () => void;
 };
 
+// Shown once, right after account creation + onboarding submission — the one
+// moment in the product that's actually a celebration, as opposed to sign-in
+// (Login.svg) or the sign-up form itself (signp.svg). success.svg was meant
+// to go here, but at its real 1920x1080 canvas it renders as an almost blank
+// frame (confirmed by direct rendering) — it reads as a Lottie animation
+// exported at a keyframe with nothing drawn yet, not a usable static image.
+// Kept the working checkmark until a real success.svg/.lottie is supplied.
 export function SubmittedStep({ title, description, note, continueLabel, onContinue }: Props) {
   return (
     <div className="flex flex-col items-center py-8 text-center">

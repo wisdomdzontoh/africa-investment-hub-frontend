@@ -1,5 +1,5 @@
 import { getLocale } from "next-intl/server";
-import { Inter, Noto_Sans_Mono } from "next/font/google";
+import { Baloo_2, Inter, Noto_Sans_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -13,6 +13,16 @@ const notoMono = Noto_Sans_Mono({
   variable: "--font-noto-mono",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+// Wordmark-only face (AfriVestLogo) — a rounded, heavy-weight display font
+// for the thick/spaced logotype look; not used anywhere else, so it doesn't
+// touch the DS's Inter-everywhere type system.
+const baloo = Baloo_2({
+  variable: "--font-brand",
+  subsets: ["latin"],
+  weight: ["700", "800"],
   display: "swap",
 });
 
@@ -31,7 +41,7 @@ export default async function RootLayout({
   const locale = await getLocale();
   const isZh = locale === "zh";
 
-  const fontClass = `${inter.variable} ${notoMono.variable}`;
+  const fontClass = `${inter.variable} ${notoMono.variable} ${baloo.variable}`;
 
   const sans = isZh
     ? `var(--font-inter), ${CJK_SANS}`

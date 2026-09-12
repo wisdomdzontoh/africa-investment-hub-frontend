@@ -1,5 +1,7 @@
 import { SignIn } from "@clerk/nextjs";
+import { getTranslations } from "next-intl/server";
 import { AuthShell } from "@/components/auth/AuthShell";
+import { HideExcludedProviders } from "@/components/auth/HideExcludedProviders";
 import { clerkAppearance } from "@/lib/clerk/appearance";
 
 export default async function SignInPage({
@@ -8,8 +10,11 @@ export default async function SignInPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const t = await getTranslations("auth.signIn");
+
   return (
-    <AuthShell mode="sign-in">
+    <AuthShell headline={t("headline")} supporting={t("supporting")} illustration="sign-in">
+      <HideExcludedProviders />
       <SignIn
         appearance={clerkAppearance}
         routing="path"
